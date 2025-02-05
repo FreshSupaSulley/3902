@@ -1,7 +1,8 @@
-namespace Sprint0.Controllers;
-
-public interface IController
+namespace Game.Controllers
 {
-    void Tick();
-    void PostTick();
+    public interface IController
+    {
+        void Update();
+        void PostUpdate();
+    }
 }
