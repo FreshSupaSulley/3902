@@ -1,2 +1,3 @@
 # 3902
-3902 project
+Legendary project from the Bombardier beetles!
+
