@@ -1,4 +1,0 @@
-/Users/eboschert/Desktop/monogame/obj/Debug/net6.0/monogame.GeneratedMSBuildEditorConfig.editorconfig
-/Users/eboschert/Desktop/monogame/obj/Debug/net6.0/monogame.AssemblyInfoInputs.cache
-/Users/eboschert/Desktop/monogame/obj/Debug/net6.0/monogame.AssemblyInfo.cs
-/Users/eboschert/Desktop/monogame/obj/Debug/net6.0/monogame.csproj.CoreCompileInputs.cache
