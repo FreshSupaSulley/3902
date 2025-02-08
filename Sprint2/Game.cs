@@ -96,15 +96,6 @@ namespace Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            // Draw quads
-            for (int i = 0; i < 4; i++)
-            {
-                Vector2 quad = new(i % 2 * Window.ClientBounds.Width / 2, i / 2 * Window.ClientBounds.Height / 2);
-                // Draw font
-                Text("Quad " + (i + 1), quad + new Vector2(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 4));
-                // Draw quad
-                DrawOutlinedRect((int)quad.X, (int)quad.Y, Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, Color.Black);
-            }
 
             // Update each object
             foreach (IGameObject sample in gameObjects)
@@ -116,18 +107,5 @@ namespace Game
             base.Draw(gameTime);
         }
 
-        private void Text(string output, Vector2 position)
-        {
-            spriteBatch.DrawString(font, output, position, Color.Black, 0, font.MeasureString(output) / 2, 1, SpriteEffects.None, 0.5f);
-        }
-
-        // Draw all 4 corners of the outlined rect
-        private void DrawOutlinedRect(int x, int y, int width, int height, Color color)
-        {
-            spriteBatch.Draw(pixel, new Rectangle(x, y, width, 1), color);
-            spriteBatch.Draw(pixel, new Rectangle(x, y + height - 1, width, 1), color);
-            spriteBatch.Draw(pixel, new Rectangle(x, y, 1, height), color);
-            spriteBatch.Draw(pixel, new Rectangle(x + width - 1, y, 1, height), color);
-        }
     }
 }
