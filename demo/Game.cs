@@ -5,6 +5,7 @@ using Game.Controllers;
 using Game.Entities;
 using Microsoft.Xna.Framework;
 using Game.Graphics;
+using Game.Commands;
 
 namespace Game
 {
@@ -24,16 +25,7 @@ namespace Game
         private SpriteFont font;
 
         // Map keys to an animation (too specific for keyboardcontroller)
-        private Dictionary<Keys, int> keyMappings = new Dictionary<Keys, int> {
-            { Keys.NumPad1, 1 },
-            { Keys.D1, 1 },
-            { Keys.NumPad2, 2 },
-            { Keys.D2, 2 },
-            { Keys.NumPad3, 3 },
-            { Keys.D3, 3 },
-            { Keys.NumPad4, 4 },
-            { Keys.D4, 4 }
-        };
+        private Dictionary<Keys, ICommand> keyMappings;
 
         public Game()
         {
@@ -49,9 +41,20 @@ namespace Game
             // Drawing rects
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new Color[] { Color.Black });
+
+
+            // Setting Up Key Mappings
+            keyMappings = new Dictionary<Keys, ICommand> {
+                { Keys.NumPad0, new QuitCommand(this) },
+                { Keys.D0, new QuitCommand(this) },
+            };
+
             // Controllers
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
+
+            keyboard.AddCommand(keyMappings);
+
             // This calls load content
             base.Initialize();
         }
@@ -77,7 +80,11 @@ namespace Game
             mouse.Update();
 
             // Quit functionality0
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboard.IsKeyDown(Keys.Escape, Keys.D0, Keys.NumPad0) || mouse.RightDown()) Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+            || keyboard.IsKeyDown(Keys.Escape) 
+            || mouse.RightDown()) {
+                Exit();
+            }
 
             // Update each object
             foreach (IGameObject sample in gameObjects)

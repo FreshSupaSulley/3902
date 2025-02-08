@@ -1,5 +1,3 @@
-// using Microsoft.Xna.Framework; // Possibly necessary in the future
-
 namespace Game.Commands;
 
 class QuitCommand : ICommand {
