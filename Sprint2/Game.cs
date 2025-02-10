@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Game.Controllers;
-using Game.Entities;
 using Microsoft.Xna.Framework;
-using Game.Graphics;
+using Game.Sprites;
+using Game.ISprites;
 
 namespace Game
 {
@@ -13,8 +13,6 @@ namespace Game
         private GraphicsDeviceManager graphics;
         private KeyboardController keyboard;
         private MouseController mouse;
-
-        private List<IGameObject> gameObjects = new List<IGameObject>();
 
         // Rectangle for quads
         private SpriteBatch spriteBatch;
@@ -34,6 +32,11 @@ namespace Game
             { Keys.NumPad4, 4 },
             { Keys.D4, 4 }
         };
+
+        private ISprite playerSprite;
+        private ISprite obstacleSprite;
+        private ISprite enemySprite;
+        private ISprite itemSprite;
 
         public Game()
         {
@@ -59,11 +62,23 @@ namespace Game
         protected override void LoadContent()
         {
             GraphicsDevice device = graphics.GraphicsDevice;
-            AnimationRegistry.Load(device);
             // Font
             font = Content.Load<SpriteFont>("Font");
             // Entities should not be initialized here but have for now due to asset loading ordering someone help
-            gameObjects.Add(new DemoPlayer(new System.Numerics.Vector2(graphics.GraphicsDevice.Viewport.Bounds.Center.X, graphics.GraphicsDevice.Viewport.Bounds.Center.Y)));
+            Texture2D wallTexture = Content.Load<Texture2D>("wall");
+            Texture2D enemyTexture = Content.Load<Texture2D>("enemy");
+            Texture2D playerTexture = Content.Load<Texture2D>("link");
+            Texture2D itemTexture = Content.Load<Texture2D>("heart");
+
+            ISprite wall = new noMotionNoAnimated(wallTexture, new Vector2(100,100));
+            ISprite heart = new noMotionNoAnimated(itemTexture, new Vector2(100, 200));
+            ISprite enemy = new noMotionAnimated(enemyTexture, new Vector2(300, 300), 1, 4);
+            ISprite player = new motionAnimated(playerTexture, new Vector2(200, 200), 1, 2, graphics);
+
+            obstacleSprite = wall;
+            enemySprite = enemy;
+            playerSprite = player;
+            itemSprite = heart;
         }
 
         // Tick
@@ -79,12 +94,8 @@ namespace Game
             // Quit functionality0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || KeyboardController.IsKeyDown(Keys.Escape, Keys.D0, Keys.NumPad0) || mouse.RightDown()) Exit();
 
-            // Update each object
-            foreach (IGameObject sample in gameObjects)
-            {
-                sample.Update();
-            }
-
+            enemySprite.Update(gameTime);
+            playerSprite.Update(gameTime); 
             // Always end with post ticks
             keyboard.PostUpdate();
             mouse.PostUpdate();
@@ -95,14 +106,10 @@ namespace Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-
-
-            // Update each object
-            foreach (IGameObject sample in gameObjects)
-            {
-                sample.Draw(spriteBatch);
-            }
-            
+            obstacleSprite.Draw(spriteBatch);
+            enemySprite.Draw(spriteBatch);
+            playerSprite.Draw(spriteBatch);
+            itemSprite.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
