@@ -1,0 +1,59 @@
+using System.IO;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Game.Graphics
+{
+    // Animations hold a collection of Sprites from a spritesheet
+    public class Animation
+    {
+        // Array of sprites composing this animation
+        private readonly SpriteBatch batch;
+        private readonly Sprite[] sprites;
+        private readonly Texture2D texture;
+        // Speed of the animation
+        private readonly int duration;
+
+        // Changes on tick
+        private int index, frames;
+
+        public Animation(Texture2D texture, int frames, int duration)
+        {
+            this.texture = texture;
+            this.frames = frames;
+            this.duration = duration;
+            sprites = new Sprite[frames];
+            int spriteWidth = texture.Width / frames;
+            // Divide spriteSheet into sprites
+            for (int i = 0; i < frames; i++)
+            {
+                sprites[i] = new Sprite(i * spriteWidth, 0, spriteWidth, texture.Height);
+            }
+        }
+
+        public void Update()
+        {
+            if (frames == duration)
+            {
+                frames = 0;
+                index = (index + 1) % sprites.Length;
+            }
+            frames++;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            // Draw sprite on the index
+            // Draw the part of the animation we need
+            Sprite sprite = sprites[index];
+            // Draw at the center of the position
+            spriteBatch.Draw(texture, position - new Vector2(sprite.Width / 2, sprite.Height / 2), new Rectangle(sprite.X, sprite.Y, sprite.Width, sprite.Height), Color.White);
+        }
+
+        public void Reset()
+        {
+            index = 0;
+            frames = 0;
+        }
+    }
+}

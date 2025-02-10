@@ -5,11 +5,6 @@ using Game.Controllers;
 using Game.Entities;
 using Microsoft.Xna.Framework;
 using Game.Graphics;
-<<<<<<< HEAD
-using demo.Game.Commands;
-=======
-using Game.Commands;
->>>>>>> 8a1e0fdc5b5b986c53e508c9fdac8eeb69e57db1
 
 namespace Game
 {
@@ -29,7 +24,16 @@ namespace Game
         private SpriteFont font;
 
         // Map keys to an animation (too specific for keyboardcontroller)
-        private Dictionary<Keys, ICommand> keyMappings;
+        private Dictionary<Keys, int> keyMappings = new Dictionary<Keys, int> {
+            { Keys.NumPad1, 1 },
+            { Keys.D1, 1 },
+            { Keys.NumPad2, 2 },
+            { Keys.D2, 2 },
+            { Keys.NumPad3, 3 },
+            { Keys.D3, 3 },
+            { Keys.NumPad4, 4 },
+            { Keys.D4, 4 }
+        };
 
         public Game()
         {
@@ -45,20 +49,9 @@ namespace Game
             // Drawing rects
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new Color[] { Color.Black });
-
-
-            // Setting Up Key Mappings
-            keyMappings = new Dictionary<Keys, ICommand> {
-                { Keys.NumPad0, new QuitCommand(this) },
-                { Keys.D0, new QuitCommand(this) },
-            };
-
             // Controllers
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
-
-            keyboard.AddCommand(keyMappings);
-
             // This calls load content
             base.Initialize();
         }
@@ -69,17 +62,8 @@ namespace Game
             AnimationRegistry.Load(device);
             // Font
             font = Content.Load<SpriteFont>("Font");
-            Specs_h.monoko = Texture2D.FromFile(device, "C:\\Users\\tyfre\\source\\repos\\3902\\demo\\Content\\Sprites\\white_desert (edited).png");
-            PlayerCharacter p = new PlayerCharacter();
-            gameObjects.Add(p);
-            //Make map for keyboard controller
-            Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
-            m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));
-            m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));
-            m.Add(Keys.Right, new PlayerMovementCommand(p, 1, 0));
-            m.Add(Keys.Left, new PlayerMovementCommand(p, -1, 0));
-            keyboard.map(m);
-
+            // Entities should not be initialized here but have for now due to asset loading ordering someone help
+            gameObjects.Add(new DemoPlayer(new System.Numerics.Vector2(graphics.GraphicsDevice.Viewport.Bounds.Center.X, graphics.GraphicsDevice.Viewport.Bounds.Center.Y)));
         }
 
         // Tick
@@ -89,15 +73,11 @@ namespace Game
             base.Update(gameTime);
 
             // Always update inputs first
-            keyboard.Update(Keyboard.GetState());
-            mouse.Update(Mouse.GetState());
+            keyboard.Update();
+            mouse.Update();
 
             // Quit functionality0
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
-            || keyboard.IsKeyDown(Keys.Escape) 
-            || mouse.RightDown()) {
-                Exit();
-            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || KeyboardController.IsKeyDown(Keys.Escape, Keys.D0, Keys.NumPad0) || mouse.RightDown()) Exit();
 
             // Update each object
             foreach (IGameObject sample in gameObjects)
@@ -115,6 +95,7 @@ namespace Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+
 
             // Update each object
             foreach (IGameObject sample in gameObjects)
