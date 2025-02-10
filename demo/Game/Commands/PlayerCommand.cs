@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace demo.Game.Commands
+namespace Game.Commands
 {
     abstract class PlayerCommand : ICommand
     {

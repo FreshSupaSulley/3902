@@ -5,11 +5,7 @@ using Game.Controllers;
 using Game.Entities;
 using Microsoft.Xna.Framework;
 using Game.Graphics;
-<<<<<<< HEAD
-using demo.Game.Commands;
-=======
 using Game.Commands;
->>>>>>> 8a1e0fdc5b5b986c53e508c9fdac8eeb69e57db1
 
 namespace Game
 {
@@ -69,7 +65,7 @@ namespace Game
             AnimationRegistry.Load(device);
             // Font
             font = Content.Load<SpriteFont>("Font");
-            Specs_h.monoko = Texture2D.FromFile(device, "C:\\Users\\tyfre\\source\\repos\\3902\\demo\\Content\\Sprites\\white_desert (edited).png");
+            Specs_h.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)");
             PlayerCharacter p = new PlayerCharacter();
             gameObjects.Add(p);
             //Make map for keyboard controller
@@ -78,7 +74,7 @@ namespace Game
             m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));
             m.Add(Keys.Right, new PlayerMovementCommand(p, 1, 0));
             m.Add(Keys.Left, new PlayerMovementCommand(p, -1, 0));
-            keyboard.map(m);
+            keyboard.AddCommand(m);
 
         }
 
@@ -89,8 +85,8 @@ namespace Game
             base.Update(gameTime);
 
             // Always update inputs first
-            keyboard.Update(Keyboard.GetState());
-            mouse.Update(Mouse.GetState());
+            keyboard.Update();
+            mouse.Update();
 
             // Quit functionality0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
