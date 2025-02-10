@@ -14,7 +14,7 @@ namespace Game.Graphics
         public static void Load(GraphicsDevice device)
         {
             // Load each animation
-            Run = new Animation(Load(device, "run.png"), 3, 3);
+           // Run = new Animation(Load(device, "run.png"), 3, 3);
         }
 
         private static Texture2D Load(GraphicsDevice device, string path)

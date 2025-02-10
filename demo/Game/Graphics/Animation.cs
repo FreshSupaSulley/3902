@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,48 +14,42 @@ namespace Game.Graphics
         private readonly Sprite[] sprites;
         private readonly Texture2D texture;
         // Speed of the animation
-        private readonly int duration;
-
+        private int[][] animations;
+        public int[] currentAnimation { get; set; }
+        private int currentFrame = 0;
         // Changes on tick
         private int index, frames;
 
-        public Animation(Texture2D texture, int frames, int duration)
-        {
+        //default constructor - assumes that 
+        public Animation(Texture2D texture, Microsoft.Xna.Framework.Rectangle[] srcs) {
             this.texture = texture;
-            this.frames = frames;
-            this.duration = duration;
-            sprites = new Sprite[frames];
-            int spriteWidth = texture.Width / frames;
-            // Divide spriteSheet into sprites
-            for (int i = 0; i < frames; i++)
+            sprites = new Sprite[srcs.Length];
+            //Initial implementation assumed equal dimensions of all sprites, changed so that positions of sprites are hard-coded
+            for (int i = 0; i < srcs.Length; i++)
             {
-                sprites[i] = new Sprite(i * spriteWidth, 0, spriteWidth, texture.Height);
+                sprites[i] = new Sprite(srcs[i].X, srcs[i].Y, srcs[i].Width, srcs[i].Height);
             }
+            currentAnimation = new int[] { 0 };
         }
 
         public void Update()
         {
-            if (frames == duration)
-            {
-                frames = 0;
-                index = (index + 1) % sprites.Length;
-            }
-            frames++;
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             // Draw sprite on the index
             // Draw the part of the animation we need
-            Sprite sprite = sprites[index];
+            Sprite sprite = sprites[currentAnimation[currentFrame]];
+            currentFrame = Specs_h.cycle(currentFrame, currentAnimation.Length);
             // Draw at the center of the position
             spriteBatch.Draw(texture, position - new Vector2(sprite.Width / 2, sprite.Height / 2), new Rectangle(sprite.X, sprite.Y, sprite.Width, sprite.Height), Color.White);
         }
 
         public void Reset()
         {
-            index = 0;
-            frames = 0;
+            currentFrame = 0;
         }
     }
 }

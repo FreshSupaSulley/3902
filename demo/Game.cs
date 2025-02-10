@@ -5,6 +5,7 @@ using Game.Controllers;
 using Game.Entities;
 using Microsoft.Xna.Framework;
 using Game.Graphics;
+using demo.Game.Commands;
 
 namespace Game
 {
@@ -62,8 +63,17 @@ namespace Game
             AnimationRegistry.Load(device);
             // Font
             font = Content.Load<SpriteFont>("Font");
-            // Entities should not be initialized here but have for now due to asset loading ordering someone help
-            gameObjects.Add(new DemoPlayer(new System.Numerics.Vector2(graphics.GraphicsDevice.Viewport.Bounds.Center.X, graphics.GraphicsDevice.Viewport.Bounds.Center.Y)));
+            Specs_h.monoko = Texture2D.FromFile(device, "C:\\Users\\tyfre\\source\\repos\\3902\\demo\\Content\\Sprites\\white_desert (edited).png");
+            PlayerCharacter p = new PlayerCharacter();
+            gameObjects.Add(p);
+            //Make map for keyboard controller
+            Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
+            m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));
+            m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));
+            m.Add(Keys.Right, new PlayerMovementCommand(p, 1, 0));
+            m.Add(Keys.Left, new PlayerMovementCommand(p, -1, 0));
+            keyboard.map(m);
+
         }
 
         // Tick
@@ -73,8 +83,8 @@ namespace Game
             base.Update(gameTime);
 
             // Always update inputs first
-            keyboard.Update();
-            mouse.Update();
+            keyboard.Update(Keyboard.GetState());
+            mouse.Update(Mouse.GetState());
 
             // Quit functionality0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboard.IsKeyDown(Keys.Escape, Keys.D0, Keys.NumPad0) || mouse.RightDown()) Exit();

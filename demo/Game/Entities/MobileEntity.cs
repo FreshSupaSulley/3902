@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Game.Entities
 {
     // LivingEntity uses animations to render itself. Maybe use a better name?
-    public abstract class LivingEntity : Entity
+    public abstract class MobileEntity : Entity
     {
-        private readonly Animation activeAnimation;
+        protected Animation activeAnimation;
 
-        public LivingEntity(Vector2 position, Animation activeAnimation) : base(position)
+        public MobileEntity(Vector2 position, Animation activeAnimation) : base(position)
         {
             this.activeAnimation = activeAnimation;
         }

@@ -1,8 +1,9 @@
+using System;
 namespace Game.Controllers
 {
     public interface IController
     {
-        void Update();
+        void Update(Object cntrlrStt);
         void PostUpdate();
     }
 }

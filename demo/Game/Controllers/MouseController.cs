@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,7 +16,7 @@ namespace Game.Controllers
         }
 
         // Unused for now
-        public void Update() {}
+        public void Update(Object cntrlrStt) {}
 
         public void PostUpdate()
         {
