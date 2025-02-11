@@ -2,6 +2,7 @@
 .DS_Store
 
 #Visual Studio files
+*.vs
 *.pidb
 *.userprefs
 *.[Oo]bj

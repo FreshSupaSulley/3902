@@ -8,10 +8,11 @@ namespace Game.Commands
 {
     abstract class PlayerCommand : ICommand
     {
-        public PlayerCommand(PlayerCharacter c) {
+        public PlayerCommand(Player c)
+        {
             player = c;
         }
-        public PlayerCharacter player { get; set; }
+        public Player player { get; set; }
         public abstract void Execute();
     }
 }

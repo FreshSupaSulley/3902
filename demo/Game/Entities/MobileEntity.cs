@@ -7,7 +7,7 @@ namespace Game.Entities
     // LivingEntity uses animations to render itself. Maybe use a better name?
     public abstract class MobileEntity : Entity
     {
-        protected Animation activeAnimation;
+        protected Animation activeAnimation { get; set; }
 
         public MobileEntity(Vector2 position, Animation activeAnimation) : base(position)
         {

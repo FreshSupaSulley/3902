@@ -1,11 +1,14 @@
 namespace Game.Commands;
 
-class QuitCommand : ICommand {
+class QuitCommand : ICommand
+{
 	private Game game;
-	public QuitCommand(Game game) {
+	public QuitCommand(Game game)
+	{
 		this.game = game;
 	}
-	public void Execute() {
+	public void Execute()
+	{
 		game.Exit();
 	}
 }

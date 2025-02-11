@@ -9,50 +9,44 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Security.Principal;
 
-public class PlayerCharacter : MobileEntity
+public class Player : MobileEntity
 {
-	public int speed { get; set; }
-	private Dictionary<String, int[]> directionalAnimations;
-	public PlayerCharacter() : base(new System.Numerics.Vector2(Specs_h.spawnX, Specs_h.spawnY), new Animation(Specs_h.monoko, Specs_h.mkAll))
+	// Static animations monoko can switch between
+	private static readonly Animation UP = new Animation(Globals.monoko, Globals.mkBack);
+	private static readonly Animation DOWN = new Animation(Globals.monoko, Globals.mkFront);
+	private static readonly Animation LEFT = new Animation(Globals.monoko, Globals.mkLeft);
+	private static readonly Animation RIGHT = new Animation(Globals.monoko, Globals.mkRight);
+
+	public int speed { get; set; } = 1;
+	private bool moving;
+
+	public Player() : base(new System.Numerics.Vector2(Globals.spawnX, Globals.spawnY), new Animation(Globals.monoko, Globals.mkAll)) { }
+
+	public void animate(int direction, int orientation)
 	{
-		speed = 15;
-		directionalAnimations = new Dictionary<String, int[]>();
-		directionalAnimations.Add("right", Specs_h.mkRightIndex);
-		directionalAnimations.Add("left", Specs_h.mkLeftIndex);
-		directionalAnimations.Add("up", Specs_h.mkUp);
-		directionalAnimations.Add("down", Specs_h.mkDown);
+		moving = true;
+		if (direction > 0) //increasing value
+		{
+			base.activeAnimation = orientation == 0 ? RIGHT : DOWN;
+		}
+		else //decreasing value
+		{
+			base.activeAnimation = orientation == 0 ? LEFT : UP;
+		}
 	}
 
 	public override void Update()
 	{
-
-	}
-
-	public void animate(int direction, int orientation)
-	{
-		if(direction > 0) //increasing value
+		if (moving)
 		{
-			if(orientation == 0) //increasing x-value (moving right)
-			{
-				base.activeAnimation.currentAnimation = directionalAnimations["right"];
-			}
-			else //increasing y-value (moving down)
-			{
-				base.activeAnimation.currentAnimation = directionalAnimations["down"];
-			}
+			base.Update();
 		}
-		else //decreasing value
+		else
 		{
-			if(orientation == 0) //decreasing x-vaue (moving left)
-			{
-				base.activeAnimation.currentAnimation = directionalAnimations["left"];
-			}
-			else //decreasing y-value (moving up)
-			{
-				base.activeAnimation.currentAnimation = directionalAnimations["up"];
-			}
-
+			base.activeAnimation.Reset();
 		}
+
+		moving = false;
 	}
 
 	public override void Draw(SpriteBatch spriteBatch)

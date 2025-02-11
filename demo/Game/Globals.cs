@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 //This class contains information that will be specific to the particular game being implemented in this engine, such as filenames and source positions for sprite sheets
-public class Specs_h
+// ... can we get rid of this class if we can *begging*
+public class Globals
 {
     public static Texture2D monoko;
     public static int spawnX = 100;
@@ -26,13 +27,13 @@ public class Specs_h
     public static Microsoft.Xna.Framework.Rectangle[] mkBack = new Microsoft.Xna.Framework.Rectangle[] { mkBackNeutral, mkBackLeft, mkBackNeutral, mkBackRight };
     public static Microsoft.Xna.Framework.Rectangle[] mkAll = new Microsoft.Xna.Framework.Rectangle[] { monokoDefault, mkFrontLeft, mkFrontRight, scaryDefault, mkRightLeftFoot, mkRightNeutral, mkRightRightFoot, mkLeftLeftFoot, mkLeftNeutral, mkLeftRightFoot, mkBackLeft, mkBackNeutral, mkBackRight };
     public static int[] mkRightIndex = { 5, 4, 5, 6 };
-    public static int[] mkLeftIndex = {8, 7, 8, 9 };
+    public static int[] mkLeftIndex = { 8, 7, 8, 9 };
     public static int[] mkDown = { 0, 1, 0, 2 };
     public static int[] mkUp = { 11, 10, 11, 12 };
     public static int cycle(int i, int length)
     {
         i++;
-        if(i >= length)
+        if (i >= length)
         {
             i = 0;
         }
