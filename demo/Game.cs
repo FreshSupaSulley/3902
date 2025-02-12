@@ -68,7 +68,12 @@ namespace Game
             gameObjects.Add(new Dragon());
             // Add tile
             gameObjects.Add(new Brick());
+            // Add item
             gameObjects.Add(new Item());
+            // Add projectile
+            gameObjects.Add(new Projectile(new System.Numerics.Vector2(200,100)));
+
+
             //Make map for keyboard controller
             Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
             m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));

@@ -12,7 +12,7 @@ namespace Game.Tiles
 {
     public class Item : ITile
     {
-        private static readonly Sprite BRICK_TILE = new Sprite(Game.Load("/Items/heart.png"));
+        private static readonly Sprite Heart = new Sprite(Game.Load("/Items/heart.png"));
 
         public Item()
         {
@@ -25,7 +25,7 @@ namespace Game.Tiles
         }
         public void Draw(SpriteBatch batch)
         {
-            BRICK_TILE.Draw(batch, new Vector2(100, 00));
+            Heart.Draw(batch, new Vector2(100, 200));
         }
     }
 }
