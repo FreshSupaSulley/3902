@@ -66,7 +66,7 @@ namespace Game
             Tile.LoadTextures();
             // Font
             font = Content.Load<SpriteFont>("Font");
-            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)");
+            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
             Player p = new Player();
             gameObjects.Add(p);
@@ -92,7 +92,9 @@ namespace Game
             m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
             m.Add(Keys.N, new PlayerAttackCommand(p));
             m.Add(Keys.Z, new PlayerAttackCommand(p));
-
+            m.Add(Keys.E, new PlayerDamageCommand(p));
+            m.Add(Keys.D0, new PlayerSwitchCommand(p, Monoko.monoko, Monoko.mkBack, Monoko.mkFront, Monoko.mkLeft, Monoko.mkRight, new Rectangle[] { Monoko.scaryDefault }, new Rectangle[] { Monoko.mkEmotionallyDamaged }));
+            m.Add(Keys.D1, new PlayerSwitchCommand(p, Madotsuki.madoSpriteSheet, Madotsuki.mdBack, Madotsuki.mdFront, Madotsuki.mdLeft, Madotsuki.mdRight, new Rectangle[] { Madotsuki.mdKnifeF }, new Rectangle[] { Madotsuki.mdDamaged }));
             keyboard.AddCommand(m);
 
         }

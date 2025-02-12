@@ -12,7 +12,7 @@ namespace demo.Game.Commands
     {
         public PlayerAttackCommand(Player p): base(p) { }
         public override void Execute() {
-            this.player.animate(new int[] { 3 });
+            this.player.animate(player.animationSequences[Player.srcSprites.ATTACK]);
             this.player.attackFlag = true;
             TempBuffer.add(new Entities.TempEntity(TempBuffer.pow, player.Position), 5000);
         }
