@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Game.Graphics;
 using Game.Commands;
 using Game.Tiles;
+using demo.Game.Commands;
 
 namespace Game
 {
@@ -84,6 +85,7 @@ namespace Game
             m.Add(Keys.S, new PlayerMovementCommand(p, 1, 1));
             m.Add(Keys.D, new PlayerMovementCommand(p, 1, 0));
             m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
+            m.Add(Keys.N, new PlayerAttackCommand(p));
             keyboard.AddCommand(m);
         }
 
