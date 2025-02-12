@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using Game.Graphics;
 using Game.Commands;
 using Game.Tiles;
-using demo.Game.Commands;
 
 namespace Game
 {
@@ -66,7 +65,8 @@ namespace Game
             Player p = new Player();
             gameObjects.Add(p);
             // Add dragon
-            gameObjects.Add(new Dragon());
+            Dragon dragon = new Dragon();
+            gameObjects.Add(dragon);
             // Add tile
             gameObjects.Add(new Brick());
             // Add item
@@ -85,8 +85,10 @@ namespace Game
             m.Add(Keys.S, new PlayerMovementCommand(p, 1, 1));
             m.Add(Keys.D, new PlayerMovementCommand(p, 1, 0));
             m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
-            m.Add(Keys.N, new PlayerAttackCommand(p));
+
+            m.Add(Keys.O, new nonPlayerMovementCommand(dragon));
             keyboard.AddCommand(m);
+
         }
 
         // Tick
@@ -106,14 +108,6 @@ namespace Game
             {
                 Exit();
             }
-
-            // restart functionality0
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-            || keyboard.IsKeyDown(Keys.R))
-            {
-                Run();
-            }
-
 
             // Update each object
             foreach (IGameObject sample in gameObjects)
