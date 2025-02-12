@@ -97,13 +97,21 @@ namespace Game
             keyboard.Update(gameTime);
             mouse.Update(gameTime);
 
-            // Quit functionality0
+            // Quit functionality
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-            || keyboard.IsKeyDown(Keys.Escape)
+            || keyboard.IsKeyDown(Keys.Escape) || keyboard.IsKeyDown(Keys.Q)
             || mouse.RightDown())
             {
                 Exit();
             }
+
+            // restart functionality0
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+            || keyboard.IsKeyDown(Keys.R))
+            {
+                Run();
+            }
+
 
             // Update each object
             foreach (IGameObject sample in gameObjects)
