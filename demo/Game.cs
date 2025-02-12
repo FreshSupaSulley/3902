@@ -85,8 +85,6 @@ namespace Game
             m.Add(Keys.S, new PlayerMovementCommand(p, 1, 1));
             m.Add(Keys.D, new PlayerMovementCommand(p, 1, 0));
             m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
-
-            m.Add(Keys.O, new nonPlayerMovementCommand(dragon));
             keyboard.AddCommand(m);
 
         }
