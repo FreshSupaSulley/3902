@@ -9,25 +9,33 @@ namespace Game.Controllers;
 public class KeyboardController : IController
 {
     // Unused for now but a good value to have
-    private Microsoft.Xna.Framework.Game game;
+    private readonly Microsoft.Xna.Framework.Game game;
     private KeyboardState oldState;
     private KeyboardState state;
 
-    private Dictionary<Keys, ICommand> commandDictionary;
+    private readonly Dictionary<Keys, ICommand> onCommand;
+    private readonly Dictionary<Keys, ICommand> onKeyup;
+    private readonly Dictionary<Keys, ICommand> onKeydown;
+    private readonly Dictionary<Keys, ICommand> onHold;
+    private readonly Dictionary<Keys, float> holdTimes;
 
     public KeyboardController(Game game)
     {
         this.game = game;
-        commandDictionary = new Dictionary<Keys, ICommand>();
+        onCommand = new Dictionary<Keys, ICommand>();
+        onKeyup = new Dictionary<Keys, ICommand>();
+        onKeydown = new Dictionary<Keys, ICommand>();
+        onHold = new Dictionary<Keys, ICommand>();
+        holdTimes = new Dictionary<Keys, float>();
     }
 
     public void AddCommand(Keys key, ICommand command)
     {
-        if (commandDictionary.ContainsKey(key))
+        if (onCommand.ContainsKey(key))
         {
-            commandDictionary.Remove(key);
+            onCommand.Remove(key);
         }
-        commandDictionary.Add(key, command);
+        onCommand.Add(key, command);
     }
 
     public void AddCommand(Dictionary<Keys, ICommand> newCommandDictionary)
@@ -38,11 +46,15 @@ public class KeyboardController : IController
         }
     }
 
+    public void AddTapCommand() {
+
+    }
+
     public void RemoveCommand(Keys key)
     {
-        if (commandDictionary.ContainsKey(key))
+        if (onCommand.ContainsKey(key))
         {
-            commandDictionary.Remove(key);
+            onCommand.Remove(key);
         }
     }
 
@@ -60,9 +72,9 @@ public class KeyboardController : IController
 
         foreach (Keys key in state.GetPressedKeys())
         {
-            if (commandDictionary.ContainsKey(key))
+            if (onCommand.ContainsKey(key))
             {
-                commandDictionary[key].Execute();
+                onCommand[key].Execute();
             }
         }
     }
