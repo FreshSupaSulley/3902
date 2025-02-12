@@ -8,6 +8,7 @@ using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Security.Principal;
+using System.Threading;
 
 public class Player : MobileEntity
 {
@@ -16,6 +17,8 @@ public class Player : MobileEntity
 	private static readonly Animation DOWN = new Animation(Globals.monoko, Globals.mkFront);
 	private static readonly Animation LEFT = new Animation(Globals.monoko, Globals.mkLeft);
 	private static readonly Animation RIGHT = new Animation(Globals.monoko, Globals.mkRight);
+
+	private Animation prev;
 	public bool attackFlag { get; set; } = false;
 	public int speed { get; set; } = 1;
 	private bool moving;
@@ -24,6 +27,7 @@ public class Player : MobileEntity
 
 	public void animate(int direction, int orientation)
 	{
+		prev = this.activeAnimation;
 		moving = true;
 		if (direction > 0) //increasing value
 		{
@@ -38,12 +42,21 @@ public class Player : MobileEntity
 	//directly change currentAnimation
 	public void animate(int[] anim)
 	{
+		prev = this.activeAnimation;
 		Rectangle[] temp = new Rectangle[anim.Length];
 		for(int i = 0; i < anim.Length; i++)
 		{
 			temp[i] = Globals.mkAll[anim[i]];
 		}
 		this.activeAnimation = new Animation(Globals.monoko, temp);
+	}
+	//Change current animation to previous animation 
+	public void restore()
+	{
+		if (prev != null)
+		{
+			this.activeAnimation = prev;
+		}
 	}
 
 	public override void Update()

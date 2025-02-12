@@ -15,7 +15,7 @@ namespace Game.Commands
             
         }
 
-        public override void Execute()
+        public void Execute()
         {
             
         }
