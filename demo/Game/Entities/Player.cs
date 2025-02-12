@@ -16,7 +16,7 @@ public class Player : MobileEntity
 	private static readonly Animation DOWN = new Animation(Globals.monoko, Globals.mkFront);
 	private static readonly Animation LEFT = new Animation(Globals.monoko, Globals.mkLeft);
 	private static readonly Animation RIGHT = new Animation(Globals.monoko, Globals.mkRight);
-
+	public bool attackFlag { get; set; } = false;
 	public int speed { get; set; } = 1;
 	private bool moving;
 
@@ -33,6 +33,17 @@ public class Player : MobileEntity
 		{
 			base.activeAnimation = orientation == 0 ? LEFT : UP;
 		}
+	}
+
+	//directly change currentAnimation
+	public void animate(int[] anim)
+	{
+		Rectangle[] temp = new Rectangle[anim.Length];
+		for(int i = 0; i < anim.Length; i++)
+		{
+			temp[i] = Globals.mkAll[anim[i]];
+		}
+		this.activeAnimation = new Animation(Globals.monoko, temp);
 	}
 
 	public override void Update()
