@@ -10,7 +10,9 @@ namespace demo.Game
 {
     internal class TempBuffer
     {
-        public static Texture2D pow { get; set; } 
+        public static Texture2D pow { get; set; }
+        public static int powLength = 50;
+        public static int powHeight = 50;
         //maps temporary entity to time it should be eliminated
         public static Dictionary<int, TempEntity> current = new Dictionary<int, TempEntity>();
         public static int elapsed = 0;
@@ -21,6 +23,16 @@ namespace demo.Game
             {
                 current.Add(elapsed + duration, t);
                 expiries.Add(elapsed + duration);
+            }
+            else
+            {
+                int i = 1;
+                while(current.ContainsKey(elapsed + duration + i))
+                {
+                    i++;
+                }
+                current.Add(elapsed + duration + i, t);
+                expiries.Add(elapsed + duration + i);
             }
         }
         public static void depreciate()

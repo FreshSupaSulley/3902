@@ -27,7 +27,7 @@ namespace demo.Game.Entities
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White * opacity);
+            spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, TempBuffer.powLength, TempBuffer.powHeight), Color.White * opacity);
         }
 
     }

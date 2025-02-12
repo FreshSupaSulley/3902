@@ -144,6 +144,7 @@ namespace Game
             {
                 TempBuffer.current[key].Draw(spriteBatch);
             }
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
