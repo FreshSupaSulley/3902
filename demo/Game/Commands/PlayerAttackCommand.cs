@@ -14,6 +14,7 @@ namespace demo.Game.Commands
         public override void Execute() {
             this.player.animate(new int[] { 3 });
             this.player.attackFlag = true;
+            TempBuffer.add(new Entities.TempEntity(TempBuffer.pow, player.Position), 5000);
         }
     }
 }

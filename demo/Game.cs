@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 using Game.Graphics;
 using Game.Commands;
 using Game.Tiles;
+using demo.Game;
+using demo.Game.Commands;
 
 namespace Game
 {
@@ -61,7 +63,8 @@ namespace Game
             Game.device = graphics.GraphicsDevice;
             // Font
             font = Content.Load<SpriteFont>("Font");
-            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)");
+            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
+            TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
             Player p = new Player();
             gameObjects.Add(p);
             // Add dragon
@@ -85,6 +88,8 @@ namespace Game
             m.Add(Keys.S, new PlayerMovementCommand(p, 1, 1));
             m.Add(Keys.D, new PlayerMovementCommand(p, 1, 0));
             m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
+            m.Add(Keys.N, new PlayerAttackCommand(p));
+
             keyboard.AddCommand(m);
 
         }
@@ -98,6 +103,11 @@ namespace Game
             // Always update inputs first
             keyboard.Update(gameTime);
             mouse.Update(gameTime);
+
+            // Document how much time has passed (probably not how I'm supposed to do it but I'm grasping at straws here :/ - Ty) 
+            TempBuffer.elapsed = gameTime.ElapsedGameTime.Milliseconds;
+            // Remove any expired temporary entities
+            TempBuffer.depreciate();
 
             // Quit functionality
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
@@ -130,6 +140,10 @@ namespace Game
                 sample.Draw(spriteBatch);
             }
 
+            foreach (int key in TempBuffer.expiries)
+            {
+                TempBuffer.current[key].Draw(spriteBatch);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }

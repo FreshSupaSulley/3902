@@ -44,6 +44,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/idle.png
 
+#begin Sprites/pow_(transparent).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/pow_(transparent).png
+
 #begin Sprites/pre_editing.png
 /importer:TextureImporter
 /processor:TextureProcessor
