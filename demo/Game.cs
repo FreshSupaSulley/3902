@@ -68,6 +68,7 @@ namespace Game
             gameObjects.Add(new Dragon());
             // Add tile
             gameObjects.Add(new Brick());
+            gameObjects.Add(new Item());
             //Make map for keyboard controller
             Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
             m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));
@@ -84,8 +85,8 @@ namespace Game
             base.Update(gameTime);
 
             // Always update inputs first
-            keyboard.Update();
-            mouse.Update();
+            keyboard.Update(gameTime);
+            mouse.Update(gameTime);
 
             // Quit functionality0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed

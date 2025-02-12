@@ -12,12 +12,10 @@ namespace Game.Controllers
         public MouseController(Microsoft.Xna.Framework.Game game)
         {
             this.game = game;
-            Update();
-            PostUpdate();
         }
 
         // Unused for now
-        public void Update() {
+        public void Update(GameTime gameTime) {
             state = Mouse.GetState();
         }
 
