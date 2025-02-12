@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Commands;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Game.Controllers;
@@ -18,7 +19,6 @@ public class KeyboardController : IController
     {
         this.game = game;
         commandDictionary = new Dictionary<Keys, ICommand>();
-        PostUpdate();
     }
 
     public void AddCommand(Keys key, ICommand command)
@@ -54,7 +54,7 @@ public class KeyboardController : IController
         }
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         state = Keyboard.GetState();
 

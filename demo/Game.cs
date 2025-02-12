@@ -84,8 +84,8 @@ namespace Game
             base.Update(gameTime);
 
             // Always update inputs first
-            keyboard.Update();
-            mouse.Update();
+            keyboard.Update(gameTime);
+            mouse.Update(gameTime);
 
             // Quit functionality0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
