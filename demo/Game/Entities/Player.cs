@@ -8,6 +8,7 @@ using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Security.Principal;
+using System.Reflection.Metadata;
 
 public class Player : MobileEntity
 {
@@ -16,7 +17,7 @@ public class Player : MobileEntity
 	private static readonly Animation DOWN = new Animation(Globals.monoko, Globals.mkFront);
 	private static readonly Animation LEFT = new Animation(Globals.monoko, Globals.mkLeft);
 	private static readonly Animation RIGHT = new Animation(Globals.monoko, Globals.mkRight);
-
+	private bool facingBack;
 	public int speed { get; set; } = 1;
 	private bool moving;
 
@@ -27,13 +28,24 @@ public class Player : MobileEntity
 		moving = true;
 		if (direction > 0) //increasing value
 		{
-			base.activeAnimation = orientation == 0 ? RIGHT : DOWN;
+			base.activeAnimation.reset(orientation == 0 ? Globals.mkRightIndex : Globals.mkDown);
 		}
 		else //decreasing value
 		{
-			base.activeAnimation = orientation == 0 ? LEFT : UP;
+			base.activeAnimation.reset(orientation == 0 ? Globals.mkLeftIndex : Globals.mkUp);
 		}
-	}
+        if (direction == 0)
+        {
+            if (facingBack)
+            {
+                base.activeAnimation.reset(new int[] { 11 });
+            }
+            else
+            {
+                base.activeAnimation.reset(new int[] { 0 });
+            }
+        }
+    }
 
 	public override void Update()
 	{
