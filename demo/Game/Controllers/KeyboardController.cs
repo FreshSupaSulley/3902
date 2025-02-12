@@ -27,6 +27,9 @@ public class KeyboardController : IController
         onKeydown = new Dictionary<Keys, ICommand>();
         onHold = new Dictionary<Keys, ICommand>();
         holdTimes = new Dictionary<Keys, float>();
+
+        oldState = Keyboard.GetState();
+        state = Keyboard.GetState();
     }
 
     public void AddCommand(Keys key, ICommand command)
@@ -46,8 +49,39 @@ public class KeyboardController : IController
         }
     }
 
-    public void AddTapCommand() {
-
+    public void AddHoldCommand(Keys key, ICommand command, float holdTime) {
+        if (onHold.ContainsKey(key))
+        {
+            onHold.Remove(key);
+        }
+        onHold.Add(key, command);
+        if (holdTimes.ContainsKey(key))
+        {
+            holdTimes.Remove(key);
+        }
+        holdTimes.Add(key, holdTime);
+    }
+    public void AddKeydownCommand(Keys key, ICommand command) {
+        // TODO: Add keydown command system
+    }
+    public void AddKeyupCommand(Keys key, ICommand command) {
+        // TODO: Add keyup command system
+    }
+    public void RemoveHoldCommand(Keys key) {
+        if (onHold.ContainsKey(key))
+        {
+            onHold.Remove(key);
+        }
+        if (holdTimes.ContainsKey(key))
+        {
+            holdTimes.Remove(key);
+        }
+    }
+    public void RemoveKeydownCommand(Keys key, ICommand command) {
+        
+    }
+    public void RemoveKeyupCommand(Keys key, ICommand command) {
+        // TODO: Add keyup command system
     }
 
     public void RemoveCommand(Keys key)
@@ -84,6 +118,6 @@ public class KeyboardController : IController
         oldState = state;
     }
 
-    public bool IsKeyDown(params Keys[] keys) => keys.Any(key => Keyboard.GetState().IsKeyDown(key));
-    public bool IsKeyPressed(params Keys[] keys) => keys.Any(key => Keyboard.GetState().IsKeyDown(key) && !oldState.IsKeyDown(key));
+    public bool IsKeyDown(params Keys[] keys) => keys.Any(key => state.IsKeyDown(key));
+    public bool IsKeyPressed(params Keys[] keys) => keys.Any(key => state.IsKeyDown(key) && !oldState.IsKeyDown(key));
 }
