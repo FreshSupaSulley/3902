@@ -69,21 +69,11 @@ namespace Game
             // Add tile
             gameObjects.Add(new Brick());
             //Make map for keyboard controller
-            Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>(); 
-            ICommand up = new PlayerMovementCommand(p, -1, 1);
-            ICommand down = new PlayerMovementCommand(p, 1, 1);
-            ICommand right = new PlayerMovementCommand(p, 1, 0);
-            ICommand left = new PlayerMovementCommand(p, -1, 0);
-            ICommand revert = new PlayerMovementCommand(p, 0, 0);
-            m.Add(Keys.Up, up);
-            m.Add(Keys.Down, down);
-            m.Add(Keys.Right, right);
-            m.Add(Keys.Left, left);
-            m.Add(Keys.W, up);
-            m.Add(Keys.S, down);
-            m.Add(Keys.A, left);
-            m.Add(Keys.D, right);
-            m.Add(Keys.F13, revert);
+            Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
+            m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));
+            m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));
+            m.Add(Keys.Right, new PlayerMovementCommand(p, 1, 0));
+            m.Add(Keys.Left, new PlayerMovementCommand(p, -1, 0));
             keyboard.AddCommand(m);
         }
 
