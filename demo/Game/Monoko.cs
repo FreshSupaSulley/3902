@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 //This class contains information that will be specific to the particular game being implemented in this engine, such as filenames and source positions for sprite sheets
 // ... can we get rid of this class if we can *begging*
@@ -41,5 +42,16 @@ public class Monoko
             i = 0;
         }
         return i;
+    }
+
+    public static void MonokoMe(Player player)
+    {
+
+        player.animationSequences.Add(Player.srcSprites.UP, new Animation(monoko, mkBack));
+        player.animationSequences.Add(Player.srcSprites.DOWN, new Animation(monoko, mkFront));
+        player.animationSequences.Add(Player.srcSprites.RIGHT, new Animation(monoko, mkRight));
+        player.animationSequences.Add(Player.srcSprites.LEFT, new Animation(monoko, mkLeft));
+        player.animationSequences.Add(Player.srcSprites.ATTACK, new Animation(monoko, new Microsoft.Xna.Framework.Rectangle[] { scaryDefault }));
+        player.animationSequences.Add(Player.srcSprites.DAMAGED, new Animation(monoko, new Microsoft.Xna.Framework.Rectangle[] { mkEmotionallyDamaged }));
     }
 }
