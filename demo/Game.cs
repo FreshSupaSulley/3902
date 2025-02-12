@@ -75,6 +75,10 @@ namespace Game
             m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));
             m.Add(Keys.Right, new PlayerMovementCommand(p, 1, 0));
             m.Add(Keys.Left, new PlayerMovementCommand(p, -1, 0));
+            m.Add(Keys.W, new PlayerMovementCommand(p, -1, 1));
+            m.Add(Keys.S, new PlayerMovementCommand(p, 1, 1));
+            m.Add(Keys.D, new PlayerMovementCommand(p, 1, 0));
+            m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
             keyboard.AddCommand(m);
         }
 
