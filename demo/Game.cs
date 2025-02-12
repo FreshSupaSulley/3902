@@ -66,7 +66,8 @@ namespace Game
             Tile.LoadTextures();
             // Font
             font = Content.Load<SpriteFont>("Font");
-            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
+            // Load mono
+            Monoko.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
             Player p = new Player();
             gameObjects.Add(p);

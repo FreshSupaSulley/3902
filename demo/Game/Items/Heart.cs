@@ -5,9 +5,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Items
 {
-    public class Heart : Item
+    public class Heart : IItem
     {
         private static readonly Sprite SPRITE = new Sprite(Game.Load("/Items/heart.png"));
+
+        public void Use() => throw new System.NotImplementedException();
 
         public void Update()
         {
