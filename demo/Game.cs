@@ -10,6 +10,7 @@ using Game.Commands;
 using Game.Tiles;
 using demo.Game;
 using demo.Game.Commands;
+using Game.Items;
 
 namespace Game
 {
@@ -61,9 +62,11 @@ namespace Game
         protected override void LoadContent()
         {
             Game.device = graphics.GraphicsDevice;
+            // Load Tiles
+            Tile.LoadTextures();
             // Font
             font = Content.Load<SpriteFont>("Font");
-            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
+            Globals.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)");
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
             Player p = new Player();
             gameObjects.Add(p);
@@ -71,14 +74,13 @@ namespace Game
             Dragon dragon = new Dragon();
             gameObjects.Add(dragon);
             // Add tile
-            gameObjects.Add(new Brick());
+            gameObjects.Add(new Tile(TileType.BRICK));
             // Add item
-            gameObjects.Add(new Item());
+            gameObjects.Add(new Heart());
             // Add projectile
-            gameObjects.Add(new Projectile(new System.Numerics.Vector2(200,100)));
+            gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
-
-            //Make map for keyboard controller
+            // Make map for keyboard controller
             Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
             m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));
             m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));

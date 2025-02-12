@@ -6,7 +6,7 @@ using Game.Entities;
 namespace Game.Tiles
 {
     // We will find a use for this late
-    public class Projectile : ITile
+    public class Projectile : IGameObject// : ITile
     {
         private static readonly Sprite dragon_projectaile = new Sprite(Game.Load("/Dragon/dragon_projectile.png"));
         float speed = 1f;
@@ -29,8 +29,8 @@ namespace Game.Tiles
             {
                 position.X -= speed;
             }
-            
         }
+
         public void Draw(SpriteBatch batch)
         {
             dragon_projectaile.Draw(batch, new Vector2(position.X, 180));

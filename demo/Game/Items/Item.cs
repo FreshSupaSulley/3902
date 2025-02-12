@@ -1,24 +1,14 @@
-using System;
-using System.IO;
-using System.Runtime.CompilerServices;
 using System.Numerics;
 using Game.Entities;
 using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System.Security.Principal;
 
-namespace Game.Tiles
+namespace Game.Items
 {
-    public class Item : ITile
+    public class Item : IGameObject
     {
         private static readonly Sprite Heart = new Sprite(Game.Load("/Items/heart.png"));
-
-        public Item()
-        {
-
-        }
-
+        
         public void Update()
         {
 
