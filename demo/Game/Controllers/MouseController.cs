@@ -7,21 +7,23 @@ namespace Game.Controllers
     {
         private Microsoft.Xna.Framework.Game game;
         private MouseState oldState;
+        private MouseState state;
 
         public MouseController(Microsoft.Xna.Framework.Game game)
         {
             this.game = game;
+            Update();
             PostUpdate();
         }
 
         // Unused for now
         public void Update() {
-            
+            state = Mouse.GetState();
         }
 
         public void PostUpdate()
         {
-            oldState = Mouse.GetState();
+            oldState = state;
         }
 
         public float RelativeX() => MathHelper.Clamp(Mouse.GetState().Position.X * 1f / game.Window.ClientBounds.Width, 0, 1);
