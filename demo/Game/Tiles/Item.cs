@@ -25,7 +25,7 @@ namespace Game.Tiles
         }
         public void Draw(SpriteBatch batch)
         {
-            BRICK_TILE.Draw(batch, new Vector2(100, 200));
+            BRICK_TILE.Draw(batch, new Vector2(100, 00));
         }
     }
 }
