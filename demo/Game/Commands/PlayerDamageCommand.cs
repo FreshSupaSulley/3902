@@ -14,7 +14,7 @@ namespace demo.Game.Commands
         }
         public override void Execute()
         {
-            this.player.animate(new int[] { Globals.mkAll.Length - 1 });
+            this.player.animate(this.player.animationSequences[Player.srcSprites.DAMAGED]);
             this.player.enforceDimensions();
         }
     }
