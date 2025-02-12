@@ -58,7 +58,10 @@ public class Player : MobileEntity
 			this.activeAnimation = prev;
 		}
 	}
-
+	public void enforceDimensions()
+	{
+		this.activeAnimation.manualOverride(Globals.mkWidth, Globals.mkHeight);
+	}
 	public override void Update()
 	{
 		if (moving)

@@ -7,6 +7,8 @@ public class Globals
     public static Texture2D monoko;
     public static int spawnX = 100;
     public static int spawnY = 100;
+    public static int mkWidth = 50;
+    public static int mkHeight = 50;
 
     public static Microsoft.Xna.Framework.Rectangle monokoDefault = new Microsoft.Xna.Framework.Rectangle(432, 98, 24, 30);
     public static Microsoft.Xna.Framework.Rectangle mkFrontLeft = new Microsoft.Xna.Framework.Rectangle(410, 100, 23, 28);
@@ -21,11 +23,12 @@ public class Globals
     public static Microsoft.Xna.Framework.Rectangle mkBackNeutral = new Microsoft.Xna.Framework.Rectangle(433, 36, 24, 30);
     public static Microsoft.Xna.Framework.Rectangle mkBackLeft = new Microsoft.Xna.Framework.Rectangle(409, 36, 24, 30);
     public static Microsoft.Xna.Framework.Rectangle mkBackRight = new Microsoft.Xna.Framework.Rectangle(458, 36, 24, 30);
+    public static Microsoft.Xna.Framework.Rectangle mkEmotionallyDamaged = new Microsoft.Xna.Framework.Rectangle(8, 34, 394, 440);
     public static Microsoft.Xna.Framework.Rectangle[] mkLeft = new Microsoft.Xna.Framework.Rectangle[] { mkLeftNeutral, mkLeftLeftFoot, mkLeftNeutral, mkLeftRightFoot };
     public static Microsoft.Xna.Framework.Rectangle[] mkRight = new Microsoft.Xna.Framework.Rectangle[] { mkRightNeutral, mkRightLeftFoot, mkRightNeutral, mkRightRightFoot };
     public static Microsoft.Xna.Framework.Rectangle[] mkFront = new Microsoft.Xna.Framework.Rectangle[] { monokoDefault, mkFrontLeft, monokoDefault, mkFrontRight };
     public static Microsoft.Xna.Framework.Rectangle[] mkBack = new Microsoft.Xna.Framework.Rectangle[] { mkBackNeutral, mkBackLeft, mkBackNeutral, mkBackRight };
-    public static Microsoft.Xna.Framework.Rectangle[] mkAll = new Microsoft.Xna.Framework.Rectangle[] { monokoDefault, mkFrontLeft, mkFrontRight, scaryDefault, mkRightLeftFoot, mkRightNeutral, mkRightRightFoot, mkLeftLeftFoot, mkLeftNeutral, mkLeftRightFoot, mkBackLeft, mkBackNeutral, mkBackRight };
+    public static Microsoft.Xna.Framework.Rectangle[] mkAll = new Microsoft.Xna.Framework.Rectangle[] { monokoDefault, mkFrontLeft, mkFrontRight, scaryDefault, mkRightLeftFoot, mkRightNeutral, mkRightRightFoot, mkLeftLeftFoot, mkLeftNeutral, mkLeftRightFoot, mkBackLeft, mkBackNeutral, mkBackRight, mkEmotionallyDamaged };
     public static int[] mkRightIndex = { 5, 4, 5, 6 };
     public static int[] mkLeftIndex = { 8, 7, 8, 9 };
     public static int[] mkDown = { 0, 1, 0, 2 };

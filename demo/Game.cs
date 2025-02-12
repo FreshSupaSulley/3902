@@ -90,7 +90,7 @@ namespace Game
             m.Add(Keys.A, new PlayerMovementCommand(p, -1, 0));
             m.Add(Keys.N, new PlayerAttackCommand(p));
             m.Add(Keys.Z, new PlayerAttackCommand(p));
-
+            m.Add(Keys.E, new PlayerDamageCommand(p));
             keyboard.AddCommand(m);
 
         }

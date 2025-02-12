@@ -14,6 +14,9 @@ namespace Game.Graphics
         // Speed of the animation
         private readonly int duration;
 
+        public int dimensionOverrideFlag = 0;
+        public Vector2 manualDimension;
+
         // Changes on tick
         private int index, frames;
 
@@ -56,7 +59,20 @@ namespace Game.Graphics
             // Draw the part of the animation we need
             Rectangle sprite = sprites[index];
             // Draw at the center of the position
-            spriteBatch.Draw(texture, position - new Vector2(sprite.Width / 2, sprite.Height / 2), sprite, Color.White);
+            if (dimensionOverrideFlag == 1)
+            {
+                spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, (int)manualDimension.X, (int)manualDimension.Y), sprite, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(texture, position - new Vector2(sprite.Width / 2, sprite.Height / 2), sprite, Color.White);
+            }
+        }
+
+        public void manualOverride(int x, int y)
+        {
+            dimensionOverrideFlag = 1;
+            manualDimension = new Vector2(x, y);
         }
 
         public void Reset()
