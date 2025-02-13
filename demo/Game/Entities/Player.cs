@@ -38,7 +38,7 @@ public class Player : MobileEntity
 	}
 	public Dictionary<srcSprites, Animation> animationSequences { get; set; }
 	public Dictionary<srcSprites, Animation> damaged { get; set; }
-	public Dictionary<srcSprites, Animation> attack { get; set; }
+	public Dictionary<facing, Animation> attack { get; set; }
 	private Animation prev;
 	public bool attackFlag { get; set; } = false;
 	public int speed { get; set; } = 1;
@@ -95,6 +95,11 @@ public class Player : MobileEntity
 		{
 			this.activeAnimation = prev;
 		}
+	}
+	public void fillAttack(Dictionary<facing, Animation> a)
+	{
+		this.attack = a;
+		attackFlag = true;
 	}
 	public void enforceDimensions()
 	{

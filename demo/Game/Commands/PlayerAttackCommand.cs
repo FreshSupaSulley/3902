@@ -12,8 +12,14 @@ namespace demo.Game.Commands
     {
         public PlayerAttackCommand(Player p): base(p) { }
         public override void Execute() {
-            this.player.animate(player.animationSequences[Player.srcSprites.ATTACK]);
-            this.player.attackFlag = true;
+            if (player.attackFlag)
+            {
+                this.player.animate(this.player.attack[this.player.direction]);
+            }
+            else
+            {
+                this.player.animate(player.animationSequences[Player.srcSprites.ATTACK]);
+            }
             TempBuffer.add(new Entities.TempEntity(TempBuffer.pow, player.Position), 5000);
         }
     }

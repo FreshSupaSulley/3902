@@ -96,7 +96,7 @@ namespace Game
             m.Add(Keys.Z, new PlayerAttackCommand(p));
             m.Add(Keys.E, new PlayerDamageCommand(p));
             m.Add(Keys.D0, new PlayerSwitchCommand(p, Monoko.monoko, Monoko.mkBack, Monoko.mkFront, Monoko.mkLeft, Monoko.mkRight, new Rectangle[] { Monoko.scaryDefault }, new Rectangle[] { Monoko.mkEmotionallyDamaged }));
-            m.Add(Keys.D1, new PlayerSwitchCommand(p, Madotsuki.madoSpriteSheet, Madotsuki.mdBack, Madotsuki.mdFront, Madotsuki.mdLeft, Madotsuki.mdRight, new Rectangle[] { Madotsuki.mdKnifeF }, new Rectangle[] { Madotsuki.mdDamaged }));
+            m.Add(Keys.D1, new PlayerSwitchCommand(p, Madotsuki.madoSpriteSheet, Madotsuki.mdBack, Madotsuki.mdFront, Madotsuki.mdLeft, Madotsuki.mdRight, new Rectangle[] { Madotsuki.mdKnifeF }, new Rectangle[] { Madotsuki.mdDamaged }, new Rectangle[][] { new Rectangle[] { Madotsuki.mdKnifeF}, new Rectangle[] { Madotsuki.mdKnifeB }, new Rectangle[] {Madotsuki.mdKnifeL }, new Rectangle[] { Madotsuki.mdKnifeR} }));
             keyboard.AddCommand(m);
 
         }
