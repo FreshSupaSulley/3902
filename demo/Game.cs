@@ -66,7 +66,7 @@ namespace Game
             Tile.LoadTextures();
             // Font
             font = Content.Load<SpriteFont>("Font");
-            // Load mono
+            // Load player assets
             Monoko.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
             Madotsuki.madoSpriteSheet = Content.Load<Texture2D>("Sprites/Mado");
