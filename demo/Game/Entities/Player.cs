@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading;
+using System.Reflection.Metadata;
 
 public class Player : MobileEntity
 {
@@ -27,12 +28,21 @@ public class Player : MobileEntity
 		ATTACK = 4,
 		DAMAGED = 5
 	};
+	public enum facing
+	{
+		VAN = 0,
+		REAR = 1,
+		WEST = 2,
+		EAST = 3
 
+	}
 	public Dictionary<srcSprites, Animation> animationSequences { get; set; }
-
+	public Dictionary<srcSprites, Animation> damaged { get; set; }
+	public Dictionary<srcSprites, Animation> attack { get; set; }
 	private Animation prev;
 	public bool attackFlag { get; set; } = false;
 	public int speed { get; set; } = 1;
+	public facing direction = facing.VAN;
 	private bool moving;
 
 	public Player() : base(new System.Numerics.Vector2(Monoko.spawnX, Monoko.spawnY), new Animation(Monoko.monoko, Monoko.mkAll)) {
@@ -52,10 +62,12 @@ public class Player : MobileEntity
 		if (direction > 0) //increasing value
 		{
 			base.activeAnimation = orientation == 0 ? animationSequences[srcSprites.RIGHT] : animationSequences[srcSprites.DOWN];
+			this.direction = orientation == 0 ? facing.EAST : facing.VAN;
 		}
 		else //decreasing value
 		{
 			base.activeAnimation = orientation == 0 ? animationSequences[srcSprites.LEFT] : animationSequences[srcSprites.UP];
+			this.direction = orientation == 0 ? facing.WEST : facing.REAR;
 		}
 	}
 

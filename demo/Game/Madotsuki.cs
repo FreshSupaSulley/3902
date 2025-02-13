@@ -25,8 +25,10 @@ namespace demo.Game
         public static Microsoft.Xna.Framework.Rectangle mdLN = new Microsoft.Xna.Framework.Rectangle(36, 116, 16, 29);
         public static Microsoft.Xna.Framework.Rectangle mdLR = new Microsoft.Xna.Framework.Rectangle(60, 116, 15, 29);
         public static Microsoft.Xna.Framework.Rectangle mdKnifeB = new Microsoft.Xna.Framework.Rectangle(36, 309, 16, 28);
-        public static Microsoft.Xna.Framework.Rectangle mdKnifeF = new Microsoft.Xna.Framework.Rectangle(35, 374, 17, 27);
+        public static Microsoft.Xna.Framework.Rectangle mdKnifeF = new Microsoft.Xna.Framework.Rectangle(254, 374, 17, 27);
         public static Microsoft.Xna.Framework.Rectangle mdDamaged = new Microsoft.Xna.Framework.Rectangle(483, 527, 21, 17);
+        public static Microsoft.Xna.Framework.Rectangle mdKnifeL = new Microsoft.Xna.Framework.Rectangle(249, 404, 21, 29);
+        public static Microsoft.Xna.Framework.Rectangle mdKnifeR = new Microsoft.Xna.Framework.Rectangle(309, 341, 21, 18);
         public static Microsoft.Xna.Framework.Rectangle[] mdBack = new Microsoft.Xna.Framework.Rectangle[] { mdBN, mdBL, mdBN, mdBR };
         public static Microsoft.Xna.Framework.Rectangle[] mdRight = new Microsoft.Xna.Framework.Rectangle[] { mdRN, mdRL, mdRN, mdRR };
         public static Microsoft.Xna.Framework.Rectangle[] mdFront = new Microsoft.Xna.Framework.Rectangle[] { mdFN, mdFL, mdFN, mdFR };
