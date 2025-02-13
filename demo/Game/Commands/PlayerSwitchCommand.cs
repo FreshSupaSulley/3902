@@ -38,7 +38,7 @@ namespace demo.Game.Commands
             player.animationSequences.Add(Player.srcSprites.ATTACK, new Animation(texture, a));
             player.animationSequences.Add(Player.srcSprites.DAMAGED, new Animation(texture, d));
             player.Update();
-
+  
         }
     }
 }

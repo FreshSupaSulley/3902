@@ -69,6 +69,7 @@ namespace Game
             // Load mono
             Monoko.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
+            Madotsuki.madoSpriteSheet = Content.Load<Texture2D>("Sprites/Mado");
             Player p = new Player();
             gameObjects.Add(p);
             // Add dragon
