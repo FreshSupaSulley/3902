@@ -74,6 +74,7 @@ public class Player : MobileEntity
 	//directly change currentAnimation
 	public void animate(int[] anim)
 	{
+		moving = true;
 		prev = this.activeAnimation;
 		Rectangle[] temp = new Rectangle[anim.Length];
 		for(int i = 0; i < anim.Length; i++)
@@ -86,6 +87,7 @@ public class Player : MobileEntity
 	//directly change currentAnimation #2
 	public void animate(Animation a)
 	{
+		moving = true;
 		this.activeAnimation = a;
 	}
 	//Change current animation to previous animation 
