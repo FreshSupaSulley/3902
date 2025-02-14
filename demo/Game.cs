@@ -62,7 +62,9 @@ namespace Game
             Madotsuki.madoSpriteSheet = Content.Load<Texture2D>("Sprites/Mado");
             Lewa.texture = Content.Load<Texture2D>("Sprites/Lewa");
             Player p = new Player();
+            Player p2 = new Player();
             gameObjects.Add(p);
+            gameObjects.Add(p2);
             // Add dragon
             Dragon dragon = new Dragon();
             gameObjects.Add(dragon);
