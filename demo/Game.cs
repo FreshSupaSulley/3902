@@ -41,17 +41,9 @@ namespace Game
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Setting Up Key Mappings
-            keyMappings = new Dictionary<Keys, ICommand> {
-                { Keys.NumPad0, new QuitCommand(this) },
-                { Keys.D0, new QuitCommand(this) },
-            };
-
             // Controllers
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
-
-            keyboard.AddCommand(keyMappings);
 
             // This calls load content
             base.Initialize();
@@ -81,10 +73,7 @@ namespace Game
             // Add projectile
             gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
-            // Make map for keyboard controller
-            Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
-            
-            keyboard.AddCommand(m);
+            ControllerLoader.LoadSprint2Commands(keyboard, p);
 
         }
 
