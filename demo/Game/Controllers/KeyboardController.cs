@@ -18,6 +18,7 @@ public class KeyboardController : IController
     private readonly Dictionary<Keys, ICommand> onKeydown;
     private readonly Dictionary<Keys, ICommand> onHold;
     private readonly Dictionary<Keys, float> holdTimes;
+    private readonly Dictionary<Keys, float> elapsedTimes;
 
     public KeyboardController(Game game)
     {
@@ -27,6 +28,7 @@ public class KeyboardController : IController
         onKeydown = new Dictionary<Keys, ICommand>();
         onHold = new Dictionary<Keys, ICommand>();
         holdTimes = new Dictionary<Keys, float>();
+        elapsedTimes = new Dictionary<Keys, float>();
 
         oldState = Keyboard.GetState();
         state = Keyboard.GetState();
@@ -60,12 +62,25 @@ public class KeyboardController : IController
             holdTimes.Remove(key);
         }
         holdTimes.Add(key, holdTime);
+        if (elapsedTimes.ContainsKey(key))
+        {
+            elapsedTimes.Remove(key);
+        }
+        elapsedTimes.Add(key, 0);
     }
     public void AddKeydownCommand(Keys key, ICommand command) {
-        // TODO: Add keydown command system
+        if (onKeydown.ContainsKey(key))
+        {
+            onKeydown.Remove(key);
+        }
+        onKeydown.Add(key, command);
     }
     public void AddKeyupCommand(Keys key, ICommand command) {
-        // TODO: Add keyup command system
+        if (onKeyup.ContainsKey(key))
+        {
+            onKeyup.Remove(key);
+        }
+        onKeyup.Add(key, command);
     }
     public void RemoveHoldCommand(Keys key) {
         if (onHold.ContainsKey(key))
@@ -76,12 +91,22 @@ public class KeyboardController : IController
         {
             holdTimes.Remove(key);
         }
+        if (elapsedTimes.ContainsKey(key))
+        {
+            elapsedTimes.Remove(key);
+        }
     }
-    public void RemoveKeydownCommand(Keys key, ICommand command) {
-        
+    public void RemoveKeydownCommand(Keys key) {
+        if (onKeydown.ContainsKey(key))
+        {
+            onKeydown.Remove(key);
+        }
     }
-    public void RemoveKeyupCommand(Keys key, ICommand command) {
-        // TODO: Add keyup command system
+    public void RemoveKeyupCommand(Keys key) {
+        if (onKeyup.ContainsKey(key))
+        {
+            onKeyup.Remove(key);
+        }
     }
 
     public void RemoveCommand(Keys key)
@@ -104,13 +129,33 @@ public class KeyboardController : IController
     {
         state = Keyboard.GetState();
 
-        foreach (Keys key in state.GetPressedKeys())
-        {
-            if (onCommand.ContainsKey(key))
-            {
-                onCommand[key].Execute();
+        foreach (KeyValuePair<Keys, ICommand> pair in onCommand) {
+            if (state.IsKeyDown(pair.Key)) {
+                pair.Value.Execute();
             }
         }
+        foreach (KeyValuePair<Keys, ICommand> pair in onKeydown) {
+            if (state.IsKeyDown(pair.Key) && oldState.IsKeyUp(pair.Key)) {
+                pair.Value.Execute();
+            }
+        }
+        foreach (KeyValuePair<Keys, ICommand> pair in onKeyup) {
+            if (state.IsKeyUp(pair.Key) && oldState.IsKeyDown(pair.Key)) {
+                pair.Value.Execute();
+            }
+        }
+        foreach (KeyValuePair<Keys, ICommand> pair in onHold) {
+            if (state.IsKeyDown(pair.Key)) {
+                elapsedTimes[pair.Key] += (float) gameTime.ElapsedGameTime.TotalSeconds;
+            } else {
+                elapsedTimes[pair.Key] = 0;
+            }
+            if (elapsedTimes[pair.Key] > holdTimes[pair.Key]) {
+                pair.Value.Execute();
+                elapsedTimes[pair.Key] = 0;
+            }
+        }
+
     }
 
     public void PostUpdate()
