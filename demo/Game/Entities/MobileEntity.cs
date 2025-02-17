@@ -1,6 +1,6 @@
-using System.Numerics;
 using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Game.Entities
 {

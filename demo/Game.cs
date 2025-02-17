@@ -27,9 +27,6 @@ namespace Game
         // Font
         private SpriteFont font;
 
-        // Map keys to an animation (too specific for keyboardcontroller)
-        private Dictionary<Keys, ICommand> keyMappings;
-
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -67,6 +64,7 @@ namespace Game
             gameObjects.Add(p2);
             // Add dragon
             Dragon dragon = new Dragon();
+            Gohma gohma = new Gohma();
             gameObjects.Add(dragon);
             // Add tile
             gameObjects.Add(new Tile(TileType.BRICK));
@@ -76,8 +74,9 @@ namespace Game
             // Add projectile
             gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
-            ControllerLoader.LoadSprint2Commands(keyboard, p);
+            MobileEntity[] entities = { dragon, gohma };
 
+            ControllerLoader.LoadSprint2Commands(keyboard, p, entities, gameObjects);
         }
 
         // Tick

@@ -51,11 +51,11 @@ namespace demo.Game.Commands
             player.animationSequences.Add(Player.srcSprites.DAMAGED, new Animation(texture, d));
             if (!(fullAttack == null))
             {
-                player.attack = new Dictionary<Player.facing, Animation>();
-                player.attack.Add(Player.facing.VAN, new Animation(texture, fullAttack[0]));
-                player.attack.Add(Player.facing.REAR, new Animation(texture, fullAttack[1]));
-                player.attack.Add(Player.facing.WEST, new Animation(texture, fullAttack[2]));
-                player.attack.Add(Player.facing.EAST, new Animation(texture, fullAttack[3]));
+                player.attack = new Dictionary<Player.Facing, Animation>();
+                player.attack.Add(Player.Facing.VAN, new Animation(texture, fullAttack[0]));
+                player.attack.Add(Player.Facing.REAR, new Animation(texture, fullAttack[1]));
+                player.attack.Add(Player.Facing.WEST, new Animation(texture, fullAttack[2]));
+                player.attack.Add(Player.Facing.EAST, new Animation(texture, fullAttack[3]));
                 player.attackFlag = true;
             }
             else
