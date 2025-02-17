@@ -111,7 +111,7 @@ public class Player : MobileEntity
 	{
 		if (moving)
 		{
-			base.Update();
+			base.activeAnimation.Update();
 		}
 		else
 		{
