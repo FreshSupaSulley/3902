@@ -1,5 +1,5 @@
-using System.Numerics;
 using Game.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Items
