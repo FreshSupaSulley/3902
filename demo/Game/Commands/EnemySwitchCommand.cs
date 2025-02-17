@@ -14,8 +14,9 @@ namespace Game.Commands
         private int state;
 
         private Entity[] entities;
+        private List<IGameObject> gameObjects;
 
-        public EnemySwitchCommand(int state, MobileEntity[] entities)
+        public EnemySwitchCommand(int state, MobileEntity[] entities, List<IGameObject> gameObjects)
         {
             this.state = state;
             this.entities = entities;
@@ -23,7 +24,10 @@ namespace Game.Commands
 
         public override void Execute()
         {
-            
+            foreach (Entity el in entities) {
+                gameObjects.Remove(el);
+            }
+            gameObjects.Add(this.entities[state]);
             entities[state].Update();
         }
     }
