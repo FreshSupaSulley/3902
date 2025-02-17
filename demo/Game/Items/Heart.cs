@@ -1,15 +1,12 @@
-using System.Numerics;
-using Game.Entities;
 using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Items
 {
-    public class Heart : IItem
+    // Hearts dont do anything yet
+    public class Heart : Item
     {
-        private static readonly Sprite SPRITE = new Sprite(Game.Load("/Items/heart.png"));
-
-        public override void Use() => throw new System.NotImplementedException();
+        private static readonly Sprite SPRITE = new(Game.Load("/Items/zelda_items.png", new(0, 0, 7, 8)));
 
         public override void Update()
         {

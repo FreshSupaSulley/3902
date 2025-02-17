@@ -3,7 +3,8 @@ using Game.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game.Entities {
+namespace Game.Entities
+{
 
     public class Gohma : MobileEntity {
         private static readonly Texture2D spriteSheet = Game.Load("/Dragon/zelda_Bosses.png");

@@ -3,20 +3,44 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Items
 {
-    public class Bomb : IItem
+    public class Bomb : Item
     {
-        private static readonly Sprite SPRITE = new Sprite(Game.Load("/Items/zelda_items.png"));
+        private static readonly Sprite BOMB = new(Game.Load("/Items/zelda_items.png", new(136, 0, 8, 14)));
 
-        public override void Use() => throw new System.NotImplementedException();
+        // Fire has an animation not a sprite
+        private static Texture2D FIRE_TEX = Game.Load("/Misc/fire.png");
+        private Animation FIRE = new(FIRE_TEX, 2, 10);
+
+        private int ticks;
+        private readonly int bombDelay = 60;
+
+        public bool isExploded()
+        {
+            return ticks > bombDelay;
+        }
 
         public override void Update()
         {
-            
+            if (!isExploded())
+            {
+                ticks++;
+            }
+            else
+            {
+                FIRE.Update();
+            }
         }
 
         public override void Draw(SpriteBatch batch)
         {
-            SPRITE.Draw(batch, Position);
+            if (!isExploded())
+            {
+                BOMB.Draw(batch, Position);
+            }
+            else
+            {
+                FIRE.Draw(batch, Position);
+            }
         }
     }
 }

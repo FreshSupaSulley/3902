@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.Commands;
-namespace demo.Game.Commands
+﻿using Game.Entities;
+
+namespace Game.Commands
 {
     internal class PlayerDamageCommand : PlayerCommand
     {

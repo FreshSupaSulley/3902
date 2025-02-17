@@ -1,8 +1,10 @@
 ﻿using System;
+using Game.Entities;
 using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 //This class contains information that will be specific to the particular game being implemented in this engine, such as filenames and source positions for sprite sheets
 // ... can we get rid of this class if we can *begging*
+
 public class Monoko
 {
     public static Texture2D monoko;

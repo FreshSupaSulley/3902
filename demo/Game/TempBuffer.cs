@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using demo.Game.Entities;
+﻿using System.Collections.Generic;
+using Game.Entities;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace demo.Game
+namespace Game
 {
     internal class TempBuffer
     {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Game.Graphics;
+using Game.Entities;
 
 namespace demo.Game
 {

@@ -5,20 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Game.Graphics
 {
     // A Sprite is a single 2D image
-    public class Sprite
+    public class Sprite(Texture2D texture)
     {
-        private readonly Texture2D texture;
+        public Texture2D Texture { get; } = texture;
 
-        public Sprite(Texture2D texture)
-        {
-            this.texture = texture;
-        }
-        
-        public Sprite(Texture2D texture, Rectangle subimage) : this(texture) {}
-        
+        public Sprite(Texture2D texture, Rectangle subimage) : this(texture) { }
+
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(texture, position, Color.White);//, sprite, Color.White);
+            spriteBatch.Draw(Texture, position, Color.White);//, sprite, Color.White);
         }
     }
 }

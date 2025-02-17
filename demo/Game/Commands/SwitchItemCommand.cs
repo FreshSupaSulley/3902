@@ -1,16 +1,16 @@
-using Game.Commands;
+using System;
+using Game.Entities;
 using Game.Items;
 
-namespace demo.Game.Commands
+namespace Game.Commands
 {
-    internal class SwitchItemCommand : PlayerCommand
+    internal class SwitchItemCommand(Player p, Func<Item> function) : PlayerCommand(p)
     {
-        private IItem item;
-        public SwitchItemCommand(Player p, IItem item): base(p) {
-            this.item = item;
-        }
-        public override void Execute() {
-            player.Item = item;
+        private Func<Item> function = function;
+
+        public override void Execute()
+        {
+            player.Item = function();
         }
     }
 }

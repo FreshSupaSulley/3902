@@ -9,6 +9,7 @@ using Game.Commands;
 using Game.Tiles;
 using demo.Game;
 using Game.Items;
+using System;
 
 namespace Game
 {
@@ -20,6 +21,8 @@ namespace Game
         private MouseController mouse;
 
         private List<IGameObject> gameObjects = new List<IGameObject>();
+        // Demo tile
+        private Tile tile;
 
         // Rectangle for quads
         private SpriteBatch spriteBatch;
@@ -51,6 +54,7 @@ namespace Game
             Game.device = graphics.GraphicsDevice;
             // Load Tiles
             Tile.LoadTextures();
+            tile = new Tile(TileType.BRICK);
             // Font
             font = Content.Load<SpriteFont>("Font");
             // Load player assets
@@ -59,15 +63,13 @@ namespace Game
             Madotsuki.madoSpriteSheet = Content.Load<Texture2D>("Sprites/Mado");
             Lewa.texture = Content.Load<Texture2D>("Sprites/Lewa");
             Player p = new Player();
-            Player p2 = new Player();
             gameObjects.Add(p);
-            gameObjects.Add(p2);
             // Add dragon
             Dragon dragon = new Dragon();
             Gohma gohma = new Gohma();
             gameObjects.Add(dragon);
             // Add tile
-            gameObjects.Add(new Tile(TileType.BRICK));
+            gameObjects.Add(tile);
             // Add item
             gameObjects.Add(new Heart());
             
@@ -76,7 +78,7 @@ namespace Game
 
             MobileEntity[] entities = { dragon, gohma };
 
-            ControllerLoader.LoadSprint2Commands(keyboard, p, entities, gameObjects);
+            ControllerLoader.LoadSprint2Commands(tile, this, keyboard, p, entities, gameObjects);
         }
 
         // Tick
@@ -140,8 +142,23 @@ namespace Game
             // Try with resources
             using (var fileStream = new FileStream("Content/Sprites/" + path, FileMode.Open))
             {
-                return Texture2D.FromStream(Game.device, fileStream);
+                return Texture2D.FromStream(device, fileStream);
             }
+        }
+
+        public static Texture2D Load(string path, Rectangle subimage)
+        {
+            Texture2D source = Load(path);
+            Texture2D croppedTexture = new(device, subimage.Width, subimage.Height);
+            Color[] data = new Color[subimage.Width * subimage.Height];
+            source.GetData(0, subimage, data, 0, data.Length);
+            croppedTexture.SetData(data);
+            return croppedTexture;
+        }
+
+        public void AddGameObject(Item item)
+        {
+            gameObjects.Add(item);
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.Commands;
+﻿using System.Collections.Generic;
+using Game.Entities;
 using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace demo.Game.Commands
+namespace Game.Commands
 {
     internal class PlayerSwitchCommand : PlayerCommand
     {
