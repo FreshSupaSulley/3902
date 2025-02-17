@@ -14,6 +14,8 @@ namespace Game.Graphics
             this.texture = texture;
         }
         
+        public Sprite(Texture2D texture, Rectangle subimage) : this(texture) {}
+        
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             spriteBatch.Draw(texture, position, Color.White);//, sprite, Color.White);

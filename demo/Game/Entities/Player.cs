@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading;
 using System.Reflection.Metadata;
+using Game.Items;
 
 public class Player : MobileEntity
 {
@@ -34,8 +35,8 @@ public class Player : MobileEntity
 		REAR = 1,
 		WEST = 2,
 		EAST = 3
-
 	}
+
 	public Dictionary<srcSprites, Animation> animationSequences { get; set; }
 	public Dictionary<srcSprites, Animation> damaged { get; set; }
 	public Dictionary<facing, Animation> attack { get; set; }
@@ -44,6 +45,7 @@ public class Player : MobileEntity
 	public int speed { get; set; } = 1;
 	public facing direction = facing.VAN;
 	private bool moving;
+	public IItem Item;
 
 	public Player() : base(new System.Numerics.Vector2(Monoko.spawnX, Monoko.spawnY), new Animation(Monoko.monoko, Monoko.mkAll)) {
 		animationSequences = new Dictionary<srcSprites, Animation>();
@@ -109,6 +111,11 @@ public class Player : MobileEntity
 	}
 	public override void Update()
 	{
+		// Using items
+		if(Item is not null)
+		{
+			Item.Position = base.Position;
+		}
 		if (moving)
 		{
 			base.Update();
@@ -124,5 +131,11 @@ public class Player : MobileEntity
 	public override void Draw(SpriteBatch spriteBatch)
 	{
 		base.Draw(spriteBatch);
+
+		// Draw item
+		if(Item is not null)
+		{
+			Item.Draw(spriteBatch);
+		}
 	}
 }
