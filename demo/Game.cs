@@ -74,7 +74,11 @@ namespace Game
             // Add projectile
             gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
-            ControllerLoader.LoadSprint2Commands(keyboard, p);
+            MobileEntity[] entities = new MobileEntity[] {
+                dragon, gohma
+            };
+
+            ControllerLoader.LoadSprint2Commands(keyboard, p, entities, gameObjects);
         }
 
         // Tick
