@@ -9,7 +9,7 @@ using Game.Entities;
 namespace Game.Controllers;
 
 class ControllerLoader {
-    public static void LoadSprint2Commands(KeyboardController keyboard, Player p, Entity[] entities) {
+    public static void LoadSprint2Commands(KeyboardController keyboard, Player p, MobileEntity[] entities) {
         Dictionary<Keys, ICommand> m = new Dictionary<Keys, ICommand>();
         m.Add(Keys.Up, new PlayerMovementCommand(p, -1, 1));
         m.Add(Keys.Down, new PlayerMovementCommand(p, 1, 1));

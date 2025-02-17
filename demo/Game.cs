@@ -64,6 +64,7 @@ namespace Game
             gameObjects.Add(p2);
             // Add dragon
             Dragon dragon = new Dragon();
+            Gohma gohma = new Gohma();
             gameObjects.Add(dragon);
             // Add tile
             gameObjects.Add(new Tile(TileType.BRICK));
