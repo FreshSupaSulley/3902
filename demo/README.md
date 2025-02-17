@@ -7,4 +7,4 @@ As described in Key Mappings for this sprint. WASD and arrow keys move Monoko (n
 
 ## Known bugs
 R for resetting is surprisingly tedious and does not reset everything.
-Holding O and P to cycle between enemies makes them move twice as fast while held.
+Pressing O and P selects enemy instead of cycling enemy selected.

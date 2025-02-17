@@ -29,7 +29,6 @@ namespace Game.Commands
                 gameObjects.Remove(el);
             }
             gameObjects.Add(this.entities[state]);
-            entities[state].Update();
         }
     }
 }
