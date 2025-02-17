@@ -16,7 +16,7 @@ public abstract class MobileMotionPathEntity : MobileEntity {
 		if (paths[currentPath].Done) {
 			currentPath++;
 		}
-		if (currentPath > paths.Length) {
+		if (currentPath >= paths.Length) {
 			currentPath = 0;
 			foreach (IPath path in this.paths) {
 				path.Reset();

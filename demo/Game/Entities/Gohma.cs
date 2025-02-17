@@ -23,7 +23,8 @@ namespace Game.Entities
             new LinearPath(new Vector2(200,200), new Vector2(100,0), 50),
             new LinearPath(new Vector2(300,200), new Vector2(-100,0), 50),
             new LinearPath(new Vector2(200,200), new Vector2(0,100), 50),
-            new LinearPath(new Vector2(200,300), new Vector2(0,-100), 50),
+            new LinearPath(new Vector2(200,300), new Vector2(0,-200), 100),
+            new LinearPath(new Vector2(200,100), new Vector2(0,100), 50),
             new LinearPath(new Vector2(200,200), new Vector2(-100,0), 50),
             new LinearPath(new Vector2(100,200), new Vector2(100,0), 50),
         };
