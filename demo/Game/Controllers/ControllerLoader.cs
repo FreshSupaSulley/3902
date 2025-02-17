@@ -32,13 +32,17 @@ namespace Game.Controllers
             m.Add(Keys.D1, new SwitchItemCommand(p, () => new Heart()));
             m.Add(Keys.D2, new SwitchItemCommand(p, () => new Boomerang()));
             m.Add(Keys.D3, new SwitchItemCommand(p, () => new Bomb()));
-            // Switch tile
-            m.Add(Keys.U, new SwitchTileCommand(tile, true));
-            m.Add(Keys.I, new SwitchTileCommand(tile, false));
             // m.Add(Keys.D2, new SwitchItemCommand(p, new Boomerang()));
             // m.Add(Keys.D1, new SwitchItemCommand(p, new Bomb()));
             // m.Add(Keys.P, new EnemySwitchCommand(1));
             keyboard.AddCommand(m);
+            // Switch tile
+            Dictionary<Keys, ICommand> m2 = new Dictionary<Keys, ICommand>();
+            keyboard.AddKeydownCommand(Keys.T, new SwitchTileCommand(tile, true));
+            keyboard.AddKeydownCommand(Keys.Y, new SwitchTileCommand(tile, false));
+            // Switch item
+            keyboard.AddKeydownCommand(Keys.U, new ReplaceItemCommand(game, true));
+            keyboard.AddKeydownCommand(Keys.I, new ReplaceItemCommand(game, false));
         }
     }
 }

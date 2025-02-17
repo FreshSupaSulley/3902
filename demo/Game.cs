@@ -21,8 +21,11 @@ namespace Game
         private MouseController mouse;
 
         private List<IGameObject> gameObjects = new List<IGameObject>();
-        // Demo tile
+
+        // Demo objects
         private Tile tile;
+        private Item item;
+        public int itemIndex;
 
         // Rectangle for quads
         private SpriteBatch spriteBatch;
@@ -54,11 +57,10 @@ namespace Game
             Game.device = graphics.GraphicsDevice;
             // Load Tiles
             Tile.LoadTextures();
-            tile = new Tile(TileType.BRICK);
             // Font
             font = Content.Load<SpriteFont>("Font");
             // Load player assets
-            Monoko.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)"); 
+            Monoko.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)");
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
             Madotsuki.madoSpriteSheet = Content.Load<Texture2D>("Sprites/Mado");
             Lewa.texture = Content.Load<Texture2D>("Sprites/Lewa");
@@ -69,10 +71,10 @@ namespace Game
             Gohma gohma = new Gohma();
             gameObjects.Add(dragon);
             // Add tile
-            gameObjects.Add(tile);
-            // Add item
-            gameObjects.Add(new Heart());
-            
+            gameObjects.Add(tile = new Tile(TileType.BRICK));
+            // Setup item
+            item = new Heart{ Position = new(600, 200) };
+
             // Add projectile
             gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
@@ -104,11 +106,25 @@ namespace Game
                 Exit();
             }
 
+            // Reset functionality
+            if (keyboard.IsKeyPressed(Keys.R))
+            {
+                // Reset item
+                item = new Heart{ Position = new(600, 200) };
+                itemIndex = 0;
+                // Remove items placed by player
+                gameObjects.RemoveAll(obj => obj is Item);
+                gameObjects.Add(item);
+            }
+
             // Update each object
             foreach (IGameObject sample in gameObjects)
             {
                 sample.Update();
             }
+
+            // Tick item, special behavior
+            item.Update();
 
             // Always end with post ticks
             keyboard.PostUpdate();
@@ -126,6 +142,9 @@ namespace Game
             {
                 sample.Draw(spriteBatch);
             }
+
+            // Render item, special behavior
+            item.Draw(spriteBatch);
 
             foreach (int key in TempBuffer.expiries)
             {
@@ -159,6 +178,12 @@ namespace Game
         public void AddGameObject(Item item)
         {
             gameObjects.Add(item);
+        }
+
+        public void SetDemoItem(Item item)
+        {
+            this.item = item;
+            this.item.Position = new Vector2(600, 200);
         }
     }
 }

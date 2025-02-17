@@ -17,6 +17,8 @@ namespace Game.Entities
 
         public Dictionary<int, Animation> animationSequences { get; set; }
         private Animation prev;
+        private int ticks;
+
         public Dragon() : base(new Vector2(200, 200), IDLE) {
             animationSequences = new Dictionary<int, Animation>();
             animationSequences.Add(0, IDLE);
@@ -29,9 +31,13 @@ namespace Game.Entities
             this.activeAnimation = animationSequences[i];
 
         }
+
         public override void Update()
         {
             base.Update();
+
+            ticks++;
+            Position += new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
