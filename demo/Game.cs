@@ -27,9 +27,6 @@ namespace Game
         // Font
         private SpriteFont font;
 
-        // Map keys to an animation (too specific for keyboardcontroller)
-        private Dictionary<Keys, ICommand> keyMappings;
-
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -77,7 +74,6 @@ namespace Game
             gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
             ControllerLoader.LoadSprint2Commands(keyboard, p);
-
         }
 
         // Tick
