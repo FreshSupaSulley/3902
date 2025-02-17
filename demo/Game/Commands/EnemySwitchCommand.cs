@@ -20,6 +20,7 @@ namespace Game.Commands
         {
             this.state = state;
             this.entities = entities;
+            this.gameObjects = gameObjects;
         }
 
         public override void Execute()
