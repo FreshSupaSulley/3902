@@ -11,14 +11,17 @@ namespace Game.Commands
 {
     internal class EnemySwitchCommand : EnemyCommand
     {
-        int state;
+        private int state;
 
-        private static Animation IDLE = new Animation(Game.Load("/Dragon/dragon.png"), 4, 10);
+        private Entity[] entities;
+
+        private static Animation IDLE = new Animation(Game.Load("/Dragon/dragon.png"), 4, 10);  
         private static Animation Hurt = new Animation(Game.Load("/Dragon/dragon_hurt.png"), 1, 10);
 
-        public EnemySwitchCommand(int state)
+        public EnemySwitchCommand(int state, Entity[] entities)
         {
             this.state = state;
+            this.entities = entities;
         }
 
         public override void Execute()

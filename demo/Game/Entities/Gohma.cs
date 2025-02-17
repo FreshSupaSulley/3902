@@ -7,12 +7,13 @@ namespace Game.Entities;
 
 public class Gleeok : MobileEntity {
     private static readonly Texture2D spriteSheet = Game.Load("/Dragon/zelda_Bosses.png");
-    private static readonly Animation IDLE = new Animation(spriteSheet, rects);
-    private static Rectangle[] rects = new Rectangle[] {
-        new Rectangle(96, 11, 219, 42),
-        new Rectangle(220, 11, 243, 42),
-        new Rectangle(244, 11, 267, 42),
+    private static readonly Rectangle[] rects = new Rectangle[] {
+        new Rectangle(298, 105, 48, 16),
+        new Rectangle(347, 105, 48, 16),
+        new Rectangle(396, 105, 48, 16),
+        new Rectangle(445, 105, 48, 16),
     };
+    private static readonly Animation IDLE = new Animation(spriteSheet, rects);
     
     public Dictionary<int, Animation> animationSequences { get; set; }
     private Animation prev;
