@@ -28,7 +28,7 @@ public class Player : MobileEntity
 		ATTACK = 4,
 		DAMAGED = 5
 	};
-	public enum facing
+	public enum Facing
 	{
 		VAN = 0,
 		REAR = 1,
@@ -38,11 +38,11 @@ public class Player : MobileEntity
 	}
 	public Dictionary<srcSprites, Animation> animationSequences { get; set; }
 	public Dictionary<srcSprites, Animation> damaged { get; set; }
-	public Dictionary<facing, Animation> attack { get; set; }
+	public Dictionary<Facing, Animation> attack { get; set; }
 	private Animation prev;
 	public bool attackFlag { get; set; } = false;
 	public int speed { get; set; } = 1;
-	public facing direction = facing.VAN;
+	public Facing direction = Facing.VAN;
 	private bool moving;
 
 	public Player() : base(new System.Numerics.Vector2(Monoko.spawnX, Monoko.spawnY), new Animation(Monoko.monoko, Monoko.mkAll)) {
@@ -62,12 +62,12 @@ public class Player : MobileEntity
 		if (direction > 0) //increasing value
 		{
 			base.activeAnimation = orientation == 0 ? animationSequences[srcSprites.RIGHT] : animationSequences[srcSprites.DOWN];
-			this.direction = orientation == 0 ? facing.EAST : facing.VAN;
+			this.direction = orientation == 0 ? Facing.EAST : Facing.VAN;
 		}
 		else //decreasing value
 		{
 			base.activeAnimation = orientation == 0 ? animationSequences[srcSprites.LEFT] : animationSequences[srcSprites.UP];
-			this.direction = orientation == 0 ? facing.WEST : facing.REAR;
+			this.direction = orientation == 0 ? Facing.WEST : Facing.REAR;
 		}
 	}
 
@@ -98,7 +98,7 @@ public class Player : MobileEntity
 			this.activeAnimation = prev;
 		}
 	}
-	public void fillAttack(Dictionary<facing, Animation> a)
+	public void fillAttack(Dictionary<Facing, Animation> a)
 	{
 		this.attack = a;
 		attackFlag = true;
