@@ -7,17 +7,13 @@ using System.Threading.Tasks;
 
 namespace Game.Commands
 {
-    internal class nonPlayerMovementCommand : ICommand
+    abstract class EnemyCommand : ICommand
     {
-
-        public nonPlayerMovementCommand(IGameObject o)
+        public EnemyCommand()
         {
             
         }
-
-        public void Execute()
-        {
-            
-        }
+        public Dragon dragon { get; set; }
+        public abstract void Execute();
     }
 }

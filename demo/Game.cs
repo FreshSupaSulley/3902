@@ -72,6 +72,7 @@ namespace Game
             gameObjects.Add(new Tile(TileType.BRICK));
             // Add item
             gameObjects.Add(new Heart());
+            
             // Add projectile
             gameObjects.Add(new Projectile(new System.Numerics.Vector2(200, 100)));
 
