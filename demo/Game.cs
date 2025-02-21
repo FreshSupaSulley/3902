@@ -59,6 +59,9 @@ namespace Game
             Tile.LoadTextures();
             // Font
             font = Content.Load<SpriteFont>("Font");
+            // Add room image
+            Room room = new Room();
+            gameObjects.Add(room);
             // Load player assets
             Monoko.monoko = Content.Load<Texture2D>("Sprites/white_desert (edited)");
             TempBuffer.pow = Content.Load<Texture2D>("Sprites/pow_(transparent)");
@@ -72,9 +75,7 @@ namespace Game
             gameObjects.Add(dragon);
             // Add tile
             gameObjects.Add(tile = new Tile(TileType.BRICK));
-            // Add room image
-            Room room = new Room();
-            gameObjects.Add(room);
+            
             // Setup item
             item = new Heart{ Position = new(600, 200) };
 
