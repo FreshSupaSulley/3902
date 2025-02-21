@@ -4,5 +4,6 @@ namespace Game.Collision;
 
 public interface ICollision {
     public void Update();
-    public void CheckCollision();
+    public bool CheckCollision();
+    public void OnCollision();
 }
