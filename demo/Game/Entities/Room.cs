@@ -1,0 +1,30 @@
+using System;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Numerics;
+using Game.Entities;
+using Game.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Security.Principal;
+using System.Net.Mime;
+
+namespace Game.Entities
+{
+    public class Room : IGameObject
+    {
+        private static readonly Sprite SPRITE = new(Game.Load("/Tiles/room.png", new(0, 0, 1000, 1000)));
+
+        public void Update()
+        {
+
+        }
+
+        public void Draw(SpriteBatch batch)
+        {
+            SPRITE.Draw(batch, new Microsoft.Xna.Framework.Vector2(0,0));
+        }
+
+    }
+}

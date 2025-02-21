@@ -3,7 +3,8 @@ using Microsoft.Xna.Framework;
 
 namespace Game.Collision;
 
-public abstract class CollisionBox : ICollision {
+public abstract class CollisionBox : ICollision
+{
     Rectangle bounds;
     CollisionBox(Rectangle bounds) {
         this.bounds = bounds;
@@ -15,4 +16,6 @@ public abstract class CollisionBox : ICollision {
         }
     }
     public void OnCollision() {}
+
+    public abstract bool CheckCollision();
 }
