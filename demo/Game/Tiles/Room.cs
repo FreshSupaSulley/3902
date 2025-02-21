@@ -2,19 +2,19 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Numerics;
-using Game.Entities;
 using Game.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Net.Mime;
+using Game.Entities;
 
-namespace Game.Entities
+namespace Game.Tiles
 {
     public class Room : IGameObject
     {
-        private static readonly Sprite Wall = new(Game.Load("/Tiles/room.png", new(0, 0, 1169, 1246)));
+        private static readonly Texture2D Wall = Game.Load("Tiles/room.png");
 
         public void Update()
         {
@@ -23,7 +23,7 @@ namespace Game.Entities
 
         public void Draw(SpriteBatch batch)
         {
-            Wall.Draw(batch, new Microsoft.Xna.Framework.Vector2(0,0));
+            batch.Draw(Wall, new System.Numerics.Vector2(0, 0), Color.White);
         }
 
     }

@@ -9,10 +9,10 @@ namespace Game.Tiles
 {
     public class Door(DoorType type) : IGameObject
     {
-        //private static readonly Texture2D DOOR_SHEET_TOP = Game.Load("Tiles/doors_top.png");
+        private static readonly Texture2D DOOR_SHEET_TOP = Game.Load("Tiles/doors_top.png");
         //private static readonly Texture2D DOOR_SHEET_LEFT = Game.Load("Tiles/doors_left.png");
         //private static readonly Texture2D DOOR_SHEET_RIGHT = Game.Load("Tiles/doors_right.png");
-        private static readonly Texture2D DOOR_SHEET_BOTTOM = Game.Load("Tiles/doors_bottom.png");
+        //private static readonly Texture2D DOOR_SHEET_BOTTOM = Game.Load("Tiles/doors_bottom.png");
         private static readonly int DOOR_TEXTURE_SIZE = 32;
 
         // Contains all mappings from DoorType to textures
@@ -26,7 +26,7 @@ namespace Game.Tiles
 
         public static void LoadTextures()
         {
-            int DOORS_PER_ROW = DOOR_SHEET_BOTTOM.Width / DOOR_TEXTURE_SIZE;
+            int DOORS_PER_ROW = DOOR_SHEET_TOP.Width / DOOR_TEXTURE_SIZE;
             foreach (DoorType item in Enum.GetValues(typeof(DoorType)))
             {
                 int ordinal = (int)item;
@@ -41,10 +41,10 @@ namespace Game.Tiles
         /// Draws the door
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(DOOR_SHEET_TOP, new System.Numerics.Vector2(300, 300), textures[Type], Color.White);
+            spriteBatch.Draw(DOOR_SHEET_TOP, new System.Numerics.Vector2(300, 300), textures[Type], Color.White);
             //spriteBatch.Draw(DOOR_SHEET_LEFT, new System.Numerics.Vector2(200, 350), textures[Type], Color.White);
             //spriteBatch.Draw(DOOR_SHEET_RIGHT, new System.Numerics.Vector2(400, 350), textures[Type], Color.White);
-            spriteBatch.Draw(DOOR_SHEET_BOTTOM, new System.Numerics.Vector2(200, 400), textures[Type], Color.White);
+            //spriteBatch.Draw(DOOR_SHEET_BOTTOM, new System.Numerics.Vector2(200, 400), textures[Type], Color.White);
             // Fun c# note: "is" can't be overriden but == can apparently
             if (Item is not null)
             {
