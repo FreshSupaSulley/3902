@@ -25,6 +25,7 @@ namespace Game
         // Demo objects
         private Tile tile;
         private Item item;
+        private Door door;
         public int itemIndex;
 
         // Rectangle for quads
@@ -75,7 +76,8 @@ namespace Game
             gameObjects.Add(dragon);
             // Add tile
             gameObjects.Add(tile = new Tile(TileType.BRICK));
-            
+            // Add doors
+            //gameObjects.Add(door = new Door(DoorType.OPEN));
             // Setup item
             item = new Heart{ Position = new(600, 200) };
 
