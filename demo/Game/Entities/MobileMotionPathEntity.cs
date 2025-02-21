@@ -24,7 +24,6 @@ public abstract class MobileMotionPathEntity : MobileEntity {
 		}
 		paths[currentPath].Update();
 		this.Position = paths[currentPath].Position;
-		System.Console.WriteLine(currentPath);
         base.Update();
     }
     public override void Draw(SpriteBatch spriteBatch)
