@@ -1,3 +1,4 @@
+using System;
 using Game.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,11 @@ namespace Game.Items
         public override void Draw(SpriteBatch batch)
         {
             SPRITE.Draw(batch, Position);
+        }
+
+        public override void Use(Game game)
+        {
+            Console.WriteLine("probably should heal player when we get health system");
         }
     }
 }

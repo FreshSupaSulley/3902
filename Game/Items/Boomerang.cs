@@ -8,22 +8,28 @@ namespace Game.Items
     {
         private static readonly Sprite SPRITE = new(Game.Load("/Items/zelda_items.png", new(129, 3, 5, 8)));
 
-        private readonly int TICKS_ALIVE = 500;
+        private readonly int TICKS_ALIVE = 300;
         private int ticks = 0;
 
         public override void Update(Game game)
         {
             Position += new Vector2(1, 0);
 
-            if(ticks++ > TICKS_ALIVE)
+            if(ticks++ >= TICKS_ALIVE)
             {
-                // call a despawn, which I dont care enough to do rn
+                game.room.RemoveEntity(this);
             }
         }
 
         public override void Draw(SpriteBatch batch)
         {
-            batch.Draw(SPRITE.Texture, Position, null, Color.White, MathHelper.ToRadians(ticks * 4), new Vector2(5f / 2, 8f / 2), new Vector2(1), SpriteEffects.None, 0f);
+            batch.Draw(SPRITE.Texture, Position, null, Color.White, MathHelper.ToRadians(ticks * 8), new Vector2(5f / 2, 8f / 2), new Vector2(1), SpriteEffects.None, 0f);
+        }
+
+        public override void Use(Game game)
+        {
+            // Launch in direction of player
+            game.room.AddEntity(this);
         }
     }
 }

@@ -6,41 +6,44 @@ namespace Game.Items
 {
     public class Bomb(Vector2 position) : Item(position)
     {
-        private static readonly Sprite BOMB = new(Game.Load("/Items/zelda_items.png", new(136, 0, 8, 14)));
+        private static readonly int bombDelay = 120, fireTime = 600;
 
-        // Fire has an animation not a sprite
-        private static Texture2D FIRE_TEX = Game.Load("/Misc/fire.png");
-        private Animation FIRE = new(FIRE_TEX, 2, 10);
+        private static readonly Sprite BOMB = new(Game.Load("/Items/zelda_items.png", new(136, 0, 8, 14)));
+        private static readonly Texture2D FIRE_TEX = Game.Load("/Misc/fire.png");
+        private readonly Animation FIRE = new(FIRE_TEX, 2, 10);
 
         private int ticks;
-        private readonly int bombDelay = 60;
+        public bool exploded;
 
-        public bool isExploded()
+        public override void Use(Game game)
         {
-            return ticks > bombDelay;
+            game.room.AddEntity(this);
         }
 
         public override void Update(Game game)
         {
-            if (!isExploded())
+            if (ticks++ >= bombDelay)
             {
-                ticks++;
-            }
-            else
-            {
+                exploded = true;
                 FIRE.Update();
+            }
+
+            // Despawn after a while
+            if (ticks >= fireTime)
+            {
+                game.room.RemoveEntity(this);
             }
         }
 
         public override void Draw(SpriteBatch batch)
         {
-            if (!isExploded())
+            if (exploded)
             {
-                BOMB.Draw(batch, Position);
+                FIRE.Draw(batch, Position);
             }
             else
             {
-                FIRE.Draw(batch, Position);
+                BOMB.Draw(batch, Position);
             }
         }
     }

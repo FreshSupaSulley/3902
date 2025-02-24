@@ -29,7 +29,7 @@ namespace Game.Entities
 
 		public override void Update(Game game)
 		{
-			Move(game.keyboard);
+			Move(game);
 			base.Update(game);
 
 			// Using items
@@ -39,15 +39,30 @@ namespace Game.Entities
 			}
 		}
 
-		private void Move(KeyboardController keyboard)
+		private void Move(Game game)
 		{
-			// If attacking, don't move
+			KeyboardController keyboard = game.keyboard;
+			// Attack
 			if (keyboard.IsKeyDown(Keys.Z, Keys.N))
 			{
-				TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
-				ActiveAnimation = ATTACK;
+				// If we have an item, use it
+				if (Item is not null)
+				{
+					Item.Use(game);
+					Item = null;
+				}
+				else
+				{
+					TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
+					ActiveAnimation = ATTACK;
+				}
+				// If attacking, don't move
 				return;
 			}
+			// Required for Sprint 3
+			if (keyboard.IsKeyPressed(Keys.D1)) Item = new Heart(Position);
+			else if (keyboard.IsKeyPressed(Keys.D2)) Item = new Boomerang(Position);
+			else if (keyboard.IsKeyPressed(Keys.D3)) Item = new Bomb(Position);
 			// Movement
 			// You could get rid of the normalization to make movement look smoother
 			const int speed = 1;
