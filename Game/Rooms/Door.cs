@@ -5,7 +5,7 @@ using Game.Items;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace demo.Game.Rooms
+namespace Game.Rooms
 {
     public class Door(DoorType type)
     {

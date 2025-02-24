@@ -1,6 +1,6 @@
 using System;
 
-namespace demo.Game.Rooms
+namespace Game.Rooms
 {
     public enum DoorType
     {
