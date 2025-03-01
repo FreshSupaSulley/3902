@@ -5,6 +5,7 @@ using Game.Entities;
 using Microsoft.Xna.Framework;
 using Game.Tiles;
 using Game.Rooms;
+using System;
 
 namespace Game
 {
@@ -16,7 +17,7 @@ namespace Game
         // Used to load resources statically
         private static GraphicsDevice device;
         private GraphicsDeviceManager graphics;
-        private RenderTarget2D target;
+        private RenderTarget2D target, loadingTarget;
 
         // Used for rendering everything
         private SpriteBatch spriteBatch;
@@ -27,6 +28,12 @@ namespace Game
         public Room room;
         public KeyboardController keyboard;
         public MouseController mouse;
+
+        // Pertains to loading rooms
+        private readonly int LOADING_TIME = 60;
+        private int loadingTime;
+        private int loadingDirection;
+        private Room loadingRoom;
 
         public Game()
         {
@@ -44,6 +51,8 @@ namespace Game
         {
             // Size of Zelda map
             target = new RenderTarget2D(graphics.GraphicsDevice, (12 + 4) * 16, (7 + 4) * 16);
+            loadingTarget = new RenderTarget2D(graphics.GraphicsDevice, target.Width, target.Height);
+
             BASE_TO_WINDOW = new Vector2(graphics.PreferredBackBufferWidth / target.Bounds.Width, graphics.PreferredBackBufferHeight / target.Bounds.Height);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -60,6 +69,7 @@ namespace Game
             // Used to load resources statically
             device = graphics.GraphicsDevice;
             Tile.LoadTextures();
+            Door.LoadTextures();
             font = Content.Load<SpriteFont>("Font");
             // Player object that stays around throughout session
             player = new();
@@ -87,8 +97,21 @@ namespace Game
             // Remove any expired temporary entities
             TempBuffer.depreciate(this);
 
-            // Tick room
-            room.Update(this);
+            // Tick room if not mid-transition
+            if (loadingRoom is null)
+            {
+                room.Update(this);
+            }
+            // If we are switching between rooms
+            else
+            {
+                if (loadingTime++ >= LOADING_TIME)
+                {
+                    room = loadingRoom;
+                    loadingRoom = null;
+                    loadingTime = 0;
+                }
+            }
 
             // Always end with post ticks
             keyboard.PostUpdate();
@@ -106,10 +129,26 @@ namespace Game
             room.Draw(spriteBatch);
             spriteBatch.End();
 
+            // If loading
+            if (loadingRoom is not null)
+            {
+                GraphicsDevice.SetRenderTarget(loadingTarget);
+                spriteBatch.Begin();
+                loadingRoom.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+
+            // Number of pixels
+            int offset = (int) (Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / LOADING_TIME), 2) * Window.ClientBounds.Width);
             // Switch back to main backbuffer and draw buffer
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-            spriteBatch.Draw(target, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            spriteBatch.Draw(target, new Rectangle(-offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+
+            if(loadingRoom is not null)
+            {
+                spriteBatch.Draw(loadingTarget, new Rectangle(Window.ClientBounds.Width - offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            }
 
             foreach (int key in TempBuffer.expiries)
             {
@@ -118,6 +157,12 @@ namespace Game
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void SwitchRoom(int direction, Room room)
+        {
+            loadingDirection = direction;
+            loadingRoom = room;
         }
 
         // Loading textures statically
