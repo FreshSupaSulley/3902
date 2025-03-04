@@ -7,7 +7,7 @@ namespace Game.Items
 {
     public class Boomerang(Vector2 position) : Item(position)
     {
-        private static readonly Sprite SPRITE = new(Game.Load("/Items/zelda_items.png", new(129, 3, 5, 8)));
+        private static readonly Sprite SPRITE = new(Game.Load("/Items/banana.png"));
         private readonly int TICKS_ALIVE = 120;
         private readonly int DISTANCE = 100;
 

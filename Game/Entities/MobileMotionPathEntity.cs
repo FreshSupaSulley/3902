@@ -1,15 +1,16 @@
+using Game.Collision;
 using Game.Graphics;
 using Game.Path;
 using Microsoft.Xna.Framework;
 
 namespace Game.Entities;
 
-public abstract class MobileMotionPathEntity(Vector2 position, Animation activeAnimation, IPath[] paths) : MobileEntity(position, activeAnimation)
+public abstract class MobileMotionPathEntity(CollisionBox box, Vector2 position, Animation activeAnimation, IPath[] paths) : LivingEntity(box, position, activeAnimation)
 {
 	protected IPath[] paths = paths;
 	protected int currentPath = 0;
 
-	public override void Update(Game game)
+	public override Vector2 Move(Game game)
 	{
 		if (paths[currentPath].Done)
 		{
@@ -24,7 +25,6 @@ public abstract class MobileMotionPathEntity(Vector2 position, Animation activeA
 			}
 		}
 		paths[currentPath].Update();
-		this.Position = paths[currentPath].Position;
-		base.Update(game);
+		return paths[currentPath].Position;
 	}
 }

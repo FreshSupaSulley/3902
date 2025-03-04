@@ -5,22 +5,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Dragon(Vector2 Position) : MobileEntity(Position, IDLE)
+    public class Dragon(Vector2 Position) : LivingEntity(new(10, 10), Position, IDLE)
     {
         private static readonly Animation IDLE = new(Game.Load("/Entities/Dragon/dragon.png"), 4, 10);
         private static readonly Animation HURT = new(Game.Load("/Entities/Dragon/hurt.png"), 1, 1);
 
         private int ticks;
 
-        public override void Update(Game game)
+        public override Vector2 Move(Game game)
         {
-            base.Update(game);
-
             if(ticks++ % 60 == 0)
             {
                 game.room.AddEntity(new Fireball(Position));
             }
-            Position += new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
+            return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

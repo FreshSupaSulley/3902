@@ -110,6 +110,35 @@ namespace Game
                     room = loadingRoom;
                     loadingRoom = null;
                     loadingTime = 0;
+                    // Put player in correct location
+                    loadingDirection = 0;
+                    switch(loadingDirection)
+                    {
+                        case 0:
+                        {
+                            player.ActiveAnimation = Player.DOWN;
+                            player.Position = new(144 - (player.collisionBox.bounds.Width + player.collisionBox.bounds.X * 2 + 32) / 2, 32 - player.collisionBox.bounds.Y);
+                            break;
+                        }
+                        case 1:
+                        {
+                            player.ActiveAnimation = Player.LEFT;
+                            player.Position = new(224 - (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 104 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
+                            break;
+                        }
+                        case 2:
+                        {
+                            player.ActiveAnimation = Player.UP;
+                            player.Position = new(144 - (player.collisionBox.bounds.X + player.collisionBox.bounds.Width + 32) / 2, 144 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height));
+                            break;
+                        }
+                        case 3:
+                        {
+                            player.ActiveAnimation = Player.RIGHT;
+                            player.Position = new(72 + (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 104 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
+                            break;
+                        }
+                    }
                 }
             }
 

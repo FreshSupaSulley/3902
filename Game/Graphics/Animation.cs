@@ -47,7 +47,10 @@ namespace Game.Graphics
             Rectangle sprite = sprites[index];
             // When rendering sprites to the screen using coordinates that aren't integers, the spritebatch freaks out and the result looks like a blurred mess with some clipping issues
             // To reconcile, Animations will snap subpixels to pixels, but can create jarring movement in exchange for resolving the clipping issue.
-            spriteBatch.Draw(texture, new Vector2((int) Math.Round(position.X), (int) Math.Round(position.Y)) - new Vector2(sprite.Width / 2, sprite.Height / 2), sprite, Color.White);
+
+            // dont draw centered anymore
+            // spriteBatch.Draw(texture, new Vector2((int) Math.Round(position.X), (int) Math.Round(position.Y)) - new Vector2(sprite.Width / 2, sprite.Height / 2), sprite, Color.White);
+            spriteBatch.Draw(texture, new Vector2((int) position.X, (int) position.Y), sprite, Color.White);
         }
 
         public void Reset()

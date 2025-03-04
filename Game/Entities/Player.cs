@@ -4,19 +4,20 @@ using Microsoft.Xna.Framework.Graphics;
 using Game.Items;
 using Game.Controllers;
 using Microsoft.Xna.Framework.Input;
+using Game.Collision;
 
 namespace Game.Entities
 {
-	public class Player : MobileEntity
+	public class Player : LivingEntity
 	{
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Game.Load("Entities/Monoko/walk.png");
 
 		// Walk animations
-		private static readonly Animation UP = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED);
-		private static readonly Animation RIGHT = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED);
-		private static readonly Animation DOWN = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED);
-		private static readonly Animation LEFT = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation UP = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation RIGHT = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation DOWN = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation LEFT = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED);
 
 		// Attack
 		private static readonly Animation ATTACK = new(Game.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
@@ -27,21 +28,19 @@ namespace Game.Entities
 		public bool Moving { get; private set; }
 
 		public Item Item;
-		public Player() : base(new Vector2(100, 100), DOWN) { }
+		public Player() : base(new(4, 8, 16, 16), new Vector2(60, 80), DOWN) { }
 
-		public override void Update(Game game)
+		public override Vector2 Move(Game game)
 		{
-			Move(game);
-			base.Update(game);
-
 			// Using items
 			if (Item is not null)
 			{
 				Item.Position = base.Position;
 			}
+			return HandleInputs(game);
 		}
 
-		private void Move(Game game)
+		private Vector2 HandleInputs(Game game)
 		{
 			KeyboardController keyboard = game.keyboard;
 			// Attack
@@ -59,7 +58,7 @@ namespace Game.Entities
 					ActiveAnimation = ATTACK;
 				}
 				// If attacking, don't move
-				return;
+				return new();
 			}
 			// Required for Sprint 3
 			if (keyboard.IsKeyPressed(Keys.D1)) Item = new Heart(Position);
@@ -90,7 +89,8 @@ namespace Game.Entities
 				ActiveAnimation.Reset();
 				Moving = false;
 			}
-			Position += velocity * speed;
+			// Position += velocity * speed;
+			return velocity * speed;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

@@ -1,21 +1,10 @@
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 namespace Game.Collision;
 
-public abstract class CollisionBox : ICollision
+public class CollisionBox(int offsetX, int offsetY, int width, int height)
 {
-    Rectangle bounds;
-    CollisionBox(Rectangle bounds) {
-        this.bounds = bounds;
-    }
-    public void Update() {}
-    public void CheckCollisions() {
-        if (bounds.Intersects(bounds)) {
-            // TODO: Add functionality
-        }
-    }
-    public void OnCollision() {}
-
-    public abstract bool CheckCollision();
+    public readonly Rectangle bounds = new(offsetX, offsetY, width, height);
+    public CollisionBox(int width, int height) : this(0, 0, width, height) { }
+    // public void CheckCollisions(LivingEntity entity, CollisionBox box) => bounds.Intersects(box.bounds);
 }
