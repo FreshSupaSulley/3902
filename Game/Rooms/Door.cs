@@ -27,6 +27,8 @@ namespace Game.Rooms
             }
         }
 
+        public static bool IsWalkable(DoorType door) => (int) door < 32;
+
         /// Subclasses can inherit Update for special behavior
         public virtual void Update() { }
 

@@ -14,20 +14,61 @@ namespace Game.Rooms
         // Every room has the same outline (for now)
         private static readonly Texture2D OUTLINE = Game.Load("Tiles/map_outline.png");
 
-        // Every room in Zelda is 12x7
-        public readonly TileType[] tiles;
-        public readonly Door topDoor, rightDoor, bottomDoor, leftDoor;
+        // Every room in Zelda is 12x7 (we secretely expand this to 14x9 for collision logic)
+        private readonly TileType[] tiles;
+        private readonly Door topDoor, rightDoor, bottomDoor, leftDoor;
         public readonly List<Entity> gameObjects = [];
 
         public Room(Player player, TileType[] tiles, DoorType topDoor, DoorType rightDoor, DoorType bottomDoor, DoorType leftDoor)
         {
             gameObjects.Add(player);
-            this.tiles = tiles;
+            // Add room boundaries
+            this.tiles = new TileType[14 * 9];
+            for (int i = 0, innerIndex = 0; i < this.tiles.Length; i++)
+            {
+                // If on the outskirts, put a wall there
+                if (IsBorderTile(i))
+                {
+                    int[] doorIndices = [6, 7, 56, 69, 118, 119];
+                    // Top door
+                    if (i >= 6 && i <= 7)
+                    {
+                        this.tiles[i] = Door.IsWalkable(topDoor) ? TileType.BLOCK : TileType.WALL;
+                    }
+                    else if (i == 56)
+                    {
+                        // Left door
+                        this.tiles[i] = Door.IsWalkable(leftDoor) ? TileType.BLOCK : TileType.WALL;
+                    }
+                    else if (i == 69)
+                    {
+                        // Right door
+                        this.tiles[i] = Door.IsWalkable(rightDoor) ? TileType.BLOCK : TileType.WALL;
+                    }
+                    else if (i >= 118 && i <= 119)
+                    {
+                        // Right door
+                        this.tiles[i] = Door.IsWalkable(bottomDoor) ? TileType.BLOCK : TileType.WALL;
+                    }
+                    else
+                    {
+                        this.tiles[i] = TileType.WALL;
+                    }
+                }
+                else
+                {
+                    this.tiles[i] = tiles[innerIndex++];
+                }
+            }
+            // Add new tiles
             this.topDoor = new Door(topDoor);
             this.rightDoor = new Door(rightDoor);
             this.bottomDoor = new Door(bottomDoor);
             this.leftDoor = new Door(leftDoor);
         }
+
+        /// True if tile is on the border of the map, false otherwise
+        private static bool IsBorderTile(int index) => index % 14 == 0 || index % 14 == 13 || index / 14 == 0 || index / 14 == 8;
 
         /// Called when a door is touched by the player
         public abstract void DoorInteracted(Game game, int direction);
@@ -39,7 +80,7 @@ namespace Game.Rooms
             foreach (var entity in gameObjects.ToList())
             {
                 entity.Update(game);
-                
+
                 // Special interactions with LivingEntity
                 if (entity is LivingEntity cast)
                 {
@@ -79,7 +120,7 @@ namespace Game.Rooms
                 for (int i = 0; i < tiles.Length; i++)
                 {
                     if (Tile.IsWalkable(tiles[i])) continue;
-                    int tileX = Tile.TILE_SIZE * 2 + i % 12 * Tile.TILE_SIZE, tileY = Tile.TILE_SIZE * 2 + i / 12 * Tile.TILE_SIZE;
+                    int tileX = Tile.TILE_SIZE + i % 14 * Tile.TILE_SIZE, tileY = Tile.TILE_SIZE + i / 14 * Tile.TILE_SIZE;
                     if (entity.collisionBox.bounds.Intersects(new Rectangle(tileX - (int)entity.Position.X, tileY - (int)entity.Position.Y, Tile.TILE_SIZE, Tile.TILE_SIZE)))
                     {
                         int newSnap = positiveMovement ? (xAxis ? tileX - entity.collisionBox.bounds.Width - entity.collisionBox.bounds.X : tileY - entity.collisionBox.bounds.Height - entity.collisionBox.bounds.Y) : (xAxis ? tileX - entity.collisionBox.bounds.X : tileY - entity.collisionBox.bounds.Y) + Tile.TILE_SIZE;
@@ -120,7 +161,9 @@ namespace Game.Rooms
 
             for (int i = 0; i < tiles.Length; i++)
             {
-                Tile.Draw(tiles[i], new Vector2(Tile.TILE_SIZE * 2 + i % 12 * Tile.TILE_SIZE, Tile.TILE_SIZE * 2 + i / 12 * Tile.TILE_SIZE), batch);
+                // Do not draw border tiles
+                if (IsBorderTile(i)) continue;
+                Tile.Draw(tiles[i], new Vector2(Tile.TILE_SIZE + i % 14 * Tile.TILE_SIZE, Tile.TILE_SIZE + i / 14 * Tile.TILE_SIZE), batch);
             }
 
             // Draw doors with rotation

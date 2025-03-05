@@ -2,6 +2,9 @@ namespace Game.Rooms
 {
     public enum DoorType
     {
-        WALL, OPEN, LOCK, PUZZLE, BREAK
+        OPEN, BREAK,
+
+        // Cannot walk through them
+        WALL = 32, LOCK, PUZZLE
     }
 }
