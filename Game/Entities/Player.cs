@@ -28,7 +28,7 @@ namespace Game.Entities
 		public bool Moving { get; private set; }
 
 		public Item Item;
-		public Player() : base(new(5, 13, 14, 14), new Vector2(60, 80), DOWN) { }
+		public Player() : base(new PushCollisionBox(5, 13, 14, 14, null), new Vector2(60, 80), DOWN) { }
 
 		public override Vector2 Move(Game game)
 		{

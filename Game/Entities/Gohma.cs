@@ -1,10 +1,11 @@
 using Game.Graphics;
 using Game.Path;
 using Microsoft.Xna.Framework;
+using Game.Collision;
 
 namespace Game.Entities
 {
-    public class Gohma(Vector2 position) : MobileMotionPathEntity(new(10, 10), position, IDLE, motionPaths)
+    public class Gohma(Vector2 position) : MobileMotionPathEntity(new StillCollisionBox(0,0,10,10, null), position, IDLE, motionPaths)
     {
         private int ticks;
         private static readonly Animation IDLE = new(Game.Load("/Entities/gohma.png", new Rectangle(0, 0, 192, 16)), 4, 10);

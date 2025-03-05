@@ -1,26 +1,10 @@
-using System.Diagnostics;
-using System.Windows.Input;
 using Microsoft.Xna.Framework;
+using Game.Commands;
 
 namespace Game.Collision;
 
-public abstract class StillCollisionBox : ICollision
+public class StillCollisionBox : CollisionBox
 {
-    Rectangle bounds;
-    ICommand command;
-    StillCollisionBox(Rectangle bounds, ICommand command) {
-        this.bounds = bounds;
-        this.command = command;
-    }
-    public void Update() {}
-    public void CheckCollisions() {
-        if (bounds.Intersects(bounds)) {
-            // TODO: Add functionality
-        }
-    }
-    public void OnCollision() {
-        command.Execute(null);
-    }
-
-    public abstract bool CheckCollision();
+    public StillCollisionBox(Rectangle bounds, ICommand command): base(bounds, command) {}
+    public StillCollisionBox(int x, int y, int width, int height, ICommand command) : base(new Rectangle(x, y, width, height), command) {}
 }
