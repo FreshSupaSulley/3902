@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using Game.Collision;
 using Game.Entities;
 using Game.Tiles;
@@ -9,13 +10,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Rooms
 {
+    [XmlRoot("Room")]
     public abstract class Room
     {
         // Every room has the same outline (for now)
         private static readonly Texture2D OUTLINE = Game.Load("Tiles/map_outline.png");
 
         // Every room in Zelda is 12x7 (we secretely expand this to 14x9 for collision logic)
-        private readonly TileType[] tiles;
+        [XmlArray("Room tiles")]
+        public TileType[] tiles;
         private readonly Door topDoor, rightDoor, bottomDoor, leftDoor;
         public readonly List<Entity> gameObjects = [];
 

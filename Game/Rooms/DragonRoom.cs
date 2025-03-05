@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using Game.Entities;
 using Game.Tiles;
 using Microsoft.Xna.Framework;
@@ -6,9 +7,11 @@ using static Game.Tiles.TileType;
 
 namespace Game.Rooms
 {
+    [XmlType("Dragon room")]
     public class DragonRoom : Room
     {
-        private static readonly TileType[] data = [
+        [XmlElement(Type = typeof(TileType))]
+        public static TileType[] data = [
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,

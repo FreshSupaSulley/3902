@@ -19,7 +19,7 @@ namespace Game.Entities
             get => _activeAnimation;
             set
             {
-                // Only set if its a new value
+                // Only set if it's a new value
                 if (_activeAnimation != value)
                 {
                     _activeAnimation?.Reset();

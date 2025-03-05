@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Game.Tiles;
 using Game.Rooms;
 using System;
+using demo.Game;
 
 namespace Game
 {
@@ -75,6 +76,7 @@ namespace Game
             player = new();
             // Add room
             room = new DragonRoom(player);
+            FileUtils.saveRoom(room, "dragon_room");
             // Pow
             TempBuffer.pow = Load("pow.png");
             // Add doors
