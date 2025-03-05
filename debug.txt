@@ -1,0 +1,4 @@
+Game.Entities.Dragon
+200, 50
+x = 200
+y = 50

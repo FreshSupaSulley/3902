@@ -12,6 +12,7 @@ using demo.Game.File_loading;
 using Game.Tiles;
 using System.Reflection.Metadata;
 using System.Numerics;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace demo.Game
 {
@@ -34,7 +35,6 @@ namespace demo.Game
             for(int i = 0; i < ents.Length; i++)
             {
                 rm.AddEntity(FileUtils.parse(ents[i]));
-                System.Diagnostics.Process.Start("CMD.exe", "/C echo " + i + " " + ents[i]);
             }
             fs.Close();
             return rm;
@@ -42,10 +42,17 @@ namespace demo.Game
 
         public static Entity parse(String s)
         {
+            TextWriter debug = new StreamWriter("debug.txt");
             Entity ent = null;
             String type = s.Substring(0, s.IndexOf(" "));
-            String pos = s.Substring(s.IndexOf(" "));
-            Vector2 position = new Vector2(int.Parse(pos.Substring(pos.IndexOf("X:") + 2, pos.IndexOf(" "))), int.Parse(pos.Substring(pos.IndexOf("Y:") + 1, pos.IndexOf("}"))));
+            debug.WriteLine(type);
+            String pos = s.Substring(s.IndexOf(" ") + 1);
+            debug.WriteLine(pos);
+            int x = int.Parse(pos.Substring(0, pos.IndexOf(", ")));
+            int y = int.Parse(pos.Substring(pos.IndexOf(", ") + 2));
+            Vector2 position = new Vector2(x, y);
+            debug.WriteLine("x = " + position.X);
+            debug.WriteLine("y = " + position.Y);
             if(type.IndexOf("Player") > -1)
             {
                 ent = new Player();
@@ -63,6 +70,7 @@ namespace demo.Game
             {
                 ent = new Fireball(position);
             }
+            debug.Close();
             return ent;
         }
 
@@ -75,7 +83,7 @@ namespace demo.Game
             w.Close();
             w = new StreamWriter(filename + "_entities.xml");
             String[] ents = new String[rm.gameObjects.Count];
-            for (int i = 0; i < ents.Length; i++) { ents[i] = rm.gameObjects[i].GetType() + " " + rm.gameObjects[i].Position.ToString(); }
+            for (int i = 0; i < ents.Length; i++) { ents[i] = rm.gameObjects[i].GetType() + " " + rm.gameObjects[i].Position.X + ", " + rm.gameObjects[i].Position.Y; }
             ser = new XmlSerializer(typeof(String[]));
             ser.Serialize(w, ents);
             w.Close();

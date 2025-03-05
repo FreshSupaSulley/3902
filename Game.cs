@@ -75,8 +75,8 @@ namespace Game
             // Player object that stays around throughout session
             player = new();
             // Add room
-            room = new DragonRoom(player);
-            FileUtils.saveRoom(room, "dragon_room");
+            room = new WaterRoom(player);
+            room = FileUtils.loadRoom(room, "dragon_room");
             // Pow
             TempBuffer.pow = Load("pow.png");
             // Add doors
