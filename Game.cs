@@ -54,6 +54,7 @@ namespace Game
             // Size of Zelda map
             target = new RenderTarget2D(graphics.GraphicsDevice, (12 + 4) * 16, (7 + 4) * 16);
             loadingTarget = new RenderTarget2D(graphics.GraphicsDevice, target.Width, target.Height);
+            loadingDirection = 5;
 
             BASE_TO_WINDOW = new Vector2(graphics.PreferredBackBufferWidth / target.Bounds.Width, graphics.PreferredBackBufferHeight / target.Bounds.Height);
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -80,7 +81,6 @@ namespace Game
             room = new WaterRoom(player);
             room = new BatRoom(player);
             room = FileUtils.loadRoom(room, "dragon_room");
-            //room = new DragonRoom(player);
             room = new StartRoom(player);
             
 
@@ -119,7 +119,6 @@ namespace Game
                     loadingRoom = null;
                     loadingTime = 0;
                     // Put player in correct location
-                    loadingDirection = 0;
                     switch(loadingDirection)
                     {
                         case 0:
@@ -128,22 +127,22 @@ namespace Game
                             player.Position = new(144 - (player.collisionBox.bounds.Width + player.collisionBox.bounds.X * 2 + 32) / 2, 32 - player.collisionBox.bounds.Y);
                             break;
                         }
-                        case 1:
+                        case 2:
                         {
                             player.ActiveAnimation = Player.LEFT;
-                            player.Position = new(224 - (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 104 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
+                            player.Position = new(224 - (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
                             break;
                         }
-                        case 2:
+                        case 3:
                         {
                             player.ActiveAnimation = Player.UP;
                             player.Position = new(144 - (player.collisionBox.bounds.X + player.collisionBox.bounds.Width + 32) / 2, 144 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height));
                             break;
                         }
-                        case 3:
+                        case 1:
                         {
                             player.ActiveAnimation = Player.RIGHT;
-                            player.Position = new(72 + (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 104 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
+                            player.Position = new(9 + (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
                             break;
                         }
                     }
@@ -177,14 +176,35 @@ namespace Game
 
             // Number of pixels
             int offset = (int) (Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / LOADING_TIME), 2) * Window.ClientBounds.Width);
+            int offsetBack = (int)(Math.Pow(Math.Cos(loadingTime * Math.PI / 2 / LOADING_TIME), 2) * Window.ClientBounds.Width);
             // Switch back to main backbuffer and draw buffer
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-            spriteBatch.Draw(target, new Rectangle(-offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-
-            if(loadingRoom is not null)
+            switch (loadingDirection)
             {
-                spriteBatch.Draw(loadingTarget, new Rectangle(Window.ClientBounds.Width - offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+                case 1:
+                    spriteBatch.Draw(target, new Rectangle(-offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+
+                    if (loadingRoom is not null)
+                    {
+                        spriteBatch.Draw(loadingTarget, new Rectangle(Window.ClientBounds.Width - offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+                    }
+                    break;
+                case 2:
+                    spriteBatch.Draw(target, new Rectangle(+offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+
+                    if (loadingRoom is not null)
+                    {
+                        spriteBatch.Draw(loadingTarget, new Rectangle(0 - offsetBack, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+                    }
+                    break;
+                case 3:
+                    //need to add room transition moving up
+                case 4:
+                    //need to add room transition moving down
+                default:
+                    spriteBatch.Draw(target, new Rectangle(-offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+                    break;
             }
 
             foreach (int key in TempBuffer.expiries)

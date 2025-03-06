@@ -33,6 +33,10 @@ namespace Game.Rooms
             {
                 DoorInteracted(game, 1);
             }
+            if (game.keyboard.IsKeyPressed(Keys.T))
+            {
+                DoorInteracted(game, 2);
+            }
         }
 
         public override void DoorInteracted(Game game, int direction)
@@ -40,6 +44,10 @@ namespace Game.Rooms
             if (direction == 1)
             {
                 game.SwitchRoom(direction, new BatRoom(game.player));
+            }
+            if (direction == 2)
+            {
+                game.SwitchRoom(direction, new DragonRoom(game.player));
             }
         }
     }
