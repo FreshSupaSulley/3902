@@ -198,9 +198,9 @@ namespace Game
                     }
                     break;
                 case 3:
-
+                    //need to add room transition moving up
                 case 4:
-
+                    //need to add room transition moving down
                 default:
                     spriteBatch.Draw(target, new Rectangle(-offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
                     break;
