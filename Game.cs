@@ -75,12 +75,17 @@ namespace Game
             // Player object that stays around throughout session
             player = new();
             // Add room
+            
             room = new WaterRoom(player);
-            room = FileUtils.loadRoom(room, "dragon_room");
+            room = new BatRoom(player);
+            //room = FileUtils.loadRoom(room, "dragon_room");
+            room = new DragonRoom(player);
+            room = new StartRoom(player);
+            
+
+
             // Pow
             TempBuffer.pow = Load("pow.png");
-            // Add doors
-            //gameObjects.Add(door = new Door(DoorType.OPEN));
             // ControllerLoader.LoadSprint2Commands(tile, this, keyboard, p, entities, gameObjects);
         }
 

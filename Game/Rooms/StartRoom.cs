@@ -7,21 +7,20 @@ using static Game.Tiles.TileType;
 
 namespace Game.Rooms
 {
-    //[XmlType("Dragon room")]
-    public class DragonRoom : Room
+    public class StartRoom : Room
     {
         [XmlElement(Type = typeof(TileType))]
         public static TileType[] data = [
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
-            BLOCK, BLOCK, BLOCK, BLOCK, WALL, BLOCK, BLOCK, WALL, BLOCK, BLOCK, BLOCK, BLOCK,
+            BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK
         ];
 
-        public DragonRoom(Player player) : base(player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE)
+        public StartRoom(Player player) : base(player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE)
         {
             gameObjects.Add(new Dragon(new Vector2(200, 50)));
         }
@@ -40,7 +39,7 @@ namespace Game.Rooms
         {
             if (direction == 1)
             {
-                game.SwitchRoom(direction, new StartRoom(game.player));
+                game.SwitchRoom(direction, new BatRoom(game.player));
             }
         }
     }

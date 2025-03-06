@@ -7,23 +7,22 @@ using static Game.Tiles.TileType;
 
 namespace Game.Rooms
 {
-    //[XmlType("Dragon room")]
-    public class DragonRoom : Room
+    public class BatRoom : Room
     {
-        [XmlElement(Type = typeof(TileType))]
-        public static TileType[] data = [
+        private static readonly TileType[] data = [
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
-            BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
-            BLOCK, BLOCK, BLOCK, BLOCK, WALL, BLOCK, BLOCK, WALL, BLOCK, BLOCK, BLOCK, BLOCK,
-            BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
+            BLOCK, BLOCK, WALL, WALL, BLOCK, BLOCK, BLOCK, BLOCK, WALL, WALL, BLOCK, BLOCK,
+            BLOCK, BLOCK, WALL, WALL, BLOCK, BLOCK, BLOCK, BLOCK, WALL, WALL, BLOCK, BLOCK,
+            BLOCK, BLOCK, WALL, WALL, BLOCK, BLOCK, BLOCK, BLOCK, WALL, WALL, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK
         ];
 
-        public DragonRoom(Player player) : base(player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE)
+        public BatRoom(Player player) : base(player, data, DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN)
         {
-            gameObjects.Add(new Dragon(new Vector2(200, 50)));
+            gameObjects.Add(new Bat(new Vector2(200, 50)));
+            gameObjects.Add(new Bat(new Vector2(200, 100)));
         }
 
         public override void Update(Game game)
@@ -35,12 +34,12 @@ namespace Game.Rooms
                 DoorInteracted(game, 1);
             }
         }
-
+        
         public override void DoorInteracted(Game game, int direction)
         {
             if (direction == 1)
             {
-                game.SwitchRoom(direction, new StartRoom(game.player));
+                game.SwitchRoom(direction, new WaterRoom(game.player));
             }
         }
     }
