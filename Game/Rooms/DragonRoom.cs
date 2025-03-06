@@ -7,7 +7,7 @@ using static Game.Tiles.TileType;
 
 namespace Game.Rooms
 {
-    //[XmlType("Dragon room")]
+    [XmlType("Dragon room")]
     public class DragonRoom : Room
     {
         [XmlElement(Type = typeof(TileType))]

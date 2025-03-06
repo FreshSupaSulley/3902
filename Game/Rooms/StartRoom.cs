@@ -22,7 +22,7 @@ namespace Game.Rooms
 
         public StartRoom(Player player) : base(player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE)
         {
-            gameObjects.Add(new Dragon(new Vector2(200, 50)));
+            
         }
 
         public override void Update(Game game)

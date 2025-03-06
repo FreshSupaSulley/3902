@@ -78,8 +78,8 @@ namespace Game
             
             room = new WaterRoom(player);
             room = new BatRoom(player);
-            //room = FileUtils.loadRoom(room, "dragon_room");
-            room = new DragonRoom(player);
+            room = FileUtils.loadRoom(room, "dragon_room");
+            //room = new DragonRoom(player);
             room = new StartRoom(player);
             
 
