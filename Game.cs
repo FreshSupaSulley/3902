@@ -44,6 +44,7 @@ namespace Game
                 PreferredBackBufferHeight = 1100 / 2
             };
             // Window.AllowUserResizing = true;
+            Window.Title = "Bombardier Beetles - Sprint 3";
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
