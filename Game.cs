@@ -7,6 +7,8 @@ using Game.Tiles;
 using Game.Rooms;
 using System;
 using demo.Game;
+using System.Collections.Generic;
+using Game.Collision;
 
 namespace Game
 {
@@ -35,6 +37,7 @@ namespace Game
         private int loadingTime;
         private int loadingDirection;
         private Room loadingRoom;
+        private List<ICollision> collisionObjects;
 
         public Game()
         {
@@ -63,6 +66,9 @@ namespace Game
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
 
+            // Collision Handling
+            collisionObjects = new();
+
             // This calls load content
             base.Initialize();
         }
@@ -78,12 +84,10 @@ namespace Game
             player = new();
             // Add room
             
-            room = new WaterRoom(player);
-            room = new BatRoom(player);
+            room = new WaterRoom(this, player);
+            room = new BatRoom(this, player);
             room = FileUtils.loadRoom(room, "dragon_room");
-            room = new StartRoom(player);
-            
-
+            room = new StartRoom(this, player);
 
             // Pow
             TempBuffer.pow = Load("pow.png");
@@ -142,7 +146,7 @@ namespace Game
                         case 1:
                         {
                             player.ActiveAnimation = Player.RIGHT;
-                            player.Position = new(9 + (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
+                            player.Position = new(11 + (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
                             break;
                         }
                     }

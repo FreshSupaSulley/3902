@@ -22,7 +22,7 @@ namespace Game.Rooms
         private readonly Door topDoor, rightDoor, bottomDoor, leftDoor;
         public readonly List<Entity> gameObjects = [];
 
-        public Room(Player player, TileType[] tiles, DoorType topDoor, DoorType rightDoor, DoorType bottomDoor, DoorType leftDoor)
+        public Room(Game game, Player player, TileType[] tiles, DoorType topDoor, DoorType rightDoor, DoorType bottomDoor, DoorType leftDoor, Room leftRoom, Room rightRoom)
         {
             gameObjects.Add(player);
             // Add room boundaries
@@ -64,22 +64,24 @@ namespace Game.Rooms
                 }
             }
             // Add new tiles
-            this.topDoor = new Door(topDoor);
-            this.rightDoor = new Door(rightDoor);
-            this.bottomDoor = new Door(bottomDoor);
-            this.leftDoor = new Door(leftDoor);
+            this.topDoor = new Door(topDoor, 1, null, game);
+            this.rightDoor = new Door(rightDoor, 2, rightRoom, game);
+            this.bottomDoor = new Door(bottomDoor, 3, null, game);
+            this.leftDoor = new Door(leftDoor, 0, leftRoom, game);
         }
 
         /// True if tile is on the border of the map, false otherwise
         private static bool IsBorderTile(int index) => index % 14 == 0 || index % 14 == 13 || index / 14 == 0 || index / 14 == 8;
 
-        /// Called when a door is touched by the player
-        public abstract void DoorInteracted(Game game, int direction);
-
         public virtual void Update(Game game)
         {
             // Not doing any fancy lambda because that would be concurrent modification
             // This apparently works??
+            topDoor.Update();
+            bottomDoor.Update();
+            leftDoor.Update();
+            rightDoor.Update();
+
             foreach (var entity in gameObjects.ToList())
             {
                 entity.Update(game);

@@ -21,7 +21,7 @@ namespace Game.Rooms
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK
         ];
 
-        public DragonRoom(Player player) : base(player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE)
+        public DragonRoom(Game game, Player player) : base(game, player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE, new WaterRoom(game, game.player), new StartRoom(game, game.player))
         {
             gameObjects.Add(new Dragon(new Vector2(200, 50)));
         }
@@ -30,26 +30,7 @@ namespace Game.Rooms
         {
             // Temp behavior
             base.Update(game);
-            if (game.keyboard.IsKeyPressed(Keys.R))
-            {
-                DoorInteracted(game, 1);
-            }
-            if (game.keyboard.IsKeyPressed(Keys.T))
-            {
-                DoorInteracted(game, 2);
-            }
         }
 
-        public override void DoorInteracted(Game game, int direction)
-        {
-            if (direction == 1)
-            {
-                game.SwitchRoom(direction, new StartRoom(game.player));
-            }
-            if (direction == 2)
-            {
-                game.SwitchRoom(direction, new WaterRoom(game.player));
-            }
-        }
     }
 }

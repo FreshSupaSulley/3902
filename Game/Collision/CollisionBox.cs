@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Game.Commands;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System;
 
 namespace Game.Collision;
 
@@ -31,13 +31,22 @@ public abstract class CollisionBox : ICollision {
             return;
         }
         foreach (ICollision collision in collisionList) {
-            CheckCollision(collision);
+            if (CheckCollision(collision)) {
+                this.OnCollision();
+                collision.OnCollision();
+            }
         }
     }
     public void OnCollision() {
         command.Execute();
     }
     public bool CheckCollision(ICollision obj) {
-        return false;
+        if (obj is null) return false;
+        if (obj is CollisionBox) {
+            Console.WriteLine("Object is collision box");
+            return CollisionStatics.BoxBoxCollision((CollisionBox) obj, this);
+        } else {
+            return false;
+        }
     }
 }

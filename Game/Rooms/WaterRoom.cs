@@ -17,35 +17,15 @@ namespace Game.Rooms
             WATER, WATER, WATER, WATER, WATER, BLOCK, BLOCK, WATER, WATER, WATER, WATER, WATER
         ];
 
-        public WaterRoom(Player player) : base(player, data, DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN)
+        public WaterRoom(Game game, Player player) : base(game, player, data, DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN, new BatRoom(game, game.player), new DragonRoom(game, game.player))
         {
             // gameObjects.Add(new Dragon(new Vector2(200, 50)));
         }
 
         public override void Update(Game game)
         {
-            // Temp behavior
             base.Update(game);
-            if (game.keyboard.IsKeyPressed(Keys.R))
-            {
-                DoorInteracted(game, 1);
-            }
-            if (game.keyboard.IsKeyPressed(Keys.T))
-            {
-                DoorInteracted(game, 2);
-            }
         }
         
-        public override void DoorInteracted(Game game, int direction)
-        {
-            if (direction == 1)
-            {
-                game.SwitchRoom(direction, new DragonRoom(game.player));
-            }
-            if (direction == 2)
-            {
-                game.SwitchRoom(direction, new BatRoom(game.player));
-            }
-        }
     }
 }
