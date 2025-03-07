@@ -128,11 +128,11 @@ namespace Game.Rooms
                 // Move player the step distance to check if we can actually move there
                 if (xAxis)
                 {
-                    entity.Position.X += step * (positiveMovement ? 1 : -1);
+                    entity.Position += new Vector2(step * (positiveMovement ? 1 : -1),0);
                 }
                 else
                 {
-                    entity.Position.Y += step * (positiveMovement ? 1 : -1);
+                    entity.Position += new Vector2(0,step * (positiveMovement ? 1 : -1));
                 }
 
                 bool contacted = false;
@@ -162,11 +162,11 @@ namespace Game.Rooms
                     // Add some push away from the wall so stuttering effect doesn't happen. This is a quirk of the Intersects logic
                     if (xAxis)
                     {
-                        entity.Position.X = snapPoint;// + (positiveMovement ? 0.1f : -0.1f);
+                        entity.Position = new Vector2(snapPoint, entity.Position.Y);// + (positiveMovement ? 0.1f : -0.1f);
                     }
                     else
                     {
-                        entity.Position.Y = snapPoint;// + (positiveMovement ? 0.1f : -0.1f);
+                        entity.Position = new Vector2(entity.Position.X, snapPoint);// + (positiveMovement ? 0.1f : -0.1f);
                     }
                     return;
                 }

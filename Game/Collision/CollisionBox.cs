@@ -57,4 +57,8 @@ public abstract class CollisionBox : ICollision {
         this.bounds.X = x;
         this.bounds.Y = y;
     }
+    public void SetPosition(Vector2 vector) {
+        this.bounds.X = (int)vector.X;
+        this.bounds.Y = (int)vector.Y;
+    }
 }

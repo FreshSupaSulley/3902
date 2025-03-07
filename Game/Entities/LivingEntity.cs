@@ -27,6 +27,15 @@ namespace Game.Entities
                 }
             }
         }
+        private Vector2 position;
+        public override Vector2 Position {
+            get{return position;}
+            set{
+                position = value;
+                collisionBox.SetPosition(position);
+            }
+        }
+
 
         public LivingEntity(CollisionBox box, Vector2 position, Animation activeAnimation) : base(position)
         {
@@ -41,7 +50,6 @@ namespace Game.Entities
         {
             Velocity = Move(game);
             ActiveAnimation.Update();
-            collisionBox.SetPosition((int) Position.X, (int) Position.Y);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

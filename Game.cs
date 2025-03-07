@@ -139,7 +139,7 @@ namespace Game
                         case 2:
                         {
                             player.ActiveAnimation = Player.LEFT;
-                            player.Position = new(224 - (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
+                            player.Position = new(220 - (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
                             break;
                         }
                         case 3:
