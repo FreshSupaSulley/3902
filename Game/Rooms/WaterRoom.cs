@@ -17,7 +17,9 @@ namespace Game.Rooms
             WATER, WATER, WATER, WATER, WATER, BLOCK, BLOCK, WATER, WATER, WATER, WATER, WATER
         ];
 
-        public WaterRoom(Game game, Player player) : base(game, player, data, DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN, new BatRoom(game, game.player), new DragonRoom(game, game.player))
+        public WaterRoom(Game game, Player player) : base(game, player, data, 
+        DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN, 
+        "bat", "dragon")
         {
             // gameObjects.Add(new Dragon(new Vector2(200, 50)));
         }

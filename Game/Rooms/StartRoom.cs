@@ -20,7 +20,9 @@ namespace Game.Rooms
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK
         ];
 
-        public StartRoom(Game game, Player player) : base(game, player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE, new DragonRoom(game, game.player), new BatRoom(game, game.player))
+        public StartRoom(Game game, Player player) : base(game, player, data, 
+        DoorType.BREAK, DoorType.OPEN, DoorType.WALL, DoorType.PUZZLE, 
+        "dragon", "bat")
         {
             
         }

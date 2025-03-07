@@ -19,10 +19,13 @@ namespace Game.Rooms
         // Every room in Zelda is 12x7 (we secretely expand this to 14x9 for collision logic)
         [XmlArray("Room tiles")]
         public TileType[] tiles;
-        private readonly Door topDoor, rightDoor, bottomDoor, leftDoor;
+        private Door topDoor, rightDoor, bottomDoor, leftDoor;
+        private readonly DoorType topType, rightType ,bottomType, leftType;
+        private readonly String leftName, rightName;
         public readonly List<Entity> gameObjects = [];
+        Game game;
 
-        public Room(Game game, Player player, TileType[] tiles, DoorType topDoor, DoorType rightDoor, DoorType bottomDoor, DoorType leftDoor, Room leftRoom, Room rightRoom)
+        public Room(Game game, Player player, TileType[] tiles, DoorType topDoor, DoorType rightDoor, DoorType bottomDoor, DoorType leftDoor, String leftRoom, String rightRoom)
         {
             gameObjects.Add(player);
             // Add room boundaries
@@ -62,12 +65,25 @@ namespace Game.Rooms
                 {
                     this.tiles[i] = tiles[innerIndex++];
                 }
+                this.rightName = rightRoom;
+                this.leftName = leftRoom;
+                this.game = game;
+
+                leftType = leftDoor;
+                topType = topDoor;
+                rightType = rightDoor;
+                bottomType = bottomDoor;
             }
             // Add new tiles
-            this.topDoor = new Door(topDoor, 1, null, game);
-            this.rightDoor = new Door(rightDoor, 2, rightRoom, game);
-            this.bottomDoor = new Door(bottomDoor, 3, null, game);
-            this.leftDoor = new Door(leftDoor, 0, leftRoom, game);
+        }
+        private bool loaded = false;
+        public void PostLoad() {
+            this.topDoor = new Door(topType, 1, null, game);
+            this.rightDoor = new Door(rightType, 2, game.rooms[rightName], game);
+            this.bottomDoor = new Door(bottomType, 3, null, game);
+            this.leftDoor = new Door(leftType, 0, game.rooms[leftName], game);
+
+            loaded = true;
         }
 
         /// True if tile is on the border of the map, false otherwise
@@ -75,6 +91,7 @@ namespace Game.Rooms
 
         public virtual void Update(Game game)
         {
+            if (!loaded) PostLoad();
             // Not doing any fancy lambda because that would be concurrent modification
             // This apparently works??
             topDoor.Update();

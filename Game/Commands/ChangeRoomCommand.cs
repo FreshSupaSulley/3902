@@ -10,7 +10,6 @@ class ChangeRoomCommand : ICommand {
     private int doorAlignment;
     private Room destinationRoom;
     private Game game;
-    private Player player;
     public ChangeRoomCommand(int doorAlignment, Room destinationRoom, Game game) {
         this.doorAlignment = doorAlignment;
         this.destinationRoom = destinationRoom;

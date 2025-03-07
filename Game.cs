@@ -37,7 +37,7 @@ namespace Game
         private int loadingTime;
         private int loadingDirection;
         private Room loadingRoom;
-        private List<ICollision> collisionObjects;
+        public Dictionary<String, Room> rooms;
 
         public Game()
         {
@@ -66,8 +66,9 @@ namespace Game
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
 
-            // Collision Handling
-            collisionObjects = new();
+            // Room Handling
+
+            rooms = new();
 
             // This calls load content
             base.Initialize();
@@ -84,10 +85,13 @@ namespace Game
             player = new();
             // Add room
             
-            room = new WaterRoom(this, player);
-            room = new BatRoom(this, player);
-            room = FileUtils.loadRoom(room, "dragon_room");
-            room = new StartRoom(this, player);
+            rooms.Add("water", new WaterRoom(this, player));
+            rooms.Add("bat", new BatRoom(this, player));
+            rooms.Add("dragon", new DragonRoom(this, player));
+            // rooms.Add("dragon", FileUtils.loadRoom(room, "dragon_room"));
+            rooms.Add("start", new StartRoom(this, player));
+
+            room = rooms["start"];
 
             // Pow
             TempBuffer.pow = Load("pow.png");

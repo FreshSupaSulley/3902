@@ -21,7 +21,9 @@ namespace Game.Rooms
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK
         ];
 
-        public DragonRoom(Game game, Player player) : base(game, player, data, DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE, new WaterRoom(game, game.player), new StartRoom(game, game.player))
+        public DragonRoom(Game game, Player player) : base(game, player, data, 
+        DoorType.BREAK, DoorType.WALL, DoorType.OPEN, DoorType.PUZZLE, 
+        "water", "start")
         {
             gameObjects.Add(new Dragon(new Vector2(200, 50)));
         }

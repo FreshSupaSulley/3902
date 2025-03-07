@@ -19,7 +19,9 @@ namespace Game.Rooms
             BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK
         ];
 
-        public BatRoom(Game game, Player player) : base(game, player, data, DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN, new StartRoom(game, game.player), new WaterRoom(game, game.player))
+        public BatRoom(Game game, Player player) : base(game, player, data, 
+        DoorType.LOCK, DoorType.OPEN, DoorType.LOCK, DoorType.OPEN, 
+        "start", "water")
         {
             gameObjects.Add(new Bat(new Vector2(200, 50)));
             gameObjects.Add(new Bat(new Vector2(200, 100)));
