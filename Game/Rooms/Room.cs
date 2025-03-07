@@ -152,8 +152,21 @@ namespace Game.Rooms
                         Console.WriteLine(IsBorderTile(i));
                         Console.WriteLine(i);
                         Console.WriteLine("=================");
-                        int newSnap = positiveMovement ? (xAxis ? tileX - entity.collisionBox.bounds.Width - entity.collisionBox.bounds.X : tileY - entity.collisionBox.bounds.Height - entity.collisionBox.bounds.Y) : (xAxis ? tileX - entity.collisionBox.bounds.X : tileY - entity.collisionBox.bounds.Y) + Tile.TILE_SIZE;
-
+                        int newSnap;
+                        if (positiveMovement) {
+                            newSnap = (xAxis ? 
+                                tileX - entity.collisionBox.bounds.Width
+                                :
+                                tileY - entity.collisionBox.bounds.Height
+                            );
+                        } else {
+                            newSnap = (xAxis ? 
+                                tileX + Tile.TILE_SIZE
+                                : 
+                                tileY+ Tile.TILE_SIZE
+                            );
+                        }
+                        Console.WriteLine(newSnap);
                         if (!contacted || (positiveMovement && newSnap < snapPoint) || (!positiveMovement && newSnap > snapPoint))
                         {
                             snapPoint = newSnap;

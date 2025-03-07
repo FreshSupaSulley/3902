@@ -41,7 +41,6 @@ namespace Game.Rooms
             }
 
             collisionBox = new DoorCollisionBox(bounds, command);
-            Console.WriteLine(command);
             collisionBox.CollisionList = new List<ICollision>(){player.collisionBox};
         }
 
