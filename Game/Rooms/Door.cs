@@ -26,21 +26,22 @@ namespace Game.Rooms
             ICommand command = new ChangeRoomCommand(doorAlignment, destinationRoom, game);
             Rectangle bounds = new Rectangle();
             switch (doorAlignment) {
-                case 0:
-                    bounds = new Rectangle(64,0,16,8);
-                    break;
-                case 1:
+                case 0: // left
                     bounds = new Rectangle(0,64,8,16);
                     break;
-                case 2: // top
-                    // bounds = new Rectangle(,136,16,8);
+                case 1: // top
+                    // bounds = new Rectangle(64,0,16,8);
+                    break;
+                case 2: // right
+                    bounds = new Rectangle(232,64,8,16);
                     break;
                 case 3: // bottom
-                    // bounds = new Rectangle(216,64,8,16);
+                    // bounds = new Rectangle(,136,16,8);
                     break;
             }
 
             collisionBox = new DoorCollisionBox(bounds, command);
+            Console.WriteLine(command);
             collisionBox.CollisionList = new List<ICollision>(){player.collisionBox};
         }
 

@@ -25,7 +25,7 @@ public abstract class CollisionBox : ICollision {
         this.Command = command;
     }
     public CollisionBox(int x, int y, int width, int height, ICommand command) : this(new Rectangle(x, y, width, height), command) {}
-    public CollisionBox(int x, int y, int width, int height) : this(new Rectangle(x, y, width, height), null) {}
+    // public CollisionBox(int x, int y, int width, int height) : this(new Rectangle(x, y, width, height), null) {}
     public void Update() {
         if (collisionList == null) {
             return;
@@ -38,20 +38,18 @@ public abstract class CollisionBox : ICollision {
         }
     }
     public void OnCollision() {
-        command.Execute();
+        command?.Execute();
     }
     public bool CheckCollision(ICollision obj) {
         if (obj is null) return false;
         if (obj is CollisionBox) {
             // Console.WriteLine("Object is collision box");
-            Console.WriteLine(((CollisionBox) obj).bounds);
-            Console.WriteLine(this.bounds);
             if (CollisionStatics.BoxBoxCollision((CollisionBox) obj, this)) {
                 Console.WriteLine("Collision detected!");
+                Console.WriteLine(((CollisionBox) obj).bounds);
             }
             return CollisionStatics.BoxBoxCollision((CollisionBox) obj, this);
         } else {
-            Console.WriteLine("");
             return false;
         }
     }

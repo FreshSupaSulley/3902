@@ -124,6 +124,7 @@ namespace Game
                 if (loadingTime++ >= LOADING_TIME)
                 {
                     room = loadingRoom;
+                    room.PostLoad();
                     loadingRoom = null;
                     loadingTime = 0;
                     // Put player in correct location
