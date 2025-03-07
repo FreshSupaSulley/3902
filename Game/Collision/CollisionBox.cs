@@ -44,9 +44,9 @@ public abstract class CollisionBox : ICollision {
         if (obj is null) return false;
         if (obj is CollisionBox) {
             // Console.WriteLine("Object is collision box");
+            Console.WriteLine(this.bounds);
             if (CollisionStatics.BoxBoxCollision((CollisionBox) obj, this)) {
                 Console.WriteLine("Collision detected!");
-                Console.WriteLine(((CollisionBox) obj).bounds);
             }
             return CollisionStatics.BoxBoxCollision((CollisionBox) obj, this);
         } else {
