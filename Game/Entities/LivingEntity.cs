@@ -41,6 +41,7 @@ namespace Game.Entities
         {
             Velocity = Move(game);
             ActiveAnimation.Update();
+            collisionBox.SetPosition((int) Position.X, (int) Position.Y);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

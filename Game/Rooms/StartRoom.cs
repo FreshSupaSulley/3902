@@ -21,7 +21,7 @@ namespace Game.Rooms
         ];
 
         public StartRoom(Game game, Player player) : base(game, player, data, 
-        DoorType.BREAK, DoorType.OPEN, DoorType.WALL, DoorType.PUZZLE, 
+        DoorType.BREAK, DoorType.OPEN, DoorType.WALL, DoorType.OPEN, 
         "dragon", "bat")
         {
             

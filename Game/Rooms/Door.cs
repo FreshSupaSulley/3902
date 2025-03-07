@@ -21,7 +21,7 @@ namespace Game.Rooms
         public DoorType Type { get; set; }
         public CollisionBox collisionBox;
 
-        public Door(DoorType type, int doorAlignment, Room destinationRoom, Game game) {
+        public Door(DoorType type, int doorAlignment, Room destinationRoom, Game game, Player player) {
             Type = type;
             ICommand command = new ChangeRoomCommand(doorAlignment, destinationRoom, game);
             Rectangle bounds = new Rectangle();
@@ -41,6 +41,7 @@ namespace Game.Rooms
             }
 
             collisionBox = new DoorCollisionBox(bounds, command);
+            collisionBox.CollisionList = new List<ICollision>(){player.collisionBox};
         }
 
         public static void LoadTextures()

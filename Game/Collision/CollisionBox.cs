@@ -6,7 +6,7 @@ using System;
 namespace Game.Collision;
 
 public abstract class CollisionBox : ICollision {
-    public readonly Rectangle bounds;
+    public Rectangle bounds;
     private ICommand command;
     public ICommand Command {
         get {return command;} 
@@ -43,10 +43,20 @@ public abstract class CollisionBox : ICollision {
     public bool CheckCollision(ICollision obj) {
         if (obj is null) return false;
         if (obj is CollisionBox) {
-            Console.WriteLine("Object is collision box");
+            // Console.WriteLine("Object is collision box");
+            Console.WriteLine(((CollisionBox) obj).bounds);
+            Console.WriteLine(this.bounds);
+            if (CollisionStatics.BoxBoxCollision((CollisionBox) obj, this)) {
+                Console.WriteLine("Collision detected!");
+            }
             return CollisionStatics.BoxBoxCollision((CollisionBox) obj, this);
         } else {
+            Console.WriteLine("");
             return false;
         }
+    }
+    public void SetPosition(int x, int y) {
+        this.bounds.X = x;
+        this.bounds.Y = y;
     }
 }

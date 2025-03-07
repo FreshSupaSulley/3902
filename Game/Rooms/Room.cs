@@ -78,10 +78,10 @@ namespace Game.Rooms
         }
         private bool loaded = false;
         public void PostLoad() {
-            this.topDoor = new Door(topType, 1, null, game);
-            this.rightDoor = new Door(rightType, 2, game.rooms[rightName], game);
-            this.bottomDoor = new Door(bottomType, 3, null, game);
-            this.leftDoor = new Door(leftType, 0, game.rooms[leftName], game);
+            this.topDoor = new Door(topType, 1, null, game, game.player);
+            this.rightDoor = new Door(rightType, 2, game.rooms[rightName], game, game.player);
+            this.bottomDoor = new Door(bottomType, 3, null, game, game.player);
+            this.leftDoor = new Door(leftType, 0, game.rooms[leftName], game, game.player);
 
             loaded = true;
         }
