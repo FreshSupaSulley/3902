@@ -53,7 +53,7 @@ namespace Game.Rooms
                     }
                     else if (i >= 118 && i <= 119)
                     {
-                        // Right door
+                        // Bottom door
                         this.tiles[i] = Door.IsWalkable(bottomDoor) ? TileType.BLOCK : TileType.WALL;
                     }
                     else
@@ -142,9 +142,16 @@ namespace Game.Rooms
                 for (int i = 0; i < tiles.Length; i++)
                 {
                     if (Tile.IsWalkable(tiles[i])) continue;
-                    int tileX = Tile.TILE_SIZE + i % 14 * Tile.TILE_SIZE, tileY = Tile.TILE_SIZE + i / 14 * Tile.TILE_SIZE;
-                    if (entity.collisionBox.bounds.Intersects(new Rectangle(tileX - (int)entity.Position.X, tileY - (int)entity.Position.Y, Tile.TILE_SIZE, Tile.TILE_SIZE)))
+                    int tileX = Tile.TILE_SIZE + i % 14 * Tile.TILE_SIZE;
+                    int tileY = Tile.TILE_SIZE + i / 14 * Tile.TILE_SIZE;
+                    if (entity.collisionBox.bounds.Intersects(new Rectangle(tileX, tileY, Tile.TILE_SIZE, Tile.TILE_SIZE)))
                     {
+                        Console.WriteLine("=================");
+                        Console.WriteLine(entity.collisionBox.bounds);
+                        Console.WriteLine(new Rectangle(tileX, tileY, Tile.TILE_SIZE, Tile.TILE_SIZE));
+                        Console.WriteLine(IsBorderTile(i));
+                        Console.WriteLine(i);
+                        Console.WriteLine("=================");
                         int newSnap = positiveMovement ? (xAxis ? tileX - entity.collisionBox.bounds.Width - entity.collisionBox.bounds.X : tileY - entity.collisionBox.bounds.Height - entity.collisionBox.bounds.Y) : (xAxis ? tileX - entity.collisionBox.bounds.X : tileY - entity.collisionBox.bounds.Y) + Tile.TILE_SIZE;
 
                         if (!contacted || (positiveMovement && newSnap < snapPoint) || (!positiveMovement && newSnap > snapPoint))

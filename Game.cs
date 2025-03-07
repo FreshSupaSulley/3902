@@ -93,6 +93,10 @@ namespace Game
 
             room = rooms["start"];
 
+            foreach (KeyValuePair<String, Room> pair in rooms) {
+                pair.Value.PostLoad();
+            }
+
             // Pow
             TempBuffer.pow = Load("pow.png");
             // ControllerLoader.LoadSprint2Commands(tile, this, keyboard, p, entities, gameObjects);

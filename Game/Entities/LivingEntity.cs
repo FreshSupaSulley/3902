@@ -27,12 +27,11 @@ namespace Game.Entities
                 }
             }
         }
-        private Vector2 position;
         public override Vector2 Position {
             get{return position;}
             set{
                 position = value;
-                collisionBox.SetPosition(position);
+                collisionBox.SetPosition(value);
             }
         }
 
