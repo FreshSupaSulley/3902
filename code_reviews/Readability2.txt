@@ -1,0 +1,21 @@
+"In the plaintext file for a readability review, include the following information:
+
+Author of the code review
+Date of the code review
+Sprint number
+Name of the .cs file being reviewed
+Author of the .cs file being reviewed
+Number of minutes taken to complete the review
+Specific comments on what is readable and what is not"
+
+Erich Boschert
+3/5/25
+Sprint 3
+Room.cs
+Erich Boschert
+5 minutes
+Comments:
+Combining the X and Y axis movement into one method would've required duplication of very similar looking code but I wonder if there's a better way to handle it to avoid having to call it twice with a boolean passed in for each axis.
+Iterations over the entities and tiles seem clean to me. Perhaps we can do the same with the doors and avoid hard coding the door values, even if they always are the same across every room.
+The constructor should be reduced down by avoiding the if else statement garbage in the beginning. I'll be handling this before the submission deadline.
+
