@@ -88,7 +88,7 @@ namespace Game
             rooms.Add("water", new WaterRoom(this, player));
             rooms.Add("bat", new BatRoom(this, player));
             rooms.Add("dragon", new DragonRoom(this, player));
-            // rooms.Add("dragon", FileUtils.loadRoom(room, "dragon_room"));
+            // rooms.Add("dragon", FileUtils.loadRoom(room, "dragon_room"));    
             rooms.Add("start", new StartRoom(this, player));
 
             room = rooms["start"];
@@ -246,7 +246,7 @@ namespace Game
             return Texture2D.FromStream(device, fileStream);
         }
 
-        // Loading textures with subimages
+        // Loading textures with subimage
         public static Texture2D Load(string path, Rectangle subimage) => Subimage(Load(path), subimage);
 
         // Grabs a subimage from a texture

@@ -1,0 +1,17 @@
+﻿Mingyu Choi
+3/6/2025
+sprint 3
+game.cs
+40 minutes
+
+lots of magic number. if we assign variables to these it will make easier read and maintain
+for the later uses.
+
+load method for texture
+
+all of the room transition stuff are inside the draw methods. it could be its own methods so we can modifty 
+room transition without messing with other stuff in the draw.
+
+we are going to have more rooms and we can make method just for loading rooms and put them into dictionary so it 
+called the same room later instead of loading individual room separately inside the load content. and if we need to 
+add more rooms we can modify load room method.

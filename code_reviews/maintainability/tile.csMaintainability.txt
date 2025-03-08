@@ -1,0 +1,12 @@
+﻿Mingyu Choi
+3/6/2025
+sprint 3
+tile.cs
+20 minutes
+
+Tile.cs has tight coupling with room.cs making easy to isolate and correct. 
+
+easy to maintain if we want to change the tile size. 
+
+we are loading tile.png using game.load. tile.png could make Initialize method and load tile.png. which might
+make more easier to test.
