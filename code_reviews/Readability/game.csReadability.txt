@@ -1,0 +1,14 @@
+﻿Mingyu Choi
+3/6/2025
+sprint 3
+game.cs
+20 minutes
+
+we can reduce magic numbers for better readability. many of the sizes and positions of player use magic number.
+it will be more clear and easier to maintain to use variables instead of magic nubmers.
+
+for player direction when moving to next room could be its own method. and if we use each int, animation and position
+as a parameter. we could possible simplify the code. same thing for the room transition code. the room transition 
+code is insdie the draw method with if and switch statements. it could be its own method and called inside the draw or update.
+and we can make new method for placing player so instead of using player.activeanmation and player.position inside of
+switch statement. new method to handle both together and called inside switch statement. we will make this

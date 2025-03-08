@@ -225,7 +225,7 @@ namespace Game
             return Texture2D.FromStream(device, fileStream);
         }
 
-        // Loading textures with subimages
+        // Loading textures with subimage
         public static Texture2D Load(string path, Rectangle subimage) => Subimage(Load(path), subimage);
 
         // Grabs a subimage from a texture
