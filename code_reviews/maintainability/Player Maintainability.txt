@@ -1,0 +1,20 @@
+"In the plaintext file for a readability review, include the following information:
+
+Author of the code review
+Date of the code review
+Sprint number
+Name of the .cs file being reviewed
+Author of the .cs file being reviewed
+Number of minutes taken to complete the review
+Specific comments on what is readable and what is not"
+
+Erich Boschert
+3/7/25
+Sprint 3
+Player.cs
+Erich Boschert
+5 minutes
+Comments:
+Player was compressed recently to keep movement controls inside of itself and rely less on public static bullshit shenanigans (why is ICommand and dictionaries a recommended practice??). As the person who rewrote that class,
+I humbly declare it to be fairly maintainable and if anything it would be harder to read now but only because it has more code. However, that code is organized. I think it's good to go for the future as collision and shit
+is also handled in parent classes or in Room.

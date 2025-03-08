@@ -24,9 +24,6 @@ namespace Game.Entities
 		// Old damaged sprite doesn't fit same style. Needs new resource
 		private static readonly Animation DAMAGE = new(Game.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
 
-		// Could prove useful one day
-		private bool moving;
-
 		[XmlIgnore] // required??
 		public Item Item;
 
@@ -77,7 +74,6 @@ namespace Game.Entities
 			// Use velocity to determine animation
 			if (velocity != Vector2.Zero)
 			{
-				moving = true;
 				// Normalize to keep consistent speed
 				velocity.Normalize();
 				// No diagonal sprites so this will have to suffice
@@ -89,7 +85,6 @@ namespace Game.Entities
 			else
 			{
 				ActiveAnimation.Reset();
-				moving = false;
 			}
 			// Position += velocity * speed;
 			return velocity * speed;
