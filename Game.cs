@@ -31,9 +31,9 @@ namespace Game
         public MouseController mouse;
 
         // Pertains to loading rooms
-        private readonly int LOADING_TIME = 60;
-        private int loadingTime;
-        private int loadingDirection;
+        private readonly int TRANSITION_TIME = 60;
+        private bool renderCaptured;
+        private int loadingTime, loadingDirection;
         private Room loadingRoom;
 
         public Game()
@@ -104,35 +104,12 @@ namespace Game
             // If we are switching between rooms
             else
             {
-                if (loadingTime++ >= LOADING_TIME)
+                if (loadingTime++ >= TRANSITION_TIME)
                 {
                     room = loadingRoom;
                     loadingRoom = null;
                     loadingTime = 0;
-                    // Put player in correct location
-                    switch (loadingDirection)
-                    {
-                        // Top
-                        case 0:
-                            player.ActiveAnimation = Player.DOWN;
-                            player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 32 - player.collisionBox.Y);
-                            break;
-                        // Bottom
-                        case 2:
-                            player.ActiveAnimation = Player.UP;
-                            player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 144 - player.collisionBox.Y - player.collisionBox.Height);
-                            break;
-                        // Left
-                        case 3:
-                            player.ActiveAnimation = Player.RIGHT;
-                            player.Position = new(32 - player.collisionBox.X, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
-                            break;
-                        // Right
-                        case 1:
-                            player.ActiveAnimation = Player.LEFT;
-                            player.Position = new(224 - player.collisionBox.X - player.collisionBox.Width, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
-                            break;
-                    }
+                    renderCaptured = false;
                 }
             }
             // Always end with post ticks
@@ -145,15 +122,42 @@ namespace Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Draw room at scaled resolution
-            GraphicsDevice.SetRenderTarget(target);
-            spriteBatch.Begin();
-            room.Draw(spriteBatch);
-            spriteBatch.End();
-
             // If loading
-            if (loadingRoom is not null)
+            if (loadingRoom is null)
             {
+                // Draw room at scaled resolution
+                GraphicsDevice.SetRenderTarget(target);
+                spriteBatch.Begin();
+                room.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+            else if (renderCaptured is false)
+            {
+                // Put player in correct location
+                switch (loadingDirection)
+                {
+                    // Top
+                    case 0:
+                        player.ActiveAnimation = Player.DOWN;
+                        player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 32 - player.collisionBox.Y);
+                        break;
+                    // Bottom
+                    case 2:
+                        player.ActiveAnimation = Player.UP;
+                        player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 144 - player.collisionBox.Y - player.collisionBox.Height);
+                        break;
+                    // Left
+                    case 3:
+                        player.ActiveAnimation = Player.RIGHT;
+                        player.Position = new(32 - player.collisionBox.X, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
+                        break;
+                    // Right
+                    case 1:
+                        player.ActiveAnimation = Player.LEFT;
+                        player.Position = new(224 - player.collisionBox.X - player.collisionBox.Width, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
+                        break;
+                }
+                renderCaptured = true;
                 GraphicsDevice.SetRenderTarget(loadingTarget);
                 spriteBatch.Begin();
                 loadingRoom.Draw(spriteBatch);
@@ -161,7 +165,7 @@ namespace Game
             }
 
             // Number of pixels
-            double sin = Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / LOADING_TIME), 2);
+            double sin = Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / TRANSITION_TIME), 2);
             // Switch back to main backbuffer
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
