@@ -10,8 +10,6 @@ namespace Game.Entities
     {
         private static readonly Animation IDLE = new(Game.Load("/Entities/snake.png"), 2, 20);
 
-        private int ticks;
-
         public override Vector2 Move(Game game)
         {
             return new Vector2(0, 0);
