@@ -77,7 +77,6 @@ namespace Game
             // Load start room. This also defines the player
             room = Room.LoadRoom("start");
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
-            // Player object that stays around throughout session
             // Pow
             TempBuffer.pow = Load("pow.png");
         }
