@@ -105,7 +105,7 @@
     <Door>
       <Type>OPEN</Type>
       <location>0</location>
-      <roomPath>dragon_room</roomPath>
+      <roomPath>water</roomPath>
     </Door>
     <Door>
       <Type>WALL</Type>

@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using Game.Collision;
 using Game.Entities;
 using Game.Tiles;
 using Microsoft.Xna.Framework;
@@ -160,12 +158,12 @@ namespace Game.Rooms
                     else if (i == 56)
                     {
                         // Left door
-                        trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
+                        trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
                     }
                     else if (i == 69)
                     {
                         // Right door
-                        trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
+                        trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
                     }
                     else if (i >= 118 && i <= 119)
                     {

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Game.Entities
 {
-    public class Player : LivingEntity
+	public class Player : LivingEntity
 	{
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Game.Load("Entities/Monoko/walk.png");
@@ -27,8 +27,9 @@ namespace Game.Entities
 		// Could prove useful one day
 		private bool moving;
 
-		[XmlIgnore]
+		[XmlIgnore] // required??
 		public Item Item;
+
 		public Player() : base(new(5, 13, 14, 14), DOWN) { }
 
 		public override Vector2 Move(Game game)
