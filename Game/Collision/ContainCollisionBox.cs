@@ -13,8 +13,8 @@ public class ContainCollisionBox : CollisionBox {
         base.OnCollision();
     }
     public void Reposition(LivingEntity entity) {
-        int x1 = entity.collisionBox.bounds.X;
-        int x2 = entity.collisionBox.bounds.X+entity.collisionBox.bounds.Width;
+        int x1 = entity.collisionBox.X;
+        int x2 = entity.collisionBox.X+entity.collisionBox.Width;
         if (x1 < 0) {
             entity.Position = new Vector2(0,entity.Position.Y);
         }

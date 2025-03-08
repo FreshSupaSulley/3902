@@ -1,0 +1,4 @@
+[*.cs]
+
+# CA5369: Use XmlReader for 'XmlSerializer.Deserialize()'
+dotnet_diagnostic.CA5369.severity = none

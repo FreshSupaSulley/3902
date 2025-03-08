@@ -1,16 +1,17 @@
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
     // An Entity is an object in the game with a position
-    public abstract class Entity
+    // List every single deserializable entity we want in this game
+    // I don't know of a better way to handle deserialization. Anyone else is welcome to find an alternative
+    [XmlInclude(typeof(Player))]
+    [XmlInclude(typeof(Dragon))]
+    public abstract class Entity(Vector2 position)
     {
-        public virtual Vector2 Position {get{return position;} set{position = value;}}
-        protected Vector2 position;
-        public Entity(Vector2 position) {
-            this.position = position;
-        }
+        public Vector2 Position = position;
 
         // Require subclasses to inherit Update and Draw
         public abstract void Update(Game game);

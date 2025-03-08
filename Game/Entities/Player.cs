@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Game.Items;
 using Game.Controllers;
 using Microsoft.Xna.Framework.Input;
-using Game.Collision;
+using System.Xml.Serialization;
 
 namespace Game.Entities
 {
-	public class Player : LivingEntity
+    public class Player : LivingEntity
 	{
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Game.Load("Entities/Monoko/walk.png");
@@ -25,10 +25,11 @@ namespace Game.Entities
 		private static readonly Animation DAMAGE = new(Game.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
 
 		// Could prove useful one day
-		public bool Moving { get; private set; }
+		private bool moving;
 
+		[XmlIgnore]
 		public Item Item;
-		public Player() : base(new PushCollisionBox(5, 13, 14, 14, null), new Vector2(60, 80), DOWN) { }
+		public Player() : base(new(5, 13, 14, 14), DOWN) { }
 
 		public override Vector2 Move(Game game)
 		{
@@ -75,7 +76,7 @@ namespace Game.Entities
 			// Use velocity to determine animation
 			if (velocity != Vector2.Zero)
 			{
-				Moving = true;
+				moving = true;
 				// Normalize to keep consistent speed
 				velocity.Normalize();
 				// No diagonal sprites so this will have to suffice
@@ -87,7 +88,7 @@ namespace Game.Entities
 			else
 			{
 				ActiveAnimation.Reset();
-				Moving = false;
+				moving = false;
 			}
 			// Position += velocity * speed;
 			return velocity * speed;

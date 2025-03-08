@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Snake(Vector2 Position) : LivingEntity(new StillCollisionBox(0,0,10, 10, null), Position, IDLE)
+    public class Snake() : LivingEntity(new(0, 0, 10, 10), IDLE)
     {
         private static readonly Animation IDLE = new(Game.Load("/Entities/snake.png"), 2, 20);
 

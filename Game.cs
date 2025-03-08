@@ -6,9 +6,6 @@ using Microsoft.Xna.Framework;
 using Game.Tiles;
 using Game.Rooms;
 using System;
-using demo.Game;
-using System.Collections.Generic;
-using Game.Collision;
 
 namespace Game
 {
@@ -37,7 +34,6 @@ namespace Game
         private int loadingTime;
         private int loadingDirection;
         private Room loadingRoom;
-        public Dictionary<String, Room> rooms;
 
         public Game()
         {
@@ -66,10 +62,6 @@ namespace Game
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
 
-            // Room Handling
-
-            rooms = new();
-
             // This calls load content
             base.Initialize();
         }
@@ -80,26 +72,14 @@ namespace Game
             device = graphics.GraphicsDevice;
             Tile.LoadTextures();
             Door.LoadTextures();
+            // Load font
             font = Content.Load<SpriteFont>("Font");
+            // Load start room. This also defines the player
+            room = Room.LoadRoom("start");
+            this.player = (Player)room.gameObjects.Find(entity => entity is Player);
             // Player object that stays around throughout session
-            player = new();
-            // Add room
-            
-            rooms.Add("water", new WaterRoom(this, player));
-            rooms.Add("bat", new BatRoom(this, player));
-            rooms.Add("dragon", new DragonRoom(this, player));
-            // rooms.Add("dragon", FileUtils.loadRoom(room, "dragon_room"));
-            rooms.Add("start", new StartRoom(this, player));
-
-            room = rooms["start"];
-
-            foreach (KeyValuePair<String, Room> pair in rooms) {
-                pair.Value.PostLoad();
-            }
-
             // Pow
             TempBuffer.pow = Load("pow.png");
-            // ControllerLoader.LoadSprint2Commands(tile, this, keyboard, p, entities, gameObjects);
         }
 
         // Tick
@@ -128,36 +108,35 @@ namespace Game
                 if (loadingTime++ >= LOADING_TIME)
                 {
                     room = loadingRoom;
-                    room.PostLoad();
                     loadingRoom = null;
                     loadingTime = 0;
                     // Put player in correct location
-                    switch(loadingDirection)
+                    switch (loadingDirection)
                     {
                         case 0:
-                        {
-                            player.ActiveAnimation = Player.DOWN;
-                            player.Position = new(144 - (player.collisionBox.bounds.Width + player.collisionBox.bounds.X * 2 + 32) / 2, 32 - player.collisionBox.bounds.Y);
-                            break;
-                        }
+                            {
+                                player.ActiveAnimation = Player.DOWN;
+                                player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 32 - player.collisionBox.Y);
+                                break;
+                            }
                         case 2:
-                        {
-                            player.ActiveAnimation = Player.LEFT;
-                            player.Position = new(220 - (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
-                            break;
-                        }
+                            {
+                                player.ActiveAnimation = Player.LEFT;
+                                player.Position = new(220 - (player.collisionBox.Width - player.collisionBox.X), 96 - (player.collisionBox.Y + player.collisionBox.Height + 32) / 2);
+                                break;
+                            }
                         case 3:
-                        {
-                            player.ActiveAnimation = Player.UP;
-                            player.Position = new(144 - (player.collisionBox.bounds.X + player.collisionBox.bounds.Width + 32) / 2, 144 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height));
-                            break;
-                        }
+                            {
+                                player.ActiveAnimation = Player.UP;
+                                player.Position = new(144 - (player.collisionBox.X + player.collisionBox.Width + 32) / 2, 144 - (player.collisionBox.Y + player.collisionBox.Height));
+                                break;
+                            }
                         case 1:
-                        {
-                            player.ActiveAnimation = Player.RIGHT;
-                            player.Position = new(11 + (player.collisionBox.bounds.Width - player.collisionBox.bounds.X), 96 - (player.collisionBox.bounds.Y + player.collisionBox.bounds.Height + 32) / 2);
-                            break;
-                        }
+                            {
+                                player.ActiveAnimation = Player.RIGHT;
+                                player.Position = new(11 + (player.collisionBox.Width - player.collisionBox.X), 96 - (player.collisionBox.Y + player.collisionBox.Height + 32) / 2);
+                                break;
+                            }
                     }
                 }
             }
@@ -188,7 +167,7 @@ namespace Game
             }
 
             // Number of pixels
-            int offset = (int) (Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / LOADING_TIME), 2) * Window.ClientBounds.Width);
+            int offset = (int)(Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / LOADING_TIME), 2) * Window.ClientBounds.Width);
             int offsetBack = (int)(Math.Pow(Math.Cos(loadingTime * Math.PI / 2 / LOADING_TIME), 2) * Window.ClientBounds.Width);
             // Switch back to main backbuffer and draw buffer
             GraphicsDevice.SetRenderTarget(null);
@@ -212,9 +191,9 @@ namespace Game
                     }
                     break;
                 case 3:
-                    //need to add room transition moving up
+                //need to add room transition moving up
                 case 4:
-                    //need to add room transition moving down
+                //need to add room transition moving down
                 default:
                     spriteBatch.Draw(target, new Rectangle(-offset, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
                     break;

@@ -6,11 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Bat(Vector2 Position) : LivingEntity(new StillCollisionBox(0,0,10, 10, null), Position, IDLE)
+    public class Bat() : LivingEntity(new(0, 0, 10, 10), IDLE)
     {
         private static readonly Animation IDLE = new(Game.Load("/Entities/bat.png"), 2, 20);
-
-        private int ticks;
 
         public override Vector2 Move(Game game)
         {

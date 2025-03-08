@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Game.Collision;
-using Game.Entities;
-using Game.Commands;
+using System.Runtime.Serialization;
 
 namespace Game.Rooms
 {
@@ -18,30 +16,37 @@ namespace Game.Rooms
         // This could alternatively be a dictionary to Texture2D? Would be less efficient on memory
         private static readonly Dictionary<DoorType, Rectangle> textures = [];
 
-        public DoorType Type { get; set; }
-        public CollisionBox collisionBox;
+        // Serialize the following
+        public Vector2 Position;
+        public int Angle;
 
-        public Door(DoorType type, int doorAlignment, Room destinationRoom, Game game, Player player) {
-            Type = type;
-            ICommand command = new ChangeRoomCommand(doorAlignment, destinationRoom, game);
-            Rectangle bounds = new Rectangle();
-            switch (doorAlignment) {
-                case 0: // left
-                    bounds = new Rectangle(0,64,8,16);
+        // Serialize these elements
+        public DoorType Type;
+        public int location;
+        public string roomPath;
+
+        /// This is so ugly, but alas, this is a consequence of our XML loading architecture. Can clean up later
+        protected internal void Initialize()
+        {
+            switch (location)
+            {
+                case 0:
+                    Position = new Vector2(112, 0);
+                    Angle = 0;
                     break;
-                case 1: // top
-                    // bounds = new Rectangle(64,0,16,8);
+                case 1:
+                    Position = new Vector2(224, 72);
+                    Angle = 90;
                     break;
-                case 2: // right
-                    bounds = new Rectangle(232,64,8,16);
+                case 2:
+                    Position = new Vector2(112, 144);
+                    Angle = 180;
                     break;
-                case 3: // bottom
-                    // bounds = new Rectangle(,136,16,8);
+                case 3:
+                    Position = new Vector2(0, 72);
+                    Angle = 270;
                     break;
             }
-
-            collisionBox = new DoorCollisionBox(bounds, command);
-            collisionBox.CollisionList = new List<ICollision>(){player.collisionBox};
         }
 
         public static void LoadTextures()
@@ -54,14 +59,22 @@ namespace Game.Rooms
             }
         }
 
-        public static bool IsWalkable(DoorType door) => (int) door < 32;
+        public static bool IsWalkable(DoorType door) => (int)door < 32;
 
         /// Subclasses can inherit Update for special behavior
-        public virtual void Update() {
-            collisionBox.Update();
+        public virtual void Update(Game game)
+        {
+            // Console.WriteLine(game.player.Position);
+            if (new Rectangle((int)Position.X - (int) game.player.Position.X, (int)Position.Y - (int) game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
+            {
+                game.SwitchRoom(location, Room.LoadRoom(roomPath));
+            }
         }
 
         /// Draws the door
-        public void Draw(SpriteBatch spriteBatch, int angle, Vector2 position) => spriteBatch.Draw(DOOR_SHEET_TOP, position + spriteOrigin, textures[Type], Color.White, (float) (angle * Math.PI / 180f), spriteOrigin, 1.0f, SpriteEffects.None, 0);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(DOOR_SHEET_TOP, Position + spriteOrigin, textures[Type], Color.White, (float)(Angle * Math.PI / 180f), spriteOrigin, 1.0f, SpriteEffects.None, 0);
+        }
     }
 }

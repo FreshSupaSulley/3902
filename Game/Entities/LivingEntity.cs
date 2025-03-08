@@ -2,18 +2,23 @@ using Game.Graphics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Game.Collision;
+using System.Xml.Serialization;
 
 namespace Game.Entities
 {
     // LivingEntitys have active animations and collisions handled for them
     public abstract class LivingEntity : Entity
     {
-        public readonly CollisionBox collisionBox;
+        [XmlIgnore]
+        public readonly Rectangle collisionBox;
+        [XmlIgnore]
         private Animation _activeAnimation;
 
         // Used for collision
+        [XmlIgnore]
         public Vector2 Velocity { get; private set; }
 
+        [XmlIgnore]
         public Animation ActiveAnimation
         {
             get => _activeAnimation;
@@ -27,16 +32,8 @@ namespace Game.Entities
                 }
             }
         }
-        public override Vector2 Position {
-            get{return position;}
-            set{
-                position = value;
-                collisionBox.SetPosition(value);
-            }
-        }
 
-
-        public LivingEntity(CollisionBox box, Vector2 position, Animation activeAnimation) : base(position)
+        public LivingEntity(Rectangle box, Animation activeAnimation) : base(new())
         {
             collisionBox = box;
             ActiveAnimation = activeAnimation;
