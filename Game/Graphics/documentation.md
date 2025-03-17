@@ -16,10 +16,10 @@
 - `void Draw(SpriteBatch sb)`
 
 ## UIText (class) : IUserInterfaceElement
-- `constructor(String text, Vector2 pos)`
+- `constructor(String text, Vector2 pos)` take a string and position to render basic text
 - `void Draw(SpriteBatch sb)`
 
 ## UIVariableText<T> (class) : UIText
-- `constructor(ref T text, Vector2 pos)`
-- `private void ConvertVariableToText()`
+- `constructor(ref T text, Vector2 pos)` takes a reference to a variable to be stored and a position for the text
+- `private void ConvertVariableToText()` give a means to add prefixes, suffixes, or change how the value is being interpreted.
 - `void Draw(SpriteBatch sb)`
