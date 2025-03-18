@@ -24,13 +24,16 @@ namespace Game.Controllers
             oldState = state;
         }
 
-        public float RelativeX() => MathHelper.Clamp(Mouse.GetState().Position.X * 1f / game.Window.ClientBounds.Width, 0, 1);
-        public float RelativeY() => MathHelper.Clamp(Mouse.GetState().Position.Y * 1f / game.Window.ClientBounds.Height, 0, 1);
+        public float RelativeX() => MathHelper.Clamp(this.state.Position.X * 1f / game.Window.ClientBounds.Width, 0, 1);
+        public float RelativeY() => MathHelper.Clamp(this.state.Position.Y * 1f / game.Window.ClientBounds.Height, 0, 1);
 
-        public bool LeftPressed() => Mouse.GetState().LeftButton == ButtonState.Pressed && oldState.LeftButton != ButtonState.Pressed;
-        public bool RightPressed() => Mouse.GetState().RightButton == ButtonState.Pressed && oldState.RightButton != ButtonState.Pressed;
+        public int PositionX() => this.state.Position.X;
+        public int PositionY() => this.state.Position.Y;
 
-        public bool LeftDown() => Mouse.GetState().LeftButton == ButtonState.Pressed;
-        public bool RightDown() => Mouse.GetState().RightButton == ButtonState.Pressed;
+        public bool LeftPressed() => this.state.LeftButton == ButtonState.Pressed && oldState.LeftButton != ButtonState.Pressed;
+        public bool RightPressed() => this.state.RightButton == ButtonState.Pressed && oldState.RightButton != ButtonState.Pressed;
+
+        public bool LeftDown() => this.state.LeftButton == ButtonState.Pressed;
+        public bool RightDown() => this.state.RightButton == ButtonState.Pressed;
     }
 }
