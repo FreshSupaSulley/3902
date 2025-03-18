@@ -6,14 +6,15 @@
 
 ## IUserInterfaceElement (interface)
 - `void Draw(SpriteBatch sb)` draws the element into the SpriteBatch (likely only called by layout)
+- `void Update(GameTime gameTime)`
 
 ## UIButton (class) : IUserInterfaceElement
-- `constructor(Rectangle bounds, ICommand onPress)`
-- `void Draw(SpriteBatch sb)`
+- `constructor(Rectangle bounds, MouseController mc, ICommand onPress)`
+- `void Draw(SpriteBatch sb)` renders a rectangular button
 
 ## UITextButton (class) : UIButton
-- `constructor(Rectangle bounds, ICommand onPress, String text)`
-- `void Draw(SpriteBatch sb)`
+- `constructor(Rectangle bounds, ICommand onPress, MouseController mc, String text)`
+- `void Draw(SpriteBatch sb)` renders the rectangular button and text
 
 ## UIText (class) : IUserInterfaceElement
 - `constructor(String text, Vector2 pos)` take a string and position to render basic text
