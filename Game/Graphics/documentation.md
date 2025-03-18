@@ -17,9 +17,10 @@
 
 ## UIText (class) : IUserInterfaceElement
 - `constructor(String text, Vector2 pos)` take a string and position to render basic text
-- `void Draw(SpriteBatch sb)`
+- `void Draw(SpriteBatch sb)` renders the text to the screen
+- `public void Update(GameTime gameTime)` can be used to change the value in child classes
 
 ## UIVariableText<T> (class) : UIText
-- `constructor(ref T text, Vector2 pos)` takes a reference to a variable to be stored and a position for the text
+- `constructor(Func<T> getValue, Vector2 pos)` takes a reference to a variable to be stored and a position for the text
 - `private void ConvertVariableToText()` give a means to add prefixes, suffixes, or change how the value is being interpreted.
-- `void Draw(SpriteBatch sb)`
+- `public void Update(GameTime gameTime)` changes text based on updated variable value
