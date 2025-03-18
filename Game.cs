@@ -22,7 +22,7 @@ namespace Game
 
         // Used for rendering everything
         private SpriteBatch spriteBatch;
-        private SpriteFont font;
+        public SpriteFont font;
 
         // Visible to inheritors
         public Player player;
