@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class trap() : LivingEntity(new(0, 0, 10, 10), IDLE)
+    public class Trap() : LivingEntity(new(0, 0, 10, 10), IDLE)
     {
         private static readonly Animation IDLE = new(Game.Load("/Entities/trap.png"), 1, 20);
 

@@ -12,7 +12,7 @@ namespace Game.Entities
 
         public override Vector2 Move(Game game)
         {
-            return new Vector2(0, 0);
+            return new Vector2((float).5, 1);
             //return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
         }
 
