@@ -103,12 +103,12 @@
   </gameObjects>
   <doors>
     <Door>
-      <Type>OPEN</Type>
+      <Type>WALL</Type>
       <location>0</location>
       <roomPath>water</roomPath>
     </Door>
     <Door>
-      <Type>WALL</Type>
+      <Type>OPEN</Type>
       <location>1</location>
       <roomPath></roomPath>
     </Door>
