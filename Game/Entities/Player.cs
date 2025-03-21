@@ -53,6 +53,9 @@ namespace Game.Entities
 				}
 				else
 				{
+					if(ActiveAnimation != ATTACK){
+						Game.sfx["punch"].Play();
+					}
 					TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
 					ActiveAnimation = ATTACK;
 				}

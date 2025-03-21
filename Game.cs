@@ -7,6 +7,8 @@ using Game.Tiles;
 using Game.Rooms;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Game
 {
@@ -35,6 +37,12 @@ namespace Game
         private bool renderCaptured;
         private int loadingTime, loadingDirection;
         private Room loadingRoom;
+
+        //sound
+        //sound effects to be played once (i.e. without looping)
+        public static Dictionary<String, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
+        //currently playing music
+        public static SoundEffectInstance bgm;
 
         public Game()
         {
@@ -68,6 +76,9 @@ namespace Game
 
         protected override void LoadContent()
         {
+            loadSoundEffect("ding.wav");
+            loadSoundEffect("punch.wav");
+            changeMusic("Song_1.wav");
             // Used to load resources statically
             device = graphics.GraphicsDevice;
             Tile.LoadTextures();
@@ -255,6 +266,31 @@ namespace Game
             texture.GetData(0, subimage, data, 0, data.Length);
             croppedTexture.SetData(data);
             return croppedTexture;
+        }
+
+        //loads sound into sfx
+        public static void loadSoundEffect(String filename){
+            if(filename.IndexOf(".") > 0){
+              String name = filename.Substring(0, filename.IndexOf("."));
+             string path = "Content/Sound/" + filename;
+             if(!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
+             sfx.Add(name, SoundEffect.FromStream(new FileStream(path, FileMode.Open)));
+            }else{
+                Console.WriteLine("Error: invalid name formatting for sound file");
+            }
+        }
+        //changes background music
+        public static void changeMusic(String filename){
+            if(filename.IndexOf(".") > 0){
+              String name = filename.Substring(0, filename.IndexOf("."));
+             string path = "Content/Sound/" + filename;
+             if(!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
+             bgm = SoundEffect.FromStream(new FileStream(path, FileMode.Open)).CreateInstance();
+             bgm.IsLooped = true;
+             bgm.Play();
+            }else{
+                Console.WriteLine("Error: invalid name formatting for sound file");
+            }
         }
     }
 }

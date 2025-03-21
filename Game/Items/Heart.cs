@@ -1,6 +1,7 @@
 using System;
 using Game.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Items
@@ -22,6 +23,7 @@ namespace Game.Items
 
         public override void Use(Game game)
         {
+            Game.sfx["ding"].Play();
             Console.WriteLine("probably should heal player when we get health system");
         }
     }
