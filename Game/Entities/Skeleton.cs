@@ -8,7 +8,7 @@ namespace Game.Entities
 {
     public class Skeleton() : LivingEntity(new(0, 0, 10, 10), IDLE)
     {
-        private static readonly Animation IDLE = new(Game.Load("/Entities/skeleton.png"), 2, 20);
+        private static readonly Animation IDLE = new(Game.Load("/Entities/skeleton.png"), 2, 50);
 
         public override Vector2 Move(Game game)
         {

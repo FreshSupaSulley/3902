@@ -115,13 +115,13 @@
 	  </Entity>
 	  <Entity xsi:type="Skeleton">
 		  <Position>
-			  <X>64</X>
+			  <X>120</X>
 			  <Y>64</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Skeleton">
 		  <Position>
-			  <X>48</X>
+			  <X>120</X>
 			  <Y>112</Y>
 		  </Position>
 	  </Entity>
