@@ -123,7 +123,7 @@
     <Door>
       <Type>OPEN</Type>
       <location>1</location>
-      <roomPath></roomPath>
+      <roomPath>start</roomPath>
     </Door>
     <Door>
       <Type>WALL</Type>
