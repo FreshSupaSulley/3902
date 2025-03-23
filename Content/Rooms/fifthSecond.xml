@@ -109,19 +109,19 @@
       <roomPath></roomPath>
     </Door>
     <Door>
-      <Type>OPEN</Type>
+      <Type>PUZZLE</Type>
       <location>1</location>
-      <roomPath>start</roomPath>
+      <roomPath>fifthThird</roomPath>
     </Door>
     <Door>
-      <Type>OPEN</Type>
+      <Type>LOCK</Type>
       <location>2</location>
-      <roomPath>start</roomPath>
+      <roomPath>forthFifth</roomPath>
     </Door>
     <Door>
-      <Type>OPEN</Type>
+      <Type>WALL</Type>
       <location>3</location>
-      <roomPath>start</roomPath>
+      <roomPath></roomPath>
     </Door>
   </doors>
 </Room>
