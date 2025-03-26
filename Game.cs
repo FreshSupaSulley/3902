@@ -38,6 +38,8 @@ namespace Game
         private int loadingTime, loadingDirection;
         private Room loadingRoom;
 
+        public static Game instance;
+
         //sound
         //sound effects to be played once (i.e. without looping)
         public static Dictionary<String, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
@@ -46,6 +48,7 @@ namespace Game
 
         public Game()
         {
+            instance = this;
             graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = 1600 / 2,
@@ -294,7 +297,7 @@ namespace Game
         }
 
         public static void reset(){
-            
+            Game.instance.SwitchRoom(1, Room.LoadRoom("start"));
         }
     }
 }
