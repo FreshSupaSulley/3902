@@ -19,6 +19,10 @@ namespace Game.Entities
         public Vector2 Velocity { get; private set; }
 
         [XmlIgnore]
+        //Health value
+        protected int health;
+
+        [XmlIgnore]
         public Animation ActiveAnimation
         {
             get => _activeAnimation;
@@ -31,6 +35,10 @@ namespace Game.Entities
                     _activeAnimation = value;
                 }
             }
+        }
+
+        public virtual void inflict(int damage){
+            health -= damage;
         }
 
         public LivingEntity(Rectangle box, Animation activeAnimation) : base(new())

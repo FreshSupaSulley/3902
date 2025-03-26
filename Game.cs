@@ -292,5 +292,9 @@ namespace Game
                 Console.WriteLine("Error: invalid name formatting for sound file");
             }
         }
+
+        public static void reset(){
+            
+        }
     }
 }
