@@ -15,7 +15,7 @@ public class UIManager {
         this.game = game;
     }
     public void Update(GameTime gameTime) {
-
+        uiDictionary[current].Update(gameTime);
     }
     public void Draw(SpriteBatch spriteBatch) {
         uiDictionary[current].Draw(spriteBatch);
