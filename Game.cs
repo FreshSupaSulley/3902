@@ -7,6 +7,7 @@ using Game.Tiles;
 using Game.Rooms;
 using System;
 using System.Linq;
+using Game.Graphics;
 
 namespace Game
 {
@@ -36,6 +37,8 @@ namespace Game
         private int loadingTime, loadingDirection;
         private Room loadingRoom;
 
+        UIManager ui;
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this)
@@ -61,6 +64,7 @@ namespace Game
             // Controllers
             keyboard = new KeyboardController(this);
             mouse = new MouseController(this);
+            ui = new UIManager(this);
 
             // This calls load content
             base.Initialize();
@@ -79,6 +83,9 @@ namespace Game
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
             // Pow
             TempBuffer.pow = Load("pow.png");
+
+            // Load all user interfaces
+            ui.Load();
         }
 
         // Tick
@@ -115,6 +122,9 @@ namespace Game
             // Always end with post ticks
             keyboard.PostUpdate();
             mouse.PostUpdate();
+
+            ui.Update(gameTime);
+
         }
 
         // Render
@@ -219,6 +229,8 @@ namespace Game
             {
                 TempBuffer.current[key].Draw(spriteBatch);
             }
+
+            ui.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

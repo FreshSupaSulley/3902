@@ -10,12 +10,15 @@ public class UIButton : IUserInterfaceElement {
     private MouseController mc;
     private ICommand onPress;
     private bool pressed = false;
-    public UIButton(Rectangle bounds, MouseController mc, ICommand onPress) {
+    private Color color;
+    public UIButton(Rectangle bounds, MouseController mc, ICommand onPress, Color color) {
         this.bounds = bounds;
         this.mc = mc;
         this.onPress = onPress;
+        this.color = color;
     }
-    public void Update(GameTime gameTime) {
+    public UIButton(Rectangle bounds, MouseController mc, ICommand onPress) : this(bounds, mc, onPress, Color.Black) {}
+    public virtual void Update(GameTime gameTime) {
         if (
             bounds.Left <= mc.PositionX() && mc.PositionX() <= bounds.Right &&
             bounds.Top <= mc.PositionY() && mc.PositionY() <= bounds.Bottom && mc.LeftDown() && !pressed
@@ -26,7 +29,8 @@ public class UIButton : IUserInterfaceElement {
             pressed = false;
         }
     }
-    public void Draw(SpriteBatch spriteBatch) {
-        
+    public virtual void Draw(SpriteBatch spriteBatch) {
+        Texture2D pixel = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+        spriteBatch.Draw(pixel, bounds, color);
     }
 }
