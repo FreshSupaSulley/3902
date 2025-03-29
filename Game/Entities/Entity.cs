@@ -9,6 +9,11 @@ namespace Game.Entities
     // I don't know of a better way to handle deserialization. Anyone else is welcome to find an alternative
     [XmlInclude(typeof(Player))]
     [XmlInclude(typeof(Dragon))]
+    [XmlInclude(typeof(Skeleton))]
+    [XmlInclude(typeof(Wallmaster))]
+    [XmlInclude(typeof(Goriya))]
+    [XmlInclude(typeof(Trap))]
+    [XmlInclude(typeof(Gel))]
     [XmlInclude(typeof(Bat))]
     public abstract class Entity(Vector2 position)
     {

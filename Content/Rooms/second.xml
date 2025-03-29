@@ -16,17 +16,17 @@
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
 	  <!--row2-->
-    <TileType>BLOCK</TileType>
-    <TileType>FISH</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>FISH</TileType>
+	<TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>STATUE</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>STATUE</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
 	  <!--row3-->  
     <TileType>BLOCK</TileType>
@@ -34,8 +34,8 @@
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
@@ -43,25 +43,25 @@
     <TileType>BLOCK</TileType>
 	  <!--row4-->
 	<TileType>BLOCK</TileType>
-	<TileType>FISH</TileType>
-	<TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-	<TileType>FISH</TileType>
-	<TileType>BLOCK</TileType>
-	<TileType>BLOCK</TileType>
-	<TileType>STATUE</TileType>
-	<TileType>BLOCK</TileType>
-	<TileType>BLOCK</TileType>
-	<TileType>STATUE</TileType>
-	<TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
 	  <!--row5-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
@@ -69,59 +69,71 @@
     <TileType>BLOCK</TileType>
 	  <!--row6-->
     <TileType>BLOCK</TileType>
-    <TileType>FISH</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>SAND</TileType>
-    <TileType>FISH</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
-    <TileType>STATUE</TileType>
-    <TileType>SAND</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>STATUE</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
 	  <!--row7-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
-    <TileType>SAND</TileType>
-	<TileType>BLOCK</TileType>
-	<TileType>BLOCK</TileType>
-	<TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
   </tiles>
   <gameObjects>
-    <Entity xsi:type="Player">
+    <Entity xsi:type="Skeleton">
       <Position>
-        <X>116</X>
-        <Y>100</Y>
+        <X>48</X>
+        <Y>48</Y>
       </Position>
     </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>64</X>
+			  <Y>64</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>48</X>
+			  <Y>112</Y>
+		  </Position>
+	  </Entity>
   </gameObjects>
   <doors>
     <Door>
-      <Type>LOCK</Type>
-      <location>0</location>
-      <roomPath>second</roomPath>
-    </Door>
-    <Door>
       <Type>OPEN</Type>
-      <location>1</location>
-      <roomPath>firstRight</roomPath>
+      <location>0</location>
+      <roomPath>thirdSecond</roomPath>
     </Door>
     <Door>
       <Type>WALL</Type>
-      <location>2</location>
+      <location>1</location>
       <roomPath></roomPath>
     </Door>
     <Door>
       <Type>OPEN</Type>
+      <location>2</location>
+      <roomPath>start</roomPath>
+    </Door>
+    <Door>
+      <Type>WALL</Type>
       <location>3</location>
-      <roomPath>keyRoom</roomPath>
+      <roomPath></roomPath>
     </Door>
   </doors>
 </Room>

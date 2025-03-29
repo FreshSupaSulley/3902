@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 
 namespace Game.Entities
 {
-    public class Goriya() : MobileMotionPathEntity(new(0, 0, 10, 10), IDLE, motionPaths)
+    public class Gohma() : MobileMotionPathEntity(new(0, 0, 10, 10), IDLE, motionPaths)
     {
-        private static readonly Animation IDLE = new(Game.Load("/Entities/gohma.png", new Rectangle(0, 0, 67, 16)), 4, 10);
+        private static readonly Animation IDLE = new(Game.Load("/Entities/goriya.png", new Rectangle(0, 0, 91, 16)), 4, 10);
 
         private static readonly IPath[] motionPaths = [
             new LinearPath(new Vector2(200,200), new Vector2(100,0), 50),

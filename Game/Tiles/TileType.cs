@@ -6,6 +6,6 @@ namespace Game.Tiles
         BLOCK, SAND, STAIRS, BLACK, BRIDGE,
 
         // Walls have ordinals after this will be incremented by 1
-        WALL = 128, BRICK, FISH, WATER
+        WALL = 128, BRICK, FISH, WATER, STATUE
     }
 }
