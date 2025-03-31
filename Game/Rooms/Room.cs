@@ -20,7 +20,7 @@ namespace Game.Rooms
         public TileType[] tiles;
         public Door[] doors;
         public List<Entity> gameObjects = [];
-
+        
         // public List<Noxa> noxe = new List<Noxa>();
 
         // Needed for serialization
