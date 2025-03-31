@@ -5,11 +5,12 @@ using Game.Items;
 using Game.Controllers;
 using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
+using Game.State;
 using Game.Util;
 
 namespace Game.Entities
 {
-    public class Player : LivingEntity
+	public class Player : LivingEntity
 	{
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
