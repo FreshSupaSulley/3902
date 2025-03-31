@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using Game.Entities;
 using Game.Tiles;
+using Game.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +14,7 @@ namespace Game.Rooms
     public class Room
     {
         // Every room has the same outline (for now)
-        private static readonly Texture2D OUTLINE = Game.Load("Tiles/map_outline.png");
+        private static readonly Texture2D OUTLINE = Main.Load("Tiles/map_outline.png");
 
         // Every room in Zelda is 12x7 (we secretely expand this to 14x9 for collision logic)
         public TileType[] tiles;
@@ -26,7 +27,7 @@ namespace Game.Rooms
         /// True if tile is on the border of the map, false otherwise
         private static bool IsBorderTile(int index) => index % 14 == 0 || index % 14 == 13 || index / 14 == 0 || index / 14 == 8;
 
-        public virtual void Update(Game game)
+        public virtual void Update(World game)
         {
             // Not doing any fancy lambda because that would be concurrent modification
             // This apparently works??

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Game.Collision;
 using System.Xml.Serialization;
+using Game.State;
 
 namespace Game.Entities
 {
@@ -40,9 +41,9 @@ namespace Game.Entities
         }
 
         // Subclasses need to return their velocities
-        public abstract Vector2 Move(Game game);
+        public abstract Vector2 Move(World game);
 
-        public override sealed void Update(Game game)
+        public override sealed void Update(World game)
         {
             Velocity = Move(game);
             ActiveAnimation.Update();

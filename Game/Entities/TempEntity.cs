@@ -1,15 +1,17 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Game.State;
+using Game.Util;
 
 namespace Game.Entities
 {
     //Temporary entity, an entity that appears on screen for a set amount of time and then disappears
-    internal class TempEntity(Texture2D txt, Vector2 v) : Entity(v * Game.BASE_TO_WINDOW)
+    internal class TempEntity(Texture2D txt, Vector2 v) : Entity(v * Main.BASE_TO_WINDOW)
     {
         private readonly Texture2D texture = txt;
         float opacity = 1.0f;
 
-        public override void Update(Game game)
+        public override void Update(World game)
         {
             opacity *= 0.9f;
         }

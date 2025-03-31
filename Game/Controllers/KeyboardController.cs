@@ -8,8 +8,6 @@ namespace Game.Controllers;
 
 public class KeyboardController : IController
 {
-    // Unused for now but a good value to have
-    private readonly Microsoft.Xna.Framework.Game game;
     private KeyboardState oldState;
     private KeyboardState state;
 
@@ -20,9 +18,8 @@ public class KeyboardController : IController
     private readonly Dictionary<Keys, float> holdTimes;
     private readonly Dictionary<Keys, float> elapsedTimes;
 
-    public KeyboardController(Game game)
+    public KeyboardController()
     {
-        this.game = game;
         onCommand = new Dictionary<Keys, ICommand>();
         onKeyup = new Dictionary<Keys, ICommand>();
         onKeydown = new Dictionary<Keys, ICommand>();
