@@ -185,7 +185,6 @@ namespace Game.Rooms
                         if (room.doors[3].Type == DoorType.LOCK && Player.Key >= 1)
                         {
                             trueTiles[i] = TileType.BLOCK;
-                            room.doors[3].Type = DoorType.OPEN;
                         }
                     }
                     else if (i == 69)

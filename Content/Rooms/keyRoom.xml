@@ -113,6 +113,12 @@
 			  <Y>112</Y>
 		  </Position>
 	  </Entity>
+	  <Item xsi:type="Bat">
+		  <Position>
+			  <X>100</X>
+			  <Y>112</Y>
+		  </Position>
+	  </Item>
   </gameObjects>
   <doors>
     <Door>
