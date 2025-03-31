@@ -55,6 +55,9 @@ namespace Game.Entities
 				}
 				else
 				{
+					if(ActiveAnimation != ATTACK){
+						Game.sfx["punch"].Play();
+					}
 					TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
 					ActiveAnimation = ATTACK;
 				}
@@ -106,6 +109,13 @@ namespace Game.Entities
 			if (ActiveAnimation == LEFT) return 3;
 			// Every other animation is down for now
 			return 2;
+		}
+
+		public override void inflict(int damage) {
+			base.inflict(damage);
+			if(this.health <= 0){
+				Game.reset();
+			}
 		}
 	}
 }
