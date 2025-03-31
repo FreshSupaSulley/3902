@@ -26,6 +26,11 @@ namespace Game.Entities
 		// Old damaged sprite doesn't fit same style. Needs new resource
 		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
 
+        //item carrying
+        public static readonly int Key = 1;
+        public int rupee = 0;
+        public int bomb = 0;
+
 		[XmlIgnore] // required??
 		public Item Item;
 
