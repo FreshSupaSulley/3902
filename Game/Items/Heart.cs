@@ -24,7 +24,7 @@ namespace Game.Items
 
         public override void Use(State.Game game)
         {
-            Game.sfx["ding"].Play();
+            State.Game.sfx["ding"].Play();
             Console.WriteLine("probably should heal player when we get health system");
         }
     }

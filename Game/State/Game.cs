@@ -8,6 +8,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
+using System.IO;
+using Game.Util;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game.State
 {
@@ -37,44 +40,12 @@ namespace Game.State
         //currently playing music
         public static SoundEffectInstance bgm;
 
-        public Game()
+        public Game(GraphicsDevice device)
         {
-            instance = this;
-            graphics = new GraphicsDeviceManager(this)
-            {
-                PreferredBackBufferWidth = 1600 / 2,
-                PreferredBackBufferHeight = 1100 / 2
-            };
-            // Window.AllowUserResizing = true;
-            Window.Title = "Bombardier Beetles - Sprint 3";
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-        }
-
-        protected override void Initialize()
-        {
+            this.device = device;
             // Size of Zelda map
-            target = new RenderTarget2D(graphics.GraphicsDevice, (12 + 4) * 16, (7 + 4) * 16);
-            loadingTarget = new RenderTarget2D(graphics.GraphicsDevice, target.Width, target.Height);
-
-            BASE_TO_WINDOW = new Vector2(graphics.PreferredBackBufferWidth / target.Bounds.Width, graphics.PreferredBackBufferHeight / target.Bounds.Height);
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // Controllers
-            keyboard = new KeyboardController(this);
-            mouse = new MouseController(this);
-
-            // This calls load content
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            loadSoundEffect("ding.wav");
-            loadSoundEffect("punch.wav");
-            changeMusic("Song_1.wav");
-            // Used to load resources statically
-            device = graphics.GraphicsDevice;
+            target = new RenderTarget2D(device, (12 + 4) * 16, (7 + 4) * 16);
+            loadingTarget = new RenderTarget2D(device, target.Width, target.Height);
             Tile.LoadTextures();
             Door.LoadTextures();
             // Load start room. This also defines the player
@@ -82,6 +53,9 @@ namespace Game.State
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
             // Pow
             TempBuffer.pow = Main.Load("pow.png");
+            loadSoundEffect("ding.wav");
+            loadSoundEffect("punch.wav");
+            changeMusic("Song_1.wav");
         }
 
         public void Update(GameTime gameTime)
@@ -92,7 +66,7 @@ namespace Game.State
                 Main.SwitchGameState(new Pause(this));
                 return;
             }
-            
+
             // Tick room if not mid-transition
             if (loadingRoom is null)
             {
@@ -208,11 +182,6 @@ namespace Game.State
                     }
             }
 
-            foreach (int key in TempBuffer.expiries)
-            {
-                TempBuffer.current[key].Draw(spriteBatch);
-            }
-
             spriteBatch.End();
         }
 
@@ -225,56 +194,41 @@ namespace Game.State
             loadingRoom.gameObjects.Add(player);
         }
 
-        // Loading textures statically
-        public static Texture2D Load(string path)
-        {
-            // Check if the file exists
-            string fullPath = "Content/Sprites/" + path;
-            if (!File.Exists(fullPath)) throw new FileNotFoundException($"Could not find texture at {fullPath}");
-            // Try with resources
-            using var fileStream = new FileStream(fullPath, FileMode.Open);
-            return Texture2D.FromStream(device, fileStream);
-        }
-
-        // Loading textures with subimage
-        public static Texture2D Load(string path, Rectangle subimage) => Subimage(Load(path), subimage);
-
-        // Grabs a subimage from a texture
-        public static Texture2D Subimage(Texture2D texture, Rectangle subimage)
-        {
-            Texture2D croppedTexture = new(device, subimage.Width, subimage.Height);
-            Color[] data = new Color[subimage.Width * subimage.Height];
-            texture.GetData(0, subimage, data, 0, data.Length);
-            croppedTexture.SetData(data);
-            return croppedTexture;
-        }
-
         //loads sound into sfx
-        public static void loadSoundEffect(String filename){
-            if(filename.IndexOf(".") > 0){
-              String name = filename.Substring(0, filename.IndexOf("."));
-             string path = "Content/Sound/" + filename;
-             if(!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
-             sfx.Add(name, SoundEffect.FromStream(new FileStream(path, FileMode.Open)));
-            }else{
+        public static void loadSoundEffect(String filename)
+        {
+            if (filename.IndexOf(".") > 0)
+            {
+                String name = filename.Substring(0, filename.IndexOf("."));
+                string path = "Content/Sound/" + filename;
+                if (!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
+                sfx.Add(name, SoundEffect.FromStream(new FileStream(path, FileMode.Open)));
+            }
+            else
+            {
                 Console.WriteLine("Error: invalid name formatting for sound file");
             }
         }
         //changes background music
-        public static void changeMusic(String filename){
-            if(filename.IndexOf(".") > 0){
-              String name = filename.Substring(0, filename.IndexOf("."));
-             string path = "Content/Sound/" + filename;
-             if(!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
-             bgm = SoundEffect.FromStream(new FileStream(path, FileMode.Open)).CreateInstance();
-             bgm.IsLooped = true;
-             bgm.Play();
-            }else{
+        public static void changeMusic(String filename)
+        {
+            if (filename.IndexOf(".") > 0)
+            {
+                String name = filename.Substring(0, filename.IndexOf("."));
+                string path = "Content/Sound/" + filename;
+                if (!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
+                bgm = SoundEffect.FromStream(new FileStream(path, FileMode.Open)).CreateInstance();
+                bgm.IsLooped = true;
+                bgm.Play();
+            }
+            else
+            {
                 Console.WriteLine("Error: invalid name formatting for sound file");
             }
         }
 
-        public static void reset(){
+        public static void reset()
+        {
             Game.instance.SwitchRoom(1, Room.LoadRoom("start"));
         }
     }

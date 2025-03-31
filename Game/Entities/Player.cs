@@ -55,8 +55,9 @@ namespace Game.Entities
 				}
 				else
 				{
-					if(ActiveAnimation != ATTACK){
-						Game.sfx["punch"].Play();
+					if (ActiveAnimation != ATTACK)
+					{
+						State.Game.sfx["punch"].Play();
 					}
 					TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
 					ActiveAnimation = ATTACK;
@@ -111,10 +112,12 @@ namespace Game.Entities
 			return 2;
 		}
 
-		public override void inflict(int damage) {
+		public override void inflict(int damage)
+		{
 			base.inflict(damage);
-			if(this.health <= 0){
-				Game.reset();
+			if (this.health <= 0)
+			{
+				State.Game.reset();
 			}
 		}
 	}
