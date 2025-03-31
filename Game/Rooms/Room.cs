@@ -21,6 +21,8 @@ namespace Game.Rooms
         public Door[] doors;
         public List<Entity> gameObjects = [];
 
+        public List<Noxa> noxe = new List<Noxa>();
+
         // Needed for serialization
         private Room() { }
 
@@ -43,10 +45,26 @@ namespace Game.Rooms
                     HandleAxisCollision(cast, velocity.Y, false);
                 }
             }
+            damage();
+            noxe = new List<Noxa>();
             // Tick doors (check for intersection)
             foreach (var door in doors)
             {
                 door.Update(game);
+            }
+        }
+
+        private void damage(){
+            for(int i = 0; i < noxe.Legnth; i++){
+                for(int a = 0; a < gameObjects.Length; a++){
+                    if(gameObjects[a] is LivingEntity le){
+                     if(le != noxe[i].originator){
+                            if(Math.pow(le.location.x - noxe[i].loc.x, 2) + Math.pow(le.location.Y -noxe[i].loc.y, 2) < Math.pow(noxe[i].radius, 2)){
+                                le.inflict(noxe[i].damage);
+                           }
+                       }
+                    }
+                }
             }
         }
 
