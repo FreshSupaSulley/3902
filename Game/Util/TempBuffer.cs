@@ -2,7 +2,7 @@
 using Game.Entities;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game
+namespace Game.Util
 {
     internal class TempBuffer
     {
@@ -31,11 +31,11 @@ namespace Game
                 expiries.Add(elapsed + duration + i);
             }
         }
-        public static void depreciate(Game game)
+        public static void depreciate(Main game)
         {
             foreach (int key in expiries)
             {
-                current[key].Update(game);
+                current[key].Update(null);
             }
             if (current.ContainsKey(elapsed))
             {

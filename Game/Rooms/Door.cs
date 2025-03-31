@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System.Runtime.Serialization;
+using Game.State;
 
 namespace Game.Rooms
 {
     public class Door
     {
-        private static readonly Texture2D DOOR_SHEET_TOP = Game.Load("Tiles/doors.png");
+        private static readonly Texture2D DOOR_SHEET_TOP = Main.Load("Tiles/doors.png");
         private static readonly int DOOR_TEXTURE_SIZE = 32;
         private static readonly Vector2 spriteOrigin = new(DOOR_TEXTURE_SIZE / 2, DOOR_TEXTURE_SIZE / 2);
 
@@ -62,7 +62,7 @@ namespace Game.Rooms
         public static bool IsWalkable(DoorType door) => (int)door < 32;
 
         /// Subclasses can inherit Update for special behavior
-        public virtual void Update(Game game)
+        public virtual void Update(State.Game game)
         {
             if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
             {
