@@ -181,17 +181,18 @@ namespace Game.Rooms
                     else if (i == 56)
                     {
                         // Left door
-                        trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[1].Type == DoorType.LOCK && Player.Key >= 1)
+                        trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
+                        if (room.doors[3].Type == DoorType.LOCK && Player.Key >= 1)
                         {
                             trueTiles[i] = TileType.BLOCK;
+                            room.doors[3].Type = DoorType.OPEN;
                         }
                     }
                     else if (i == 69)
                     {
                         // Right door
-                        trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[3].Type == DoorType.LOCK && Player.Key >= 1)
+                        trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
+                        if (room.doors[1].Type == DoorType.LOCK && Player.Key >= 1)
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }

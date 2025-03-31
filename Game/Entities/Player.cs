@@ -27,9 +27,9 @@ namespace Game.Entities
 		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
 
         //item carrying
-        public static readonly int Key = 1;
-        public int rupee = 0;
-        public int bomb = 0;
+        public static readonly int Key = 0;
+        public static readonly int rupee = 0;
+        public static readonly int bomb = 0;
 
 		[XmlIgnore] // required??
 		public Item Item;
