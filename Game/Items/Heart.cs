@@ -11,7 +11,7 @@ namespace Game.Items
     {
         private static readonly Sprite SPRITE = new(Main.Load("/Items/zelda_items.png", new(0, 0, 7, 8)));
 
-        public override void Update(World game)
+        public override void Update(State.Game game)
         {
 
         }
@@ -21,7 +21,7 @@ namespace Game.Items
             SPRITE.Draw(batch, Position);
         }
 
-        public override void Use(World game)
+        public override void Use(State.Game game)
         {
             Console.WriteLine("probably should heal player when we get health system");
         }

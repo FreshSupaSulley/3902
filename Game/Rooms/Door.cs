@@ -62,7 +62,7 @@ namespace Game.Rooms
         public static bool IsWalkable(DoorType door) => (int)door < 32;
 
         /// Subclasses can inherit Update for special behavior
-        public virtual void Update(World game)
+        public virtual void Update(State.Game game)
         {
             if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
             {

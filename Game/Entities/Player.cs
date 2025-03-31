@@ -31,7 +31,7 @@ namespace Game.Entities
 
 		public Player() : base(new(5, 13, 14, 14), DOWN) { }
 
-		public override Vector2 Move(World game)
+		public override Vector2 Move(State.Game game)
 		{
 			// Using items
 			if (Item is not null)
@@ -41,7 +41,7 @@ namespace Game.Entities
 			return HandleInputs(game);
 		}
 
-		private Vector2 HandleInputs(World game)
+		private Vector2 HandleInputs(State.Game game)
 		{
 			KeyboardController keyboard = Main.INSTANCE.keyboard;
 			// Attack

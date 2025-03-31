@@ -27,7 +27,7 @@ namespace Game.Rooms
         /// True if tile is on the border of the map, false otherwise
         private static bool IsBorderTile(int index) => index % 14 == 0 || index % 14 == 13 || index / 14 == 0 || index / 14 == 8;
 
-        public virtual void Update(World game)
+        public virtual void Update(State.Game game)
         {
             // Not doing any fancy lambda because that would be concurrent modification
             // This apparently works??

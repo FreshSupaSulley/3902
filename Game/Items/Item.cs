@@ -7,6 +7,6 @@ namespace Game.Items
     public abstract class Item(Vector2 position) : Entity(position)
     {
         /// Item was used
-        public abstract void Use(World game);
+        public abstract void Use(State.Game game);
     }
 }

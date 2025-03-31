@@ -4,8 +4,8 @@ namespace Game.Commands;
 
 class QuitCommand : ICommand
 {
-	private World game;
-	public QuitCommand(World game)
+	private State.Game game;
+	public QuitCommand(State.Game game)
 	{
 		this.game = game;
 	}

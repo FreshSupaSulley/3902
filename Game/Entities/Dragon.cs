@@ -13,7 +13,7 @@ namespace Game.Entities
 
         private int ticks;
 
-        public override Vector2 Move(World game)
+        public override Vector2 Move(State.Game game)
         {
             if (ticks++ % 60 == 0)
             {

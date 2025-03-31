@@ -11,7 +11,7 @@ namespace Game.Entities
         private readonly Texture2D texture = txt;
         float opacity = 1.0f;
 
-        public override void Update(World game)
+        public override void Update(State.Game game)
         {
             opacity *= 0.9f;
         }

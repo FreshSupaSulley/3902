@@ -15,7 +15,7 @@ namespace Game.Items
         private Vector2 startPos, velocity;
         private int ticks = 0;
 
-        public override void Update(World game)
+        public override void Update(State.Game game)
         {
             Position = startPos + velocity * (float)Math.Sin(ticks * Math.PI / TICKS_ALIVE) * DISTANCE;
             if (ticks++ >= TICKS_ALIVE)
@@ -29,7 +29,7 @@ namespace Game.Items
             batch.Draw(SPRITE.Texture, Position, null, Color.White, MathHelper.ToRadians(ticks * 12), new Vector2(5f / 2, 8f / 2), new Vector2(1), SpriteEffects.None, 0f);
         }
 
-        public override void Use(World game)
+        public override void Use(State.Game game)
         {
             // Launch in direction of player
             switch (game.player.GetDirection())

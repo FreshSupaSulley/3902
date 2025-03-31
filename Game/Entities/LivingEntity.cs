@@ -41,9 +41,9 @@ namespace Game.Entities
         }
 
         // Subclasses need to return their velocities
-        public abstract Vector2 Move(World game);
+        public abstract Vector2 Move(State.Game game);
 
-        public override sealed void Update(World game)
+        public override sealed void Update(State.Game game)
         {
             Velocity = Move(game);
             ActiveAnimation.Update();

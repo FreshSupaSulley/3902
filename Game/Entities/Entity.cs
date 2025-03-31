@@ -21,7 +21,7 @@ namespace Game.Entities
         public Vector2 Position = position;
 
         // Require subclasses to inherit Update and Draw
-        public abstract void Update(World game);
+        public abstract void Update(State.Game game);
         public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

@@ -16,12 +16,12 @@ namespace Game.Items
         private int ticks;
         public bool exploded;
 
-        public override void Use(World game)
+        public override void Use(State.Game game)
         {
             game.room.AddEntity(this);
         }
 
-        public override void Update(World game)
+        public override void Update(State.Game game)
         {
             if (ticks++ >= bombDelay)
             {

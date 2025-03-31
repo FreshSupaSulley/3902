@@ -16,7 +16,7 @@ namespace Game.Tiles
         // Used to track when it should despawn
         private int ticksAlive;
 
-        public override void Update(World game)
+        public override void Update(State.Game game)
         {
             Position -= new Vector2(speed, 0);
             if (ticksAlive++ > timeAlive)

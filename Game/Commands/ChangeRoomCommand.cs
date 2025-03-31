@@ -7,8 +7,8 @@ class ChangeRoomCommand : ICommand
 {
     private int doorAlignment;
     private Room destinationRoom;
-    private World game;
-    public ChangeRoomCommand(int doorAlignment, Room destinationRoom, World game)
+    private State.Game game;
+    public ChangeRoomCommand(int doorAlignment, Room destinationRoom, State.Game game)
     {
         this.doorAlignment = doorAlignment;
         this.destinationRoom = destinationRoom;

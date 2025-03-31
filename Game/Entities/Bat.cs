@@ -20,7 +20,7 @@ namespace Game.Entities
             new LinearPath(new Vector2(100,200), new Vector2(100,0), 50),
         ];
 
-        public override Vector2 Move(World game)
+        public override Vector2 Move(State.Game game)
         {
             return new Vector2(1, 1);
         }

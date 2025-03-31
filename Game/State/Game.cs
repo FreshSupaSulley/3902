@@ -6,10 +6,11 @@ using Game.Tiles;
 using Game.Rooms;
 using System;
 using Game.Util;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game.State
 {
-    public class World : IGameState
+    public class Game : IGameState
     {
         // Used to load resources statically
         private GraphicsDevice device;
@@ -26,8 +27,8 @@ namespace Game.State
         private bool renderCaptured;
         private int loadingTime, loadingDirection;
         private Room loadingRoom;
-        
-        public World(GraphicsDevice device)
+
+        public Game(GraphicsDevice device)
         {
             this.device = device;
             // Size of Zelda map
@@ -41,9 +42,16 @@ namespace Game.State
             // Pow
             TempBuffer.pow = Main.Load("pow.png");
         }
-        
+
         public void Update(GameTime gameTime)
         {
+            // If we want to switch to pause
+            if (Main.INSTANCE.keyboard.IsKeyPressed(Keys.Escape))
+            {
+                Main.SwitchGameState(new Pause(this));
+                return;
+            }
+            
             // Tick room if not mid-transition
             if (loadingRoom is null)
             {

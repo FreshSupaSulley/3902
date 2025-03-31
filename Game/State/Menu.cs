@@ -19,15 +19,14 @@ namespace Game.State
         {
             if (Main.INSTANCE.mouse.LeftDown())
             {
-                Main.SwitchGameState(new World(device));
+                Main.SwitchGameState(new Game(device));
             }
         }
 
-        // Render
         public void Draw(SpriteBatch batch)
         {
             batch.Begin();
-            FontRenderer.Text("hi!!!!", batch, new(100, 100));
+            FontRenderer.Text("crude home menu for functionality check (left click the screen)!!!!", batch, new(100, 100));
             batch.End();
         }
     }

@@ -10,7 +10,7 @@ public abstract class MobileMotionPathEntity(Rectangle collisionBox, Animation a
 	protected IPath[] paths = paths;
 	protected int currentPath = 0;
 
-	public override Vector2 Move(World game)
+	public override Vector2 Move(State.Game game)
 	{
 		if (paths[currentPath].Done)
 		{
