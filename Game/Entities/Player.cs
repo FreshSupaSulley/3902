@@ -63,8 +63,8 @@ namespace Game.Entities
 					if (ActiveAnimation != ATTACK)
 					{
 						State.Game.sfx["punch"].Play();
+						TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
 					}
-					TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
 					ActiveAnimation = ATTACK;
 				}
 				// If attacking, don't move
@@ -96,6 +96,9 @@ namespace Game.Entities
 			else
 			{
 				ActiveAnimation.Reset();
+			}
+			if(keyboard.IsKeyPressed(Keys.M)){
+				game.muteRequest = 1;
 			}
 			// Position += velocity * speed;
 			return velocity * speed;

@@ -22,6 +22,8 @@ namespace Game.Entities
         [XmlIgnore]
         //Health value
         protected int health;
+        //maximum possible health for any given entity
+        protected static int healthMax;
 
         [XmlIgnore]
         public Animation ActiveAnimation

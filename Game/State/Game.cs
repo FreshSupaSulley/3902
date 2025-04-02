@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using Game.Util;
+using System.Diagnostics;
+using System.Threading;
 using Microsoft.Xna.Framework.Input;
 
 namespace Game.State
@@ -34,11 +36,18 @@ namespace Game.State
 
         public static Game instance;
 
+        public static Stopwatch sw;
+
         //sound
         //sound effects to be played once (i.e. without looping)
         public static Dictionary<String, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
+        public static Dictionary<string, SoundEffect> sfxStore = new Dictionary<string, SoundEffect>();
         //currently playing music
         public static SoundEffectInstance bgm;
+        public static SoundEffectInstance bgmStore;
+
+        public int muteBit = 0;
+        public int muteRequest = 0;
 
         public Game(GraphicsDevice device)
         {
@@ -56,6 +65,8 @@ namespace Game.State
             loadSoundEffect("ding.wav");
             loadSoundEffect("punch.wav");
             changeMusic("Song_1.wav");
+            sw = new Stopwatch();
+            sw.Start();
         }
 
         public void Update(GameTime gameTime)
@@ -82,6 +93,15 @@ namespace Game.State
                     loadingTime = 0;
                     renderCaptured = false;
                 }
+            }
+
+            if(muteRequest == 1){
+                if(muteBit == 0){
+                    this.mute();
+                }else{
+                    this.unmute();
+                }
+                muteRequest = 0;
             }
         }
 
@@ -225,6 +245,16 @@ namespace Game.State
             {
                 Console.WriteLine("Error: invalid name formatting for sound file");
             }
+        }
+
+        public void mute(){
+            SoundEffect.MasterVolume = 0.0f;
+            muteBit = 1;
+        }
+
+        public void unmute(){
+            SoundEffect.MasterVolume = 1.0f;
+            muteBit = 0;
         }
 
         public static void reset()
