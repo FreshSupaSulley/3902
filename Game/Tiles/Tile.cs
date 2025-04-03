@@ -7,7 +7,7 @@ namespace Game.Tiles
 {
     public static class Tile
     {
-        private static readonly Texture2D TILE_SHEET = Game.Load("Tiles/tiles.png");
+        private static readonly Texture2D TILE_SHEET = Main.Load("Tiles/tiles.png");
 
         // Size of a tile (width and height) in pixels
         public static readonly int TILE_SIZE = 16;

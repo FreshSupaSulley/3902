@@ -1,4 +1,5 @@
 using System.Xml.Serialization;
+using Game.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,7 +21,7 @@ namespace Game.Entities
         public Vector2 Position = position;
 
         // Require subclasses to inherit Update and Draw
-        public abstract void Update(Game game);
+        public abstract void Update(State.Game game);
         public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

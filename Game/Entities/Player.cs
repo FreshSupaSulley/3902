@@ -5,31 +5,38 @@ using Game.Items;
 using Game.Controllers;
 using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
+using Game.State;
+using Game.Util;
 
 namespace Game.Entities
 {
 	public class Player : LivingEntity
 	{
 		private static readonly int ANIMATION_SPEED = 8;
-		private static readonly Texture2D WALK_SHEET = Game.Load("Entities/Monoko/walk.png");
+		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
 		// Walk animations
-		public static readonly Animation UP = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED);
-		public static readonly Animation RIGHT = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED);
-		public static readonly Animation DOWN = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED);
-		public static readonly Animation LEFT = new(Game.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation UP = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation RIGHT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation DOWN = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation LEFT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED);
 
 		// Attack
-		private static readonly Animation ATTACK = new(Game.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
+		private static readonly Animation ATTACK = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
 		// Old damaged sprite doesn't fit same style. Needs new resource
-		private static readonly Animation DAMAGE = new(Game.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
+		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
+
+        //item carrying
+        public static readonly int Key = 1;
+        public static readonly int rupee = 0;
+        public static readonly int bomb = 0;
 
 		[XmlIgnore] // required??
 		public Item Item;
 
 		public Player() : base(new(5, 13, 14, 14), DOWN) { }
 
-		public override Vector2 Move(Game game)
+		public override Vector2 Move(State.Game game)
 		{
 			// Using items
 			if (Item is not null)
@@ -39,9 +46,9 @@ namespace Game.Entities
 			return HandleInputs(game);
 		}
 
-		private Vector2 HandleInputs(Game game)
+		private Vector2 HandleInputs(State.Game game)
 		{
-			KeyboardController keyboard = game.keyboard;
+			KeyboardController keyboard = Main.INSTANCE.keyboard;
 			// Attack
 			if (keyboard.IsKeyDown(Keys.Z, Keys.N))
 			{
@@ -53,7 +60,11 @@ namespace Game.Entities
 				}
 				else
 				{
-					TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
+					if (ActiveAnimation != ATTACK)
+					{
+						State.Game.sfx["punch"].Play();
+						TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
+					}
 					ActiveAnimation = ATTACK;
 				}
 				// If attacking, don't move
@@ -86,6 +97,9 @@ namespace Game.Entities
 			{
 				ActiveAnimation.Reset();
 			}
+			if(keyboard.IsKeyPressed(Keys.M)){
+				game.muteRequest = 1;
+			}
 			// Position += velocity * speed;
 			return velocity * speed;
 		}
@@ -104,6 +118,15 @@ namespace Game.Entities
 			if (ActiveAnimation == LEFT) return 3;
 			// Every other animation is down for now
 			return 2;
+		}
+
+		public override void inflict(int damage)
+		{
+			base.inflict(damage);
+			if (this.health <= 0)
+			{
+				State.Game.reset();
+			}
 		}
 	}
 }

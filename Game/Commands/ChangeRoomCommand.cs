@@ -1,17 +1,21 @@
 using Game.Rooms;
+using Game.State;
 
 namespace Game.Commands;
 
-class ChangeRoomCommand : ICommand {
+class ChangeRoomCommand : ICommand
+{
     private int doorAlignment;
     private Room destinationRoom;
-    private Game game;
-    public ChangeRoomCommand(int doorAlignment, Room destinationRoom, Game game) {
+    private State.Game game;
+    public ChangeRoomCommand(int doorAlignment, Room destinationRoom, State.Game game)
+    {
         this.doorAlignment = doorAlignment;
         this.destinationRoom = destinationRoom;
         this.game = game;
     }
-    public void Execute() {
+    public void Execute()
+    {
         game.SwitchRoom(doorAlignment, destinationRoom);
     }
 }

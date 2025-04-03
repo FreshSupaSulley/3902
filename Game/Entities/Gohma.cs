@@ -1,12 +1,13 @@
 using Game.Graphics;
 using Game.Path;
+using Game.State;
 using Microsoft.Xna.Framework;
 
 namespace Game.Entities
 {
     public class Goriya() : MobileMotionPathEntity(new(0, 0, 10, 10), IDLE, motionPaths)
     {
-        private static readonly Animation IDLE = new(Game.Load("/Entities/gohma.png", new Rectangle(0, 0, 67, 16)), 4, 10);
+        private static readonly Animation IDLE = new(Main.Load("/Entities/gohma.png", new Rectangle(0, 0, 67, 16)), 4, 10);
 
         private static readonly IPath[] motionPaths = [
             new LinearPath(new Vector2(200,200), new Vector2(100,0), 50),
@@ -18,7 +19,7 @@ namespace Game.Entities
             new LinearPath(new Vector2(100,200), new Vector2(100,0), 50),
         ];
 
-        public override Vector2 Move(Game game)
+        public override Vector2 Move(State.Game game)
         {
             return base.Move(game);
             // ticks++;

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Game.Collision;
 using System.Xml.Serialization;
+using Game.State;
 
 namespace Game.Entities
 {
@@ -19,6 +20,12 @@ namespace Game.Entities
         public Vector2 Velocity { get; private set; }
 
         [XmlIgnore]
+        //Health value
+        protected int health;
+        //maximum possible health for any given entity
+        protected static int healthMax;
+
+        [XmlIgnore]
         public Animation ActiveAnimation
         {
             get => _activeAnimation;
@@ -33,6 +40,10 @@ namespace Game.Entities
             }
         }
 
+        public virtual void inflict(int damage){
+            health -= damage;
+        }
+
         public LivingEntity(Rectangle box, Animation activeAnimation) : base(new())
         {
             collisionBox = box;
@@ -40,9 +51,9 @@ namespace Game.Entities
         }
 
         // Subclasses need to return their velocities
-        public abstract Vector2 Move(Game game);
+        public abstract Vector2 Move(State.Game game);
 
-        public override sealed void Update(Game game)
+        public override sealed void Update(State.Game game)
         {
             Velocity = Move(game);
             ActiveAnimation.Update();

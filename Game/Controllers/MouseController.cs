@@ -5,17 +5,12 @@ namespace Game.Controllers
 {
     public class MouseController : IController
     {
-        private Microsoft.Xna.Framework.Game game;
         private MouseState oldState;
         private MouseState state;
 
-        public MouseController(Microsoft.Xna.Framework.Game game)
-        {
-            this.game = game;
-        }
-
         // Unused for now
-        public void Update(GameTime gameTime) {
+        public void Update(GameTime gameTime)
+        {
             state = Mouse.GetState();
         }
 
@@ -24,8 +19,8 @@ namespace Game.Controllers
             oldState = state;
         }
 
-        public float RelativeX() => MathHelper.Clamp(this.state.Position.X * 1f / game.Window.ClientBounds.Width, 0, 1);
-        public float RelativeY() => MathHelper.Clamp(this.state.Position.Y * 1f / game.Window.ClientBounds.Height, 0, 1);
+        public float RelativeX() => MathHelper.Clamp(this.state.Position.X * 1f / Main.INSTANCE.Window.ClientBounds.Width, 0, 1);
+        public float RelativeY() => MathHelper.Clamp(this.state.Position.Y * 1f / Main.INSTANCE.Window.ClientBounds.Height, 0, 1);
 
         public int PositionX() => this.state.Position.X;
         public int PositionY() => this.state.Position.Y;

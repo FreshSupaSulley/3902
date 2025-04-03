@@ -1,6 +1,6 @@
-using Game.Collision;
 using Game.Graphics;
 using Game.Path;
+using Game.State;
 using Microsoft.Xna.Framework;
 
 namespace Game.Entities;
@@ -10,7 +10,7 @@ public abstract class MobileMotionPathEntity(Rectangle collisionBox, Animation a
 	protected IPath[] paths = paths;
 	protected int currentPath = 0;
 
-	public override Vector2 Move(Game game)
+	public override Vector2 Move(State.Game game)
 	{
 		if (paths[currentPath].Done)
 		{
