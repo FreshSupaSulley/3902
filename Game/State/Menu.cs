@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework;
 using System;
 using Game.Util;
 using Game.Controllers;
+using Game.Graphics;
 
 namespace Game.State
 {
     public class Menu : IGameState
     {
         private GraphicsDevice device;
+        protected UIManager uiManager;
         
         public Menu(GraphicsDevice device)
         {

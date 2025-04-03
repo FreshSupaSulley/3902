@@ -9,10 +9,8 @@ namespace Game.Graphics;
 public class UIManager {
     public string current;
     private Dictionary<string, IUserInterfaceLayout> uiDictionary;
-    private Game game;
-    public UIManager(Game game) {
+    public UIManager() {
         uiDictionary = new();
-        this.game = game;
     }
     public void Update(GameTime gameTime) {
         uiDictionary[current].Update(gameTime);
@@ -20,7 +18,10 @@ public class UIManager {
     public void Draw(SpriteBatch spriteBatch) {
         uiDictionary[current].Draw(spriteBatch);
     }
+    public void ChangeUIState(string newValue) {
+        current = newValue;
+    }
     public void Load() {
-
+        uiDictionary["menu"]
     }
 }
