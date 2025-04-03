@@ -17,7 +17,7 @@ namespace Game.Entities
         {
             if (ticks++ % 60 == 0)
             {
-                game.room.AddEntity(new Fireball(Position));
+                game.room.AddEntity(new Fireball(game, Position));
             }
             return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
         }

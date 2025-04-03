@@ -13,6 +13,8 @@ namespace Game.Tiles
         private static readonly Sprite dragon_projectile;
         private static readonly float speed = 1f;
         private static readonly int timeAlive = 30;
+
+        public static int damage = 20;
         private CollisionBox collisionBox;
 
         // Used to track when it should despawn
@@ -22,9 +24,9 @@ namespace Game.Tiles
             dragon_projectile = new Sprite(Main.Load("/Entities/Dragon/projectile.png"));
         }
 
-        public Fireball(Vector2 position) : base(position) {
+        public Fireball(State.Game game, Vector2 position) : base(position) {
             Rectangle bounds = new Rectangle((int)position.X, (int)position.Y, 10, 10); // Change to size of fireball if incorrect
-            collisionBox = new PushCollisionBox(bounds, new DamageCommand(Game.State.Game.instance.player, 20));
+            collisionBox = new PushCollisionBox(bounds, new DamageCommand(game.player, damage));
         }
 
         public override void Update(State.Game game)
