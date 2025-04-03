@@ -24,7 +24,7 @@ namespace Game.Tiles
 
         public Fireball(Vector2 position) : base(position) {
             Rectangle bounds = new Rectangle((int)position.X, (int)position.Y, 10, 10); // Change to size of fireball if incorrect
-            collisionBox = new PushCollisionBox(bounds, new DamageCommand(Game.State.Game.instance.player, 20)); // TODO: Jared finish player damaging
+            collisionBox = new PushCollisionBox(bounds, new DamageCommand(Game.State.Game.instance.player, 20));
         }
 
         public override void Update(State.Game game)
