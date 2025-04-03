@@ -11,6 +11,7 @@ public class UIManager {
     private Dictionary<string, IUserInterfaceLayout> uiDictionary;
     public UIManager() {
         uiDictionary = new();
+        current = Main.startingUI;
     }
     public void Update(GameTime gameTime) {
         uiDictionary[current].Update(gameTime);
@@ -22,6 +23,7 @@ public class UIManager {
         current = newValue;
     }
     public void Load() {
-        uiDictionary["menu"]
+        uiDictionary.Add("empty", new EmptyLayout());
+        uiDictionary.Add("menu", new MenuLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
     }
 }

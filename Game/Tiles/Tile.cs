@@ -11,6 +11,8 @@ namespace Game.Tiles
 
         // Size of a tile (width and height) in pixels
         public static readonly int TILE_SIZE = 16;
+        
+        public static int loadCount = 0;
 
         // Contains all mappings from TileType to textures
         // This could alternatively be a dictionary to Texture2D? Would be less efficient on memory
@@ -18,6 +20,9 @@ namespace Game.Tiles
 
         public static void LoadTextures()
         {
+            // Console.WriteLine("Loading textures"); // TODO: Remove
+            // loadCount++;
+            // Console.WriteLine(loadCount);
             int TILES_PER_ROW = TILE_SHEET.Width / TILE_SIZE;
             foreach (TileType item in Enum.GetValues(typeof(TileType)))
             {
