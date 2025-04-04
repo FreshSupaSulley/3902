@@ -6,7 +6,7 @@ namespace Game.Graphics;
 
 public class UIVariableText<T> : UIText {
     private readonly Func<T> getValue;
-    public UIVariableText(Func<T> getValue, Vector2 position, SpriteFont font, Color color) : base("", position, font, color) {
+    public UIVariableText(Func<T> getValue, Vector2 position, string font, Color color) : base("", position, font, color) {
         this.getValue = getValue;
         ConvertVariableToText();
     }

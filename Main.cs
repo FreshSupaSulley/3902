@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Game.State;
 using Game.Util;
 using Game.Graphics;
+using System.Collections.Generic;
 
 new Main().Run();
 
@@ -23,7 +24,6 @@ public class Main : Microsoft.Xna.Framework.Game
 
     // Used for rendering everything
     public SpriteBatch spriteBatch;
-    public SpriteFont font;
 
     public KeyboardController keyboard;
     public MouseController mouse;
@@ -32,6 +32,7 @@ public class Main : Microsoft.Xna.Framework.Game
 
     public static string startingUI = "menu"; // The starting ui layout to use
     public static UIManager uiManager;
+    public static Dictionary<string,SpriteFont> fonts;
     public Main()
     {
         INSTANCE = this;
@@ -62,6 +63,14 @@ public class Main : Microsoft.Xna.Framework.Game
         // Initialize UI
         uiManager = new();
 
+        // Add Fonts
+        fonts = new()
+        {
+            { "arial12", Content.Load<SpriteFont>("Font") },
+            { "arialbold", Content.Load<SpriteFont>("Bold") },
+            { "header", Content.Load<SpriteFont>("Header") },
+        };
+
         // This calls load content
         base.Initialize();
     }
@@ -70,7 +79,6 @@ public class Main : Microsoft.Xna.Framework.Game
     {
         // Used to load resources statically
         device = graphics.GraphicsDevice;
-        font = Content.Load<SpriteFont>("Font");
         // state = new World(device);
         state = new Menu();
         uiManager.Load();

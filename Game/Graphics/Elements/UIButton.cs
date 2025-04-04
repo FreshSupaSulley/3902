@@ -37,6 +37,5 @@ public class UIButton : IUserInterfaceElement {
     }
     public virtual void Draw(SpriteBatch spriteBatch) {
         spriteBatch.Draw(pixel, bounds, color);
-        Console.WriteLine(bounds);
     }
 }
