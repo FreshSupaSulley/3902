@@ -5,6 +5,7 @@ using Game.Collision;
 using System.Xml.Serialization;
 using Game.State;
 using Game.Util;
+using System;
 
 namespace Game.Entities
 {
@@ -19,7 +20,7 @@ namespace Game.Entities
         // Health value
         [XmlIgnore]
         protected int health;
-
+        
         [XmlIgnore]
         public Animation ActiveAnimation
         {
@@ -51,7 +52,8 @@ namespace Game.Entities
                 health = 0;
             } 
             if (completed_damage > 0) {
-                InGameMessage.messages.Add(new InGameMessage("-" + completed_damage, new Vector2(base.Position.X + 30, base.Position.Y), 100, 0.25f));
+                Vector2 variation = RNG.RandomVector2(-5,5,-5,5);
+                InGameMessage.messages.Add(new InGameMessage("-" + completed_damage, new Vector2(base.Position.X + 30, base.Position.Y)+variation, 100, 0.25f));
             }
         }
 
