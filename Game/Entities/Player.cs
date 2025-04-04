@@ -64,7 +64,6 @@ namespace Game.Entities
 				}
 				else if (deadTicks > TOTAL_DEATH_TICKS)
 				{
-					game.Reset();
 					Main.SwitchGameState(new Death(Main.device));
 				}
 			}

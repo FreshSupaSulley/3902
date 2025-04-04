@@ -19,7 +19,6 @@ namespace Game.State
     public class Game : IGameState
     {
         // Used to load resources statically
-        private GraphicsDevice device;
         private RenderTarget2D target, loadingTarget;
 
         // Visible to inheritors
@@ -50,12 +49,11 @@ namespace Game.State
             TempBuffer.pow = Main.Load("pow.png");
         }
 
-        public Game(GraphicsDevice device)
+        public Game()
         {
-            this.device = device;
             // Size of Zelda map
-            target = new RenderTarget2D(device, (12 + 4) * 16, (7 + 4) * 16);
-            loadingTarget = new RenderTarget2D(device, target.Width, target.Height);
+            target = new RenderTarget2D(Main.device, (12 + 4) * 16, (7 + 4) * 16);
+            loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
             room = Room.LoadRoom("start");
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
@@ -64,6 +62,12 @@ namespace Game.State
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");
             ChangeMusic("Song_1.wav");
+        }
+
+        /// Called when the game state is switched to something else
+        public void OnExit()
+        {
+            bgm.Stop();
         }
 
         public void Update(GameTime gameTime)
@@ -113,7 +117,7 @@ namespace Game.State
             if (loadingRoom is null)
             {
                 // Draw room at scaled resolution
-                device.SetRenderTarget(target);
+                Main.device.SetRenderTarget(target);
                 spriteBatch.Begin();
                 room.Draw(spriteBatch);
                 spriteBatch.End();
@@ -145,7 +149,7 @@ namespace Game.State
                         break;
                 }
                 renderCaptured = true;
-                device.SetRenderTarget(loadingTarget);
+                Main.device.SetRenderTarget(loadingTarget);
                 spriteBatch.Begin();
                 loadingRoom.Draw(spriteBatch);
                 spriteBatch.End();
@@ -154,7 +158,7 @@ namespace Game.State
             // Number of pixels
             double sin = Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / TRANSITION_TIME), 2);
             // Switch back to main backbuffer
-            device.SetRenderTarget(null);
+            Main.device.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
             var bounds = Main.INSTANCE.Window.ClientBounds;
             switch (loadingDirection)
@@ -259,11 +263,6 @@ namespace Game.State
         {
             SoundEffect.MasterVolume = 1.0f;
             muteBit = 0;
-        }
-
-        public void Reset()
-        {
-            bgm.Stop();
         }
     }
 }

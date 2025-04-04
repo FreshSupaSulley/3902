@@ -1,20 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
 using Game.Util;
-using Game.Controllers;
 
 namespace Game.State
 {
-    public class Death : IGameState
+    public class Win : IGameState
     {
-        private GraphicsDevice device;
-
-        public Death(GraphicsDevice device)
-        {
-            this.device = device;
-        }
-
         public void Update(GameTime gameTime)
         {
             if (Main.INSTANCE.mouse.LeftDown())
@@ -26,7 +17,7 @@ namespace Game.State
         public void Draw(SpriteBatch batch)
         {
             batch.Begin();
-            FontRenderer.Text("you fucking died!! click to restart :)))", batch, new(100, 100));
+            FontRenderer.Text("your did it", batch, new(100, 100));
             batch.End();
         }
     }

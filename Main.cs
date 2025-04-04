@@ -72,7 +72,7 @@ public class Main : Microsoft.Xna.Framework.Game
         device = graphics.GraphicsDevice;
         font = Content.Load<SpriteFont>("Font");
         // state = new World(device);
-        state = new Menu(device);
+        state = new Menu();
         uiManager.Load();
     }
 
