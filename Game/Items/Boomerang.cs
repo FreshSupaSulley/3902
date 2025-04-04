@@ -3,6 +3,7 @@ using Game.Graphics;
 using Game.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Game.Entities;
 
 namespace Game.Items
 {
@@ -21,6 +22,18 @@ namespace Game.Items
             if (ticks++ >= TICKS_ALIVE)
             {
                 game.room.RemoveEntity(this);
+            }
+            for(int i = 0; i < game.room.gameObjects.Count; i++){
+                Entity e = game.room.gameObjects[i];
+                if(e is LivingEntity){
+                    LivingEntity le = (LivingEntity)e;
+                   if(!(le is Player)){
+                       if(Math.Pow(Position.X - le.Position.X, 2) + Math.Pow(Position.Y - le.Position.Y, 2) < 25){
+
+                            le.Inflict(game, 1);
+                      }
+                  }
+                }
             }
         }
 

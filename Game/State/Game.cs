@@ -62,6 +62,7 @@ namespace Game.State
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");
             LoadSoundEffect("wow.wav");
+            LoadSoundEffect("pain.wav");
             ChangeMusic("Song_1.wav");
         }
 

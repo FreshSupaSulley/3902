@@ -187,6 +187,9 @@ namespace Game.Entities
 				iframeTicks = 0;
 				invulnerable = true;
 				base.Inflict(game, damage);
+				if(base.health < 50){
+					game.sfx["pain"].Play();
+				}
 			}
 		}
 
