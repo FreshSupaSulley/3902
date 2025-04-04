@@ -17,7 +17,7 @@ namespace Game.State
         public void Draw(SpriteBatch batch)
         {
             batch.Begin();
-            FontRenderer.Text("your did it", batch, new(100, 100));
+            Main.uiManager.Draw(batch);
             batch.End();
         }
     }

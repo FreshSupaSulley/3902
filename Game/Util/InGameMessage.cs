@@ -59,7 +59,7 @@ namespace Game.Util{
         }
 
         public void draw(SpriteBatch sb){
-            sb.DrawString(Main.fonts["arial12"], this.text, this.position, Color.White * this.endurance);
+            sb.DrawString(Main.fonts["arialbold"], this.text, this.position, Color.White * this.endurance);
         }
 
     }
