@@ -19,7 +19,16 @@ public class UIGameLayout : UILayout {
         }
         base.Update(gameTime);
     }
+    public void RemoveHealth() {
+        foreach(IUserInterfaceElement el in elements) {
+            if (el is UIHealthVariableText<int>) {
+                RemoveElement(el);
+                break;
+            }
+        }
+    }
     public override void Reset() {
-        
+        RemoveHealth();
+        healthAdded = false;
     }
 }

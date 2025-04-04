@@ -6,12 +6,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Game.Graphics;
 
 public abstract class UILayout : IUserInterfaceLayout {
-    private List<IUserInterfaceElement> elements;
+    protected List<IUserInterfaceElement> elements;
     public UILayout() {
         elements = new();
     }
     public void AddElement(IUserInterfaceElement el) {
         elements.Add(el);
+    }
+    public void RemoveElement(IUserInterfaceElement el) {
+        elements.Remove(el);
     }
     public virtual void Draw(SpriteBatch spriteBatch) {
         foreach (IUserInterfaceElement el in elements) {

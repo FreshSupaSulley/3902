@@ -21,6 +21,7 @@ public class UIManager {
     }
     public void ChangeUIState(string newValue) {
         current = newValue;
+        uiDictionary[current].Reset();
     }
     public void Load() {
         uiDictionary.Add("empty", new UIEmptyLayout());
