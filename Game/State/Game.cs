@@ -83,6 +83,7 @@ namespace Game.State
             if (loadingRoom is null)
             {
                 room.Update(this);
+                InGameMessage.agit(this);
             }
             // If we are switching between rooms
             else
@@ -120,6 +121,7 @@ namespace Game.State
                 Main.device.SetRenderTarget(target);
                 spriteBatch.Begin();
                 room.Draw(spriteBatch);
+                InGameMessage.drawAll(spriteBatch);
                 spriteBatch.End();
             }
             else if (renderCaptured is false)
