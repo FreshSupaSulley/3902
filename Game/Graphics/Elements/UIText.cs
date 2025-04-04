@@ -18,7 +18,7 @@ public class UIText : IUserInterfaceElement {
     }
     public UIText(string text, Vector2 position) : this(text, position, null, new Color()) {}
     public virtual void Update(GameTime gameTime) {}
-    public void Draw(SpriteBatch sprites) {
+    public virtual void Draw(SpriteBatch sprites) {
         sprites.DrawString(Main.fonts[font], text, position, textColor);
     }
 }

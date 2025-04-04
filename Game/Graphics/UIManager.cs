@@ -25,8 +25,11 @@ public class UIManager {
     public void Load() {
         uiDictionary.Add("empty", new UIEmptyLayout());
         uiDictionary.Add("menu", new UIMenuLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
+        uiDictionary.Add("game", new UIGameLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
     }
     public void AddElement(IUserInterfaceElement el) {
         uiDictionary[current].AddElement(el);
+    }
+    public void Reset() {
     }
 }

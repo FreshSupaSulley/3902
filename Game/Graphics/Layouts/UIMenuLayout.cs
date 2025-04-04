@@ -10,7 +10,7 @@ public class UIMenuLayout : UILayout {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
         Rectangle bounds = new Rectangle((int)(0.35*w), (int)(0.4*h),(int)(0.3*w), (int)(0.1*h));
-        AddElement(new UITextButton(bounds, Main.INSTANCE.mouse, new StartGameCommand(device, "empty"), Color.AntiqueWhite, "Start", Color.Black, "arialbold"));
+        AddElement(new UITextButton(bounds, Main.INSTANCE.mouse, new StartGameCommand(device, "game"), Color.AntiqueWhite, "Start", Color.Black, "arialbold"));
         Vector2 vec = new Vector2(w/2, h/2);
         vec.X -= Main.fonts["header"].MeasureString("Bombadeer Beetles").X/2;
         vec.Y = h/4;

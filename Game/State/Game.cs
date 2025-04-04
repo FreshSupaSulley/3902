@@ -203,6 +203,8 @@ namespace Game.State
                     }
             }
 
+            Main.uiManager.Draw(spriteBatch);
+
             spriteBatch.End();
         }
 

@@ -14,6 +14,8 @@ public class Main : Microsoft.Xna.Framework.Game
     // Current game state (game, menu, pause, etc.)
     private IGameState state;
 
+    public IGameState State {get {return state;}}
+
     // Ratio
     public static Vector2 BASE_TO_WINDOW;
 
