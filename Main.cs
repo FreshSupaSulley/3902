@@ -71,6 +71,7 @@ public class Main : Microsoft.Xna.Framework.Game
             { "arial12", Content.Load<SpriteFont>("Font") },
             { "arialbold", Content.Load<SpriteFont>("Bold") },
             { "header", Content.Load<SpriteFont>("Header") },
+            { "arial32", Content.Load<SpriteFont>("BigFont") },
         };
 
         // This calls load content

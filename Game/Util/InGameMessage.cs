@@ -19,7 +19,7 @@ namespace Game.Util{
         private string text;
         private Vector2 position = new Vector2(100, 100);
         private float lowerBound = 0.001f;
-        private Vector2 scale;
+        private float scale;
         public InGameMessage(string message){
             this.text = message;
             messages.Add(this);
@@ -27,9 +27,9 @@ namespace Game.Util{
 
         public InGameMessage(string message, Vector2 pos) : this(message, pos, 0) {}
 
-        public InGameMessage(string message, Vector2 pos, int length) : this(message, pos, length, Vector2.One) {}
+        public InGameMessage(string message, Vector2 pos, int length) : this(message, pos, length, 1f) {}
 
-        public InGameMessage(string message, Vector2 pos, int length, Vector2 scale) {
+        public InGameMessage(string message, Vector2 pos, int length, float scale) {
             this.text = message;
             this.position = pos;
             this.persistence = length;
@@ -61,7 +61,17 @@ namespace Game.Util{
         }
 
         public void draw(SpriteBatch sb){
-            sb.DrawString(Main.fonts["arial12"], this.text, this.position, Color.White * this.endurance, 0.0f, Vector2.Zero, scale, SpriteEffects.None, 0.0f);
+            sb.DrawString(
+                Main.fonts["arial32"], 
+                this.text, 
+                this.position, 
+                Color.White * this.endurance, 
+                0.0f, 
+                Vector2.Zero, 
+                scale, 
+                SpriteEffects.None, 
+                0.0f
+            );
         }
 
     }

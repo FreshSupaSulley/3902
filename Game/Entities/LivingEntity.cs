@@ -41,13 +41,17 @@ namespace Game.Entities
         // Damage the entity
         public virtual void Inflict(State.Game game, int damage)
         {
+            int completed_damage = damage > health ? health : damage;
+            
             if ((health -= damage) <= 0)
             {
                 OnDeath(game);
             }
-            if (health < 0) {health = 0;} 
-            else {
-                InGameMessage.messages.Add(new InGameMessage("-" + damage, new Vector2(base.Position.X + 30, base.Position.Y), 100, new Vector2(0.5f,0.5f)));
+            if (health < 0) {
+                health = 0;
+            } 
+            if (completed_damage > 0) {
+                InGameMessage.messages.Add(new InGameMessage("-" + completed_damage, new Vector2(base.Position.X + 30, base.Position.Y), 100, 0.25f));
             }
         }
 
