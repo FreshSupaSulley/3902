@@ -2,6 +2,8 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
+using System.Runtime.InteropServices;
 namespace Game.Util{
     public class InGameMessage{
 
@@ -17,21 +19,21 @@ namespace Game.Util{
         private string text;
         private Vector2 position = new Vector2(100, 100);
         private float lowerBound = 0.001f;
+        private Vector2 scale;
         public InGameMessage(string message){
             this.text = message;
             messages.Add(this);
         }
 
-        public InGameMessage(string message, Vector2 pos){
-            this.text = message;
-            this.position = pos;
-            messages.Add(this);
-        }
+        public InGameMessage(string message, Vector2 pos) : this(message, pos, 0) {}
 
-        public InGameMessage(string message, Vector2 pos, int length){
+        public InGameMessage(string message, Vector2 pos, int length) : this(message, pos, length, Vector2.One) {}
+
+        public InGameMessage(string message, Vector2 pos, int length, Vector2 scale) {
             this.text = message;
             this.position = pos;
             this.persistence = length;
+            this.scale = scale;
             messages.Add(this);
         }
 
@@ -59,7 +61,7 @@ namespace Game.Util{
         }
 
         public void draw(SpriteBatch sb){
-            sb.DrawString(Main.fonts["arial12"], this.text, this.position, Color.White * this.endurance);
+            sb.DrawString(Main.fonts["arial12"], this.text, this.position, Color.White * this.endurance, 0.0f, Vector2.Zero, scale, SpriteEffects.None, 0.0f);
         }
 
     }

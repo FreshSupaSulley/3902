@@ -45,7 +45,10 @@ namespace Game.Entities
             {
                 OnDeath(game);
             }
-            InGameMessage.messages.Add(new InGameMessage("" + this.health, new Vector2(base.Position.X + 30, base.Position.Y), 100));
+            if (health < 0) {health = 0;} 
+            else {
+                InGameMessage.messages.Add(new InGameMessage("-" + damage, new Vector2(base.Position.X + 30, base.Position.Y), 100, new Vector2(0.5f,0.5f)));
+            }
         }
 
         // By default, an entity dying just removes it from the world and plays a dumb shit sound effect

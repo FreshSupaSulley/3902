@@ -19,7 +19,7 @@ public class UIGameLayout : UILayout {
         }
         base.Update(gameTime);
     }
-    public void Reset() {
+    public override void Reset() {
         
     }
 }

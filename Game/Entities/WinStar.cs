@@ -16,6 +16,7 @@ namespace Game.Entities
             {
                 game.sfx["wow"].Play();
                 Main.SwitchGameState(new Win());
+                Main.uiManager.ChangeUIState("win");
             }
         }
 

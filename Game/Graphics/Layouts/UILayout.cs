@@ -23,4 +23,5 @@ public abstract class UILayout : IUserInterfaceLayout {
             el.Update(gameTime);
         }
     }
+    public virtual void Reset() {}
 }

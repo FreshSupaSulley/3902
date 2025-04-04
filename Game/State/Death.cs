@@ -26,7 +26,7 @@ namespace Game.State
         public void Draw(SpriteBatch batch)
         {
             batch.Begin();
-            FontRenderer.Text("you fucking died!! click to restart :)))", batch, new(100, 100));
+            Main.uiManager.Draw(batch);
             batch.End();
         }
     }
