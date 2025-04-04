@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Game.Collision;
 using System.Xml.Serialization;
 using Game.State;
+using Game.Util;
 
 namespace Game.Entities
 {
@@ -44,6 +45,7 @@ namespace Game.Entities
             {
                 OnDeath(game);
             }
+            InGameMessage.messages.Add(new InGameMessage("" + this.health, new Vector2(base.Position.X + 30, base.Position.Y), 100));
         }
 
         // By default, an entity dying just removes it from the world and plays a dumb shit sound effect
