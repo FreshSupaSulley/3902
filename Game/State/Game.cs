@@ -36,7 +36,7 @@ namespace Game.State
         //sound effects to be played once (i.e. without looping)
         public Dictionary<String, SoundEffect> sfx = [];
         //currently playing music
-        public SoundEffectInstance bgm;
+        public SoundEffectInstance bgm = null;
 
         public int muteBit = 0;
         public int muteRequest = 0;
@@ -61,6 +61,7 @@ namespace Game.State
             LoadSoundEffect("ding.wav");
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");
+            LoadSoundEffect("wow.wav");
             ChangeMusic("Song_1.wav");
         }
 
@@ -247,6 +248,9 @@ namespace Game.State
                 String name = filename.Substring(0, filename.IndexOf("."));
                 string path = "Content/Sound/" + filename;
                 if (!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
+                if(bgm != null){
+                    bgm.Pause();
+                }
                 bgm = SoundEffect.FromStream(new FileStream(path, FileMode.Open)).CreateInstance();
                 bgm.IsLooped = true;
                 bgm.Play();

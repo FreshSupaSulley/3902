@@ -14,6 +14,7 @@ namespace Game.Entities
         {
             if (game.player.Intersects(new((int)Position.X, (int)Position.Y, SPRITE.Texture.Width, SPRITE.Texture.Height)))
             {
+                game.sfx["wow"].Play();
                 Main.SwitchGameState(new Win());
             }
         }
