@@ -4,6 +4,7 @@ using Game.Controllers;
 using Microsoft.Xna.Framework;
 using Game.State;
 using Game.Util;
+using Game.Graphics;
 
 new Main().Run();
 
@@ -21,7 +22,7 @@ public class Main : Microsoft.Xna.Framework.Game
     private RenderTarget2D target, loadingTarget;
 
     // Used for rendering everything
-    private SpriteBatch spriteBatch;
+    public SpriteBatch spriteBatch;
     public SpriteFont font;
 
     public KeyboardController keyboard;
@@ -29,6 +30,8 @@ public class Main : Microsoft.Xna.Framework.Game
 
     public static Main INSTANCE;
 
+    public static string startingUI = "menu"; // The starting ui layout to use
+    public static UIManager uiManager;
     public Main()
     {
         INSTANCE = this;
@@ -56,6 +59,9 @@ public class Main : Microsoft.Xna.Framework.Game
         keyboard = new KeyboardController();
         mouse = new MouseController();
 
+        // Initialize UI
+        uiManager = new();
+
         // This calls load content
         base.Initialize();
     }
@@ -67,6 +73,7 @@ public class Main : Microsoft.Xna.Framework.Game
         font = Content.Load<SpriteFont>("Font");
         // state = new World(device);
         state = new Menu(device);
+        uiManager.Load();
     }
 
     // Tick
@@ -86,6 +93,8 @@ public class Main : Microsoft.Xna.Framework.Game
         TempBuffer.elapsed = gameTime.ElapsedGameTime.Milliseconds;
         // Remove any expired temporary entities
         TempBuffer.depreciate(this);
+
+        uiManager.Update(gameTime);
 
         // Always end with post ticks
         keyboard.PostUpdate();

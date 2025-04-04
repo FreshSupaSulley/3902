@@ -13,7 +13,7 @@
 - `void Draw(SpriteBatch sb)` renders a rectangular button
 
 ## UITextButton (class) : UIButton
-- `constructor(Rectangle bounds, ICommand onPress, MouseController mc, String text)`
+- `constructor(Rectangle bounds, ICommand onPress, MouseController mc, String text SpriteFont font, Color color)`
 - `void Draw(SpriteBatch sb)` renders the rectangular button and text
 
 ## UIText (class) : IUserInterfaceElement
