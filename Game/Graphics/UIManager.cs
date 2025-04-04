@@ -23,7 +23,10 @@ public class UIManager {
         current = newValue;
     }
     public void Load() {
-        uiDictionary.Add("empty", new EmptyLayout());
-        uiDictionary.Add("menu", new MenuLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
+        uiDictionary.Add("empty", new UIEmptyLayout());
+        uiDictionary.Add("menu", new UIMenuLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
+    }
+    public void AddElement(IUserInterfaceElement el) {
+        uiDictionary[current].AddElement(el);
     }
 }

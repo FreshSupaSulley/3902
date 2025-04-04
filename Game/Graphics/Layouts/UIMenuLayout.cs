@@ -5,8 +5,8 @@ using Game.Commands;
  
 namespace Game.Graphics;
 
-public class MenuLayout : UILayout {
-    public MenuLayout(GraphicsDevice device) : base() {
+public class UIMenuLayout : UILayout {
+    public UIMenuLayout(GraphicsDevice device) : base() {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
         Rectangle bounds = new Rectangle((int)(0.35*w), (int)(0.4*h),(int)(0.3*w), (int)(0.1*h));
