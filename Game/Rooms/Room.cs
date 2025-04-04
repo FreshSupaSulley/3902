@@ -21,7 +21,8 @@ namespace Game.Rooms
         public Door[] doors;
         public List<Entity> gameObjects = [];
 
-        // public List<Noxa> noxe = new List<Noxa>();
+        [XmlIgnore]
+        public List<Hitbox> hitboxes = [];
 
         // Needed for serialization
         private Room() { }
@@ -45,8 +46,31 @@ namespace Game.Rooms
                     HandleAxisCollision(cast, velocity.Y, false);
                 }
             }
-            // damage();
-            // noxe = new List<Noxa>();
+
+            // Process hitboxes
+            foreach (var hitbox in hitboxes.ToList())
+            {
+                foreach (var entity in gameObjects.ToList())
+                {
+                    // Check if entity is within hitbox
+                    if (entity is LivingEntity victim)
+                    {
+                        // If an enemy is attacking another enemy, we don't care
+                        if (hitbox.GetEntity() is not Player && victim is not Player) continue;
+                        // If the player is attacking themselves, we don't care
+                        if (hitbox.GetEntity() is Player && victim is Player) continue;
+                        // If the living entity collided with a hitbox
+                        if (victim.Intersects(hitbox.GetCollisionBox()))
+                        {
+                            victim.Inflict(game, hitbox.GetDamage());
+                        }
+                    }
+                }
+            }
+
+            // Remove all hitboxes (they need to be provided every update)
+            hitboxes.Clear();
+
             // Tick doors (check for intersection)
             foreach (var door in doors)
             {
@@ -54,19 +78,10 @@ namespace Game.Rooms
             }
         }
 
-        // private void damage(){
-        //     for(int i = 0; i < noxe.Legnth; i++){
-        //         for(int a = 0; a < gameObjects.Length; a++){
-        //             if(gameObjects[a] is LivingEntity le){
-        //              if(le != noxe[i].originator){
-        //                     if(Math.pow(le.location.x - noxe[i].loc.x, 2) + Math.pow(le.location.Y -noxe[i].loc.y, 2) < Math.pow(noxe[i].radius, 2)){
-        //                         le.inflict(noxe[i].damage);
-        //                    }
-        //                }
-        //             }
-        //         }
-        //     }
-        // }
+        public void AddHitbox(Hitbox hitbox)
+        {
+            hitboxes.Add(hitbox);
+        }
 
         private void HandleAxisCollision(LivingEntity entity, float velocity, bool xAxis)
         {
@@ -99,7 +114,8 @@ namespace Game.Rooms
                     if (Tile.IsWalkable(tiles[i])) continue;
                     int tileX = Tile.TILE_SIZE + i % 14 * Tile.TILE_SIZE;
                     int tileY = Tile.TILE_SIZE + i / 14 * Tile.TILE_SIZE;
-                    if (entity.collisionBox.Intersects(new Rectangle(tileX - (int)entity.Position.X, tileY - (int)entity.Position.Y, Tile.TILE_SIZE, Tile.TILE_SIZE)))
+                    // if (entity.collisionBox.Intersects(new(tileX - (int)entity.Position.X, tileY - (int)entity.Position.Y, Tile.TILE_SIZE, Tile.TILE_SIZE)))
+                    if (entity.Intersects(new(tileX, tileY, Tile.TILE_SIZE, Tile.TILE_SIZE)))
                     {
                         int newSnap = positiveMovement ? (xAxis ? tileX - entity.collisionBox.Width - entity.collisionBox.X : tileY - entity.collisionBox.Height - entity.collisionBox.Y) : (xAxis ? tileX - entity.collisionBox.X : tileY - entity.collisionBox.Y) + Tile.TILE_SIZE;
 

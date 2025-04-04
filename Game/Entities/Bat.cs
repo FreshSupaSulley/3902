@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Bat() : LivingEntity(new(0, 0, 10, 10), IDLE)
+    public class Bat() : EnemyEntity(10, new(0, 0, 10, 10), IDLE)
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/bat.png"), 2, 20);
 

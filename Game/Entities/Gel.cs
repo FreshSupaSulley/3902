@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Gel() : LivingEntity(new(0, 0, 10, 10), IDLE)
+    public class Gel() : LivingEntity(10, new(0, 0, 10, 10), IDLE)
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/gel.png"), 2, 20);
 

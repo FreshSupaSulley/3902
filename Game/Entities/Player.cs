@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
 using Game.State;
 using Game.Util;
+using System;
 
 namespace Game.Entities
 {
@@ -26,18 +27,53 @@ namespace Game.Entities
 		// Old damaged sprite doesn't fit same style. Needs new resource
 		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
 
-        //item carrying
-        public static readonly int Key = 1;
-        public static readonly int rupee = 0;
-        public static readonly int bomb = 0;
+		// Dead
+		private static readonly Sprite HEAD = new(Main.Load("Entities/Monoko/head.png")), BODY = new(Main.Load("Entities/Monoko/body.png"));
+
+		//item carrying
+		// there are these awesome things called booleans you should check them out ):
+		public static readonly int Key = 1;
+		public static readonly int rupee = 0;
+		public static readonly int bomb = 0;
+
+		private static readonly int TOTAL_DEATH_TICKS = 120, I_FRAMES = 30;
+		private bool invulnerable, dead;
+		private int deadTicks, iframeTicks;
 
 		[XmlIgnore] // required??
 		public Item Item;
 
-		public Player() : base(new(5, 13, 14, 14), DOWN) { }
+		// Player has 100hp
+		public Player() : base(100, new(5, 13, 14, 14), DOWN) { }
+
+		public override void Update(State.Game game)
+		{
+			base.Update(game);
+
+			// Handle invulnerability
+			if (invulnerable && ++iframeTicks >= I_FRAMES)
+			{
+				invulnerable = false;
+			}
+
+			if (dead)
+			{
+				if (deadTicks++ == 0)
+				{
+					game.sfx["fart"].Play();
+				}
+				else if (deadTicks > TOTAL_DEATH_TICKS)
+				{
+					game.Reset();
+					Main.SwitchGameState(new Death(Main.device));
+				}
+			}
+		}
 
 		public override Vector2 Move(State.Game game)
 		{
+			// Don't move while dead
+			if (dead) return new();
 			// Using items
 			if (Item is not null)
 			{
@@ -62,8 +98,11 @@ namespace Game.Entities
 				{
 					if (ActiveAnimation != ATTACK)
 					{
-						State.Game.sfx["punch"].Play();
+						game.sfx["punch"].Play();
 						TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
+						int padding = 30;
+						// Widespread area hitbox for testing. Later we want this to be directional
+						game.room.AddHitbox(new(10, this, new(-padding, -padding, collisionBox.Width + padding * 2, collisionBox.Height + padding * 2)));
 					}
 					ActiveAnimation = ATTACK;
 				}
@@ -97,7 +136,8 @@ namespace Game.Entities
 			{
 				ActiveAnimation.Reset();
 			}
-			if(keyboard.IsKeyPressed(Keys.M)){
+			if (keyboard.IsKeyPressed(Keys.M))
+			{
 				game.muteRequest = 1;
 			}
 			// Position += velocity * speed;
@@ -106,9 +146,26 @@ namespace Game.Entities
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			base.Draw(spriteBatch);
-			// Draw item if exists
-			Item?.Draw(spriteBatch);
+			if (!dead)
+			{
+				if (invulnerable)
+				{
+					base.Draw(spriteBatch, new Color(Color.White, 0.5f));
+				}
+				else
+				{
+					base.Draw(spriteBatch);
+				}
+				// Draw item if exists
+				Item?.Draw(spriteBatch);
+			}
+			else
+			{
+				// idgaf anymore
+				// fart death animation lol
+				spriteBatch.Draw(HEAD.Texture, new((int)Position.X + HEAD.Texture.Width / 2, (int)Position.Y + HEAD.Texture.Height / 2 - deadTicks), null, Color.White, MathHelper.ToRadians(deadTicks * 12), new Vector2(HEAD.Texture.Width / 2f, HEAD.Texture.Height / 2f), new Vector2(1), SpriteEffects.None, 0f);
+				spriteBatch.Draw(BODY.Texture, new Vector2((int)Position.X, (int)Position.Y), Color.White);
+			}
 		}
 
 		public int GetDirection()
@@ -120,13 +177,20 @@ namespace Game.Entities
 			return 2;
 		}
 
-		public override void inflict(int damage)
+		public override void Inflict(State.Game game, int damage)
 		{
-			base.inflict(damage);
-			if (this.health <= 0)
+			// If we're in iframes don't apply damage
+			if (!invulnerable)
 			{
-				State.Game.reset();
+				iframeTicks = 0;
+				invulnerable = true;
+				base.Inflict(game, damage);
 			}
+		}
+
+		public override void OnDeath(State.Game game)
+		{
+			dead = true;
 		}
 	}
 }

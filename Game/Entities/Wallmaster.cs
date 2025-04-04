@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Wallmaster() : LivingEntity(new(0, 0, 10, 10), IDLE)
+    public class Wallmaster() : LivingEntity(10, new(0, 0, 10, 10), IDLE)
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/wallmaster.png"), 2, 20);
 

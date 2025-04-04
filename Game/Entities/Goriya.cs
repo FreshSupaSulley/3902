@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Game.Entities
 {
-    public class Gohma() : MobileMotionPathEntity(new(0, 0, 10, 10), IDLE, motionPaths)
+    public class Gohma() : MobileMotionPathEntity(40, new(0, 0, 10, 10), IDLE, motionPaths)
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/goriya.png", new Rectangle(0, 0, 91, 16)), 4, 10);
 

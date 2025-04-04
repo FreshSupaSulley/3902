@@ -16,7 +16,7 @@ public class Main : Microsoft.Xna.Framework.Game
     public static Vector2 BASE_TO_WINDOW;
 
     // Used to load resources statically
-    private static GraphicsDevice device;
+    public static GraphicsDevice device;
     private GraphicsDeviceManager graphics;
     private RenderTarget2D target, loadingTarget;
 
