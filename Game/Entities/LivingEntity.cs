@@ -47,7 +47,7 @@ namespace Game.Entities
             }
             if (health < 0) {health = 0;} 
             else {
-                InGameMessage.messages.Add(new InGameMessage("-" + damage, new Vector2(base.Position.X + 30, base.Position.Y), 100));
+                InGameMessage.messages.Add(new InGameMessage("-" + damage, new Vector2(base.Position.X + 30, base.Position.Y), 100, new Vector2(0.5f,0.5f)));
             }
         }
 
