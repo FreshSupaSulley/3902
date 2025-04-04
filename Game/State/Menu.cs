@@ -18,10 +18,6 @@ namespace Game.State
         
         public void Update(GameTime gameTime)
         {
-            // if (Main.INSTANCE.mouse.LeftDown())
-            // {
-            //     Main.SwitchGameState(new Game(device));
-            // }
             Main.uiManager.Update(gameTime);
         }
 
@@ -29,7 +25,6 @@ namespace Game.State
         {
             batch.Begin();
             Main.uiManager.Draw(batch);
-            FontRenderer.Text("crude home menu for functionality check (left click the screen)!!!!", batch, new(100, 100));
             batch.End();
         }
     }
