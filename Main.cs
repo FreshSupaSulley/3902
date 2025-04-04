@@ -82,7 +82,7 @@ public class Main : Microsoft.Xna.Framework.Game
         // Used to load resources statically
         device = graphics.GraphicsDevice;
         // state = new World(device);
-        state = new Menu(device);
+        state = new Menu();
         uiManager.Load();
     }
 

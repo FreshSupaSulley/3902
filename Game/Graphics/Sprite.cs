@@ -8,12 +8,17 @@ namespace Game.Graphics
     public class Sprite(Texture2D texture)
     {
         public Texture2D Texture { get; } = texture;
+        private int width = texture.Width, height = texture.Height;
 
-        public Sprite(Texture2D texture, Rectangle subimage) : this(texture) { }
+        public Sprite(Texture2D texture, int width, int height) : this(texture)
+        {
+            this.width = width;
+            this.height = height;
+        }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(Texture, position, Color.White);//, sprite, Color.White);
+            spriteBatch.Draw(Texture, new Rectangle((int)position.X, (int)position.Y, width, height), Color.White);//, sprite, Color.White);
         }
     }
 }

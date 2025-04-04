@@ -9,13 +9,6 @@ namespace Game.State
 {
     public class Menu : IGameState
     {
-        private GraphicsDevice device;
-        
-        public Menu(GraphicsDevice device)
-        {
-            this.device = device;
-        }
-        
         public void Update(GameTime gameTime)
         {
             Main.uiManager.Update(gameTime);

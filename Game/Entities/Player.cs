@@ -64,7 +64,6 @@ namespace Game.Entities
 				}
 				else if (deadTicks > TOTAL_DEATH_TICKS)
 				{
-					game.Reset();
 					Main.SwitchGameState(new Death(Main.device));
 				}
 			}
@@ -139,6 +138,9 @@ namespace Game.Entities
 			if (keyboard.IsKeyPressed(Keys.M))
 			{
 				game.muteRequest = 1;
+			}
+			if(keyboard.IsKeyPressed(Keys.G)){
+				InGameMessage.messages.Add(new InGameMessage("Hi", new Vector2(base.Position.X + 30, base.Position.Y), 100));
 			}
 			// Position += velocity * speed;
 			return velocity * speed;

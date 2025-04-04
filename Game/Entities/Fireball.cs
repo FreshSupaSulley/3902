@@ -1,9 +1,8 @@
 using Microsoft.Xna.Framework;
 using Game.Graphics;
-using Game.Entities;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game.Tiles
+namespace Game.Entities
 {
     public class Fireball(Vector2 position) : Entity(position)
     {
