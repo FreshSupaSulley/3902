@@ -9,7 +9,7 @@ namespace Game.Entities
 {
     public class Gel : LivingEntity
     {
-        private static readonly Animation IDLE = new(Main.Load("/Entities/gel.png"), 2, 20);
+        private static readonly Animation IDLE = new(Main.Load("/Entities/gel.png"), 2, 30);
         
         public Gel() : base(new Rectangle(0,0,10,10), IDLE) { }
 

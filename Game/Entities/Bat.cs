@@ -8,7 +8,7 @@ namespace Game.Entities
 {
     public class Bat : LivingEntity
     {
-        private static readonly Animation IDLE = new(Main.Load("/Entities/bat.png"), 2, 20);
+        private static readonly Animation IDLE = new(Main.Load("/Entities/bat.png"), 2, 30);
 
         public Bat() : base(new Rectangle(0, 0, 14, 14), IDLE)
         {
