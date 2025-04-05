@@ -97,32 +97,32 @@
   <gameObjects>
     <Entity xsi:type="Skeleton">
       <Position>
-        <X>48</X>
-        <Y>48</Y>
+        <X>152</X>
+        <Y>32</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Skeleton">
 		  <Position>
-			  <X>64</X>
-			  <Y>64</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Skeleton">
-		  <Position>
-			  <X>48</X>
-			  <Y>112</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Skeleton">
-		  <Position>
 			  <X>100</X>
-			  <Y>112</Y>
+			  <Y>62</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Skeleton">
 		  <Position>
-			  <X>200</X>
-			  <Y>112</Y>
+			  <X>144</X>
+			  <Y>70</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>128</X>
+			  <Y>84</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>80</X>
+			  <Y>104</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>
