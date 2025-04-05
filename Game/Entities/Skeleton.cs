@@ -4,12 +4,18 @@ using Game.State;
 using Game.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq.Expressions;
 
 namespace Game.Entities
 {
-    public class Skeleton() : LivingEntity(new(0, 0, 10, 10), IDLE)
+    public class Skeleton : LivingEntity
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/skeleton.png"), 2, 50);
+
+        public Skeleton() : base(new Rectangle(0, 0, 16, 16), IDLE)
+        {
+
+        }
 
         public override Vector2 Move(State.Game game)
         {
