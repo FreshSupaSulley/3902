@@ -94,7 +94,9 @@
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
   </tiles>
+	
   <gameObjects>
+	  
     <Entity xsi:type="Bat">
       <Position>
         <X>160</X>

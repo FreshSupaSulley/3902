@@ -177,12 +177,20 @@ namespace Game.Rooms
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
+                        if (room.gameObjects.Count == 0)
+                        {
+                            trueTiles[i] = TileType.BLOCK;
+                        }
                     }
                     else if (i == 56)
                     {
                         // Left door
                         trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
                         if (room.doors[3].Type == DoorType.LOCK && Player.Key >= 1)
+                        {
+                            trueTiles[i] = TileType.BLOCK;
+                        }
+                        if (room.gameObjects.Count == 0)
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
@@ -195,12 +203,20 @@ namespace Game.Rooms
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
+                        if (room.gameObjects.Count == 0)
+                        {
+                            trueTiles[i] = TileType.BLOCK;
+                        }
                     }
                     else if (i >= 118 && i <= 119)
                     {
                         // Bottom door
                         trueTiles[i] = Door.IsWalkable(room.doors[2].Type) ? TileType.BLOCK : TileType.WALL;
                         if (room.doors[2].Type == DoorType.LOCK && Player.Key >= 1)
+                        {
+                            trueTiles[i] = TileType.BLOCK;
+                        }
+                        if (room.gameObjects.Count == 0)
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
