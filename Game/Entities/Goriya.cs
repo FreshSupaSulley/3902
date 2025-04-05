@@ -13,9 +13,9 @@ namespace Game.Entities
         private static readonly Texture2D GORIYA_TEXTURE = Main.Load("/Entities/goriya.png");
 
         private static readonly Animation DOWN = new(Main.Load("/Entities/goriya.png", new Rectangle(0, 0, 32, 16)), 2, 20);
-        private static readonly Animation UP = new(Main.Load("/Entities/goriya.png", new Rectangle(32, 0, 16, 16)), 2, 20);
-        private static readonly Animation RIGHT = new(Main.Load("/Entities/goriya.png", new Rectangle(64, 0, 16, 16)), 2, 20);
-        private static readonly Animation LEFT = new(Main.Load("/Entities/goriya.png", new Rectangle(96, 0, 16, 16)), 2, 20);
+        private static readonly Animation UP = new(Main.Load("/Entities/goriya.png", new Rectangle(32, 0, 32, 16)), 2, 20);
+        private static readonly Animation RIGHT = new(Main.Load("/Entities/goriya.png", new Rectangle(64, 0, 32, 16)), 2, 20);
+        private static readonly Animation LEFT = new(Main.Load("/Entities/goriya.png", new Rectangle(96, 0, 32, 16)), 2, 20);
 
         public Goriya() : base (new Rectangle(0,0,16,16), DOWN)
         {
