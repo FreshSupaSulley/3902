@@ -97,20 +97,20 @@
   <gameObjects>
     <Entity xsi:type="Skeleton">
       <Position>
-        <X>200</X>
-        <Y>36</Y>
+        <X>56</X>
+        <Y>48</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Skeleton">
 		  <Position>
-			  <X>48</X>
-			  <Y>36</Y>
+			  <X>80</X>
+			  <Y>88</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Skeleton">
 		  <Position>
-			  <X>60</X>
-			  <Y>60</Y>
+			  <X>192</X>
+			  <Y>56</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>
