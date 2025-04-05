@@ -97,19 +97,19 @@
   <gameObjects>
     <Entity xsi:type="Gel">
       <Position>
-        <X>48</X>
+        <X>112</X>
         <Y>48</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Gel">
 		  <Position>
-			  <X>64</X>
-			  <Y>64</Y>
+			  <X>80</X>
+			  <Y>80</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Gel">
 		  <Position>
-			  <X>48</X>
+			  <X>112</X>
 			  <Y>112</Y>
 		  </Position>
 	  </Entity>
