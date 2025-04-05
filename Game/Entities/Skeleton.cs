@@ -13,8 +13,16 @@ namespace Game.Entities
 
         public override Vector2 Move(State.Game game)
         {
-            return new Vector2(0, 0);
-            //return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
+            Vector2 direction = game.player.Position - Position;
+
+            if (direction != Vector2.Zero)
+                direction.Normalize();
+
+            // speed
+            float speed = 0.5f;
+
+            // Move toward player
+            return direction * speed;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

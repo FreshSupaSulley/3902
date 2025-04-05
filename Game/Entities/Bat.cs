@@ -22,17 +22,12 @@ namespace Game.Entities
 
         public override Vector2 Move(State.Game game)
         {
-            // Get player's position
-            Vector2 playerPos = game.player.Position;
+            Vector2 direction = game.player.Position - Position;
 
-            // Calculate direction vector toward player
-            Vector2 direction = playerPos - Position;
-
-            // Normalize direction to get unit vector (keeps movement consistent)
             if (direction != Vector2.Zero)
                 direction.Normalize();
 
-            // Bat speed (adjust as needed)
+            // speed
             float speed = 0.5f;
 
             // Move toward player
