@@ -31,7 +31,7 @@ namespace Game.Entities
             Vector2 direction = game.player.Position - Position;
             float distance = direction.Length();
 
-            const float stopDistance = 32f;
+            const float stopDistance = 40f;
 
             if (Math.Abs(direction.X) > Math.Abs(direction.Y))
             {
@@ -41,7 +41,7 @@ namespace Game.Entities
             else
             {
                 ActiveAnimation = direction.Y > 0 ? DOWN : UP;
-                boomerang_direction = ActiveAnimation == LEFT ? 2 : 0;
+                boomerang_direction = ActiveAnimation == DOWN ? 2 : 0;
             }
 
             if (ticks++ % 60 == 0)
