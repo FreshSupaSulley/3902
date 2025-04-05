@@ -10,7 +10,7 @@ namespace Game.Entities
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/bat.png"), 2, 20);
 
-        public Bat() : base(new Rectangle(0, 0, 10, 10), IDLE)
+        public Bat() : base(new Rectangle(0, 0, 14, 14), IDLE)
         {
         }
 
