@@ -1,6 +1,7 @@
 using Game.Graphics;
 using Game.Path;
 using Game.State;
+using Game.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -21,11 +22,17 @@ namespace Game.Entities
         {
 
         }
+        private int ticks;
 
         public override Vector2 Move(State.Game game)
         {
             Vector2 direction = game.player.Position - Position;
             float distance = direction.Length();
+
+            if (ticks++ % 60 == 0)
+            {
+                game.room.AddEntity(new Fireball(Position));
+            }
 
 
             const float stopDistance = 32f;

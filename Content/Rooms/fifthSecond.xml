@@ -97,8 +97,8 @@
   <gameObjects>
     <Entity xsi:type="Dragon">
       <Position>
-        <X>200</X>
-        <Y>36</Y>
+        <X>160</X>
+        <Y>64</Y>
       </Position>
     </Entity>
   </gameObjects>
