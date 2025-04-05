@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Items
 {
-    public class Boomerang(Vector2 position) : Item(position)
+    public class Banana(Vector2 position) : Item(position)
     {
         private static readonly Sprite SPRITE = new(Main.Load("/Items/banana.png"));
         private readonly int TICKS_ALIVE = 120;

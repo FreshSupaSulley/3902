@@ -26,28 +26,27 @@ namespace Game.Entities
 
         public override Vector2 Move(State.Game game)
         {
+
+            int boomerang_direction = 0;
             Vector2 direction = game.player.Position - Position;
             float distance = direction.Length();
-
-            if (ticks++ % 60 == 0)
-            {
-                game.room.AddEntity(new Fireball(Position));
-            }
-
 
             const float stopDistance = 32f;
 
             if (Math.Abs(direction.X) > Math.Abs(direction.Y))
             {
                 ActiveAnimation = direction.X > 0 ? RIGHT : LEFT;
-                if (ActiveAnimation == LEFT)
-                {
-                    SpriteEffects flip = SpriteEffects.FlipHorizontally;
-                }
+                boomerang_direction = ActiveAnimation == LEFT ? 3 : 1;
             }
             else
             {
                 ActiveAnimation = direction.Y > 0 ? DOWN : UP;
+                boomerang_direction = ActiveAnimation == LEFT ? 2 : 0;
+            }
+
+            if (ticks++ % 60 == 0)
+            {
+                game.room.AddEntity(new Boomerang(Position, boomerang_direction));
             }
 
             if (distance > stopDistance)

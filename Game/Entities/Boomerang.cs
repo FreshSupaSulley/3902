@@ -7,27 +7,51 @@ using Game.State;
 
 namespace Game.Tiles
 {
-    public class Boomerang(Vector2 position) : Entity(position)
+    public class Boomerang : LivingEntity
     {
-        private static readonly Sprite dragon_projectaile = new Sprite(Main.Load("/Entities/boomerang.png"));
+        private static readonly Animation IDLE = new Animation (Main.Load("/Entities/boomerang.png"),3,30);
         private static readonly float speed = 1f;
         private static readonly int timeAlive = 30;
+        private Vector2 Position;
+        private Vector2 velocity;
+        private int Direction; //0 = to top, 1 = right, 2 = bottom, 3 = left
 
         // Used to track when it should despawn
         private int ticksAlive;
 
-        public override void Update(State.Game game)
+        public Boomerang(Vector2 position, int direction) : base(new Rectangle(0, 0, 14, 14), IDLE)
         {
-            Position -= new Vector2(speed, 0);
+            Position = position;
+            Direction = direction;
+        }
+
+        public override Vector2 Move(State.Game game)
+        {
             if (ticksAlive++ > timeAlive)
             {
                 game.room.RemoveEntity(this);
             }
+            switch (Direction)
+            {
+                case 0:
+                    velocity = new(0, -1);
+                    break;
+                case 1:
+                    velocity = new(1, 0);
+                    break;
+                case 2:
+                    velocity = new(0, 1);
+                    break;
+                case 3:
+                    velocity = new(-1, 0);
+                    break;
+            }
+            return velocity;
         }
 
         public override void Draw(SpriteBatch batch)
         {
-            dragon_projectaile.Draw(batch, Position);
+            IDLE.Draw(batch, Position);
         }
     }
 }

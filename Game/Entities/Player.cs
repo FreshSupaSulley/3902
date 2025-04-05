@@ -72,7 +72,7 @@ namespace Game.Entities
 			}
 			// Required for Sprint 3
 			if (keyboard.IsKeyPressed(Keys.D1)) Item = new Heart(Position);
-			else if (keyboard.IsKeyPressed(Keys.D2)) Item = new Boomerang(Position);
+			else if (keyboard.IsKeyPressed(Keys.D2)) Item = new Banana(Position);
 			else if (keyboard.IsKeyPressed(Keys.D3)) Item = new Bomb(Position);
 			// Movement
 			// You could get rid of the normalization to make movement look smoother
