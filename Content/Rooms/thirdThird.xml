@@ -97,50 +97,50 @@
   <gameObjects>
     <Entity xsi:type="Bat">
       <Position>
-        <X>48</X>
-        <Y>48</Y>
+        <X>80</X>
+        <Y>32</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Bat">
 		  <Position>
-			  <X>64</X>
+			  <X>128</X>
 			  <Y>64</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Bat">
 		  <Position>
-			  <X>48</X>
+			  <X>128</X>
+			  <Y>96</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Bat">
+		  <Position>
+			  <X>160</X>
+			  <Y>64</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Bat">
+		  <Position>
+			  <X>160</X>
+			  <Y>96</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Bat">
+		  <Position>
+			  <X>192</X>
+			  <Y>48</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Bat">
+		  <Position>
+			  <X>192</X>
 			  <Y>112</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Bat">
 		  <Position>
-			  <X>100</X>
-			  <Y>112</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Bat">
-		  <Position>
-			  <X>200</X>
-			  <Y>112</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Bat">
-		  <Position>
-			  <X>80</X>
-			  <Y>112</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Bat">
-		  <Position>
-			  <X>200</X>
-			  <Y>112</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Bat">
-		  <Position>
-			  <X>48</X>
-			  <Y>112</Y>
+			  <X>208</X>
+			  <Y>80</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>
