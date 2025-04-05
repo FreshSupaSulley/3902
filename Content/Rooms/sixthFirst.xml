@@ -104,19 +104,19 @@
 	  <Entity xsi:type="Trap">
 		  <Position>
 			  <X>32</X>
-			  <Y>130</Y>
+			  <Y>144</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Trap">
 		  <Position>
-			  <X>200</X>
+			  <X>224</X>
 			  <Y>32</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Trap">
 		  <Position>
-			  <X>200</X>
-			  <Y>130</Y>
+			  <X>224</X>
+			  <Y>144</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>

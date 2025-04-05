@@ -7,14 +7,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Trap() : LivingEntity(new(0, 0, 10, 10), IDLE)
+    public class Trap : LivingEntity
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/trap.png"), 1, 20);
 
+        public Trap() : base (new Rectangle(0, 0, 16, 16), IDLE)
+        {
+
+        }
+
         public override Vector2 Move(State.Game game)
         {
-            return new Vector2(0, 0);
-            //return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
+            Vector2 toPlayer = game.player.Position - Position;
+            float speed = 1f;
+
+            if(game.player.Position.X == Position.X)
+            {
+                return new Vector2(toPlayer.X, 0) * speed;
+            }
+
+            return Vector2.Zero;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
