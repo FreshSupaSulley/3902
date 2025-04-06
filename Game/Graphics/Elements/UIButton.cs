@@ -36,6 +36,8 @@ public class UIButton : IUserInterfaceElement {
             if (mc.LeftDown() && !pressed) {
                 onPress.Execute();
             }
+        } else {
+            hovered = false;
         }
         if (!mc.LeftDown()) {
             pressed = false;

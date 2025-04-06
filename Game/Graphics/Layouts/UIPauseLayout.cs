@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Game.Commands;
-using System;
+
 namespace Game.Graphics;
 
 public class UIPauseLayout : UILayout {
@@ -13,6 +13,8 @@ public class UIPauseLayout : UILayout {
         int h = device.Viewport.Height;
         resumeBounds = new Rectangle((int)(0.35*w), (int)(0.4*h),(int)(0.3*w), (int)(0.1*h));
         resumeButton = new UITextButton(resumeBounds, Main.INSTANCE.mouse, null, Color.AntiqueWhite, "Resume", Color.Black, "arialbold");
+        
+        resumeButton.SetHoverColor(ColorTransform.Add(Color.AntiqueWhite, -20,-20,-20));
         AddElement(resumeButton);
         
         Vector2 vec = new Vector2(w/2, h/2);

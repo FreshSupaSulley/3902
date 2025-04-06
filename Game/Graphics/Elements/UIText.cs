@@ -29,7 +29,6 @@ public class UIText : IUserInterfaceElement {
             sprites.DrawString(Main.fonts[font], text, position+new Vector2(1,0), outlineColor);
             sprites.DrawString(Main.fonts[font], text, position-new Vector2(1,0), outlineColor);
         }
-
         sprites.DrawString(Main.fonts[font], text, position, textColor);
     }
     public void SetOutline(Color outlineColor) {

@@ -14,7 +14,9 @@ public class UIGameLayout : UILayout {
             Game.State.Game playerGame = (Game.State.Game) Main.INSTANCE.State;
             Func<int> function = playerGame.player.GetHealth;
             Vector2 position = new Vector2(50,20);
-            AddElement(new UIHealthVariableText<int>(function, position, "arialbold", Color.White));
+            UIVariableText<int> el = new UIHealthVariableText<int>(function, position, "arialbold", Color.White);
+            el.SetOutline(Color.Black);
+            AddElement(el);
             healthAdded = true;
         }
         base.Update(gameTime);
