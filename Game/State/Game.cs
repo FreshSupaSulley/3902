@@ -77,7 +77,9 @@ namespace Game.State
             // If we want to switch to pause
             if (Main.INSTANCE.keyboard.IsKeyPressed(Keys.Escape))
             {
+                Main.uiManager.SetGame(this);
                 Main.SwitchGameState(new Pause(this));
+                Main.uiManager.ChangeUIState("pause");
                 return;
             }
 

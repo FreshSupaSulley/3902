@@ -27,4 +27,7 @@ public abstract class UILayout : IUserInterfaceLayout {
         }
     }
     public virtual void Reset() {}
+    public virtual void ClearElements() {
+        elements.Clear();
+    }
 }

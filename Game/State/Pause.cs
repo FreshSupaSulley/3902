@@ -29,7 +29,6 @@ namespace Game.State
             game.Draw(batch);
             // Now draw pause on top
             batch.Begin();
-            FontRenderer.Text("PAUSE!!!!", batch, new(Main.INSTANCE.Window.ClientBounds.Width / 2, Main.INSTANCE.Window.ClientBounds.Height / 2));
             batch.End();
         }
     }
