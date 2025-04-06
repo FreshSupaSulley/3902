@@ -73,7 +73,7 @@ namespace Game.Entities
                 {
                     velocity = new Vector2(1, 0);
 
-                    if (Position.X == 114)
+                    if (Position.X == 113)
                     {
                         velocity = Vector2.Zero;
                         returning = true;
@@ -116,7 +116,7 @@ namespace Game.Entities
             }
             // horizontal
             if(returning == true && hMoving== true) { 
-                if (Position.X <= 114)
+                if (Position.X <= 113)
                 {
                     velocity = new Vector2(-1, 0);
                     if (Position.X == 32)
