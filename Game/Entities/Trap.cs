@@ -69,21 +69,21 @@ namespace Game.Entities
             }
             // horizontal
             else if(hMoving == true && set == false) { 
-                if (Position.X < 112)
+                if (Position.X < 120)
                 {
                     velocity = new Vector2(1, 0);
 
-                    if (Position.X == 106)
+                    if (Position.X == 114)
                     {
                         velocity = Vector2.Zero;
                         returning = true;
                     }
                 }
-                else if (Position.X > 112)
+                else if (Position.X > 120)
                 {
                     velocity = new Vector2(-1, 0);
 
-                    if (Position.X == 118)
+                    if (Position.X == 128)
                     {
                         velocity = Vector2.Zero;
                         returning = true;
@@ -116,7 +116,7 @@ namespace Game.Entities
             }
             // horizontal
             if(returning == true && hMoving== true) { 
-                if (Position.X <= 106)
+                if (Position.X <= 114)
                 {
                     velocity = new Vector2(-1, 0);
                     if (Position.X == 32)
@@ -126,7 +126,7 @@ namespace Game.Entities
                         set = true;
                     }
                 }
-                if (Position.X >= 118)
+                if (Position.X >= 120)
                 {
                     velocity = new Vector2(1, 0);
                     if (Position.X == 208)
