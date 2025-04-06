@@ -15,6 +15,7 @@ namespace Game.Entities
         private Vector2 velocity = Vector2.Zero;
         private bool vMoving = false;
         private bool hMoving = false;
+        private bool set = true;
         private bool returning = false;
         private const float Speed = 1f;
 
@@ -29,22 +30,23 @@ namespace Game.Entities
             Vector2 toPlayer = game.player.Position - Position + new Vector2(game.player.collisionBox.Width / 2, game.player.collisionBox.Height / 2);
             float distanceToPlayer = toPlayer.Length();
             float playerX = game.player.Position.X + game.player.collisionBox.Width / 2;
-            float playerY = game.player.Position.Y + game.player.collisionBox.Height / 2;
+            float playerY = game.player.Position.Y + (game.player.collisionBox.Height / 2) + 4;
 
-            if (playerX >= Position.X && playerX <= Position.X + collisionBox.Width)
+            if (playerX >= Position.X && playerX <= Position.X + collisionBox.Width && set == true)
             {
                 vMoving = true;
                 hMoving = false;
+                set = false;
             }
-            else if (playerY >= Position.Y && playerY <= Position.Y + collisionBox.Height)
+            else if (playerY >= Position.Y && playerY <= Position.Y + collisionBox.Height && set == true)
             {
                 vMoving = false;
                 hMoving = true;
+                set = false;
             }
-
-            if (vMoving == true)
+            // vertical
+            if (vMoving == true && set == false)
             {
-                //up down
                 if (Position.Y < 80)
                 {
                     velocity = new Vector2(0, 1);
@@ -65,8 +67,8 @@ namespace Game.Entities
                     }
                 }
             }
-            else if(hMoving == true) { 
-                // left right
+            // horizontal
+            else if(hMoving == true && set == false) { 
                 if (Position.X < 112)
                 {
                     velocity = new Vector2(1, 0);
@@ -77,21 +79,20 @@ namespace Game.Entities
                         returning = true;
                     }
                 }
-                else if (Position.X > 118)
+                else if (Position.X > 112)
                 {
                     velocity = new Vector2(-1, 0);
 
-                    if (Position.X == 88)
+                    if (Position.X == 118)
                     {
                         velocity = Vector2.Zero;
                         returning = true;
                     }
                 }
             }
-
+            // vertical
             if (returning == true && vMoving == true)
             {
-                //up down
                 if (Position.Y <= 74)
                 {
                     velocity = new Vector2(0, -1);
@@ -99,20 +100,22 @@ namespace Game.Entities
                     {
                         vMoving = false;
                         returning = false;
+                        set = true;
                     }
                 }
-                if (Position.Y >= 86)
+                if (Position.Y >= 86) 
                 {
                     velocity = new Vector2(0, 1);
                     if (Position.Y == 128)
                     {
                         vMoving = false;
                         returning = false;
+                        set = true;
                     }
                 }
             }
+            // horizontal
             if(returning == true && hMoving== true) { 
-                // left right
                 if (Position.X <= 106)
                 {
                     velocity = new Vector2(-1, 0);
@@ -120,15 +123,17 @@ namespace Game.Entities
                     {
                         hMoving = false;
                         returning = false;
+                        set = true;
                     }
                 }
-                if (Position.X >= 112)
+                if (Position.X >= 118)
                 {
                     velocity = new Vector2(1, 0);
-                    if (Position.X == 128)
+                    if (Position.X == 208)
                     {
                         hMoving = false;
                         returning = false;
+                        set = true;
                     }
                 }
             }
