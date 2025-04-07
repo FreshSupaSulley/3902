@@ -113,6 +113,12 @@
 			  <Y>112</Y>
 		  </Position>
 	  </Entity>
+	  <Entity xsi:type="Key">
+		  <Position>
+			  <X>128</X>
+			  <Y>128</Y>
+		  </Position>
+	  </Entity>
   </gameObjects>
   <doors>
     <Door>

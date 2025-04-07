@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using Game.Entities;
 using Game.Tiles;
 using Game.State;
+using Game.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -64,6 +65,7 @@ namespace Game.Rooms
                         {
                             victim.Inflict(game, hitbox.GetDamage());
                         }
+                        
                     }
                 }
             }

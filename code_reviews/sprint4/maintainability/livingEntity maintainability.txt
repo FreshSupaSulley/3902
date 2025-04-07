@@ -1,0 +1,20 @@
+"In the plaintext file for a maintainability review, include the following information:
+
+Author of the code review
+Date of the code review
+Sprint number
+Name of the .cs file being reviewed
+Author of the .cs file being reviewed
+Number of minutes taken to complete the review
+Specific comments on what is readable and what is not"
+
+Mingyu Choi
+4/7/25
+Sprint 4
+LivingEntity
+Jared Willets
+5 minutes
+Comments:
+livingentity class well writen codes maintaining entity's animation, collision, health management, and drawing, making it easy to understand and extend.
+livingentity makes easier to check collision between entities which will cause damage. health and damage is also tracked in here. it's easy to maintain
+with separate methods and easy to change fix in case we need to test or change.

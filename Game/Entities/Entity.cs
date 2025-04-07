@@ -1,4 +1,5 @@
 using System.Xml.Serialization;
+using Game.Items;
 using Game.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,6 +17,7 @@ namespace Game.Entities
     [XmlInclude(typeof(Trap))]
     [XmlInclude(typeof(Gel))]
     [XmlInclude(typeof(Bat))]
+    [XmlInclude(typeof(Key))]
     [XmlInclude(typeof(WinStar))]
     public abstract class Entity(Vector2 position)
     {
