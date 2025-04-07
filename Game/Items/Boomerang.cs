@@ -13,6 +13,9 @@ namespace Game.Items
         private readonly int TICKS_ALIVE = 120;
         private readonly int DISTANCE = 100;
 
+        private readonly int XCORRECTION = -10;
+        private readonly int YCORRECTION = -2;
+
         private Vector2 startPos, velocity;
         private int ticks = 0;
 
@@ -28,7 +31,7 @@ namespace Game.Items
                 if(e is LivingEntity){
                     LivingEntity le = (LivingEntity)e;
                    if(!(le is Player)){
-                       if(Math.Pow(Position.X - le.Position.X, 2) + Math.Pow(Position.Y - le.Position.Y, 2) < 25){
+                       if(Math.Pow(Position.X + XCORRECTION - le.Position.X, 2) + Math.Pow(Position.Y + YCORRECTION - le.Position.Y, 2) < 49){
 
                             le.Inflict(game, 1);
                       }
