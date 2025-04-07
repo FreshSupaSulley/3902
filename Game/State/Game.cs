@@ -55,7 +55,8 @@ namespace Game.State
             target = new RenderTarget2D(Main.device, (12 + 4) * 16, (7 + 4) * 16);
             loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
-            room = Room.LoadRoom("start");
+            this.player = new Player();
+            room = Room.LoadRoom("start", player);
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
             // Pow
             LoadSoundEffect("ding.wav");

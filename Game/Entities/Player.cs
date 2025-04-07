@@ -32,9 +32,9 @@ namespace Game.Entities
 
 		//item carrying
 		// there are these awesome things called booleans you should check them out ):
-		public static readonly int Key = 1;
-		public static readonly int rupee = 0;
-		public static readonly int bomb = 0;
+		private int Key = 0;
+        private int rupee = 0;
+        private int bomb = 0;
 
 		private static readonly int TOTAL_DEATH_TICKS = 120, I_FRAMES = 30;
 		private bool invulnerable, dead;
@@ -80,6 +80,16 @@ namespace Game.Entities
 				Item.Position = base.Position;
 			}
 			return HandleInputs(game);
+		}
+
+		public bool hasKey()
+		{
+            if (Key >= 1)
+            {
+				Key--;
+				return true;
+            }
+			return false;
 		}
 
 		private Vector2 HandleInputs(State.Game game)
