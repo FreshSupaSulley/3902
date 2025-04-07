@@ -66,7 +66,7 @@ namespace Game.Rooms
         {
             if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
             {
-                game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath));
+                game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.player));
             }
         }
 

@@ -173,7 +173,7 @@ namespace Game.Rooms
         public void AddEntity(Entity entity) => gameObjects.Add(entity);
         public void RemoveEntity(Entity entity) => gameObjects.Remove(entity);
 
-        public static Room LoadRoom(string filename)
+        public static Room LoadRoom(string filename, Player player)
         {
             XmlSerializer serializer = new(typeof(Room));
             using Stream reader = new FileStream("Content/Rooms/" + filename + ".xml", FileMode.Open);
@@ -189,7 +189,7 @@ namespace Game.Rooms
                     if (i >= 6 && i <= 7)
                     {
                         trueTiles[i] = Door.IsWalkable(room.doors[0].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[0].Type == DoorType.LOCK && Player.Key >= 1)
+                        if (room.doors[0].Type == DoorType.LOCK && player.hasKey())
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
@@ -202,7 +202,7 @@ namespace Game.Rooms
                     {
                         // Left door
                         trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[3].Type == DoorType.LOCK && Player.Key >= 1)
+                        if (room.doors[3].Type == DoorType.LOCK && player.hasKey())
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
@@ -215,7 +215,7 @@ namespace Game.Rooms
                     {
                         // Right door
                         trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[1].Type == DoorType.LOCK && Player.Key >= 1)
+                        if (room.doors[1].Type == DoorType.LOCK && player.hasKey())
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
@@ -228,7 +228,7 @@ namespace Game.Rooms
                     {
                         // Bottom door
                         trueTiles[i] = Door.IsWalkable(room.doors[2].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[2].Type == DoorType.LOCK && Player.Key >= 1)
+                        if (room.doors[2].Type == DoorType.LOCK && player.hasKey())
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
