@@ -12,7 +12,7 @@ namespace Game.Entities
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/skeleton.png"), 2, 30);
 
-        public Skeleton() : base(new Rectangle(0, 0, 16, 16), IDLE)
+        public Skeleton() : base(10,new Rectangle(0, 0, 16, 16), IDLE)
         {
 
         }

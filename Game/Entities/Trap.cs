@@ -19,7 +19,7 @@ namespace Game.Entities
         private bool returning = false;
         private const float Speed = 1f;
 
-        public Trap() : base(new Rectangle(0, 0, 16, 16), IDLE)
+        public Trap() : base(10000,new Rectangle(0, 0, 16, 16), IDLE)
         {
 
         }

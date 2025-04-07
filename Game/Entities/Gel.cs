@@ -11,7 +11,7 @@ namespace Game.Entities
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/gel.png"), 2, 30);
         
-        public Gel() : base(new Rectangle(0,0,10,10), IDLE) { }
+        public Gel() : base(10,new Rectangle(0,0,10,10), IDLE) { }
 
         public override Vector2 Move(State.Game game)
         {

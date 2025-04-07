@@ -17,7 +17,7 @@ namespace Game.Tiles
         // Used to track when it should despawn
         private int ticksAlive;
 
-        public Boomerang(Vector2 position, int direction) : base(new Rectangle(0, 0, 10, 10), IDLE)
+        public Boomerang(Vector2 position, int direction) : base(100,new Rectangle(0, 0, 10, 10), IDLE)
         {
             Position = position;
             Direction = direction;

@@ -11,7 +11,7 @@ namespace Game.Entities
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/wallmaster.png"), 2, 50);
 
-        public Wallmaster() : base(new Rectangle(0, 0, 16, 16), IDLE)
+        public Wallmaster() : base(10,new Rectangle(0, 0, 16, 16), IDLE)
         {
 
         }
