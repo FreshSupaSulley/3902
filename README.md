@@ -8,9 +8,9 @@ Click [here](https://github.com/MonoGame/MonoGame.Samples) for good resource for
 
 To run, open with VSCode and press play button using C# extension, or cd into 3902 and run `dotnet run`
 
-# Sprint 3
+# Sprint 4
 ## Controls
-WASD / arrow keys for movement. 1, 2, 3 draw items (use Z or N to use them). You don't need to use the mouse controller to transition between rooms; simply walk up to open doors.
+WASD / arrow keys for movement. Z to attack. 1, 2, 3 draw items (use Z to use). Walk up to doors to use them.
 
 ## Known bugs
 Monoko kinda stutters when she moves diagonally. This is a property of keeping everything on pixels and upscaling the render target. Not really a bug but something to note.
