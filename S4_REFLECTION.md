@@ -1,0 +1,4 @@
+# Sprint 4 Reflection
+"Near the end of the sprint, write up a brief report on how your team performed this sprint, using the burndown chart from the board as the basis for discussion. Feel free to also discuss your processes as a whole. Were any changes your made this sprint constructive or detrimental? Do you have any plans for doing things differently next sprint?"
+
+This sprint, the team coordinated much better and was able to successfully work in a branched dev environment and use pull requests to bring all components together. We used documentation to make clarity better for us and the graders. We split different sections of this sprint into reasonably sized chunks (like entities, sounds, gui, etc.) into their own brances each assigned to their own team member. Although some aspects of the sprint are still rudimentary, the basic flow of the game is down, such as hitting enemies and receiving damage, doors, loading levels, etc.
