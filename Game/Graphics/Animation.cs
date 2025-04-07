@@ -8,8 +8,8 @@ namespace Game.Graphics
     public class Animation
     {
         // Array of sprites composing this animation
-        private readonly Rectangle[] sprites;
-        private readonly Texture2D texture;
+        public readonly Rectangle[] sprites;
+        public readonly Texture2D texture;
         // Speed of the animation
         private readonly int duration;
 
@@ -41,7 +41,7 @@ namespace Game.Graphics
             frames++;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
             // Draw the part of the animation we need
             Rectangle sprite = sprites[index];
@@ -50,7 +50,12 @@ namespace Game.Graphics
 
             // dont draw centered anymore
             // spriteBatch.Draw(texture, new Vector2((int) Math.Round(position.X), (int) Math.Round(position.Y)) - new Vector2(sprite.Width / 2, sprite.Height / 2), sprite, Color.White);
-            spriteBatch.Draw(texture, new Vector2((int) position.X, (int) position.Y), sprite, Color.White);
+            spriteBatch.Draw(texture, new Vector2((int)position.X, (int)position.Y), sprite, color);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            Draw(spriteBatch, position, Color.White);
         }
 
         public void Reset()

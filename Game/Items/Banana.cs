@@ -3,6 +3,7 @@ using Game.Graphics;
 using Game.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Game.Entities;
 
 namespace Game.Items
 {
@@ -11,6 +12,9 @@ namespace Game.Items
         private static readonly Sprite SPRITE = new(Main.Load("/Items/banana.png"));
         private readonly int TICKS_ALIVE = 120;
         private readonly int DISTANCE = 100;
+
+        private readonly int XCORRECTION = -10;
+        private readonly int YCORRECTION = -2;
 
         private Vector2 startPos, velocity;
         private int ticks = 0;
@@ -21,6 +25,18 @@ namespace Game.Items
             if (ticks++ >= TICKS_ALIVE)
             {
                 game.room.RemoveEntity(this);
+            }
+            for(int i = 0; i < game.room.gameObjects.Count; i++){
+                Entity e = game.room.gameObjects[i];
+                if(e is LivingEntity){
+                    LivingEntity le = (LivingEntity)e;
+                   if(!(le is Player)){
+                       if(Math.Pow(Position.X + XCORRECTION - le.Position.X, 2) + Math.Pow(Position.Y + YCORRECTION - le.Position.Y, 2) < 49){
+
+                            le.Inflict(game, 1);
+                      }
+                  }
+                }
             }
         }
 

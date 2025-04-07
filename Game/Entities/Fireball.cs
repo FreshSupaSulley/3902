@@ -1,15 +1,12 @@
 using Microsoft.Xna.Framework;
 using Game.Graphics;
-using Game.Entities;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Game.State;
 
-namespace Game.Tiles
+namespace Game.Entities
 {
     public class Fireball(Vector2 position) : Entity(position)
     {
-        private static readonly Sprite dragon_projectaile = new Sprite(Main.Load("/Entities/Dragon/projectile.png"));
+        private static readonly Sprite SPRITE = new Sprite(Main.Load("/Entities/Dragon/projectile.png"));
         private static readonly float speed = 1f;
         private static readonly int timeAlive = 30;
 
@@ -19,6 +16,9 @@ namespace Game.Tiles
         public override void Update(State.Game game)
         {
             Position -= new Vector2(speed, 0);
+            // Add hitbox to room
+            game.room.AddHitbox(new(10, this, new(0, 0, SPRITE.Texture.Width, SPRITE.Texture.Height)));
+            // Check whether to remove it from the game
             if (ticksAlive++ > timeAlive)
             {
                 game.room.RemoveEntity(this);
@@ -27,7 +27,7 @@ namespace Game.Tiles
 
         public override void Draw(SpriteBatch batch)
         {
-            dragon_projectaile.Draw(batch, Position);
+            SPRITE.Draw(batch, Position);
         }
     }
 }

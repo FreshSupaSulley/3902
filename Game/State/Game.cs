@@ -19,7 +19,6 @@ namespace Game.State
     public class Game : IGameState
     {
         // Used to load resources statically
-        private GraphicsDevice device;
         private RenderTarget2D target, loadingTarget;
 
         // Visible to inheritors
@@ -34,39 +33,43 @@ namespace Game.State
         private int loadingTime, loadingDirection;
         private Room loadingRoom;
 
-        public static Game instance;
-
-        public static Stopwatch sw;
-
-        //sound
         //sound effects to be played once (i.e. without looping)
-        public static Dictionary<String, SoundEffect> sfx = new Dictionary<string, SoundEffect>();
-        public static Dictionary<string, SoundEffect> sfxStore = new Dictionary<string, SoundEffect>();
+        public Dictionary<String, SoundEffect> sfx = [];
         //currently playing music
-        public static SoundEffectInstance bgm;
-        public static SoundEffectInstance bgmStore;
+        public SoundEffectInstance bgm = null;
 
         public int muteBit = 0;
         public int muteRequest = 0;
 
-        public Game(GraphicsDevice device)
+        // Load static assets
+        static Game()
         {
-            this.device = device;
-            // Size of Zelda map
-            target = new RenderTarget2D(device, (12 + 4) * 16, (7 + 4) * 16);
-            loadingTarget = new RenderTarget2D(device, target.Width, target.Height);
             Tile.LoadTextures();
             Door.LoadTextures();
+            TempBuffer.pow = Main.Load("pow.png");
+        }
+
+        public Game()
+        {
+            // Size of Zelda map
+            target = new RenderTarget2D(Main.device, (12 + 4) * 16, (7 + 4) * 16);
+            loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
             room = Room.LoadRoom("start");
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
             // Pow
-            TempBuffer.pow = Main.Load("pow.png");
-            loadSoundEffect("ding.wav");
-            loadSoundEffect("punch.wav");
-            changeMusic("Song_1.wav");
-            sw = new Stopwatch();
-            sw.Start();
+            LoadSoundEffect("ding.wav");
+            LoadSoundEffect("punch.wav");
+            LoadSoundEffect("fart.wav");
+            LoadSoundEffect("wow.wav");
+            LoadSoundEffect("pain.wav");
+            ChangeMusic("Song_1.wav");
+        }
+
+        /// Called when the game state is switched to something else
+        public void OnExit()
+        {
+            bgm.Stop();
         }
 
         public void Update(GameTime gameTime)
@@ -74,7 +77,9 @@ namespace Game.State
             // If we want to switch to pause
             if (Main.INSTANCE.keyboard.IsKeyPressed(Keys.Escape))
             {
+                Main.uiManager.SetGame(this);
                 Main.SwitchGameState(new Pause(this));
+                Main.uiManager.ChangeUIState("pause");
                 return;
             }
 
@@ -82,6 +87,7 @@ namespace Game.State
             if (loadingRoom is null)
             {
                 room.Update(this);
+                InGameMessage.agit(this);
             }
             // If we are switching between rooms
             else
@@ -95,11 +101,15 @@ namespace Game.State
                 }
             }
 
-            if(muteRequest == 1){
-                if(muteBit == 0){
-                    this.mute();
-                }else{
-                    this.unmute();
+            if (muteRequest == 1)
+            {
+                if (muteBit == 0)
+                {
+                    this.Mute();
+                }
+                else
+                {
+                    this.Unmute();
                 }
                 muteRequest = 0;
             }
@@ -112,9 +122,10 @@ namespace Game.State
             if (loadingRoom is null)
             {
                 // Draw room at scaled resolution
-                device.SetRenderTarget(target);
+                Main.device.SetRenderTarget(target);
                 spriteBatch.Begin();
                 room.Draw(spriteBatch);
+                InGameMessage.drawAll(spriteBatch);
                 spriteBatch.End();
             }
             else if (renderCaptured is false)
@@ -144,7 +155,7 @@ namespace Game.State
                         break;
                 }
                 renderCaptured = true;
-                device.SetRenderTarget(loadingTarget);
+                Main.device.SetRenderTarget(loadingTarget);
                 spriteBatch.Begin();
                 loadingRoom.Draw(spriteBatch);
                 spriteBatch.End();
@@ -153,7 +164,7 @@ namespace Game.State
             // Number of pixels
             double sin = Math.Pow(Math.Sin(loadingTime * Math.PI / 2 / TRANSITION_TIME), 2);
             // Switch back to main backbuffer
-            device.SetRenderTarget(null);
+            Main.device.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
             var bounds = Main.INSTANCE.Window.ClientBounds;
             switch (loadingDirection)
@@ -202,6 +213,8 @@ namespace Game.State
                     }
             }
 
+            Main.uiManager.Draw(spriteBatch);
+
             spriteBatch.End();
         }
 
@@ -215,7 +228,7 @@ namespace Game.State
         }
 
         //loads sound into sfx
-        public static void loadSoundEffect(String filename)
+        private void LoadSoundEffect(String filename)
         {
             if (filename.IndexOf(".") > 0)
             {
@@ -229,14 +242,18 @@ namespace Game.State
                 Console.WriteLine("Error: invalid name formatting for sound file");
             }
         }
+
         //changes background music
-        public static void changeMusic(String filename)
+        public void ChangeMusic(String filename)
         {
             if (filename.IndexOf(".") > 0)
             {
                 String name = filename.Substring(0, filename.IndexOf("."));
                 string path = "Content/Sound/" + filename;
                 if (!File.Exists(path)) throw new FileNotFoundException($"Could not find sound at {path}");
+                if(bgm != null){
+                    bgm.Pause();
+                }
                 bgm = SoundEffect.FromStream(new FileStream(path, FileMode.Open)).CreateInstance();
                 bgm.IsLooped = true;
                 bgm.Play();
@@ -247,19 +264,16 @@ namespace Game.State
             }
         }
 
-        public void mute(){
+        public void Mute()
+        {
             SoundEffect.MasterVolume = 0.0f;
             muteBit = 1;
         }
 
-        public void unmute(){
+        public void Unmute()
+        {
             SoundEffect.MasterVolume = 1.0f;
             muteBit = 0;
-        }
-
-        public static void reset()
-        {
-            Game.instance.SwitchRoom(1, Room.LoadRoom("start"));
         }
     }
 }

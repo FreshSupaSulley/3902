@@ -12,12 +12,15 @@ public class UIButton : IUserInterfaceElement {
     private ICommand onPress;
     private bool pressed = false;
     protected Color color;
+    protected Color hoverColor;
+    protected bool hovered;
     protected Texture2D pixel;
     public UIButton(Rectangle bounds, MouseController mc, ICommand onPress, Color color) {
         this.bounds = bounds;
         this.mc = mc;
         this.onPress = onPress;
         this.color = color;
+        this.hoverColor = color;
 
         pixel = new Texture2D(Main.INSTANCE.GraphicsDevice, 1, 1);
         pixel.SetData(new [] {color});
@@ -27,16 +30,30 @@ public class UIButton : IUserInterfaceElement {
     public virtual void Update(GameTime gameTime) {
         if (
             bounds.Left <= mc.PositionX() && mc.PositionX() <= bounds.Right &&
-            bounds.Top <= mc.PositionY() && mc.PositionY() <= bounds.Bottom && mc.LeftDown() && !pressed
+            bounds.Top <= mc.PositionY() && mc.PositionY() <= bounds.Bottom
         ) {
-            onPress.Execute();
+            hovered = true;
+            if (mc.LeftDown() && !pressed) {
+                onPress.Execute();
+            }
+        } else {
+            hovered = false;
         }
         if (!mc.LeftDown()) {
             pressed = false;
         }
     }
+    public void UpdateCommand(ICommand command) {
+        onPress = command;
+    }
     public virtual void Draw(SpriteBatch spriteBatch) {
-        spriteBatch.Draw(pixel, bounds, color);
-        Console.WriteLine(bounds);
+        if (hovered) {
+            spriteBatch.Draw(pixel, bounds, hoverColor);
+        } else {
+            spriteBatch.Draw(pixel, bounds, color);
+        }
+    }
+    public void SetHoverColor(Color hoverColor) {
+        this.hoverColor = hoverColor;
     }
 }

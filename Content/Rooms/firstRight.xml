@@ -2,7 +2,7 @@
 <Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <tiles>
-	  <!--row1-->
+    <!--row1-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
@@ -15,8 +15,7 @@
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-	  <!--row2-->
-	<TileType>BLOCK</TileType>
+    <!--row2-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
@@ -28,33 +27,8 @@
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-	  <!--row3-->  
     <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>WALL</TileType>
-    <TileType>WALL</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>WALL</TileType>
-    <TileType>WALL</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-	  <!--row4-->
-	<TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>WALL</TileType>
-    <TileType>WALL</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>WALL</TileType>
-    <TileType>WALL</TileType>
-    <TileType>BLOCK</TileType>
-    <TileType>BLOCK</TileType>
-	  <!--row5-->
+    <!--row3-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>WALL</TileType>
@@ -67,7 +41,33 @@
     <TileType>WALL</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-	  <!--row6-->
+    <!--row4-->
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <!--row5-->
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>WALL</TileType>
+    <TileType>WALL</TileType>
+    <TileType>BLOCK</TileType>
+    <TileType>BLOCK</TileType>
+    <!--row6-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
@@ -80,7 +80,7 @@
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
-	  <!--row7-->
+    <!--row7-->
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
     <TileType>BLOCK</TileType>
