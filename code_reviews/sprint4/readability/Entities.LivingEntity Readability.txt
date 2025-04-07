@@ -1,0 +1,17 @@
+
+    Author of the code review
+    Date of the code review
+    Sprint number
+    Name of the .cs file being reviewed
+    Author of the .cs file being reviewed
+    Number of minutes taken to complete the review
+    Specific comments on what is readable and what is not 
+
+Jared Willets
+APR 7, 2025
+Sprint 4
+Game/Entities/LivingEntity.cs
+Erich Boschert
+10 minutes + time using in development
+
+I think this class is a great example of good readability, with an overall lack of unnecessary bloat and good, plain-english names along with a nice use of the font rendering for the damage indicators, plus it was very convenient to use for the creation of the health element.
