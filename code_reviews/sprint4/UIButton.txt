@@ -1,0 +1,8 @@
+Ty Tram Fredrick
+4/7/25
+Sprint 4
+UIButton.cs
+Jared Willets
+5 minutes
+This code is reasonably readable, with meaningful English-language variable names devoid of any abstruse abbreviations. The logic is easy to follow and needs only a few
+moments to grasp; however, some description of the actions taken in update could make this process even faster
