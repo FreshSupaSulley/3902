@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Game.Entities
 {
-    public class Skeleton : LivingEntity
+    public class Skeleton : EnemyEntity
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/skeleton.png"), 2, 30);
 

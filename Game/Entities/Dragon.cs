@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Dragon : LivingEntity
+    public class Dragon : EnemyEntity
     {
         private static readonly Animation IDLE = new(Main.Load("/Entities/Dragon/dragon.png"), 4, 10);
         private static readonly Animation HURT = new(Main.Load("/Entities/Dragon/damaged.png"), 1, 1);

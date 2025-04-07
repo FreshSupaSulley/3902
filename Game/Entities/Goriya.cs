@@ -8,7 +8,7 @@ using System;
 
 namespace Game.Entities
 {
-    public class Goriya : LivingEntity
+    public class Goriya : EnemyEntity
     {
 
         private static readonly Texture2D GORIYA_TEXTURE = Main.Load("/Entities/goriya.png");
