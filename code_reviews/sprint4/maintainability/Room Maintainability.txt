@@ -1,0 +1,21 @@
+"In the plaintext file for a maintainability review, include the following information:
+
+Author of the code review
+Date of the code review
+Sprint number
+Name of the .cs file being reviewed
+Author of the .cs file being reviewed
+Number of minutes taken to complete the review
+Specific comments on what is readable and what is not"
+
+Erich Boschert
+4/7/25
+Sprint 4
+Room.cs
+Erich Boschert
+5 minutes
+Comments:
+Room is now effectively the heart of the State.Game class. It handles ticking of entities, linking hitboxes together, etc. In a perfect world, this should probably be combined in the State.Game class but since each room
+is effectively their own little world, this could suffice for now. One thing I'd like to address one day is the hitbox system, as its a bit crude and only differentiates between the player's hitboxes and the entity's
+hitboxes. Right now there's a lot of type checking to see if the hitboxes should connect but this is a minor issue that could be addressed at a different time. Other than that, I think room does the job fairly well
+and could see little changes for the rest of the project.
