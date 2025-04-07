@@ -1,0 +1,10 @@
+Jared Willets
+APR 7, 2025
+Sprint 4
+State/Game.cs
+Class Author: Erich Boschert
+Time Taken: 15 minutes + time developing with it for UI system
+
+I think this new system is very helpful and going to greatly improve the overall connectedness and state handling for the game.
+For how complicated of a system it is, I think this entire class and system is surprisingly maintainable and modular, as I encountered minimal issues as I used it to work on the UI system and pausing mechanics, especially with the static Main INSTANCE always having access to the current game. Overall I think this was a very good implementation.
+I think it would be good as an improvement to have the spritebatch begin and end be handled in the main draw instead of the game state draw, as the uiManager must be added to every state class with the way it is right now.
