@@ -97,40 +97,34 @@
   <gameObjects>
     <Entity xsi:type="Skeleton">
       <Position>
-        <X>48</X>
-        <Y>48</Y>
-      </Position>
-    </Entity>
-    <Entity xsi:type="Skeleton">
-      <Position>
-        <X>64</X>
-        <Y>64</Y>
-      </Position>
-    </Entity>
-    <Entity xsi:type="Skeleton">
-      <Position>
-        <X>48</X>
+        <X>80</X>
         <Y>112</Y>
       </Position>
     </Entity>
-    <Entity xsi:type="Skeleton">
-      <Position>
-        <X>120</X>
-        <Y>64</Y>
-      </Position>
-    </Entity>
-    <Entity xsi:type="Skeleton">
-      <Position>
-        <X>120</X>
-        <Y>112</Y>
-      </Position>
-    </Entity>
-    <Entity xsi:type="WinStar">
-      <Position>
-        <X>120</X>
-        <Y>50</Y>
-      </Position>
-    </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>128</X>
+			  <Y>48</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>176</X>
+			  <Y>42</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>200</X>
+			  <Y>112</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Skeleton">
+		  <Position>
+			  <X>134</X>
+			  <Y>108</Y>
+		  </Position>
+	  </Entity>
   </gameObjects>
   <doors>
     <Door>

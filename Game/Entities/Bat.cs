@@ -6,23 +6,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Bat() : EnemyEntity(10, new(0, 0, 10, 10), IDLE)
+    public class Bat : LivingEntity
     {
-        private static readonly Animation IDLE = new(Main.Load("/Entities/bat.png"), 2, 20);
+        private static readonly Animation IDLE = new(Main.Load("/Entities/bat.png"), 2, 30);
 
-        private static readonly IPath[] motionPaths = [
-            new LinearPath(new Vector2(200,200), new Vector2(100,0), 50),
-            new LinearPath(new Vector2(300,200), new Vector2(-100,0), 50),
-            new LinearPath(new Vector2(200,200), new Vector2(0,100), 50),
-            new LinearPath(new Vector2(200,300), new Vector2(0,-200), 100),
-            new LinearPath(new Vector2(200,100), new Vector2(0,100), 50),
-            new LinearPath(new Vector2(200,200), new Vector2(-100,0), 50),
-            new LinearPath(new Vector2(100,200), new Vector2(100,0), 50),
-        ];
+        public Bat() : base(new Rectangle(0, 0, 14, 14), IDLE)
+        {
+        }
 
         public override Vector2 Move(State.Game game)
         {
-            return new Vector2(1, 1);
+            Vector2 direction = game.player.Position - Position;
+
+            if (direction != Vector2.Zero)
+                direction.Normalize();
+
+            float speed = 0.5f;
+
+            return direction * speed;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

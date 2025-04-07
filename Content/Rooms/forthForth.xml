@@ -97,20 +97,20 @@
   <gameObjects>
     <Entity xsi:type="Goriya">
       <Position>
-        <X>48</X>
-        <Y>48</Y>
+        <X>144</X>
+        <Y>32</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Goriya">
 		  <Position>
-			  <X>64</X>
-			  <Y>64</Y>
+			  <X>144</X>
+			  <Y>96</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Goriya">
 		  <Position>
-			  <X>200</X>
-			  <Y>112</Y>
+			  <X>180</X>
+			  <Y>48</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>

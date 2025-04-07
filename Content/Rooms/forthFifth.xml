@@ -97,50 +97,50 @@
   <gameObjects>
     <Entity xsi:type="Wallmaster">
       <Position>
-        <X>48</X>
-        <Y>48</Y>
+        <X>32</X>
+        <Y>60</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>64</X>
-			  <Y>64</Y>
+			  <X>32</X>
+			  <Y>88</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>48</X>
-			  <Y>112</Y>
+			  <X>32</X>
+			  <Y>192</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>60</X>
-			  <Y>48</Y>
+			  <X>32</X>
+			  <Y>210</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>100</X>
-			  <Y>64</Y>
+			  <X>32</X>
+			  <Y>100</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>130</X>
-			  <Y>112</Y>
+			  <X>32</X>
+			  <Y>132</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>100</X>
-			  <Y>64</Y>
+			  <X>224</X>
+			  <Y>100</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Wallmaster">
 		  <Position>
-			  <X>120</X>
-			  <Y>112</Y>
+			  <X>224</X>
+			  <Y>130</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>

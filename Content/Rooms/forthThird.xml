@@ -97,32 +97,32 @@
   <gameObjects>
     <Entity xsi:type="Gel">
       <Position>
-        <X>48</X>
-        <Y>48</Y>
+        <X>64</X>
+        <Y>32</Y>
       </Position>
     </Entity>
 	  <Entity xsi:type="Gel">
 		  <Position>
-			  <X>64</X>
+			  <X>80</X>
 			  <Y>64</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Gel">
-		  <Position>
-			  <X>48</X>
-			  <Y>112</Y>
-		  </Position>
-	  </Entity>
-	  <Entity xsi:type="Gel">
-		  <Position>
-			  <X>64</X>
-			  <Y>80</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Gel">
 		  <Position>
 			  <X>80</X>
 			  <Y>112</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Gel">
+		  <Position>
+			  <X>150</X>
+			  <Y>32</Y>
+		  </Position>
+	  </Entity>
+	  <Entity xsi:type="Gel">
+		  <Position>
+			  <X>158</X>
+			  <Y>62</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>

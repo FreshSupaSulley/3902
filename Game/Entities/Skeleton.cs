@@ -4,17 +4,31 @@ using Game.State;
 using Game.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq.Expressions;
 
 namespace Game.Entities
 {
-    public class Skeleton() : LivingEntity(15, new(0, 0, 10, 10), IDLE)
+    public class Skeleton : LivingEntity
     {
-        private static readonly Animation IDLE = new(Main.Load("/Entities/skeleton.png"), 2, 50);
+        private static readonly Animation IDLE = new(Main.Load("/Entities/skeleton.png"), 2, 30);
+
+        public Skeleton() : base(new Rectangle(0, 0, 16, 16), IDLE)
+        {
+
+        }
 
         public override Vector2 Move(State.Game game)
         {
-            return new Vector2(0, 0);
-            //return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
+            Vector2 direction = game.player.Position - Position;
+
+            if (direction != Vector2.Zero)
+                direction.Normalize();
+
+            // speed
+            float speed = 0.5f;
+
+            // Move toward player
+            return direction * speed;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

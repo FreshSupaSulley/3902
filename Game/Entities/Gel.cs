@@ -7,14 +7,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game.Entities
 {
-    public class Gel() : LivingEntity(10, new(0, 0, 10, 10), IDLE)
+    public class Gel : LivingEntity
     {
-        private static readonly Animation IDLE = new(Main.Load("/Entities/gel.png"), 2, 20);
+        private static readonly Animation IDLE = new(Main.Load("/Entities/gel.png"), 2, 30);
+        
+        public Gel() : base(new Rectangle(0,0,10,10), IDLE) { }
 
         public override Vector2 Move(State.Game game)
         {
-            return new Vector2(0, 0);
-            //return new Vector2(0, ticks / 10 % 2 == 0 ? 1 : -1);
+            Vector2 direction = game.player.Position - Position;
+
+            if (direction != Vector2.Zero)
+                direction.Normalize();
+
+            float speed = 0.5f;
+
+            return direction * speed;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
