@@ -46,7 +46,10 @@ namespace Game.Entities
 		// Player has 100hp
 		public Player() : base(100, new(5, 13, 14, 14), DOWN) { }
 
-		public override void Update(State.Game game)
+
+        public int GetKey() => Key;
+
+        public override void Update(State.Game game)
 		{
 			base.Update(game);
 
@@ -90,6 +93,11 @@ namespace Game.Entities
 				return true;
             }
 			return false;
+		}
+
+		public void addKey()
+		{
+			Key++;
 		}
 
 		private Vector2 HandleInputs(State.Game game)

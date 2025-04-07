@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using Game.State;
 using Game.Util;
 using System;
+using Game.Items;
 
 namespace Game.Entities
 {

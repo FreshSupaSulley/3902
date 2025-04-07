@@ -9,6 +9,7 @@ using Game.State;
 using Game.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Reflection.PortableExecutable;
 
 namespace Game.Rooms
 {
@@ -65,7 +66,6 @@ namespace Game.Rooms
                         {
                             victim.Inflict(game, hitbox.GetDamage());
                         }
-                        
                     }
                 }
             }
