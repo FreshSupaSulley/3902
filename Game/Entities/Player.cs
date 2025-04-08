@@ -84,7 +84,7 @@ namespace Game.Entities
 			return HandleInputs(game);
 		}
 
-		public bool hasKey()
+		public bool HasKey()
 		{
             if (Key >= 1)
             {
