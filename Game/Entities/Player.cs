@@ -7,11 +7,10 @@ using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
 using Game.State;
 using Game.Util;
-using System;
 
 namespace Game.Entities
 {
-	public class Player : LivingEntity
+    public class Player : LivingEntity
 	{
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
@@ -33,8 +32,8 @@ namespace Game.Entities
 		//item carrying
 		// there are these awesome things called booleans you should check them out ):
 		private int Key = 0;
-        private int rupee = 0;
-        private int bomb = 0;
+        // private int rupee = 0;
+        // private int bomb = 0;
 
 		private static readonly int TOTAL_DEATH_TICKS = 120, I_FRAMES = 30;
 		private bool invulnerable, dead;
