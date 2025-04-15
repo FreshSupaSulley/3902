@@ -17,10 +17,7 @@ namespace Game.State
 
         public void Update(GameTime gameTime)
         {
-            if (Main.INSTANCE.mouse.LeftDown())
-            {
-                Main.SwitchGameState(new Game());
-            }
+            Main.uiManager.Update(gameTime);
         }
 
         public void Draw(SpriteBatch batch)

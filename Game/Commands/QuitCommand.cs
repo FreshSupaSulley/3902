@@ -4,15 +4,14 @@ namespace Game.Commands;
 
 class QuitCommand : ICommand
 {
-	private State.Game game;
-	public QuitCommand(State.Game game)
+	private Microsoft.Xna.Framework.Game game;
+	public QuitCommand(Microsoft.Xna.Framework.Game game)
 	{
 		this.game = game;
 	}
 
 	public void Execute()
 	{
-		// what?
-		// game.Exit();
+		game.Exit();
 	}
 }
