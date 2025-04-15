@@ -21,6 +21,7 @@ namespace Game.State
                 Main.SwitchGameState(game);
                 return;
             }
+            Main.uiManager.Update(gameTime);
         }
 
         public void Draw(SpriteBatch batch)
