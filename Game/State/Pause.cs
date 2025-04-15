@@ -30,6 +30,7 @@ namespace Game.State
             game.Draw(batch);
             // Now draw pause on top
             batch.Begin();
+            Main.uiManager.Draw(batch);
             batch.End();
         }
     }

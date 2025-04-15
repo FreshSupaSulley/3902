@@ -89,11 +89,27 @@ namespace Game.Entities
         public override void Draw(SpriteBatch spriteBatch)
         {
             ActiveAnimation.Draw(spriteBatch, Position);
+            if (Main.debug) {
+                Rectangle temp = new Rectangle(
+                    (int) (collisionBox.X + Position.X), 
+                    (int) (collisionBox.Y + Position.Y), 
+                    collisionBox.Width, 
+                    collisionBox.Height);
+				DebugTools.DrawRect(spriteBatch, temp);
+			}
         }
 
         public void Draw(SpriteBatch spriteBatch, Color color)
         {
             ActiveAnimation.Draw(spriteBatch, Position, color);
+            if (Main.debug) {
+                Rectangle temp = new Rectangle(
+                    (int) (collisionBox.X + Position.X), 
+                    (int) (collisionBox.Y + Position.Y), 
+                    collisionBox.Width, 
+                    collisionBox.Height);
+				DebugTools.DrawRect(spriteBatch, temp);
+			}
         }
     }
 }

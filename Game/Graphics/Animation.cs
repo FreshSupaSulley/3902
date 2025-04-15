@@ -16,8 +16,10 @@ namespace Game.Graphics
         // Changes on tick
         private int index, frames;
 
-        public Animation(Texture2D texture, int frames, int duration)
-        {
+        private float scale;
+
+        public Animation(Texture2D texture, int frames, int duration) : this(texture, frames, duration, 1.0f) {}
+        public Animation(Texture2D texture, int frames, int duration, float scale) {
             this.texture = texture;
             this.frames = frames;
             this.duration = duration;
@@ -28,6 +30,7 @@ namespace Game.Graphics
             {
                 sprites[i] = new Rectangle(i * spriteWidth, 0, spriteWidth, texture.Height);
             }
+            this.scale = scale;
         }
 
         public void Update()
@@ -50,7 +53,7 @@ namespace Game.Graphics
 
             // dont draw centered anymore
             // spriteBatch.Draw(texture, new Vector2((int) Math.Round(position.X), (int) Math.Round(position.Y)) - new Vector2(sprite.Width / 2, sprite.Height / 2), sprite, Color.White);
-            spriteBatch.Draw(texture, new Vector2((int)position.X, (int)position.Y), sprite, color);
+            spriteBatch.Draw(texture, new Vector2((int)position.X, (int)position.Y), sprite, color, 0.0f, Vector2.Zero, scale, SpriteEffects.None, 0.0f);
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)

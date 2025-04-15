@@ -124,7 +124,7 @@ namespace Game.State
             {
                 // Draw room at scaled resolution
                 Main.device.SetRenderTarget(target);
-                spriteBatch.Begin();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
                 room.Draw(spriteBatch);
                 InGameMessage.drawAll(spriteBatch);
                 spriteBatch.End();

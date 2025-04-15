@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
 using Game.State;
 using Game.Util;
+using System.Diagnostics;
+using System.Reflection;
+using System;
 
 namespace Game.Entities
 {
@@ -15,16 +18,18 @@ namespace Game.Entities
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
+		private static float scale = 0.7f;
+
 		// Walk animations
-		public static readonly Animation UP = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED);
-		public static readonly Animation RIGHT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED);
-		public static readonly Animation DOWN = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED);
-		public static readonly Animation LEFT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED);
+		public static readonly Animation UP = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED, scale);
+		public static readonly Animation RIGHT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED, scale);
+		public static readonly Animation DOWN = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED, scale);
+		public static readonly Animation LEFT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED, scale);
 
 		// Attack
-		private static readonly Animation ATTACK = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
+		private static readonly Animation ATTACK = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
 		// Old damaged sprite doesn't fit same style. Needs new resource
-		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED);
+		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
 
 		// Dead
 		private static readonly Sprite HEAD = new(Main.Load("Entities/Monoko/head.png")), BODY = new(Main.Load("Entities/Monoko/body.png"));
@@ -43,7 +48,17 @@ namespace Game.Entities
 		public Item Item;
 
 		// Player has 100hp
-		public Player() : base(100, new(5, 13, 14, 14), DOWN) { }
+		public Player() : base(
+			100, 
+			new(
+				(int)(BODY.Texture.Width*scale)/2-7, 
+				(int)((BODY.Texture.Height)*scale)/2-7, 
+				14, 
+				14
+			), 
+			DOWN
+			) {
+		 }
 
 
         public int GetKey() => Key;

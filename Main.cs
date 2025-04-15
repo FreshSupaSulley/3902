@@ -6,6 +6,8 @@ using Game.State;
 using Game.Util;
 using Game.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection.Metadata;
 
 new Main().Run();
 
@@ -35,6 +37,7 @@ public class Main : Microsoft.Xna.Framework.Game
     public static string startingUI = "menu"; // The starting ui layout to use
     public static UIManager uiManager;
     public static Dictionary<string,SpriteFont> fonts;
+    public static bool debug = false; // Change to false when not testing
     public Main()
     {
         INSTANCE = this;
