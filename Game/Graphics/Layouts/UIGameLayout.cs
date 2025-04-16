@@ -19,11 +19,11 @@ public class UIGameLayout : UILayout {
             Func<int> key = playerGame.player.GetKey;
             Vector2 position = new Vector2(50,20);
             UIVariableText<int> el = new UIHealthVariableText<int>(function, position, "arialbold", Color.White);
-            UIVariableText<int> le = new UIKeyVariableText<int>(key, new Vector2(180,20), "arialbold", Color.White);
+            UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(180,20), "arialbold", Color.White);
             el.SetOutline(Color.Black);
-            le.SetOutline(Color.Black);
+            keyLayout.SetOutline(Color.Black);
             AddElement(el);
-            AddElement(le);
+            AddElement(keyLayout);
             healthAdded = true;
         }
         base.Update(gameTime);

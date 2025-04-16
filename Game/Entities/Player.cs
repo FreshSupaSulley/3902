@@ -36,7 +36,7 @@ namespace Game.Entities
 
 		//item carrying
 		// there are these awesome things called booleans you should check them out ):
-		private int Key = 0;
+		private int Key;
         // private int rupee = 0;
         // private int bomb = 0;
 
@@ -58,6 +58,7 @@ namespace Game.Entities
 			), 
 			DOWN
 			) {
+			Key = 0;
 		 }
 
 
@@ -103,7 +104,6 @@ namespace Game.Entities
 		{
             if (Key >= 1)
             {
-				Key--;
 				return true;
             }
 			return false;
@@ -112,6 +112,16 @@ namespace Game.Entities
 		public void addKey()
 		{
 			Key++;
+		}
+
+		public void useKey()
+		{
+			Key--;
+        }
+
+		public void setKey(int count)
+		{
+			Key = count;
 		}
 
 		private Vector2 HandleInputs(State.Game game)
