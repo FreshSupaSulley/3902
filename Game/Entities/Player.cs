@@ -10,6 +10,9 @@ using Game.Util;
 using System.Diagnostics;
 using System.Reflection;
 using System;
+using Game.KeyResponses;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Game.Entities
 {
@@ -27,7 +30,7 @@ namespace Game.Entities
 		public static readonly Animation LEFT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED, scale);
 
 		// Attack
-		private static readonly Animation ATTACK = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
+		public static readonly Animation ATTACK = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
 		// Old damaged sprite doesn't fit same style. Needs new resource
 		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
 
@@ -44,6 +47,8 @@ namespace Game.Entities
 		private bool invulnerable, dead;
 		private int deadTicks, iframeTicks;
 
+		public Dictionary<Keys, IKeyResponse> mappings = new Dictionary<Keys, IKeyResponse>();
+
 		[XmlIgnore] // required??
 		public Item Item;
 
@@ -58,6 +63,7 @@ namespace Game.Entities
 			), 
 			DOWN
 			) {
+				Console.WriteLine("hello world\n");
 		 }
 
 
@@ -96,7 +102,8 @@ namespace Game.Entities
 			{
 				Item.Position = base.Position;
 			}
-			return HandleInputs(game);
+			//return HandleInputs(game);
+			return new Vector2(0, 0);
 		}
 
 		public bool HasKey()
