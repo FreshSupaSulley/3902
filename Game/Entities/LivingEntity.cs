@@ -89,7 +89,7 @@ namespace Game.Entities
         public override void Draw(SpriteBatch spriteBatch)
         {
             ActiveAnimation.Draw(spriteBatch, Position);
-            if (Main.debug) {
+            if (Main.debug && !(this is Player)) {
                 Rectangle temp = new Rectangle(
                     (int) (collisionBox.X + Position.X), 
                     (int) (collisionBox.Y + Position.Y), 
@@ -102,12 +102,13 @@ namespace Game.Entities
         public void Draw(SpriteBatch spriteBatch, Color color)
         {
             ActiveAnimation.Draw(spriteBatch, Position, color);
-            if (Main.debug) {
+            if (Main.debug && !(this is Player)) {
                 Rectangle temp = new Rectangle(
                     (int) (collisionBox.X + Position.X), 
                     (int) (collisionBox.Y + Position.Y), 
                     collisionBox.Width, 
-                    collisionBox.Height);
+                    collisionBox.Height
+                );
 				DebugTools.DrawRect(spriteBatch, temp);
 			}
         }

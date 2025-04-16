@@ -74,6 +74,9 @@ namespace Game.Rooms
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(DOOR_SHEET_TOP, Position + spriteOrigin, textures[Type], Color.White, (float)(Angle * Math.PI / 180f), spriteOrigin, 1.0f, SpriteEffects.None, 0);
+            if (Main.debug) {
+                DebugTools.DrawRect(spriteBatch, new Rectangle((int)Position.X, (int)Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE), new Color(Color.Blue, 0.5f));
+            }
         }
     }
 }

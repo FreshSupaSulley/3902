@@ -67,8 +67,6 @@ namespace Game.Entities
 		{
 			base.Update(game);
 
-			Console.WriteLine(Key);
-
 			// Handle invulnerability
 			if (invulnerable && ++iframeTicks >= I_FRAMES)
 			{
@@ -202,6 +200,14 @@ namespace Game.Entities
 				// fart death animation lol
 				spriteBatch.Draw(HEAD.Texture, new((int)Position.X + HEAD.Texture.Width / 2, (int)Position.Y + HEAD.Texture.Height / 2 - deadTicks), null, Color.White, MathHelper.ToRadians(deadTicks * 12), new Vector2(HEAD.Texture.Width / 2f, HEAD.Texture.Height / 2f), new Vector2(1), SpriteEffects.None, 0f);
 				spriteBatch.Draw(BODY.Texture, new Vector2((int)Position.X, (int)Position.Y), Color.White);
+			}
+			if (Main.debug) {
+                Rectangle temp = new Rectangle(
+                    (int) (collisionBox.X + Position.X), 
+                    (int) (collisionBox.Y + Position.Y), 
+                    collisionBox.Width, 
+                    collisionBox.Height);
+				DebugTools.DrawRect(spriteBatch, temp, new Color(Color.Green, 0.5f));
 			}
 		}
 
