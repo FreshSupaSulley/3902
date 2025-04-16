@@ -8,6 +8,9 @@ public class UIGameLayout : UILayout {
     public UIGameLayout(GraphicsDevice device) {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
+
+        // UITextButton pauseButton = new UITextButton(bounds, Main.INSTANCE.mouse, new PauseCommand, buttonColor, "⏸︎", Color.Black, "arialbold");
+
     }
     public override void Update(GameTime gameTime) {
         if (!healthAdded && Main.INSTANCE.State is Game.State.Game) {

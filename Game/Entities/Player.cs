@@ -67,6 +67,8 @@ namespace Game.Entities
 		{
 			base.Update(game);
 
+			Console.WriteLine(Key);
+
 			// Handle invulnerability
 			if (invulnerable && ++iframeTicks >= I_FRAMES)
 			{

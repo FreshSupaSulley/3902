@@ -3,6 +3,7 @@ using Game.Controllers;
 using Game.Commands;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game.Graphics;
 
@@ -15,6 +16,8 @@ public class UIButton : IUserInterfaceElement {
     protected Color hoverColor;
     protected bool hovered;
     protected Texture2D pixel;
+    protected int borderWidth;
+    protected Color borderColor;
     public UIButton(Rectangle bounds, MouseController mc, ICommand onPress, Color color) {
         this.bounds = bounds;
         this.mc = mc;
@@ -47,13 +50,28 @@ public class UIButton : IUserInterfaceElement {
         onPress = command;
     }
     public virtual void Draw(SpriteBatch spriteBatch) {
+        Rectangle borderBounds = new Rectangle(
+            bounds.X - borderWidth,
+            bounds.Y - borderWidth,
+            bounds.Width + 2*borderWidth,
+            bounds.Height + 2*borderWidth
+        );
+        spriteBatch.Draw(pixel, borderBounds, borderColor);
         if (hovered) {
             spriteBatch.Draw(pixel, bounds, hoverColor);
+            Mouse.SetCursor(MouseCursor.Hand);
         } else {
             spriteBatch.Draw(pixel, bounds, color);
         }
     }
     public void SetHoverColor(Color hoverColor) {
         this.hoverColor = hoverColor;
+    }
+    public void SetBorder(Color borderColor, int borderWidth) {
+        this.borderColor = borderColor;
+        this.borderWidth = borderWidth;
+    }
+    public void SetBorder(Color borderColor) {
+        SetBorder(borderColor, 1);
     }
 }

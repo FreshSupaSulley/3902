@@ -26,6 +26,8 @@ namespace Game.Rooms
         [XmlIgnore]
         public List<Hitbox> hitboxes = [];
 
+        public static Dictionary<string, Room> LoadedRooms = new();
+
         // Needed for serialization
         private Room() { }
 
@@ -177,85 +179,92 @@ namespace Game.Rooms
 
         public static Room LoadRoom(string filename, Player player)
         {
-            XmlSerializer serializer = new(typeof(Room));
-            using Stream reader = new FileStream("Content/Rooms/" + filename + ".xml", FileMode.Open);
-            Room room = (Room)serializer.Deserialize(reader);
-            // Add room boundaries
-            TileType[] trueTiles = new TileType[14 * 9];
-            for (int i = 0, innerIndex = 0; i < trueTiles.Length; i++)
-            {
-                // If on the outskirts, put an invisible wall there
-                if (IsBorderTile(i))
+            Room room = new Room();
+            if (LoadedRooms.ContainsKey(filename)) {
+                return LoadedRooms[filename];
+            } else {
+
+                XmlSerializer serializer = new(typeof(Room));
+                using Stream reader = new FileStream("Content/Rooms/" + filename + ".xml", FileMode.Open);
+                room = (Room)serializer.Deserialize(reader);
+                // Add room boundaries
+                TileType[] trueTiles = new TileType[14 * 9];
+                for (int i = 0, innerIndex = 0; i < trueTiles.Length; i++)
                 {
-                    // Top door
-                    if (i >= 6 && i <= 7)
+                    // If on the outskirts, put an invisible wall there
+                    if (IsBorderTile(i))
                     {
-                        trueTiles[i] = Door.IsWalkable(room.doors[0].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[0].Type == DoorType.LOCK && player.HasKey())
+                        // Top door
+                        if (i >= 6 && i <= 7)
                         {
-                            trueTiles[i] = TileType.BLOCK;
+                            trueTiles[i] = Door.IsWalkable(room.doors[0].Type) ? TileType.BLOCK : TileType.WALL;
+                            if (room.doors[0].Type == DoorType.LOCK && player.HasKey())
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
+                            if (room.gameObjects.Count == 0)
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
                         }
-                        if (room.gameObjects.Count == 0)
+                        else if (i == 56)
                         {
-                            trueTiles[i] = TileType.BLOCK;
+                            // Left door
+                            trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
+                            if (room.doors[3].Type == DoorType.LOCK && player.HasKey())
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
+                            if (room.gameObjects.Count == 0)
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
                         }
-                    }
-                    else if (i == 56)
-                    {
-                        // Left door
-                        trueTiles[i] = Door.IsWalkable(room.doors[3].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[3].Type == DoorType.LOCK && player.HasKey())
+                        else if (i == 69)
                         {
-                            trueTiles[i] = TileType.BLOCK;
+                            // Right door
+                            trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
+                            if (room.doors[1].Type == DoorType.LOCK && player.HasKey())
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
+                            if (room.gameObjects.Count == 0)
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
                         }
-                        if (room.gameObjects.Count == 0)
+                        else if (i >= 118 && i <= 119)
                         {
-                            trueTiles[i] = TileType.BLOCK;
+                            // Bottom door
+                            trueTiles[i] = Door.IsWalkable(room.doors[2].Type) ? TileType.BLOCK : TileType.WALL;
+                            if (room.doors[2].Type == DoorType.LOCK && player.HasKey())
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
+                            if (room.gameObjects.Count == 0)
+                            {
+                                trueTiles[i] = TileType.BLOCK;
+                            }
                         }
-                    }
-                    else if (i == 69)
-                    {
-                        // Right door
-                        trueTiles[i] = Door.IsWalkable(room.doors[1].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[1].Type == DoorType.LOCK && player.HasKey())
+                        else
                         {
-                            trueTiles[i] = TileType.BLOCK;
-                        }
-                        if (room.gameObjects.Count == 0)
-                        {
-                            trueTiles[i] = TileType.BLOCK;
-                        }
-                    }
-                    else if (i >= 118 && i <= 119)
-                    {
-                        // Bottom door
-                        trueTiles[i] = Door.IsWalkable(room.doors[2].Type) ? TileType.BLOCK : TileType.WALL;
-                        if (room.doors[2].Type == DoorType.LOCK && player.HasKey())
-                        {
-                            trueTiles[i] = TileType.BLOCK;
-                        }
-                        if (room.gameObjects.Count == 0)
-                        {
-                            trueTiles[i] = TileType.BLOCK;
+                            trueTiles[i] = TileType.WALL;
                         }
                     }
                     else
                     {
-                        trueTiles[i] = TileType.WALL;
+                        trueTiles[i] = room.tiles[innerIndex++];
                     }
                 }
-                else
+                room.tiles = trueTiles;
+                // Initialize doors
+                foreach (var door in room.doors)
                 {
-                    trueTiles[i] = room.tiles[innerIndex++];
+                    door.Initialize();
                 }
+                LoadedRooms.Add(filename, room);
+                return room;
             }
-            room.tiles = trueTiles;
-            // Initialize doors
-            foreach (var door in room.doors)
-            {
-                door.Initialize();
-            }
-            return room;
         }
     }
 }

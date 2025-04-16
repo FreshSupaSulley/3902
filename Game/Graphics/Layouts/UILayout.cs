@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game.Graphics;
 
@@ -17,6 +18,7 @@ public abstract class UILayout : IUserInterfaceLayout {
         elements.Remove(el);
     }
     public virtual void Draw(SpriteBatch spriteBatch) {
+        Mouse.SetCursor(MouseCursor.Arrow);
         foreach (IUserInterfaceElement el in elements) {
             el.Draw(spriteBatch);
         }
