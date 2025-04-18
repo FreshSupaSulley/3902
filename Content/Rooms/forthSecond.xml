@@ -126,7 +126,7 @@
       <roomPath>forthThird</roomPath>
     </Door>
     <Door>
-      <Type>LOCK</Type>
+      <Type>OPEN</Type>
       <location>2</location>
       <roomPath>thirdFirst</roomPath>
     </Door>

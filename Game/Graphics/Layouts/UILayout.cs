@@ -18,7 +18,6 @@ public abstract class UILayout : IUserInterfaceLayout {
         elements.Remove(el);
     }
     public virtual void Draw(SpriteBatch spriteBatch) {
-        Mouse.SetCursor(MouseCursor.Arrow);
         foreach (IUserInterfaceElement el in elements) {
             el.Draw(spriteBatch);
         }

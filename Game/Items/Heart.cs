@@ -22,6 +22,7 @@ namespace Game.Items
             SPRITE.Draw(batch, Position);
         }
 
+
         public override void Use(State.Game game)
         {
             game.sfx["ding"].Play();

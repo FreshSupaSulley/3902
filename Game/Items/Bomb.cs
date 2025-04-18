@@ -36,6 +36,7 @@ namespace Game.Items
             }
         }
 
+
         public override void Draw(SpriteBatch batch)
         {
             if (exploded)

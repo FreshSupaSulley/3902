@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Game.KeyResponses;
 using Microsoft.Xna.Framework.Input;
 public class XmlUtils{
-    public static void saveMappings(Dictionary<Keys, IKeyResponse> dict, string filename){
+    public static void serializeMappings(Dictionary<Keys, IKeyResponse> dict, string filename){
         TextWriter tw = new StreamWriter(filename);
         XmlSerializer sr = new XmlSerializer(typeof(Dictionary<Keys, IKeyResponse>));
         sr.Serialize(tw, dict);
@@ -18,4 +18,11 @@ public class XmlUtils{
         XmlSerializer sr = new XmlSerializer(typeof(Dictionary<Keys, IKeyResponse>));
         return (Dictionary<Keys, IKeyResponse>)sr.Deserialize(fs);
     }
+    
+    public static void saveMappings(Dictionary<string, Keys> dict, string filename){
+        TextWriter tw = new StreamWriter(filename);
+        XmlSerializer sr = new XmlSerializer(typeof(List<string>));
+        sr.Serialize(tw, dict.Keys);
+    }
+
 }

@@ -12,6 +12,7 @@ public class ExertResponse : IKeyResponse{
     public Vector2 respond(){
         if(player.Item != null){
             player.Item.Use(game);
+        }
             if (this.player.ActiveAnimation != Player.ATTACK)
 					{
 						game.sfx["punch"].Play();
@@ -21,7 +22,6 @@ public class ExertResponse : IKeyResponse{
 						game.room.AddHitbox(new(10, this.player, new(-padding, -padding, this.player.collisionBox.Width + padding * 2, this.player.collisionBox.Height + padding * 2)));
 					}
 					this.player.ActiveAnimation = Player.ATTACK;
-        }
         return new Vector2(0, 0);
     }
     public void processGame(Game.State.Game game){

@@ -95,7 +95,12 @@
     <TileType>BLACK</TileType>
   </tiles>
   <gameObjects>
-
+	  <Entity xsi:type="NPC">
+		  <Position>
+			  <X>120</X>
+			  <Y>60</Y>
+		  </Position>
+	  </Entity>
 	  <!--to add - eastmost pennisula is the secret?-->
   </gameObjects>
   <doors>

@@ -66,5 +66,6 @@ namespace Game.Items
             startPos = new Vector2(Position.X, Position.Y);
             game.room.AddEntity(this);
         }
+        
     }
 }

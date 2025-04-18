@@ -19,6 +19,32 @@ namespace Game.Entities
     public class Player : LivingEntity
 	{
 
+		//maybe this could be outsourced into an xml file?
+		public static Dictionary<string, Keys> left_map = new Dictionary<string, Keys>(){
+			{"up", Keys.W},
+			{"down", Keys.S},
+			{"right", Keys.D},
+			{"left", Keys.A},
+			{"attack", Keys.Z},
+			{"heart", Keys.D1},
+			{"banana", Keys.D2},
+			{"bomb", Keys.D3}
+		};
+
+
+		public static Dictionary<string, Keys> right_map = new Dictionary<string, Keys>(){
+			{"up", Keys.Up},
+			{"down", Keys.Down},
+			{"right", Keys.Right},
+			{"left", Keys.Left},
+			{"attack", Keys.N},
+			{"heart", Keys.D8},
+			{"banana", Keys.D9},
+			{"bomb", Keys.D0}
+		};
+
+		List<Player> players = new List<Player>();
+		int playerCount = 2;
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
@@ -40,7 +66,7 @@ namespace Game.Entities
 
 		//item carrying
 		// there are these awesome things called booleans you should check them out ):
-		private int Key = 0;
+		private static int Key = 0;
         // private int rupee = 0;
         // private int bomb = 0;
 
@@ -73,28 +99,13 @@ namespace Game.Entities
 				this.ownDown = Player.DOWN;
 				this.ownLeft = Player.LEFT;
 				this.ownAttack = Player.ATTACK;
-				this.mapping.Add(Keys.W, new MoveResponse(this, 0, -1));
-				this.mapping.Add(Keys.A, new MoveResponse(this, -1, 0));
-				this.mapping.Add(Keys.S, new MoveResponse(this, 0, 1));
-				this.mapping.Add(Keys.D, new MoveResponse(this, 1, 0));
-				this.mapping.Add(Keys.Up, new MoveResponse(this, 0, -1));
-				this.mapping.Add(Keys.Left, new MoveResponse(this, -1, 0));
-				this.mapping.Add(Keys.Down, new MoveResponse(this, 0, 1));
-				this.mapping.Add(Keys.Right, new MoveResponse(this, 1, 0));
-				this.mapping.Add(Keys.N, new ExertResponse(this));
-				this.mapping.Add(Keys.Z, new ExertResponse(this));
-				this.mapping.Add(Keys.D1, new AcquireResponse(this, new Heart(Position)));
-				this.mapping.Add(Keys.D2, new AcquireResponse(this, new Banana(Position)));
-				this.mapping.Add(Keys.D3, new AcquireResponse(this, new Bomb(Position)));
-
-				Dictionary<string, Keys> map = new Dictionary<string, Keys>();
-				map.Add("up", Keys.W);
-				map.Add("left", Keys.A);
-				map.Add("down", Keys.S);
-				map.Add("right", Keys.D);
-				map.Add("attack", Keys.Z);
-				//XmlUtils.saveMappings(map, "left_mappings");
-
+				if(players.Count == 0){
+					this.makeMappings(left_map);
+				}
+				if(players.Count == playerCount - 1){
+					this.makeMappings(right_map);
+				}
+				players.Add(this);
 		 }
 
 
@@ -137,17 +148,16 @@ namespace Game.Entities
 			Vector2 req = new Vector2(0, 0);
 			KeyboardState ks = Keyboard.GetState();
 			Keys[] pressed = ks.GetPressedKeys();
-			if(pressed.Length == 0){
-				/*if(base.ActiveAnimation == Player.ATTACK){
-					base.ActiveAnimation = Player.DOWN;
-				}*/
-				base.ActiveAnimation.Reset(); //remain still if no key is pressed
-			}
+			int mappedKeyCount = 0;
 			for(int i = 0; i < pressed.Length; i++){
 				if(this.mapping.ContainsKey(pressed[i])){
+					mappedKeyCount++;
 					this.mapping[pressed[i]].processGame(game);
 					req = this.mapping[pressed[i]].respond();
 				}
+			}
+			if(mappedKeyCount == 0){
+				base.ActiveAnimation.Reset(); //remain still if no mapped key is pressed
 			}
 			return req;
 		}
@@ -167,6 +177,13 @@ namespace Game.Entities
 			Key++;
 		}
 
+		public void useKey(){
+			Key--;
+		}
+		
+		public void setKey(int count){
+			Key = count;
+		}
 		private Vector2 HandleInputs(State.Game game)
 		{
 			KeyboardController keyboard = Main.INSTANCE.keyboard;
@@ -290,6 +307,17 @@ namespace Game.Entities
 		public override void OnDeath(State.Game game)
 		{
 			dead = true;
+		}
+
+		public void makeMappings(Dictionary<string, Keys> dict){
+				this.mapping.Add(dict["up"], new MoveResponse(this, 0, -1));
+				this.mapping.Add(dict["left"], new MoveResponse(this, -1, 0));
+				this.mapping.Add(dict["down"], new MoveResponse(this, 0, 1));
+				this.mapping.Add(dict["right"], new MoveResponse(this, 1, 0));
+				this.mapping.Add(dict["attack"], new ExertResponse(this));
+				this.mapping.Add(dict["heart"], new AcquireResponse(this, new Heart(base.Position)));
+				this.mapping.Add(dict["banana"], new AcquireResponse(this, new Banana(base.Position)));
+				this.mapping.Add(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
 		}
 	}
 }

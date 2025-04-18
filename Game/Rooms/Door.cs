@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Game.State;
 using System.Xml;
+using Game.Entities;
 
 namespace Game.Rooms
 {
@@ -25,27 +26,34 @@ namespace Game.Rooms
         public DoorType Type;
         public int location;
         public string roomPath;
+        private Room room;
+        private int[] tileNums;
 
         /// This is so ugly, but alas, this is a consequence of our XML loading architecture. Can clean up later
-        protected internal void Initialize()
+        protected internal void Initialize(Room room)
         {
+            this.room = room;
             switch (location)
             {
                 case 0:
                     Position = new Vector2(112, 0);
                     Angle = 0;
+                    tileNums = [6,7];
                     break;
                 case 1:
                     Position = new Vector2(224, 72);
                     Angle = 90;
+                    tileNums = [69];
                     break;
                 case 2:
                     Position = new Vector2(112, 144);
                     Angle = 180;
+                    tileNums = [118, 119];
                     break;
                 case 3:
                     Position = new Vector2(0, 72);
                     Angle = 270;
+                    tileNums = [56];
                     break;
             }
         }
@@ -65,6 +73,20 @@ namespace Game.Rooms
         /// Subclasses can inherit Update for special behavior
         public virtual void Update(State.Game game)
         {
+            if (Type == DoorType.PUZZLE) {
+                if (room.gameObjects.Count <= 1) {
+                    Type = DoorType.OPEN;
+                    foreach (int tileNum in tileNums) {
+                        room.tiles[tileNum] = Tiles.TileType.BLOCK;
+                    }
+                }
+            } else if (Type == DoorType.LOCK) {
+                if (game.player.HasKey()) {
+                    foreach (int tileNum in tileNums) {
+                        room.tiles[tileNum] = Tiles.TileType.BLOCK;
+                    }
+                }
+            }
             if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
             {
                 int oldKeys = game.player.GetKey();
@@ -73,6 +95,7 @@ namespace Game.Rooms
                 if (Type == DoorType.LOCK && game.player.GetKey() >= 1)
                 {
                     game.player.useKey();
+                    Type = DoorType.OPEN;
                 }
             }
             

@@ -22,6 +22,9 @@ namespace Game.State
         private RenderTarget2D target, loadingTarget;
 
         // Visible to inheritors
+
+        public int playerCount;
+        public List<Player> players;
         public Player player;
         public Room room;
         public KeyboardController keyboard;
@@ -136,22 +139,22 @@ namespace Game.State
                 {
                     // Top
                     case 0:
-                        player.ActiveAnimation = Player.DOWN;
+                        player.ActiveAnimation = player.ownDown;
                         player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 32 - player.collisionBox.Y);
                         break;
                     // Bottom
                     case 2:
-                        player.ActiveAnimation = Player.UP;
+                        player.ActiveAnimation = player.ownUp;
                         player.Position = new(144 - (player.collisionBox.Width + player.collisionBox.X * 2 + 32) / 2, 144 - player.collisionBox.Y - player.collisionBox.Height);
                         break;
                     // Left
                     case 3:
-                        player.ActiveAnimation = Player.RIGHT;
+                        player.ActiveAnimation = player.ownRight;
                         player.Position = new(32 - player.collisionBox.X, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
                         break;
                     // Right
                     case 1:
-                        player.ActiveAnimation = Player.LEFT;
+                        player.ActiveAnimation = player.ownLeft;
                         player.Position = new(224 - player.collisionBox.X - player.collisionBox.Width, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
                         break;
                 }

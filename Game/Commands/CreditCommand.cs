@@ -1,12 +1,9 @@
-using Microsoft.Xna.Framework.Graphics;
-
 namespace Game.Commands;
 
 class CreditCommand : ICommand {
-    public CreditCommand(GraphicsDevice device, string newUI) {
-
-    }
+    public CreditCommand() {}
     public void Execute() {
-
+        Main.uiManager.ChangeUIState("credits");
+        Main.SwitchGameState(new State.Credits());
     }
 }
