@@ -44,7 +44,7 @@ namespace Game.Entities
 		};
 
 		List<Player> players = new List<Player>();
-		int playerCount = 2;
+		int playerCount = 1;
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
