@@ -67,9 +67,13 @@ namespace Game.Rooms
         {
             if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
             {
+                Console.WriteLine("Collision");
                 int oldKeys = game.player.GetKey();
                 game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.player));
                 game.player.setKey(oldKeys);
+                if (Type == DoorType.LOCK) { // Here for development
+                    Console.WriteLine(game.player.GetKey());
+                }
                 if (Type == DoorType.LOCK && game.player.GetKey() >= 1)
                 {
                     game.player.useKey();
