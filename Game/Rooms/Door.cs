@@ -73,6 +73,7 @@ namespace Game.Rooms
                 if (Type == DoorType.LOCK && game.player.GetKey() >= 1)
                 {
                     game.player.useKey();
+                    Type = DoorType.OPEN;
                 }
             }
             

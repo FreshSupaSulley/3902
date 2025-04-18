@@ -180,12 +180,12 @@ namespace Game.Rooms
         public static Room LoadRoom(string filename, Player player)
         {
             Room room = new Room();
-            // if (LoadedRooms.ContainsKey(filename)) {
-            //   return LoadedRooms[filename];
-            //    } else {
+            if (LoadedRooms.ContainsKey(filename)) {
+                Console.WriteLine("Loaded previous room");
+              return LoadedRooms[filename];
+            } else {
             
-
-            XmlSerializer serializer = new(typeof(Room));
+                XmlSerializer serializer = new(typeof(Room));
                 using Stream reader = new FileStream("Content/Rooms/" + filename + ".xml", FileMode.Open);
                 room = (Room)serializer.Deserialize(reader);
                 // Add room boundaries
@@ -263,9 +263,9 @@ namespace Game.Rooms
                 {
                     door.Initialize();
                 }
-              //  LoadedRooms.Add(filename, room);
+                LoadedRooms.Add(filename, room);
                 return room;
-            //}
+            }
         }
     }
 }

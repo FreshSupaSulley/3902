@@ -47,7 +47,7 @@ public class Main : Microsoft.Xna.Framework.Game
             PreferredBackBufferHeight = 1100 / 2
         };
         // Window.AllowUserResizing = true;
-        Window.Title = "Bombardier Beetles - Sprint 4";
+        Window.Title = "Bombardier Beetles";
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
