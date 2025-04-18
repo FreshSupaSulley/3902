@@ -58,7 +58,7 @@ namespace Game.Entities
 			), 
 			DOWN
 			) {
-			Key = 1;
+			Key = 0;
 		 }
 
 

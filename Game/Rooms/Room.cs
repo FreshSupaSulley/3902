@@ -179,9 +179,9 @@ namespace Game.Rooms
 
         public static Room LoadRoom(string filename, Player player)
         {
+            Console.WriteLine(filename);
             Room room = new Room();
             if (LoadedRooms.ContainsKey(filename)) {
-                Console.WriteLine("Loaded previous room");
               return LoadedRooms[filename];
             } else {
             
