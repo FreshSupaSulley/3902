@@ -191,10 +191,9 @@ namespace Game.Rooms
                 // Initialize doors
                 foreach (var door in room.doors)
                 {
-                    door.Initialize();
+                    door.Initialize(room);
                 }
             }
-            Console.WriteLine(room.tiles.Length);
             // Add/rebuild room boundaries
             TileType[] trueTiles = new TileType[14 * 9];
             for (int i = 0, innerIndex = 0; i < trueTiles.Length; i++)
