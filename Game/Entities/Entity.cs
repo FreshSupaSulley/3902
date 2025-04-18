@@ -17,6 +17,7 @@ namespace Game.Entities
     [XmlInclude(typeof(Trap))]
     [XmlInclude(typeof(Gel))]
     [XmlInclude(typeof(Bat))]
+    [XmlInclude(typeof(NPC))]
     [XmlInclude(typeof(Key))]
     [XmlInclude(typeof(WinStar))]
     public abstract class Entity(Vector2 position)
