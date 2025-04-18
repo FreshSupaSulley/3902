@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
-using KeyResponses;
+using Game.KeyResponses;
 using Microsoft.Xna.Framework.Input;
 public class XmlUtils{
     public static void saveMappings(Dictionary<Keys, IKeyResponse> dict, string filename){

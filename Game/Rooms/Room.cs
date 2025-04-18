@@ -180,11 +180,12 @@ namespace Game.Rooms
         public static Room LoadRoom(string filename, Player player)
         {
             Room room = new Room();
-            if (LoadedRooms.ContainsKey(filename)) {
-                return LoadedRooms[filename];
-            } else {
+            // if (LoadedRooms.ContainsKey(filename)) {
+            //   return LoadedRooms[filename];
+            //    } else {
+            
 
-                XmlSerializer serializer = new(typeof(Room));
+            XmlSerializer serializer = new(typeof(Room));
                 using Stream reader = new FileStream("Content/Rooms/" + filename + ".xml", FileMode.Open);
                 room = (Room)serializer.Deserialize(reader);
                 // Add room boundaries
@@ -202,7 +203,7 @@ namespace Game.Rooms
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
-                            if (room.gameObjects.Count == 0)
+                            if (room.doors[0].Type == DoorType.PUZZLE && room.gameObjects.Count == 0 )
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
@@ -215,7 +216,7 @@ namespace Game.Rooms
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
-                            if (room.gameObjects.Count == 0)
+                            if (room.doors[3].Type == DoorType.PUZZLE && room.gameObjects.Count == 0)
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
@@ -228,7 +229,7 @@ namespace Game.Rooms
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
-                            if (room.gameObjects.Count == 0)
+                            if (room.doors[1].Type == DoorType.PUZZLE && room.gameObjects.Count == 0)
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
@@ -241,7 +242,7 @@ namespace Game.Rooms
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
-                            if (room.gameObjects.Count == 0)
+                            if (room.doors[2].Type == DoorType.PUZZLE && room.gameObjects.Count == 0)
                             {
                                 trueTiles[i] = TileType.BLOCK;
                             }
@@ -262,9 +263,9 @@ namespace Game.Rooms
                 {
                     door.Initialize();
                 }
-                LoadedRooms.Add(filename, room);
+              //  LoadedRooms.Add(filename, room);
                 return room;
-            }
+            //}
         }
     }
 }

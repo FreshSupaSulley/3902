@@ -1,7 +1,7 @@
 using Game.Entities;
 using Microsoft.Xna.Framework;
 using Game.Util;
-namespace KeyResponses;
+namespace Game.KeyResponses;
 public class ExertResponse : IKeyResponse{
     Player player;
     public ExertResponse(Player c){
@@ -23,5 +23,8 @@ public class ExertResponse : IKeyResponse{
 					this.player.ActiveAnimation = Player.ATTACK;
         }
         return new Vector2(0, 0);
+    }
+    public void processGame(Game.State.Game game){
+        this.game = game;
     }
 }

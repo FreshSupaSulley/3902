@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
-namespace KeyResponses;
+namespace Game.KeyResponses;
 public interface IKeyResponse{
     Vector2 respond();
+    void processGame(Game.State.Game game);
 }

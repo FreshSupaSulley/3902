@@ -1,7 +1,7 @@
 using Game.Entities;
 using Microsoft.Xna.Framework;
 
-namespace KeyResponses;
+namespace Game.KeyResponses{
 public class MoveResponse : IKeyResponse{
     Player player;
     int hdsp;
@@ -27,4 +27,8 @@ public class MoveResponse : IKeyResponse{
         }
         return new Vector2(hdsp, vdsp);
     }
+    public void processGame(Game.State.Game game){
+
+    }
+}
 }

@@ -10,14 +10,15 @@ using Game.Util;
 using System.Diagnostics;
 using System.Reflection;
 using System;
-using Game.KeyResponses;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using Game.KeyResponses;
 
 namespace Game.Entities
 {
     public class Player : LivingEntity
 	{
+
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
@@ -47,12 +48,16 @@ namespace Game.Entities
 		private bool invulnerable, dead;
 		private int deadTicks, iframeTicks;
 
-		public Dictionary<Keys, IKeyResponse> mappings = new Dictionary<Keys, IKeyResponse>();
-
 		[XmlIgnore] // required??
 		public Item Item;
-
 		// Player has 100hp
+
+		[XmlIgnore]
+        public Dictionary<Keys, IKeyResponse> mapping = new Dictionary<Keys, IKeyResponse>();
+
+		[XmlIgnore]
+		public Animation ownUp, ownDown, ownLeft, ownRight, ownAttack;
+
 		public Player() : base(
 			100, 
 			new(
@@ -63,7 +68,33 @@ namespace Game.Entities
 			), 
 			DOWN
 			) {
-				Console.WriteLine("hello world\n");
+				this.ownUp = Player.UP;
+				this.ownRight = Player.RIGHT;
+				this.ownDown = Player.DOWN;
+				this.ownLeft = Player.LEFT;
+				this.ownAttack = Player.ATTACK;
+				this.mapping.Add(Keys.W, new MoveResponse(this, 0, -1));
+				this.mapping.Add(Keys.A, new MoveResponse(this, -1, 0));
+				this.mapping.Add(Keys.S, new MoveResponse(this, 0, 1));
+				this.mapping.Add(Keys.D, new MoveResponse(this, 1, 0));
+				this.mapping.Add(Keys.Up, new MoveResponse(this, 0, -1));
+				this.mapping.Add(Keys.Left, new MoveResponse(this, -1, 0));
+				this.mapping.Add(Keys.Down, new MoveResponse(this, 0, 1));
+				this.mapping.Add(Keys.Right, new MoveResponse(this, 1, 0));
+				this.mapping.Add(Keys.N, new ExertResponse(this));
+				this.mapping.Add(Keys.Z, new ExertResponse(this));
+				this.mapping.Add(Keys.D1, new AcquireResponse(this, new Heart(Position)));
+				this.mapping.Add(Keys.D2, new AcquireResponse(this, new Banana(Position)));
+				this.mapping.Add(Keys.D3, new AcquireResponse(this, new Bomb(Position)));
+
+				Dictionary<string, Keys> map = new Dictionary<string, Keys>();
+				map.Add("up", Keys.W);
+				map.Add("left", Keys.A);
+				map.Add("down", Keys.S);
+				map.Add("right", Keys.D);
+				map.Add("attack", Keys.Z);
+				//XmlUtils.saveMappings(map, "left_mappings");
+
 		 }
 
 
@@ -103,7 +134,22 @@ namespace Game.Entities
 				Item.Position = base.Position;
 			}
 			//return HandleInputs(game);
-			return new Vector2(0, 0);
+			Vector2 req = new Vector2(0, 0);
+			KeyboardState ks = Keyboard.GetState();
+			Keys[] pressed = ks.GetPressedKeys();
+			if(pressed.Length == 0){
+				/*if(base.ActiveAnimation == Player.ATTACK){
+					base.ActiveAnimation = Player.DOWN;
+				}*/
+				base.ActiveAnimation.Reset(); //remain still if no key is pressed
+			}
+			for(int i = 0; i < pressed.Length; i++){
+				if(this.mapping.ContainsKey(pressed[i])){
+					this.mapping[pressed[i]].processGame(game);
+					req = this.mapping[pressed[i]].respond();
+				}
+			}
+			return req;
 		}
 
 		public bool HasKey()
