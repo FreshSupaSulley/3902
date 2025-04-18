@@ -40,10 +40,12 @@ public class UIManager {
         uiDictionary.Add("death", new UIDeathLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
         uiDictionary.Add("win", new UIWinLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
         uiDictionary.Add("pause", new UIPauseLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
+        uiDictionary.Add("credits", new UICreditLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
     }
     public void AddElement(IUserInterfaceElement el) {
         uiDictionary[current].AddElement(el);
     }
     public void Reset() {
+        uiDictionary[current].Reset();
     }
 }
