@@ -92,7 +92,7 @@ namespace Game.Rooms
                 int oldKeys = game.player.GetKey();
                 game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.player));
                 game.player.setKey(oldKeys);
-                if (Type == DoorType.LOCK && game.player.GetKey() >= 1)
+                if (Type == DoorType.LOCK && game.player.HasKey())
                 {
                     game.player.useKey();
                     Type = DoorType.OPEN;
