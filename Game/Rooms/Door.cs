@@ -86,25 +86,17 @@ namespace Game.Rooms
                         room.tiles[tileNum] = Tiles.TileType.BLOCK;
                     }
                 }
-            }
-            foreach(Player player in Player.players){            
-                if (new Rectangle((int)Position.X - (int)player.Position.X, (int)Position.Y - (int)player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(player.collisionBox))
+            }   
+                if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
             {
                 int oldKeys = game.player.GetKey();
-<<<<<<< HEAD
-                game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, Player.players));
-                player.setKey(oldKeys);
-                if (Type == DoorType.LOCK && player.GetKey() >= 1)
-=======
                 game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.player));
                 game.player.setKey(oldKeys);
                 if (Type == DoorType.LOCK && game.player.HasKey())
->>>>>>> 1dc7ff7d5fb9e4a2b044537f15b00e46ca1d8705
                 {
-                    player.useKey();
+                    game.player.useKey();
                     Type = DoorType.OPEN;
                 }
-            }
             }
             
         }

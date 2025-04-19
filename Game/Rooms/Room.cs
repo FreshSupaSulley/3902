@@ -177,7 +177,7 @@ namespace Game.Rooms
         public void AddEntity(Entity entity) => gameObjects.Add(entity);
         public void RemoveEntity(Entity entity) => gameObjects.Remove(entity);
 
-        public static Room LoadRoom(string filename, List<Player> players)
+        public static Room LoadRoom(string filename, Player player)
         {
             bool loadingFromFile = LoadedRooms.ContainsKey(filename);
             Room room = new Room();
@@ -196,11 +196,10 @@ namespace Game.Rooms
             // Add/rebuild room boundaries
             TileType[] trueTiles = new TileType[14 * 9];
             bool anyoneHasKey = false;
-            foreach(Player player in players){
                 if(player.HasKey()){
                     anyoneHasKey = true;
                 }
-            }
+
             for (int i = 0, innerIndex = 0; i < trueTiles.Length; i++)
             {
                 // If on the outskirts, put an invisible wall there
