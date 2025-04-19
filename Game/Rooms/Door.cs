@@ -87,16 +87,18 @@ namespace Game.Rooms
                     }
                 }
             }
-            if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
+            foreach(Player player in Player.players){            
+                if (new Rectangle((int)Position.X - (int)player.Position.X, (int)Position.Y - (int)player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(player.collisionBox))
             {
                 int oldKeys = game.player.GetKey();
-                game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.player));
-                game.player.setKey(oldKeys);
-                if (Type == DoorType.LOCK && game.player.GetKey() >= 1)
+                game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, Player.players));
+                player.setKey(oldKeys);
+                if (Type == DoorType.LOCK && player.GetKey() >= 1)
                 {
-                    game.player.useKey();
+                    player.useKey();
                     Type = DoorType.OPEN;
                 }
+            }
             }
             
         }

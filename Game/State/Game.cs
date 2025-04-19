@@ -22,9 +22,6 @@ namespace Game.State
         private RenderTarget2D target, loadingTarget;
 
         // Visible to inheritors
-
-        public int playerCount;
-        public List<Player> players;
         public Player player;
         public Room room;
         public KeyboardController keyboard;
@@ -59,7 +56,7 @@ namespace Game.State
             loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
             this.player = new Player();
-            room = Room.LoadRoom("start", player);
+            room = Room.LoadRoom("start", Player.players);
             this.player = (Player)room.gameObjects.Find(entity => entity is Player);
             // Pow
             LoadSoundEffect("ding.wav");

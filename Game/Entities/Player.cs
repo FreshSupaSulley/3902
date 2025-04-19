@@ -43,8 +43,8 @@ namespace Game.Entities
 			{"bomb", Keys.D0}
 		};
 
-		List<Player> players = new List<Player>();
-		int playerCount = 1;
+		public static List<Player> players = new List<Player>();
+		public static int playerCount = 1;
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
@@ -99,13 +99,8 @@ namespace Game.Entities
 				this.ownDown = Player.DOWN;
 				this.ownLeft = Player.LEFT;
 				this.ownAttack = Player.ATTACK;
-				if(players.Count == 0){
 					this.makeMappings(left_map);
-				}
-				if(players.Count == playerCount - 1){
 					this.makeMappings(right_map);
-				}
-				players.Add(this);
 		 }
 
 
@@ -153,7 +148,7 @@ namespace Game.Entities
 				if(this.mapping.ContainsKey(pressed[i])){
 					mappedKeyCount++;
 					this.mapping[pressed[i]].processGame(game);
-					req = this.mapping[pressed[i]].respond();
+					req += this.mapping[pressed[i]].respond();
 				}
 			}
 			if(mappedKeyCount == 0){
