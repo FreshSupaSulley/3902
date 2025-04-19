@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game.Graphics;
 
@@ -32,6 +31,7 @@ public class UIManager {
     public void ChangeUIState(string newValue) {
         current = newValue;
         uiDictionary[current].Reset();
+        Mouse.SetCursor(MouseCursor.Arrow);
     }
     public void Load() {
         uiDictionary.Add("empty", new UIEmptyLayout());

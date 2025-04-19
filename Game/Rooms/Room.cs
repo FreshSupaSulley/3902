@@ -179,7 +179,6 @@ namespace Game.Rooms
 
         public static Room LoadRoom(string filename, List<Player> players)
         {
-            Console.WriteLine(filename);
             bool loadingFromFile = LoadedRooms.ContainsKey(filename);
             Room room = new Room();
             if (loadingFromFile) {

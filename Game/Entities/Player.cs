@@ -161,7 +161,6 @@ namespace Game.Entities
 		{
             if (Key >= 1)
             {
-				Key--;
 				return true;
             }
 			return false;
