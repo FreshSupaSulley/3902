@@ -26,9 +26,11 @@ namespace Game.Entities
 
         public override Vector2 Move(State.Game game)
         {
-
+            Vector2 direction = new Vector2();
             int boomerang_direction = 0;
-            Vector2 direction = game.player.Position - Position;
+            foreach(Player player in game.players){
+                direction = player.Position - Position;
+            }
             float distance = direction.Length();
 
             const float stopDistance = 40f;

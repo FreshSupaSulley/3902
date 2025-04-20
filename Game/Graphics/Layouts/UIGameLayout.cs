@@ -15,11 +15,11 @@ public class UIGameLayout : UILayout {
     public override void Update(GameTime gameTime) {
         if (!healthAdded && Main.INSTANCE.State is Game.State.Game) {
             Game.State.Game playerGame = (Game.State.Game) Main.INSTANCE.State;
-            Func<int> function = playerGame.player.GetHealth;
+            Func<int> function = playerGame.players[0].GetHealth;
             Rectangle bounds = new (50,20,100,30);
             UIHealthBar el = new UIHealthBar(function, bounds, new(95, 25), 0, 100);
             
-            Func<int> key = playerGame.player.GetKey;
+            Func<int> key = playerGame.players[0].GetKey;
             UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(180,20), "arialbold", Color.White);
             keyLayout.SetOutline(Color.Black);
 

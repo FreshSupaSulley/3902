@@ -15,11 +15,13 @@ namespace Game.Items
 
         public override void Update(State.Game game)
         {
-            if (game.player.Intersects(new((int)Position.X, (int)Position.Y, SPRITE.Texture.Width, SPRITE.Texture.Height)))
-            {
-                game.sfx["fart"].Play();
-                game.room.RemoveEntity(this);
-                game.player.addKey();
+            foreach(Player player in game.players){
+              if (player.Intersects(new((int)Position.X, (int)Position.Y, SPRITE.Texture.Width, SPRITE.Texture.Height)))
+             {
+                    game.sfx["fart"].Play();
+                    game.room.RemoveEntity(this);
+                    player.addKey();
+                }
             }
         }
 

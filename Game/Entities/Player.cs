@@ -42,9 +42,6 @@ namespace Game.Entities
 			{"banana", Keys.D9},
 			{"bomb", Keys.D0}
 		};
-
-		public static List<Player> players = new List<Player>();
-		public static int playerCount = 1;
 		private static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
 
@@ -99,8 +96,6 @@ namespace Game.Entities
 				this.ownDown = Player.DOWN;
 				this.ownLeft = Player.LEFT;
 				this.ownAttack = Player.ATTACK;
-					this.makeMappings(left_map);
-					this.makeMappings(right_map);
 		 }
 
 
@@ -178,71 +173,6 @@ namespace Game.Entities
 		public void setKey(int count){
 			Key = count;
 		}
-		private Vector2 HandleInputs(State.Game game)
-		{
-			KeyboardController keyboard = Main.INSTANCE.keyboard;
-			// Attack
-			if (keyboard.IsKeyDown(Keys.Z, Keys.N))
-			{
-				// If we have an item, use it
-				if (Item is not null)
-				{
-					Item.Use(game);
-					Item = null;
-				}
-				else
-				{
-					if (ActiveAnimation != ATTACK)
-					{
-						game.sfx["punch"].Play();
-						TempBuffer.add(new TempEntity(TempBuffer.pow, Position), 1000);
-						int padding = 30;
-						// Widespread area hitbox for testing. Later we want this to be directional
-						game.room.AddHitbox(new(10, this, new(-padding, -padding, collisionBox.Width + padding * 2, collisionBox.Height + padding * 2)));
-					}
-					ActiveAnimation = ATTACK;
-				}
-				// If attacking, don't move
-				return new();
-			}
-			// Required for Sprint 3
-			if (keyboard.IsKeyPressed(Keys.D1)) Item = new Heart(Position);
-			else if (keyboard.IsKeyPressed(Keys.D2)) Item = new Banana(Position);
-			else if (keyboard.IsKeyPressed(Keys.D3)) Item = new Bomb(Position);
-			// Movement
-			// You could get rid of the normalization to make movement look smoother
-			const int speed = 1;
-			Vector2 velocity = new();
-			if (keyboard.IsKeyDown(Keys.W, Keys.Up)) velocity += new Vector2(0, -1);
-			if (keyboard.IsKeyDown(Keys.A, Keys.Left)) velocity += new Vector2(-1, 0);
-			if (keyboard.IsKeyDown(Keys.S, Keys.Down)) velocity += new Vector2(0, 1);
-			if (keyboard.IsKeyDown(Keys.D, Keys.Right)) velocity += new Vector2(1, 0);
-			// Use velocity to determine animation
-			if (velocity != Vector2.Zero)
-			{
-				// Normalize to keep consistent speed
-				velocity.Normalize();
-				// No diagonal sprites so this will have to suffice
-				if (velocity.X > 0) ActiveAnimation = RIGHT;
-				else if (velocity.X < 0) ActiveAnimation = LEFT;
-				else if (velocity.Y > 0) ActiveAnimation = DOWN;
-				else if (velocity.Y < 0) ActiveAnimation = UP;
-			}
-			else
-			{
-				ActiveAnimation.Reset();
-			}
-			if (keyboard.IsKeyPressed(Keys.M))
-			{
-				game.muteRequest = 1;
-			}
-			if(keyboard.IsKeyPressed(Keys.G)){
-				InGameMessage.messages.Add(new InGameMessage("Hi", new Vector2(base.Position.X + 30, base.Position.Y), 100));
-			}
-			// Position += velocity * speed;
-			return velocity * speed;
-		}
-
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			if (!dead)

@@ -16,7 +16,10 @@ namespace Game.Entities
 
         public override Vector2 Move(State.Game game)
         {
-            Vector2 direction = (game.player.Position + new Vector2(0,game.player.collisionBox.Height/2)) - Position;
+            Vector2 direction = new Vector2();
+            foreach(Player player in game.players){
+                direction = (player.Position + new Vector2(0, player.collisionBox.Height/2)) - Position;
+            }
 
             if (direction != Vector2.Zero)
                 direction.Normalize();

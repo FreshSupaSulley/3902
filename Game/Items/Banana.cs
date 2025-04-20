@@ -47,8 +47,8 @@ namespace Game.Items
 
         public override void Use(State.Game game)
         {
-            // Launch in direction of player
-            switch (game.player.GetDirection())
+            // Launch in direction of player 1
+            switch (game.players[0].GetDirection())
             {
                 case 0:
                     velocity = new(0, -1);
