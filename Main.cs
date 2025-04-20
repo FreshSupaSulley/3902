@@ -44,7 +44,7 @@ public class Main : Microsoft.Xna.Framework.Game
         graphics = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = 1600 / 2,
-            PreferredBackBufferHeight = 1400 / 2
+            PreferredBackBufferHeight = 1450 / 2
         };
         // Window.AllowUserResizing = true;
         Window.Title = "Bombardier Beetles";

@@ -20,7 +20,7 @@ public class UIGameLayout : UILayout {
             UIHealthBar el = new UIHealthBar(function, bounds, new(95, 25), 0, 100);
             
             Func<int> key = playerGame.player.GetKey;
-            UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(180,20), "arialbold", Color.White);
+            UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(340,90), "arialbold", Color.White);
             keyLayout.SetOutline(Color.Black);
 
             AddElement(el);
