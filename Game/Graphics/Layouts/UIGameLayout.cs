@@ -17,12 +17,12 @@ public class UIGameLayout : UILayout {
         if (!healthAdded && Main.INSTANCE.State is Game.State.Game) {
             Game.State.Game playerGame = (Game.State.Game) Main.INSTANCE.State;
             Func<int> function = playerGame.players[0].GetHealth;
-            Rectangle bounds = new (50,20,100,30);
+            Rectangle bounds = new (600,80,100,30);
             UIHealthBar el = new UIHealthBar(function, bounds, new(95, 25), 0, 100);
             
-            Func<int> key = playerGame.player.GetKey;
-            Func<int> rupee = playerGame.player.GetRupee;
-            Func<int> bomb = playerGame.player.GetBomb;
+            Func<int> key = playerGame.players[0].GetKey;
+            Func<int> rupee = playerGame.players[0].GetRupee;
+            Func<int> bomb = playerGame.players[0].GetBomb;
             UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(330,90), "arialbold", Color.White);
             UIVariableText<int> rupeeLayout = new UIKeyVariableText<int>(rupee, new Vector2(330, 45), "arialbold", Color.White);
             UIVariableText<int> bombLayout = new UIKeyVariableText<int>(bomb, new Vector2(330, 115), "arialbold", Color.White);
