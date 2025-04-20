@@ -65,10 +65,9 @@ namespace Game.Entities
 		private static readonly Sprite HEAD = new(Main.Load("Entities/Monoko/head.png")), BODY = new(Main.Load("Entities/Monoko/body.png"));
 
 		//item carrying
-		// there are these awesome things called booleans you should check them out ):
 		private static int Key = 0;
-        // private int rupee = 0;
-        // private int bomb = 0;
+        private static int rupee = 0;
+        private static int bomb = 0;
 
 		private static readonly int TOTAL_DEATH_TICKS = 120, I_FRAMES = 30;
 		private bool invulnerable, dead;
@@ -105,6 +104,8 @@ namespace Game.Entities
 
 
         public int GetKey() => Key;
+		public int GetRupee() => rupee;
+		public int GetBomb() => bomb;
 
         public override void Update(State.Game game)
 		{
