@@ -103,13 +103,13 @@
 	  </Entity>
 	  <Entity xsi:type="Fire">
 		  <Position>
-			  <X>90</X>
+			  <X>80</X>
 			  <Y>60</Y>
 		  </Position>
 	  </Entity>
 	  <Entity xsi:type="Fire">
 		  <Position>
-			  <X>166</X>
+			  <X>160</X>
 			  <Y>60</Y>
 		  </Position>
 	  </Entity>

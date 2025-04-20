@@ -14,6 +14,7 @@ namespace Game.Entities
     [XmlInclude(typeof(Skeleton))]
     [XmlInclude(typeof(Wallmaster))]
     [XmlInclude(typeof(Goriya))]
+    [XmlInclude(typeof(Fire))]
     [XmlInclude(typeof(Trap))]
     [XmlInclude(typeof(Gel))]
     [XmlInclude(typeof(Bat))]
