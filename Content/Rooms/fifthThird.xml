@@ -95,6 +95,12 @@
     <TileType>BLOCK</TileType>
   </tiles>
   <gameObjects>
+	  <Entity xsi:type="Triforce">
+		  <Position>
+			  <X>120</X>
+			  <Y>50</Y>
+		  </Position>
+	  </Entity>
   </gameObjects>
   <doors>
     <Door>

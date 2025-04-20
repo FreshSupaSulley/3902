@@ -125,12 +125,6 @@
         <Y>108</Y>
       </Position>
     </Entity>
-    <Entity xsi:type="WinStar">
-      <Position>
-        <X>120</X>
-        <Y>50</Y>
-      </Position>
-    </Entity>
   </gameObjects>
   <doors>
     <Door>

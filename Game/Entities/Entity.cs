@@ -21,6 +21,7 @@ namespace Game.Entities
     [XmlInclude(typeof(NPC))]
     [XmlInclude(typeof(Key))]
     [XmlInclude(typeof(WinStar))]
+    [XmlInclude(typeof(Triforce))]
     public abstract class Entity(Vector2 position)
     {
         public Vector2 Position = position;

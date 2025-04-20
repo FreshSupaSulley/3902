@@ -1,23 +1,24 @@
-using Microsoft.Xna.Framework;
-using Game.Graphics;
+using System;
 using Game.Entities;
-using Microsoft.Xna.Framework.Graphics;
+using Game.Graphics;
 using Game.State;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace Game.Entities
+namespace Game.Items
 {
-    public class WinStar() : Entity(new())
+    // Hearts dont do anything yet
+    public class Triforce() : Entity(new(0, 0))
     {
-        private static readonly Sprite SPRITE = new Sprite(Main.Load("/Misc/your.png"));
+        private static readonly Sprite SPRITE = new(Main.Load("/Items/triforce.png"));
 
         public override void Update(State.Game game)
         {
             foreach(Player player in game.players){
                 if (player.Intersects(new((int)Position.X, (int)Position.Y, SPRITE.Texture.Width, SPRITE.Texture.Height)))
                 {
-                    game.sfx["wow"].Play();
-                    Main.SwitchGameState(new Win());
-                    Main.uiManager.ChangeUIState("win");
+                    game.room.RemoveEntity(this);
                 }
             }
         }
