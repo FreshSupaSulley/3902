@@ -54,7 +54,7 @@ namespace Game.State
         public Game()
         {
             // Size of Zelda map
-            target = new RenderTarget2D(Main.device, (12 + 4) * 16, (7 + 4) * 16);
+            target = new RenderTarget2D(Main.device, (12 + 4) * 16, (10 + 4) * 16);
             loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
             for(int i = 0; i < playerCount; i++){
@@ -185,20 +185,20 @@ namespace Game.State
                 case 0:
                     {
                         int offset = (int)(sin * bounds.Height);
-                        spriteBatch.Draw(target, new Rectangle(0, -offset, bounds.Width, bounds.Height), Color.White);
+                        spriteBatch.Draw(target, new Rectangle(0, -offset+160, bounds.Width, bounds.Height), Color.White);
                         if (loadingRoom is not null)
                         {
-                            spriteBatch.Draw(loadingTarget, new Rectangle(0, bounds.Height - offset, bounds.Width, bounds.Height), Color.White);
+                            spriteBatch.Draw(loadingTarget, new Rectangle(0, bounds.Height - offset + 160, bounds.Width, bounds.Height), Color.White);
                         }
                         break;
                     }
                 case 1:
                     {
                         int offset = (int)(sin * bounds.Width);
-                        spriteBatch.Draw(target, new Rectangle(offset, 0, bounds.Width, bounds.Height), Color.White);
+                        spriteBatch.Draw(target, new Rectangle(offset, 0 + 160, bounds.Width, bounds.Height), Color.White);
                         if (loadingRoom is not null)
                         {
-                            spriteBatch.Draw(loadingTarget, new Rectangle(offset - bounds.Width, 0, bounds.Width, bounds.Height), Color.White);
+                            spriteBatch.Draw(loadingTarget, new Rectangle(offset - bounds.Width, 0 + 160, bounds.Width, bounds.Height), Color.White);
                         }
                         break;
                     }
@@ -206,20 +206,20 @@ namespace Game.State
                 case 2:
                     {
                         int offset = (int)(sin * bounds.Height);
-                        spriteBatch.Draw(target, new Rectangle(0, offset, bounds.Width, bounds.Height), Color.White);
+                        spriteBatch.Draw(target, new Rectangle(0, offset + 160, bounds.Width, bounds.Height), Color.White);
                         if (loadingRoom is not null)
                         {
-                            spriteBatch.Draw(loadingTarget, new Rectangle(0, offset - bounds.Height, bounds.Width, bounds.Height), Color.White);
+                            spriteBatch.Draw(loadingTarget, new Rectangle(0, offset - bounds.Height + 160, bounds.Width, bounds.Height), Color.White);
                         }
                         break;
                     }
                 case 3:
                     {
                         int offset = (int)(sin * bounds.Width);
-                        spriteBatch.Draw(target, new Rectangle(-offset, 0, bounds.Width, bounds.Height), Color.White);
+                        spriteBatch.Draw(target, new Rectangle(-offset, 0 + 160, bounds.Width, bounds.Height), Color.White);
                         if (loadingRoom is not null)
                         {
-                            spriteBatch.Draw(loadingTarget, new Rectangle(bounds.Width - offset, 0, bounds.Width, bounds.Height), Color.White);
+                            spriteBatch.Draw(loadingTarget, new Rectangle(bounds.Width - offset, 0 + 160, bounds.Width, bounds.Height), Color.White);
                         }
                         break;
                     }
