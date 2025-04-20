@@ -200,6 +200,15 @@ namespace Game.Rooms
                     if(player.HasKey()){
                         anyoneHasKey = true;
                    }
+                   if(!room.gameObjects.Contains(player)){
+                    if(player.Position.X < 100){
+                        player.Position.X += 100;
+                    }
+                    if(player.Position.Y < 100){
+                        player.Position.Y += 100;
+                    }
+                    room.AddEntity(player);
+                   }
             }
 
             for (int i = 0, innerIndex = 0; i < trueTiles.Length; i++)
