@@ -19,15 +19,9 @@ public class UIGameLayout : UILayout {
             Rectangle bounds = new (50,20,100,30);
             UIHealthBar el = new UIHealthBar(function, bounds, new(95, 25), 0, 100);
             
-<<<<<<< HEAD
             Func<int> key = playerGame.players[0].GetKey;
             UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(180,20), "arialbold", Color.White);
-=======
-            Func<int> key = playerGame.player.GetKey;
-            UIVariableText<int> keyLayout = new UIKeyVariableText<int>(key, new Vector2(340,90), "arialbold", Color.White);
->>>>>>> 44c33fbeede618f7afbffce30791bd5e2749e86c
             keyLayout.SetOutline(Color.Black);
-
             AddElement(el);
             AddElement(keyLayout);
             healthAdded = true;
