@@ -27,10 +27,11 @@ namespace Game.Entities
         public override Vector2 Move(State.Game game)
         {
             // Calculate direction to the player
-            Vector2 toPlayer = game.player.Position - Position + new Vector2(game.player.collisionBox.Width / 2, game.player.collisionBox.Height / 2);
+            int playerNumber = new Random().Next(0, game.playerCount);
+            Vector2 toPlayer = game.players[playerNumber].Position - Position + new Vector2(game.players[playerNumber].collisionBox.Width / 2, game.players[playerNumber].collisionBox.Height / 2);
             float distanceToPlayer = toPlayer.Length();
-            float playerX = game.player.Position.X + game.player.collisionBox.Width / 2;
-            float playerY = game.player.Position.Y + (game.player.collisionBox.Height / 2) + 4;
+            float playerX = game.players[playerNumber].Position.X + game.players[playerNumber].collisionBox.Width / 2;
+            float playerY = game.players[playerNumber].Position.Y + (game.players[playerNumber].collisionBox.Height / 2) + 4;
 
             if (playerX >= Position.X && playerX <= Position.X + collisionBox.Width && set == true)
             {

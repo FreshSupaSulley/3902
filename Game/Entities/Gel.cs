@@ -15,14 +15,18 @@ namespace Game.Entities
 
         public override Vector2 Move(State.Game game)
         {
-            Vector2 direction = game.player.Position - Position;
+            Vector2 direction = new Vector2();
+            foreach(Player player in game.players){
+                //arbitrary lock on to 2nd player rip
+                direction = player.Position - Position;
+            }
 
-            if (direction != Vector2.Zero)
-                direction.Normalize();
+               if (direction != Vector2.Zero)
+                  direction.Normalize();
 
-            float speed = 0.5f;
+             float speed = 0.5f;
 
-            return direction * speed;
+             return direction * speed;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

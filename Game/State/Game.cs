@@ -22,7 +22,9 @@ namespace Game.State
         private RenderTarget2D target, loadingTarget;
 
         // Visible to inheritors
-        public Player player;
+        //public Player player;
+        public List<Player> players = new List<Player>();
+        public int playerCount = 2;
         public Room room;
         public KeyboardController keyboard;
         public MouseController mouse;
@@ -55,10 +57,16 @@ namespace Game.State
             target = new RenderTarget2D(Main.device, (12 + 4) * 16, (10 + 4) * 16);
             loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
-            this.player = new Player();
-            room = Room.LoadRoom("start", this.player);
-            this.player = (Player)room.gameObjects.Find(entity => entity is Player);
-            // Pow
+            for(int i = 0; i < playerCount; i++){
+                Player p = new Player();
+                players.Add(p);
+            }
+            //this.player = new Player();
+            room = Room.LoadRoom("start", this.players);
+            players[0] = (Player)room.gameObjects.Find(entity => entity is Player);
+            players[0].makeMappings(Player.left_map);
+            players[playerCount - 1] = (Player)room.gameObjects.FindLast(entity => entity is Player);
+            players[playerCount - 1].makeMappings(Player.right_map);
             LoadSoundEffect("ding.wav");
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");
@@ -132,8 +140,9 @@ namespace Game.State
             else if (renderCaptured is false)
             {
                 // Put player in correct location
-                switch (loadingDirection)
-                {
+                foreach(Player player in players){
+                  switch (loadingDirection)
+                  {
                     // Top
                     case 0:
                         player.ActiveAnimation = player.ownDown;
@@ -154,6 +163,8 @@ namespace Game.State
                         player.ActiveAnimation = player.ownLeft;
                         player.Position = new(224 - player.collisionBox.X - player.collisionBox.Width, 104 - (player.collisionBox.Height + player.collisionBox.Y * 2 + 32) / 2);
                         break;
+
+                    }
                 }
                 renderCaptured = true;
                 Main.device.SetRenderTarget(loadingTarget);
@@ -225,7 +236,9 @@ namespace Game.State
             loadingRoom = room;
             // Force add player into room. Delete player object if it already had one
             loadingRoom.gameObjects.RemoveAll(item => item is Player);
-            loadingRoom.gameObjects.Add(player);
+            foreach(Player player in players){
+                loadingRoom.gameObjects.Add(player);
+            }
         }
 
         //loads sound into sfx

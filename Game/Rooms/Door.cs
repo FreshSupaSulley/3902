@@ -81,24 +81,28 @@ namespace Game.Rooms
                     }
                 }
             } else if (Type == DoorType.LOCK) {
-                if (game.player.HasKey()) {
-                    foreach (int tileNum in tileNums) {
-                        room.tiles[tileNum] = Tiles.TileType.BLOCK;
+                foreach(Player player in game.players){
+                 if (player.HasKey()) {
+                     foreach (int tileNum in tileNums) {
+                            room.tiles[tileNum] = Tiles.TileType.BLOCK;
+                        }
                     }
                 }
-            }   
-                if (new Rectangle((int)Position.X - (int)game.player.Position.X, (int)Position.Y - (int)game.player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(game.player.collisionBox))
-            {
-                int oldKeys = game.player.GetKey();
-                game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.player));
-                game.player.setKey(oldKeys);
-                if (Type == DoorType.LOCK && game.player.HasKey())
+            }  
+
+            foreach(Player player in game.players){ 
+                if (new Rectangle((int)Position.X - (int)player.Position.X, (int)Position.Y - (int)player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(player.collisionBox))
                 {
-                    game.player.useKey();
-                    Type = DoorType.OPEN;
+                    int oldKeys = player.GetKey();
+                    game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.players));
+                 player.setKey(oldKeys);
+                   if (Type == DoorType.LOCK && player.HasKey())
+                    {
+                        player.useKey();
+                      Type = DoorType.OPEN;
+                   }
                 }
             }
-            
         }
 
 
