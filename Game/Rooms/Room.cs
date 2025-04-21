@@ -292,7 +292,9 @@ namespace Game.Rooms
             }
             return room;
         }
+        public static void ResetRooms() {
+            LoadedRooms.Clear();
+        }
     }
-
     
 }

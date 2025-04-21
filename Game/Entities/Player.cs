@@ -235,14 +235,14 @@ namespace Game.Entities
 		}
 
 		public void makeMappings(Dictionary<string, Keys> dict){
-				this.mapping.Add(dict["up"], new MoveResponse(this, 0, -1));
-				this.mapping.Add(dict["left"], new MoveResponse(this, -1, 0));
-				this.mapping.Add(dict["down"], new MoveResponse(this, 0, 1));
-				this.mapping.Add(dict["right"], new MoveResponse(this, 1, 0));
-				this.mapping.Add(dict["attack"], new ExertResponse(this));
-				this.mapping.Add(dict["heart"], new AcquireResponse(this, new Heart(base.Position)));
-				this.mapping.Add(dict["banana"], new AcquireResponse(this, new Banana(base.Position)));
-				this.mapping.Add(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
+				this.mapping.TryAdd(dict["up"], new MoveResponse(this, 0, -1));
+				this.mapping.TryAdd(dict["left"], new MoveResponse(this, -1, 0));
+				this.mapping.TryAdd(dict["down"], new MoveResponse(this, 0, 1));
+				this.mapping.TryAdd(dict["right"], new MoveResponse(this, 1, 0));
+				this.mapping.TryAdd(dict["attack"], new ExertResponse(this));
+				this.mapping.TryAdd(dict["heart"], new AcquireResponse(this, new Heart(base.Position)));
+				this.mapping.TryAdd(dict["banana"], new AcquireResponse(this, new Banana(base.Position)));
+				this.mapping.TryAdd(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
 		}
 	}
 }
