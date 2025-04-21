@@ -32,19 +32,19 @@ public class UIPauseLayout : UILayout {
         // Adds Resume Button
         Rectangle resumeBounds = new Rectangle((int)(0.35*w), (int)(0.4*h),(int)(0.3*w), (int)(0.1*h));
         resumeButton = new UITextButton(resumeBounds, Main.INSTANCE.mouse, new ResumeCommand(Main.uiManager.Game, "game"), buttonColor, "Resume", Color.Black, "arialbold");
-        resumeButton.SetHoverColor(ColorTransform.Add(buttonColor, -20,-20,-20));
+        resumeButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(resumeButton);
 
         // Adds Menu Button
         Rectangle menuBounds = new Rectangle((int)(0.35*w), (int)(0.55*h),(int)(0.3*w), (int)(0.1*h));
         menuButton = new UITextButton(menuBounds, Main.INSTANCE.mouse, new MenuCommand(), buttonColor, "Back to Menu", Color.Black, "arialbold");
-        menuButton.SetHoverColor(ColorTransform.Add(buttonColor, -20,-20,-20));
+        menuButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(menuButton);
         
         // Adds Quit Button
         Rectangle quitButtonBounds = new Rectangle((int)(0.35*w), (int)(0.7*h),(int)(0.3*w), (int)(0.1*h));
         quitButton = new UITextButton(quitButtonBounds, Main.INSTANCE.mouse, new QuitCommand(Main.INSTANCE), buttonColor, "Quit", Color.Black, "arialbold");
-        quitButton.SetHoverColor(ColorTransform.Add(buttonColor, -20,-20,-20));
+        quitButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(quitButton);
 
         changed = false;

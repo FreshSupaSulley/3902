@@ -24,13 +24,13 @@ public class UIWinLayout : UILayout {
         // Adds Play Again Button
         Rectangle playAgainButtonBounds = new Rectangle((int)(0.35*w), (int)(0.4*h),(int)(0.3*w), (int)(0.1*h));
         UITextButton playAgainButton = new UITextButton(playAgainButtonBounds, Main.INSTANCE.mouse, new StartGameCommand(device, "game"), buttonColor, "Play Again", Color.Black, "arialbold");
-        playAgainButton.SetHoverColor(ColorTransform.Add(buttonColor, -20,-20,-20));
+        playAgainButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(playAgainButton);
 
         // Adds Quit Button
         Rectangle quitButtonBounds = new Rectangle((int)(0.35*w), (int)(0.55*h),(int)(0.3*w), (int)(0.1*h));
         UITextButton quitButton = new UITextButton(quitButtonBounds, Main.INSTANCE.mouse, new QuitCommand(Main.INSTANCE), buttonColor, "Quit", Color.Black, "arialbold");
-        quitButton.SetHoverColor(ColorTransform.Add(buttonColor, -20,-20,-20));
+        quitButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(quitButton);
     }
 }
