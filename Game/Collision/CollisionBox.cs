@@ -43,9 +43,7 @@ public abstract class CollisionBox : ICollision {
     public virtual bool CheckCollision(ICollision obj) {
         if (obj is null) return false;
         if (obj is CollisionBox && !(obj is ContainCollisionBox)) {
-            // Console.WriteLine(((CollisionBox) obj).bounds);
             if (CollisionStatics.BoxBoxCollision((CollisionBox) obj, this)) {
-                Console.WriteLine("Collision detected!");
             }
             return CollisionStatics.BoxBoxCollision((CollisionBox) obj, this);
         } else {

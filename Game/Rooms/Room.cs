@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Game.Entities;    
+using Game.Entities;
 using Game.Tiles;
 using Game.State;
 using Game.Items;
@@ -80,7 +80,11 @@ namespace Game.Rooms
             // Tick doors (check for intersection)
             foreach (var door in doors)
             {
-                door.Update(game);
+                // If we loaded a new room
+                if (door.Update(game))
+                {
+                    break;
+                }
             }
         }
 
@@ -171,7 +175,7 @@ namespace Game.Rooms
             {
                 door.Draw(batch);
             }
-            
+
 
             // Draw entities over tiles
             gameObjects.ForEach(entity => entity.Draw(batch));
@@ -180,10 +184,13 @@ namespace Game.Rooms
         public void AddEntity(Entity entity) => gameObjects.Add(entity);
         public void RemoveEntity(Entity entity) => gameObjects.Remove(entity);
 
-        public int playerCount(){
+        public int playerCount()
+        {
             int count = 0;
-            foreach(Entity e in gameObjects){
-                if(e is Player){
+            foreach (Entity e in gameObjects)
+            {
+                if (e is Player)
+                {
                     count++;
                 }
             }
@@ -192,37 +199,49 @@ namespace Game.Rooms
 
         public static Room LoadRoom(string filename, List<Player> players)
         {
+            if (string.IsNullOrEmpty(filename))
+            {
+                throw new Exception("Room filename is empty!");
+            }
             currentRoom = filename;
-            bool loadingFromFile = LoadedRooms.ContainsKey(filename);
-            Room room = new Room();
-            if (loadingFromFile) {
+            bool loadingFromCache = LoadedRooms.ContainsKey(filename);
+            Room room = new();
+            if (loadingFromCache)
+            {
                 room = LoadedRooms[filename];
-            } else {
+            }
+            else
+            {
                 XmlSerializer serializer = new(typeof(Room));
                 using Stream reader = new FileStream("Content/Rooms/" + filename + ".xml", FileMode.Open);
                 room = (Room)serializer.Deserialize(reader);
                 // Initialize doors
                 foreach (var door in room.doors)
                 {
-                    door.Initialize(room);
+                    door.Initialize(filename, room);
                 }
             }
             // Add/rebuild room boundaries
             TileType[] trueTiles = new TileType[14 * 9];
             bool anyoneHasKey = false;
-            foreach (Player player in players){
-                    if(player.HasKey()){
-                        anyoneHasKey = true;
-                   }
-                   if(!room.gameObjects.Contains(player) && room.playerCount() < players.Count){
-                    if(player.Position.X < 100){
+            foreach (Player player in players)
+            {
+                if (player.HasKey())
+                {
+                    anyoneHasKey = true;
+                }
+                if (!room.gameObjects.Contains(player) && room.playerCount() < players.Count)
+                {
+                    if (player.Position.X < 100)
+                    {
                         player.Position.X += 100;
                     }
-                    if(player.Position.Y < 100){
+                    if (player.Position.Y < 100)
+                    {
                         player.Position.Y += 100;
                     }
                     room.AddEntity(player);
-                   }
+                }
             }
 
             for (int i = 0, innerIndex = 0; i < trueTiles.Length; i++)
@@ -238,7 +257,7 @@ namespace Game.Rooms
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
-                        if (room.doors[0].Type == DoorType.PUZZLE && room.gameObjects.Count == 0 )
+                        if (room.doors[0].Type == DoorType.PUZZLE && room.gameObjects.Count == 0)
                         {
                             trueTiles[i] = TileType.BLOCK;
                         }
@@ -284,35 +303,40 @@ namespace Game.Rooms
                     }
                     else
                     {
-                        if (!loadingFromFile) {
+                        if (!loadingFromCache)
+                        {
                             trueTiles[i] = TileType.WALL;
-                        } else {
+                        }
+                        else
+                        {
                             trueTiles[i] = room.tiles[i];
                         }
                     }
                 }
                 else
                 {
-                    if (!loadingFromFile) {
+                    if (!loadingFromCache)
+                    {
                         trueTiles[i] = room.tiles[innerIndex++];
-                    } else {
+                    }
+                    else
+                    {
                         trueTiles[i] = room.tiles[i];
                     }
                 }
             }
             room.tiles = trueTiles;
-            if (!loadingFromFile) {
+            // If we had to load from disk
+            if (!loadingFromCache)
+            {
                 LoadedRooms.Add(filename, room);
-            }
-            Console.WriteLine("New Room Doors");
-            foreach (Door door in room.doors) {
-                Console.WriteLine(door.roomPath);
             }
             return room;
         }
-        public static void ResetRooms() {
+
+        public static void ResetRooms()
+        {
             LoadedRooms.Clear();
         }
     }
-    
 }

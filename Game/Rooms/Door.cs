@@ -21,24 +21,28 @@ namespace Game.Rooms
         // Serialize the following
         public Vector2 Position;
         public int Angle;
-
-        // Serialize these elements
         public DoorType Type;
         public int location;
         public string roomPath;
+
+        // Don't serialize
         private Room room;
         private int[] tileNums;
 
         /// This is so ugly, but alas, this is a consequence of our XML loading architecture. Can clean up later
-        protected internal void Initialize(Room room)
+        protected internal void Initialize(string filename, Room room)
         {
+            if (string.IsNullOrEmpty(roomPath) && Type != DoorType.WALL)
+            {
+                throw new Exception("Room path isn't set for this door at room " + filename);
+            }
             this.room = room;
             switch (location)
             {
                 case 0:
                     Position = new Vector2(112, 0);
                     Angle = 0;
-                    tileNums = [6,7];
+                    tileNums = [6, 7];
                     break;
                 case 1:
                     Position = new Vector2(224, 72);
@@ -71,50 +75,66 @@ namespace Game.Rooms
         public static bool IsWalkable(DoorType door) => (int)door < 32;
 
         /// Subclasses can inherit Update for special behavior
-        public virtual void Update(State.Game game)
+        public virtual bool Update(State.Game game)
         {
-            if (Type == DoorType.PUZZLE) {
-                if (room.gameObjects.Count <= 1) {
+            if (Type == DoorType.PUZZLE)
+            {
+                if (room.gameObjects.Count <= 1)
+                {
                     Type = DoorType.OPEN;
-                    foreach (int tileNum in tileNums) {
+                    foreach (int tileNum in tileNums)
+                    {
                         room.tiles[tileNum] = Tiles.TileType.BLOCK;
                     }
                 }
-            } else if (Type == DoorType.LOCK) {
-                foreach(Player player in game.players){
-                 if (player.HasKey()) {
-                     foreach (int tileNum in tileNums) {
+            }
+            else if (Type == DoorType.LOCK)
+            {
+                foreach (Player player in game.players)
+                {
+                    if (player.HasKey())
+                    {
+                        // Unlock the door
+                        Type = DoorType.OPEN;
+                        foreach (int tileNum in tileNums)
+                        {
                             room.tiles[tileNum] = Tiles.TileType.BLOCK;
                         }
                     }
                 }
-            }  
+            }
             bool anyKey = false;
-            foreach(Player player in game.players){ 
+            foreach (Player player in game.players)
+            {
+                // If we're inside the door activation box, which you should only be able to do if the door is actually interactable
                 if (new Rectangle((int)Position.X - (int)player.Position.X, (int)Position.Y - (int)player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(player.collisionBox))
                 {
                     int oldKeys = player.GetKey();
                     game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.players));
-                    
-                 player.setKey(oldKeys);
-                if(player.HasKey()){
-                    anyKey = true;
-                }
-                   if (Type == DoorType.LOCK && anyKey)
+                    player.setKey(oldKeys);
+
+                    if (player.HasKey())
+                    {
+                        anyKey = true;
+                    }
+                    if (Type == DoorType.LOCK && anyKey)
                     {
                         player.useKey();
-                      Type = DoorType.OPEN;
-                   }
+                        Type = DoorType.OPEN;
+                    }
+                    // I assume we don't need to run this for each player
+                    return true;
                 }
             }
+            return false;
         }
-
 
         /// Draws the door
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(DOOR_SHEET_TOP, Position + spriteOrigin, textures[Type], Color.White, (float)(Angle * Math.PI / 180f), spriteOrigin, 1.0f, SpriteEffects.None, 0);
-            if (Main.debug) {
+            if (Main.debug)
+            {
                 DebugTools.DrawRect(spriteBatch, new Rectangle((int)Position.X, (int)Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE), new Color(Color.Blue, 0.5f));
             }
         }
