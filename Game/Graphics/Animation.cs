@@ -34,7 +34,7 @@ namespace Game.Graphics
         }
 
         public Animation makeCopy(){
-            return new Animation(this.texture, this.frames, this.duration, this.scale);
+            return new Animation(this.texture, sprites.Length, this.duration, this.scale);
         }
 
         public void Update()
