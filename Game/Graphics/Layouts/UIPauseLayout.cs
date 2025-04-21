@@ -45,7 +45,6 @@ public class UIPauseLayout : UILayout {
         restartButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(restartButton);
 
-
         // Adds Quit Button
         Rectangle quitButtonBounds = new Rectangle((int)(0.35*w), (int)(0.85*h),(int)(0.3*w), (int)(0.1*h));
         quitButton = new UITextButton(quitButtonBounds, Main.INSTANCE.mouse, new QuitCommand(Main.INSTANCE), buttonColor, "Quit", Color.Black, "arialbold");

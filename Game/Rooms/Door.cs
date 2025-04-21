@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Game.State;
 using System.Xml;
 using Game.Entities;
+using System.Security;
 
 namespace Game.Rooms
 {
@@ -79,7 +80,7 @@ namespace Game.Rooms
         {
             if (Type == DoorType.PUZZLE)
             {
-                if (room.gameObjects.Count <= 1)
+                if (room.gameObjects.Count <= game.players.Count)
                 {
                     Type = DoorType.OPEN;
                     foreach (int tileNum in tileNums)
@@ -95,7 +96,6 @@ namespace Game.Rooms
                     if (player.HasKey())
                     {
                         // Unlock the door
-                        Type = DoorType.OPEN;
                         foreach (int tileNum in tileNums)
                         {
                             room.tiles[tileNum] = Tiles.TileType.BLOCK;
