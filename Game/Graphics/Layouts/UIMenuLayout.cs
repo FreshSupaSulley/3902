@@ -6,8 +6,7 @@ using Game.Commands;
 namespace Game.Graphics;
 
 public class UIMenuLayout : UILayout {
-    private UITextButton startButton;
-    private UITextButton creditButton;
+    private UITextButton startButton, creditButton, quitButton;
     public UIMenuLayout(GraphicsDevice device) : base() {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
@@ -34,5 +33,11 @@ public class UIMenuLayout : UILayout {
         creditButton = new UITextButton(creditButtonBounds, Main.INSTANCE.mouse, new CreditCommand(), buttonColor, "Credits", Color.Black, "arialbold");
         creditButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(creditButton);
+
+        // Adds Quit Button
+        Rectangle quitButtonBounds = new Rectangle((int)(0.35*w), (int)(0.7*h),(int)(0.3*w), (int)(0.1*h));
+        quitButton = new UITextButton(quitButtonBounds, Main.INSTANCE.mouse, new QuitCommand(Main.INSTANCE), buttonColor, "Quit", Color.Black, "arialbold");
+        quitButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
+        AddElement(quitButton);
     }
 }

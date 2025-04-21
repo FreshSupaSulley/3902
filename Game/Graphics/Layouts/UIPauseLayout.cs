@@ -6,9 +6,7 @@ namespace Game.Graphics;
 
 public class UIPauseLayout : UILayout {
     private bool changed;
-    private UITextButton resumeButton;
-    private UITextButton menuButton;
-    private UITextButton quitButton;
+    private UITextButton resumeButton, menuButton, quitButton, restartButton;
     public UIPauseLayout(GraphicsDevice device) {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
@@ -41,8 +39,15 @@ public class UIPauseLayout : UILayout {
         menuButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(menuButton);
         
+        // Adds Restart Button
+        Rectangle restartButtonBounds = new Rectangle((int)(0.35*w), (int)(0.7*h),(int)(0.3*w), (int)(0.1*h));
+        restartButton = new UITextButton(restartButtonBounds, Main.INSTANCE.mouse, new StartGameCommand(Main.INSTANCE.GraphicsDevice, "game"), buttonColor, "Restart", Color.Black, "arialbold");
+        restartButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
+        AddElement(restartButton);
+
+
         // Adds Quit Button
-        Rectangle quitButtonBounds = new Rectangle((int)(0.35*w), (int)(0.7*h),(int)(0.3*w), (int)(0.1*h));
+        Rectangle quitButtonBounds = new Rectangle((int)(0.35*w), (int)(0.85*h),(int)(0.3*w), (int)(0.1*h));
         quitButton = new UITextButton(quitButtonBounds, Main.INSTANCE.mouse, new QuitCommand(Main.INSTANCE), buttonColor, "Quit", Color.Black, "arialbold");
         quitButton.SetHoverColor(ColorTransform.Add(buttonColor, -20));
         AddElement(quitButton);
