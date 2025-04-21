@@ -13,6 +13,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.KeyResponses;
+using System.Security.Principal;
+using System.IO;
 
 namespace Game.Entities
 {
@@ -126,6 +128,23 @@ namespace Game.Entities
 				}
 			}
 		}
+		public void ReloadAnimation() {
+			int dir = GetDirection();
+			switch (dir) {
+				case 0:
+					ActiveAnimation = ownUp;
+					break;
+				case 1:
+					ActiveAnimation = ownRight;
+					break;
+				case 2:
+					ActiveAnimation = ownDown;
+					break;
+				case 3:
+					ActiveAnimation = ownLeft;
+					break;
+			}
+		}
 
 		public override Vector2 Move(State.Game game)
 		{
@@ -215,9 +234,9 @@ namespace Game.Entities
 
 		public int GetDirection()
 		{
-			if (ActiveAnimation == UP) return 0;
-			if (ActiveAnimation == RIGHT) return 1;
-			if (ActiveAnimation == LEFT) return 3;
+			if (ActiveAnimation == ownUp) return 0;
+			if (ActiveAnimation == ownRight) return 1;
+			if (ActiveAnimation == ownLeft) return 3;
 			// Every other animation is down for now
 			return 2;
 		}
@@ -247,8 +266,8 @@ namespace Game.Entities
 				this.mapping.TryAdd(dict["down"], new MoveResponse(this, 0, 1));
 				this.mapping.TryAdd(dict["right"], new MoveResponse(this, 1, 0));
 				this.mapping.TryAdd(dict["attack"], new ExertResponse(this));
-				this.mapping.TryAdd(dict["heart"], new AcquireResponse(this, new Heart(base.Position)));
-				this.mapping.TryAdd(dict["banana"], new AcquireResponse(this, new Banana(base.Position)));
+				this.mapping.TryAdd(dict["heart"], new AcquireResponse(this, "heart"));
+				this.mapping.TryAdd(dict["banana"], new AcquireResponse(this, "banana"));
 				//this.mapping.TryAdd(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
 		}
 	}

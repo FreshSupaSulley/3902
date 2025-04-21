@@ -78,6 +78,7 @@ namespace Game.State
                 players[playerCount - 1].ownLeft = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 94, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
                 players[playerCount - 1].ownAttack = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(24, 62, 24, 31)), 1, Player.ANIMATION_SPEED, Player.scale);
             }
+            players[playerCount-1].ReloadAnimation();
             LoadSoundEffect("ding.wav");
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");

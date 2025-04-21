@@ -7,7 +7,7 @@ using Game.Entities;
 
 namespace Game.Items
 {
-    public class Banana(Vector2 position) : Item(position)
+    public class Banana : Item
     {
         private static readonly Sprite SPRITE = new(Main.Load("/Items/banana.png"));
         private readonly int TICKS_ALIVE = 120;
@@ -18,7 +18,10 @@ namespace Game.Items
 
         private Vector2 startPos, velocity;
         private int ticks = 0;
-
+        private Player player;
+        public Banana(Vector2 position, Player player) : base(position) {
+            this.player = player;
+        }
         public override void Update(State.Game game)
         {
             Position = startPos + velocity * (float)Math.Sin(ticks * Math.PI / TICKS_ALIVE) * DISTANCE;
@@ -48,7 +51,7 @@ namespace Game.Items
         public override void Use(State.Game game)
         {
             // Launch in direction of player 1
-            switch (game.players[0].GetDirection())
+            switch (player.GetDirection())
             {
                 case 0:
                     velocity = new(0, -1);
