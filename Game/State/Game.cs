@@ -56,6 +56,7 @@ namespace Game.State
 
         public Game()
         {
+            Room.ResetRooms();
             // Size of Zelda map
             target = new RenderTarget2D(Main.device, (12 + 4) * 16, (10 + 4) * 16);
             loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
@@ -83,7 +84,6 @@ namespace Game.State
             LoadSoundEffect("wow.wav");
             LoadSoundEffect("pain.wav");
             ChangeMusic("Song_1.wav");
-            Room.ResetRooms();
         }
 
         /// Called when the game state is switched to something else
