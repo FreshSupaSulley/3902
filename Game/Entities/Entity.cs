@@ -20,6 +20,8 @@ namespace Game.Entities
     [XmlInclude(typeof(Bat))]
     [XmlInclude(typeof(NPC))]
     [XmlInclude(typeof(Key))]
+    [XmlInclude(typeof(Bomb))]
+    //[XmlInclude(typeof(Rupee))]
     [XmlInclude(typeof(WinStar))]
     [XmlInclude(typeof(Triforce))]
     public abstract class Entity(Vector2 position)

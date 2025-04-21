@@ -119,6 +119,12 @@
 			  <Y>128</Y>
 		  </Position>
 	  </Entity>
+	 <Entity xsi:type="Bomb">
+		  <Position>
+			  <X>64</X>
+			  <Y>128</Y>
+		  </Position>
+	  </Entity>
   </gameObjects>
   <doors>
     <Door>

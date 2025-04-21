@@ -171,6 +171,12 @@ namespace Game.Entities
 		public void useKey(){
 			Key--;
 		}
+
+		public void addBomb()
+		{
+			bomb++;
+		}
+		
 		
 		public void setKey(int count){
 			Key = count;
@@ -243,7 +249,7 @@ namespace Game.Entities
 				this.mapping.TryAdd(dict["attack"], new ExertResponse(this));
 				this.mapping.TryAdd(dict["heart"], new AcquireResponse(this, new Heart(base.Position)));
 				this.mapping.TryAdd(dict["banana"], new AcquireResponse(this, new Banana(base.Position)));
-				this.mapping.TryAdd(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
+				//this.mapping.TryAdd(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
 		}
 	}
 }
