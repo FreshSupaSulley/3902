@@ -73,6 +73,7 @@ namespace Game.State
             LoadSoundEffect("wow.wav");
             LoadSoundEffect("pain.wav");
             ChangeMusic("Song_1.wav");
+            Room.ResetRooms();
         }
 
         /// Called when the game state is switched to something else
