@@ -98,7 +98,7 @@
 	  <Entity xsi:type="Triforce">
 		  <Position>
 			  <X>120</X>
-			  <Y>50</Y>
+			  <Y>72</Y>
 		  </Position>
 	  </Entity>
   </gameObjects>
