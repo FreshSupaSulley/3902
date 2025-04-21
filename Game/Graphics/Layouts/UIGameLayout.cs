@@ -1,11 +1,16 @@
 using System;
 using Game.Graphics;
+using Game.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class UIGameLayout : UILayout {
     private bool healthAdded = false;
     private static readonly Sprite HUD = new(Main.Load("/Misc/HUD.png"), 2400, 600);
+    private static readonly Sprite levelMap = new(Main.Load("/Misc/levelMap.png"));
+    private Vector2 mapSpritePos = new Vector2(0, 0);
+    private Rectangle sourceRectangle;
+
     public UIGameLayout(GraphicsDevice device) {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
@@ -32,6 +37,18 @@ public class UIGameLayout : UILayout {
             AddElement(rupeeLayout);
             AddElement(bombLayout);
             healthAdded = true;
+
+            
+            if(Room.currentRoom == "start")
+            {
+                sourceRectangle = new Rectangle(65, 0, 64, 40);
+            }else if(Room.currentRoom == "keyRoom")
+            {
+                sourceRectangle = new Rectangle(0, 0, 64, 40);
+            }else if(Room.currentRoom == "firstRight")
+            {
+                sourceRectangle = new Rectangle(129, 0, 64, 40);
+            }
         }
         base.Update(gameTime);
     }
@@ -51,6 +68,7 @@ public class UIGameLayout : UILayout {
     public override void Draw(SpriteBatch spriteBatch)
     {
         HUD.Draw(spriteBatch, new Vector2(0, 0));
+        levelMap.Draw(spriteBatch, new Vector2(48, 23), sourceRectangle, 3.2f);
         base.Draw(spriteBatch);
     }
 }

@@ -18,7 +18,12 @@ namespace Game.Graphics
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(Texture, new Rectangle((int)position.X, (int)position.Y, width, height), Color.White);//, sprite, Color.White);
+            spriteBatch.Draw(Texture, new Rectangle((int)position.X, (int)position.Y, width, height), Color.White);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Rectangle sourceRectangle,float scale)
+        {
+            spriteBatch.Draw(Texture, new Vector2((int)position.X, (int)position.Y), sourceRectangle, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
     }
 }

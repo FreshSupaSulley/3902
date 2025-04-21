@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Game.Entities;
+using Game.Entities;    
 using Game.Tiles;
 using Game.State;
 using Game.Items;
@@ -27,6 +27,8 @@ namespace Game.Rooms
         public List<Hitbox> hitboxes = [];
 
         public static Dictionary<string, Room> LoadedRooms = new();
+
+        public static String currentRoom = "start";
 
         // Needed for serialization
         private Room() { }
@@ -169,6 +171,7 @@ namespace Game.Rooms
             {
                 door.Draw(batch);
             }
+            
 
             // Draw entities over tiles
             gameObjects.ForEach(entity => entity.Draw(batch));
@@ -179,6 +182,7 @@ namespace Game.Rooms
 
         public static Room LoadRoom(string filename, List<Player> players)
         {
+            currentRoom = filename;
             bool loadingFromFile = LoadedRooms.ContainsKey(filename);
             Room room = new Room();
             if (loadingFromFile) {
