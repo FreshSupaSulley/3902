@@ -12,8 +12,10 @@ public class UIManager {
     public State.Game Game {get {return game;}}
 
     private Dictionary<string, IUserInterfaceLayout> uiDictionary;
+    private Dictionary<string, Texture2D> icons;
     public UIManager() {
         uiDictionary = new();
+        icons = new();
         current = Main.startingUI;
     }
     public void SetGame(State.Game game) {
@@ -34,6 +36,9 @@ public class UIManager {
         Mouse.SetCursor(MouseCursor.Arrow);
     }
     public void Load() {
+        icons.Add("pause", Main.Load("/Misc/pause.png"));
+        icons.Add("pauseHover", Main.Load("/Misc/pauseHover.png"));
+
         uiDictionary.Add("empty", new UIEmptyLayout());
         uiDictionary.Add("menu", new UIMenuLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
         uiDictionary.Add("game", new UIGameLayout(Main.INSTANCE.spriteBatch.GraphicsDevice));
@@ -44,6 +49,9 @@ public class UIManager {
     }
     public void AddElement(IUserInterfaceElement el) {
         uiDictionary[current].AddElement(el);
+    }
+    public Texture2D GetIcon(string key) {
+        return icons[key];
     }
     public void Reset() {
         uiDictionary[current].Reset();

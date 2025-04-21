@@ -3,6 +3,7 @@ using Game.Rooms;
 using Game.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Net.Mime;
 
 namespace Game.Graphics;
 
@@ -17,20 +18,14 @@ public class UIGameLayout : UILayout {
 
         Color buttonColor = Color.AntiqueWhite;
 
-        Rectangle pauseButtonBounds = new((int)(0.75*w), (int)(0.05*h),(int)(0.15*w), (int)(0.05*h));
-        UITextButton pauseButton = new UITextButton(
-            pauseButtonBounds, 
-            Main.INSTANCE.mouse, 
-            new PauseCommand(), 
-            buttonColor, 
-            "Pause",
-            Color.Black, 
-            "arialbold"
+        Rectangle pauseButtonBounds = new((int)(0.9*w), (int)(0.05*h),(int)(0.05*w), (int)(0.05*h));
+        UISpriteButton pauseButton = new UISpriteButton(
+            Main.uiManager.GetIcon("pause"),
+            pauseButtonBounds,
+            new PauseCommand()
         );
-        pauseButton.SetHoverColor(ColorTransform.Add(Color.AntiqueWhite, -30));
+        pauseButton.SetHover(Main.uiManager.GetIcon("pauseHover"));
         AddElement(pauseButton);
-
-        
 
     }
     public override void Update(GameTime gameTime) {
