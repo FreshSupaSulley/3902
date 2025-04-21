@@ -114,7 +114,7 @@
       <roomPath>fifthThird</roomPath>
     </Door>
     <Door>
-      <Type>LOCK</Type>
+      <Type>OPEN</Type>
       <location>2</location>
       <roomPath>forthFifth</roomPath>
     </Door>
