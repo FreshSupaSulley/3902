@@ -32,6 +32,8 @@ public class UIGameLayout : UILayout {
         pauseButton.SetHoverColor(ColorTransform.Add(Color.AntiqueWhite, -30));
         AddElement(pauseButton);
 
+        
+
     }
     public override void Update(GameTime gameTime) {
         if (!variableTextAdded && Main.INSTANCE.State is Game.State.Game) {
