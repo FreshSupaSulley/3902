@@ -18,7 +18,7 @@ public class UIGameLayout : UILayout {
 
         Color buttonColor = Color.AntiqueWhite;
 
-        Rectangle pauseButtonBounds = new((int)(0.9*w), (int)(0.05*h),(int)(0.05*w), (int)(0.05*h));
+        Rectangle pauseButtonBounds = new((int)(0.93*w), (int)(0.03*h),(int)(0.04*h), (int)(0.04*h));
         UISpriteButton pauseButton = new UISpriteButton(
             Main.uiManager.GetIcon("pause"),
             pauseButtonBounds,
