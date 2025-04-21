@@ -13,7 +13,7 @@ public class ExertResponse : IKeyResponse{
         if(player.Item != null){
             player.Item.Use(game);
         }
-            if (this.player.ActiveAnimation != Player.ATTACK)
+            if (this.player.ActiveAnimation != this.player.ownAttack)
 					{
 						game.sfx["punch"].Play();
 						TempBuffer.add(new TempEntity(TempBuffer.pow, this.player.Position), 1000);
@@ -21,7 +21,7 @@ public class ExertResponse : IKeyResponse{
 						// Widespread area hitbox for testing. Later we want this to be directional
 						game.room.AddHitbox(new(10, this.player, new(-padding, -padding, this.player.collisionBox.Width + padding * 2, this.player.collisionBox.Height + padding * 2)));
 					}
-					this.player.ActiveAnimation = Player.ATTACK;
+					this.player.ActiveAnimation = this.player.ownAttack;
         return new Vector2(0, 0);
     }
     public void processGame(Game.State.Game game){

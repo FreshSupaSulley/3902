@@ -13,6 +13,7 @@ using Game.Util;
 using System.Diagnostics;
 using System.Threading;
 using Microsoft.Xna.Framework.Input;
+using Game.Graphics;
 
 namespace Game.State
 {
@@ -25,6 +26,8 @@ namespace Game.State
         //public Player player;
         public List<Player> players = new List<Player>();
         public int playerCount = 2;
+        //if true, no double Monoko
+        public bool noDup = true;
         public Room room;
         public KeyboardController keyboard;
         public MouseController mouse;
@@ -67,6 +70,13 @@ namespace Game.State
             players[0].makeMappings(Player.left_map);
             players[playerCount - 1] = (Player)room.gameObjects.FindLast(entity => entity is Player);
             players[playerCount - 1].makeMappings(Player.right_map);
+            if(playerCount > 1 && noDup){
+                players[playerCount - 1].ownUp = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 0, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
+                players[playerCount - 1].ownRight = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 31, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
+                players[playerCount - 1].ownDown = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 62, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
+                players[playerCount - 1].ownLeft = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 94, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
+                players[playerCount - 1].ownAttack = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(24, 62, 24, 31)), 1, Player.ANIMATION_SPEED, Player.scale);
+            }
             LoadSoundEffect("ding.wav");
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");

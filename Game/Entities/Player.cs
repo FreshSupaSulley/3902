@@ -42,10 +42,11 @@ namespace Game.Entities
 			{"banana", Keys.D9},
 			{"bomb", Keys.D0}
 		};
-		private static readonly int ANIMATION_SPEED = 8;
+		public static readonly int ANIMATION_SPEED = 8;
 		private static readonly Texture2D WALK_SHEET = Main.Load("Entities/Monoko/walk.png");
+		public static readonly Texture2D MAFURAKO = Main.Load("Entities/Mafurako.png");
 
-		private static float scale = 0.7f;
+		public static float scale = 0.7f;
 
 		// Walk animations
 		public static readonly Animation UP = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED, scale);
