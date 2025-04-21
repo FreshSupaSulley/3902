@@ -10,8 +10,6 @@ public class UIGameLayout : UILayout {
     private bool variableTextAdded = false;
     private static readonly Sprite HUD = new(Main.Load("/Misc/HUD.png"), 2400, 600);
     private static readonly Sprite levelMap = new(Main.Load("/Misc/levelMap.png"));
-    private Vector2 mapSpritePos = new Vector2(0, 0);
-    private Rectangle sourceRectangle;
 
     public UIGameLayout(GraphicsDevice device) {
         int w = device.Viewport.Width;
@@ -55,17 +53,6 @@ public class UIGameLayout : UILayout {
             AddElement(bombLayout);
             variableTextAdded = true;
 
-            
-            if(Room.currentRoom == "start")
-            {
-                sourceRectangle = new Rectangle(65, 0, 64, 40);
-            }else if(Room.currentRoom == "keyRoom")
-            {
-                sourceRectangle = new Rectangle(0, 0, 64, 40);
-            }else if(Room.currentRoom == "firstRight")
-            {
-                sourceRectangle = new Rectangle(129, 0, 64, 40);
-            }
         }
         base.Update(gameTime);
     }
@@ -85,7 +72,72 @@ public class UIGameLayout : UILayout {
     public override void Draw(SpriteBatch spriteBatch)
     {
         HUD.Draw(spriteBatch, new Vector2(0, 0));
-        levelMap.Draw(spriteBatch, new Vector2(48, 23), sourceRectangle, 3.2f);
+        if (Room.currentRoom == "start")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(65, 39 * 0, 64, 39), 3.2f);
+        }else if(Room.currentRoom == "keyRoom")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(0, 39 * 0, 64, 39), 3.2f);
+        }else if(Room.currentRoom == "firstRight")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(129, 39 * 0, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "second")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(0, 39 * 1 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "thirdFirst")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(0, 39 * 2 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "thirdSecond")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(65, 39 * 2 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "thirdThird")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(129, 39 * 2 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "forthFirst")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(0, 39 * 3 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "forthSecond")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(64 * 1 + 1, 39 * 3 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "forthThird")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(64 * 2 + 1, 39 * 3 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "forthForth")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(64 * 3 + 1, 39 * 3 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "forthFifth")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(64 * 4 + 1, 39 * 3 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "fifthFirst")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(0, 39 * 4 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "fifthSecond")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(64 * 1 + 1, 39 * 4 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "fifthThird")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(64 * 2 + 1, 39 * 4 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "sixthFirst")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(0, 39 * 5 + 1, 64, 39), 3.2f);
+        }
+        else if (Room.currentRoom == "sixthSecond")
+        {
+            levelMap.Draw(spriteBatch, new Vector2(48, 23), new Rectangle(65, 39 * 5 + 1, 64, 39), 3.2f);
+        }
         base.Draw(spriteBatch);
     }
 }
