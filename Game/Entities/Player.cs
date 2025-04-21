@@ -72,6 +72,7 @@ namespace Game.Entities
 		private static readonly int TOTAL_DEATH_TICKS = 120, I_FRAMES = 30;
 		private bool invulnerable, dead;
 		private int deadTicks, iframeTicks;
+		private int maxHealth = 100;
 
 		[XmlIgnore] // required??
 		public Item Item;
@@ -240,7 +241,13 @@ namespace Game.Entities
 			// Every other animation is down for now
 			return 2;
 		}
-
+		public void IncreaseHealth(int amount) {
+			int temp = health + amount;
+			if (temp > maxHealth) {
+				temp = maxHealth;
+			}
+			health = temp;
+		}
 		public override void Inflict(State.Game game, int damage)
 		{
 			// If we're in iframes don't apply damage

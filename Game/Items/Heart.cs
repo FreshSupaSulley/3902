@@ -31,7 +31,7 @@ namespace Game.Items
         public override void Use(State.Game game)
         {
             game.sfx["ding"].Play();
-            Console.WriteLine("probably should heal player when we get health system");
+            this.player.IncreaseHealth(5);
         }
     }
 }
