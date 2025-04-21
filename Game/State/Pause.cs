@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Game.Util;
 using Microsoft.Xna.Framework.Input;
+using Game.Commands;
 
 namespace Game.State
 {
@@ -18,7 +19,8 @@ namespace Game.State
         {
             if (Main.INSTANCE.keyboard.IsKeyPressed(Keys.Escape))
             {
-                Main.SwitchGameState(game);
+                new ResumeCommand(game, "game").Execute();
+                // Main.SwitchGameState(game);
                 return;
             }
             Main.uiManager.Update(gameTime);

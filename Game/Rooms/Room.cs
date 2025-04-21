@@ -290,6 +290,10 @@ namespace Game.Rooms
             if (!loadingFromFile) {
                 LoadedRooms.Add(filename, room);
             }
+            Console.WriteLine("New Room Doors");
+            foreach (Door door in room.doors) {
+                Console.WriteLine(door.roomPath);
+            }
             return room;
         }
         public static void ResetRooms() {
