@@ -1,8 +1,10 @@
 using System;
-using Game.Graphics;
 using Game.Rooms;
+using Game.Commands;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+namespace Game.Graphics;
 
 public class UIGameLayout : UILayout {
     private bool variableTextAdded = false;
@@ -15,7 +17,20 @@ public class UIGameLayout : UILayout {
         int w = device.Viewport.Width;
         int h = device.Viewport.Height;
 
-        // UITextButton pauseButton = new UITextButton(bounds, Main.INSTANCE.mouse, new PauseCommand, buttonColor, "⏸︎", Color.Black, "arialbold");
+        Color buttonColor = Color.AntiqueWhite;
+
+        Rectangle pauseButtonBounds = new((int)(0.75*w), (int)(0.05*h),(int)(0.15*w), (int)(0.05*h));
+        UITextButton pauseButton = new UITextButton(
+            pauseButtonBounds, 
+            Main.INSTANCE.mouse, 
+            new PauseCommand(), 
+            buttonColor, 
+            "Pause",
+            Color.Black, 
+            "arialbold"
+        );
+        pauseButton.SetHoverColor(ColorTransform.Add(Color.AntiqueWhite, -30));
+        AddElement(pauseButton);
 
     }
     public override void Update(GameTime gameTime) {
