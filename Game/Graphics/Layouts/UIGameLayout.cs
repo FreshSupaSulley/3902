@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class UIGameLayout : UILayout {
-    private bool healthAdded = false;
+    private bool variableTextAdded = false;
     private static readonly Sprite HUD = new(Main.Load("/Misc/HUD.png"), 2400, 600);
     private static readonly Sprite levelMap = new(Main.Load("/Misc/levelMap.png"));
     private Vector2 mapSpritePos = new Vector2(0, 0);
@@ -19,7 +19,7 @@ public class UIGameLayout : UILayout {
 
     }
     public override void Update(GameTime gameTime) {
-        if (!healthAdded && Main.INSTANCE.State is Game.State.Game) {
+        if (!variableTextAdded && Main.INSTANCE.State is Game.State.Game) {
             Game.State.Game playerGame = (Game.State.Game) Main.INSTANCE.State;
             Func<int> function = playerGame.players[0].GetHealth;
             Rectangle bounds = new (600,80,100,30);
@@ -36,7 +36,7 @@ public class UIGameLayout : UILayout {
             AddElement(keyLayout);
             AddElement(rupeeLayout);
             AddElement(bombLayout);
-            healthAdded = true;
+            variableTextAdded = true;
 
             
             if(Room.currentRoom == "start")
@@ -62,7 +62,7 @@ public class UIGameLayout : UILayout {
     }
     public override void Reset() {
         RemoveHealth();
-        healthAdded = false;
+        variableTextAdded = false;
     }
 
     public override void Draw(SpriteBatch spriteBatch)
