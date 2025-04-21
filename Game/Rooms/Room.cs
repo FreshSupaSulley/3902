@@ -180,6 +180,16 @@ namespace Game.Rooms
         public void AddEntity(Entity entity) => gameObjects.Add(entity);
         public void RemoveEntity(Entity entity) => gameObjects.Remove(entity);
 
+        public int playerCount(){
+            int count = 0;
+            foreach(Entity e in gameObjects){
+                if(e is Player){
+                    count++;
+                }
+            }
+            return count;
+        }
+
         public static Room LoadRoom(string filename, List<Player> players)
         {
             currentRoom = filename;
@@ -204,7 +214,7 @@ namespace Game.Rooms
                     if(player.HasKey()){
                         anyoneHasKey = true;
                    }
-                   if(!room.gameObjects.Contains(player)){
+                   if(!room.gameObjects.Contains(player) && room.playerCount() < players.Count){
                     if(player.Position.X < 100){
                         player.Position.X += 100;
                     }
