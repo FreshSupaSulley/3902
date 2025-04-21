@@ -24,3 +24,10 @@ We picked:
 "Use the .NET code analyzers (Roslyn) with rules for code quality analysis. Document any errors or warnings that you get, then on-by-one fix them or set them as supressed with an explanation in your documentation on why you supressed that particular warning/error."
 
 Refer to *code_analyzer.png*. No errors or warning were found in the workspace (we are goated).
+
+
+# Sprint 5
+
+Write up a document with useful information on your project. This might include: program controls, descriptions of known bugs that program has, and details of any tools or processes your team used that aren't explicitly required (for example, calculating and using Code Metrics as part of your design process) 
+
+Player 1 is controlled using the WASD keys for movement and Z for attack/use item. Player 2 is controlled using the arrow keys and N for attack/use item. For player 1, items can be used by pressing 1, 2, or 3. For player 2, the same behavior can be done using 8, 9, and 0. Doors function automatically on collision.
