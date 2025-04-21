@@ -37,7 +37,6 @@ public class UICreditLayout : UILayout {
             c++;
         }
 
-
         // Add Back Button
         Rectangle backButtonBounds = new((int)(0.05*w), (int)(0.9*h),(int)(0.1*w), (int)(0.05*h));
         UITextButton backButton = new UITextButton(backButtonBounds, Main.INSTANCE.mouse, new MenuCommand(), buttonColor, "Back", Color.Black, "arialbold");

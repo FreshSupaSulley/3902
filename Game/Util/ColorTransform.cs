@@ -15,4 +15,7 @@ public static class ColorTransform {
     public static Color Add(Color color, byte r, byte g, byte b) {
         return Add(color, r, g, b, 0);
     }
+    public static Color Add(Color color, int val) {
+        return Add(color, val, val, val);
+    }
 }
