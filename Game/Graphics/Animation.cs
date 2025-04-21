@@ -33,6 +33,10 @@ namespace Game.Graphics
             this.scale = scale;
         }
 
+        public Animation makeCopy(){
+            return new Animation(this.texture, this.frames, this.duration, this.scale);
+        }
+
         public void Update()
         {
             if (frames == duration)

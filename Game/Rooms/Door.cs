@@ -89,7 +89,7 @@ namespace Game.Rooms
                     }
                 }
             }  
-
+            bool anyKey = false;
             foreach(Player player in game.players){ 
                 if (new Rectangle((int)Position.X - (int)player.Position.X, (int)Position.Y - (int)player.Position.Y, DOOR_TEXTURE_SIZE, DOOR_TEXTURE_SIZE).Intersects(player.collisionBox))
                 {
@@ -97,7 +97,10 @@ namespace Game.Rooms
                     game.SwitchRoom((location + 2) % 4, Room.LoadRoom(roomPath, game.players));
                     
                  player.setKey(oldKeys);
-                   if (Type == DoorType.LOCK && player.HasKey())
+                if(player.HasKey()){
+                    anyKey = true;
+                }
+                   if (Type == DoorType.LOCK && anyKey)
                     {
                         player.useKey();
                       Type = DoorType.OPEN;

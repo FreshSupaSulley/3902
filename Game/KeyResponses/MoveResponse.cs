@@ -14,16 +14,16 @@ public class MoveResponse : IKeyResponse{
 
     public Vector2 respond(){
         if(hdsp < 0){
-            this.player.ActiveAnimation = Player.LEFT;
+            this.player.ActiveAnimation = this.player.ownLeft;
         }
         if(hdsp > 0){
-            this.player.ActiveAnimation = Player.RIGHT;
+            this.player.ActiveAnimation = this.player.ownRight;
         }
         if(vdsp < 0){
-            this.player.ActiveAnimation = Player.UP;
+            this.player.ActiveAnimation = this.player.ownUp;
         }
         if(vdsp > 0){
-            this.player.ActiveAnimation = Player.DOWN;
+            this.player.ActiveAnimation = this.player.ownDown;
         }
         return new Vector2(hdsp, vdsp);
     }

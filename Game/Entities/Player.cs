@@ -90,11 +90,11 @@ namespace Game.Entities
 			), 
 			DOWN
 			) {
-				this.ownUp = Player.UP;
-				this.ownRight = Player.RIGHT;
-				this.ownDown = Player.DOWN;
-				this.ownLeft = Player.LEFT;
-				this.ownAttack = Player.ATTACK;
+				this.ownUp = Player.UP.makeCopy();
+				this.ownRight = Player.RIGHT.makeCopy();
+				this.ownDown = Player.DOWN.makeCopy();
+				this.ownLeft = Player.LEFT.makeCopy();
+				this.ownAttack = Player.ATTACK.makeCopy();
 		 }
 
 
