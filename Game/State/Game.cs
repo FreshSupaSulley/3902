@@ -69,6 +69,7 @@ namespace Game.State
             room = Room.LoadRoom("start", this.players);
             players[0] = (Player)room.gameObjects.Find(entity => entity is Player);
             players[0].makeMappings(Player.left_map);
+            players[0].Position = new (120,100);
             players[playerCount - 1] = (Player)room.gameObjects.FindLast(entity => entity is Player);
             players[playerCount - 1].makeMappings(Player.right_map);
             if(playerCount > 1 && noDup){
@@ -79,6 +80,7 @@ namespace Game.State
                 players[playerCount - 1].ownAttack = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(24, 62, 24, 31)), 1, Player.ANIMATION_SPEED, Player.scale);
             }
             players[playerCount-1].ReloadAnimation();
+            players[playerCount-1].Position = new(120,50);
             LoadSoundEffect("ding.wav");
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");
