@@ -29,12 +29,20 @@ public class UIGameLayout : UILayout {
 
     }
     public override void Update(GameTime gameTime) {
-        if (!variableTextAdded && Main.INSTANCE.State is Game.State.Game) {
+        if (!variableTextAdded && Main.INSTANCE.State is State.Game) {
             Game.State.Game playerGame = (Game.State.Game) Main.INSTANCE.State;
-            Func<int> function = playerGame.players[0].GetHealth;
-            Rectangle bounds = new (600,80,100,30);
-            UIHealthBar el = new UIHealthBar(function, bounds, new(95, 25), 0, 100);
+
+            Rectangle bounds1 = new (600,80,100,20);
+            Func<int> function1 = playerGame.players[0].GetHealth;
+            UIHealthBar player1Health = new UIHealthBar(function1, bounds1, new(95, 15), 0, 100);
+
+            Rectangle bounds2 = new (600,105,100,20);
+            Func<int> function2 = playerGame.players[1].GetHealth;
+            UIHealthBar player2Health = new UIHealthBar(function2, bounds2, new(95, 15), 0, 100);
             
+            AddElement(player1Health);
+            AddElement(player2Health);
+
             Func<int> key = playerGame.players[0].GetKey;
             Func<int> rupee = playerGame.players[0].GetRupee;
             Func<int> bomb = playerGame.players[0].GetBomb;
@@ -42,7 +50,6 @@ public class UIGameLayout : UILayout {
             UIVariableText<int> rupeeLayout = new UIKeyVariableText<int>(rupee, new Vector2(330, 45), "arialbold", Color.White);
             UIVariableText<int> bombLayout = new UIKeyVariableText<int>(bomb, new Vector2(330, 115), "arialbold", Color.White);
             keyLayout.SetOutline(Color.Black);
-            AddElement(el);
             AddElement(keyLayout);
             AddElement(rupeeLayout);
             AddElement(bombLayout);
