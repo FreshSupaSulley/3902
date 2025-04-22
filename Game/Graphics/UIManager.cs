@@ -50,6 +50,9 @@ public class UIManager {
     public void AddElement(IUserInterfaceElement el) {
         uiDictionary[current].AddElement(el);
     }
+    public void RemoveElement(IUserInterfaceElement el) {
+        uiDictionary[current].RemoveElement(el);
+    }
     public Texture2D GetIcon(string key) {
         return icons[key];
     }

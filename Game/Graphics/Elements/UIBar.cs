@@ -54,6 +54,14 @@ class UIBar : IUserInterfaceElement {
         }
 
     }
+    public void SetInternalColor(Color color) {
+        internalColor = color;
+        foregroundRect = new(new (0,0,0,(int)barDimensions.Y), color);
+    }
+    public void SetExternalColor(Color color) {
+        externalColor = color;
+        backgroundRect = new(bounds, color);
+    }
     public virtual void OnDecrease() {}
     public virtual void OnIncrease() {}
     public void Draw(SpriteBatch spriteBatch) {

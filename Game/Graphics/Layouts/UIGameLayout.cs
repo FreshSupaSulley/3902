@@ -35,12 +35,15 @@ public class UIGameLayout : UILayout {
             Rectangle bounds1 = new (600,80,100,20);
             Func<int> function1 = playerGame.players[0].GetHealth;
             UIHealthBar player1Health = new UIHealthBar(function1, bounds1, new(95, 15), 0, 100);
+            player1Health.SetInternalColor(Color.LightGreen);
+            player1Health.SetExternalColor(ColorTransform.Add(Color.DarkSlateGray, 50));
+            AddElement(player1Health);
 
             Rectangle bounds2 = new (600,105,100,20);
             Func<int> function2 = playerGame.players[1].GetHealth;
             UIHealthBar player2Health = new UIHealthBar(function2, bounds2, new(95, 15), 0, 100);
-            
-            AddElement(player1Health);
+            player2Health.SetInternalColor(Color.LightGreen);
+            player2Health.SetExternalColor(ColorTransform.Add(Color.DarkSlateGray, 50));
             AddElement(player2Health);
 
             Func<int> key = playerGame.players[0].GetKey;
