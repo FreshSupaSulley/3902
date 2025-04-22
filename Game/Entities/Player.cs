@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using Game.KeyResponses;
 using System.Security.Principal;
 using System.IO;
+using System.Linq;
 
 namespace Game.Entities
 {
@@ -50,14 +51,9 @@ namespace Game.Entities
 
 		public static float scale = 0.7f;
 
-		// Walk animations
-		public static readonly Animation UP = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED, scale);
-		public static readonly Animation RIGHT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED, scale);
-		public static readonly Animation DOWN = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED, scale);
-		public static readonly Animation LEFT = new(Main.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED, scale);
+		public static Dictionary<string, Dictionary<string, Animation>> characterAnimations;
 
-		// Attack
-		public static readonly Animation ATTACK = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
+		// Walk animations
 		// Old damaged sprite doesn't fit same style. Needs new resource
 		private static readonly Animation DAMAGE = new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale);
 
@@ -73,6 +69,8 @@ namespace Game.Entities
 		private bool invulnerable, dead;
 		private int deadTicks, iframeTicks;
 		private int maxHealth = 100;
+		[XmlIgnore]
+		private string character = "monoko";
 
 		[XmlIgnore] // required??
 		public Item Item;
@@ -88,17 +86,13 @@ namespace Game.Entities
 			100, 
 			new(
 				(int)(BODY.Texture.Width*scale)/2-7, 
-				(int)((BODY.Texture.Height)*scale)/2-7, 
+				(int)(BODY.Texture.Height*scale)/2-7, 
 				14, 
 				14
 			), 
-			DOWN
+			characterAnimations["monoko"]["down"]
 			) {
-				this.ownUp = Player.UP.makeCopy();
-				this.ownRight = Player.RIGHT.makeCopy();
-				this.ownDown = Player.DOWN.makeCopy();
-				this.ownLeft = Player.LEFT.makeCopy();
-				this.ownAttack = Player.ATTACK.makeCopy();
+				SetCharacter(character);
 		 }
 
 
@@ -233,6 +227,16 @@ namespace Game.Entities
 			}
 		}
 
+		public void SetCharacter(string character) {
+			this.character = character;
+			this.ownUp = characterAnimations[character]["up"].makeCopy();
+			this.ownRight = characterAnimations[character]["right"].makeCopy();
+			this.ownDown = characterAnimations[character]["down"].makeCopy();
+			this.ownLeft = characterAnimations[character]["left"].makeCopy();
+			this.ownAttack = characterAnimations[character]["attack"].makeCopy();
+			ReloadAnimation();
+		}
+
 		public int GetDirection()
 		{
 			if (ActiveAnimation == ownUp) return 0;
@@ -276,6 +280,28 @@ namespace Game.Entities
 				this.mapping.TryAdd(dict["heart"], new AcquireResponse(this, "heart"));
 				this.mapping.TryAdd(dict["banana"], new AcquireResponse(this, "banana"));
 				//this.mapping.TryAdd(dict["bomb"], new AcquireResponse(this, new Bomb(base.Position)));
+		}
+		public static void LoadAnimations() {
+			characterAnimations = new();
+			Dictionary<string, Animation> temp = new()
+            {
+                { "up", new(Main.Subimage(WALK_SHEET, new Rectangle(0, 0, 96, 32)), 4, ANIMATION_SPEED, scale) },
+				{ "down", new(Main.Subimage(WALK_SHEET, new Rectangle(0, 64, 96, 32)), 4, ANIMATION_SPEED, scale)},
+				{ "left", new(Main.Subimage(WALK_SHEET, new Rectangle(0, 96, 96, 32)), 4, ANIMATION_SPEED, scale)},
+				{ "right", new(Main.Subimage(WALK_SHEET, new Rectangle(0, 32, 96, 32)), 4, ANIMATION_SPEED, scale)},
+				{ "attack", new(Main.Load("Entities/Monoko/attack.png"), 3, ANIMATION_SPEED, scale)}
+            };
+			characterAnimations.Add("monoko", temp);
+
+			temp = new() {
+				{ "up", new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 0, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale) },
+				{ "right", new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 31, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale) },
+				{ "down", new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 62, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale) },
+				{ "left", new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 94, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale) },
+				{ "attack", new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(24, 62, 24, 31)), 1, Player.ANIMATION_SPEED, Player.scale) }
+			};
+
+			characterAnimations.Add("mafurako", temp);
 		}
 	}
 }

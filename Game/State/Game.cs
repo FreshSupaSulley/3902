@@ -61,26 +61,19 @@ namespace Game.State
             target = new RenderTarget2D(Main.device, (12 + 4) * 16, (10 + 4) * 16);
             loadingTarget = new RenderTarget2D(Main.device, target.Width, target.Height);
             // Load start room. This also defines the player
-            for(int i = 0; i < playerCount; i++){
-                Player p = new Player();
-                players.Add(p);
-            }
-            //this.player = new Player();
+            players.Add(new ());
+            players.Add(new ());
+            
             room = Room.LoadRoom("start", this.players);
+            
             players[0] = (Player)room.gameObjects.Find(entity => entity is Player);
+            players[0].SetCharacter("monoko");
             players[0].makeMappings(Player.left_map);
-            players[0].Position = new (120,100);
-            players[playerCount - 1] = (Player)room.gameObjects.FindLast(entity => entity is Player);
-            players[playerCount - 1].makeMappings(Player.right_map);
-            if(playerCount > 1 && noDup){
-                players[playerCount - 1].ownUp = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 0, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
-                players[playerCount - 1].ownRight = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 31, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
-                players[playerCount - 1].ownDown = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 62, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
-                players[playerCount - 1].ownLeft = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(71, 94, 73, 31)), 3, Player.ANIMATION_SPEED, Player.scale);
-                players[playerCount - 1].ownAttack = new Animation(Main.Subimage(Player.MAFURAKO, new Rectangle(24, 62, 24, 31)), 1, Player.ANIMATION_SPEED, Player.scale);
-            }
-            players[playerCount-1].ReloadAnimation();
-            players[playerCount-1].Position = new(120,50);
+
+            players[playerCount-1] = (Player)room.gameObjects.FindLast(entity => entity is Player);
+            players[playerCount-1].SetCharacter("mafurako");
+            players[playerCount-1].makeMappings(Player.right_map);
+
             LoadSoundEffect("ding.wav");
             LoadSoundEffect("punch.wav");
             LoadSoundEffect("fart.wav");

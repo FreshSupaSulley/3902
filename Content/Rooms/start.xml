@@ -97,9 +97,17 @@
   <gameObjects>
     <Entity xsi:type="Player">
       <Position>
-        <X>116</X>
+        <X>120</X>
         <Y>100</Y>
       </Position>
+      <character>monoko</character>
+    </Entity>
+    <Entity xsi:type="Player">
+      <Position>
+        <X>120</X>
+        <Y>50</Y>
+      </Position>
+      <character>mafurako</character>
     </Entity>
   </gameObjects>
   <doors>

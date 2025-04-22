@@ -8,6 +8,7 @@ using Game.Graphics;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection.Metadata;
+using Game.Entities;
 
 new Main().Run();
 
@@ -88,6 +89,7 @@ public class Main : Microsoft.Xna.Framework.Game
         // state = new World(device);
         state = new Menu();
         uiManager.Load();
+        Player.LoadAnimations();
     }
 
     // Tick
