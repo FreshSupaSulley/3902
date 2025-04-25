@@ -38,7 +38,7 @@ public class Main : Microsoft.Xna.Framework.Game
     public static string startingUI = "menu"; // The starting ui layout to use
     public static UIManager uiManager;
     public static Dictionary<string,SpriteFont> fonts;
-    public static bool debug = false; // Change to false when not testing  
+    public static bool debug = true; // Change to false when not testing  
     public Main()
     {
         INSTANCE = this;
